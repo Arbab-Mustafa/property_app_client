@@ -117,184 +117,184 @@ const InflationCalculator = () => {
             </p>
           </div>
 
-          <div className="lg:flex items-start">
-            <div className="lg:w-1/2 lg:pr-12 mb-8 lg:mb-0">
-              <Card className="bg-white rounded-lg shadow-lg overflow-hidden">
-                <CardContent className="p-8">
-                  <Form {...form}>
-                    <form
-                      onSubmit={form.handleSubmit(calculateInflation)}
-                      className="space-y-6"
-                    >
-                      <div className="mb-6">
-                        <h3 className="text-xl font-semibold text-neutral-800 mb-2">
-                          Show me how much
-                        </h3>
+          {/* Full-width calculator */}
+          <Card className="bg-white rounded-lg shadow-lg overflow-hidden mb-8">
+            <CardContent className="p-8">
+              <Form {...form}>
+                <form
+                  onSubmit={form.handleSubmit(calculateInflation)}
+                  className="space-y-6"
+                >
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div className="mb-6">
+                      <h3 className="text-xl font-semibold text-neutral-800 mb-2">
+                        Show me how much
+                      </h3>
+                      <FormField
+                        control={form.control}
+                        name="amount"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel className="text-neutral-700 font-medium">
+                              Amount (£)
+                            </FormLabel>
+                            <FormControl>
+                              <Input
+                                placeholder="10000"
+                                className="w-full px-4 py-2 border border-neutral-300 rounded-md focus:ring-primary"
+                                {...field}
+                              />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                    </div>
+
+                    <div className="mb-6">
+                      <h3 className="text-xl font-semibold text-neutral-800 mb-2">
+                        in
+                      </h3>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <FormField
                           control={form.control}
-                          name="amount"
+                          name="month"
                           render={({ field }) => (
                             <FormItem>
                               <FormLabel className="text-neutral-700 font-medium">
-                                Amount (£)
+                                Month
                               </FormLabel>
-                              <FormControl>
-                                <Input
-                                  placeholder="10000"
-                                  className="w-full px-4 py-2 border border-neutral-300 rounded-md focus:ring-primary"
-                                  {...field}
-                                />
-                              </FormControl>
+                              <Select
+                                onValueChange={field.onChange}
+                                defaultValue={field.value}
+                              >
+                                <FormControl>
+                                  <SelectTrigger className="w-full px-4 py-2 border border-neutral-300 rounded-md focus:ring-primary">
+                                    <SelectValue placeholder="Select month" />
+                                  </SelectTrigger>
+                                </FormControl>
+                                <SelectContent>
+                                  {months.map((month) => (
+                                    <SelectItem key={month.value} value={month.value}>
+                                      {month.label}
+                                    </SelectItem>
+                                  ))}
+                                </SelectContent>
+                              </Select>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+
+                        <FormField
+                          control={form.control}
+                          name="year"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel className="text-neutral-700 font-medium">
+                                Year
+                              </FormLabel>
+                              <Select
+                                onValueChange={field.onChange}
+                                defaultValue={field.value}
+                              >
+                                <FormControl>
+                                  <SelectTrigger className="w-full px-4 py-2 border border-neutral-300 rounded-md focus:ring-primary">
+                                    <SelectValue placeholder="Select year" />
+                                  </SelectTrigger>
+                                </FormControl>
+                                <SelectContent>
+                                  {years.map((year) => (
+                                    <SelectItem key={year.value} value={year.value}>
+                                      {year.label}
+                                    </SelectItem>
+                                  ))}
+                                </SelectContent>
+                              </Select>
                               <FormMessage />
                             </FormItem>
                           )}
                         />
                       </div>
+                    </div>
 
-                      <div className="mb-6">
-                        <h3 className="text-xl font-semibold text-neutral-800 mb-2">
-                          in
-                        </h3>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                          <FormField
-                            control={form.control}
-                            name="month"
-                            render={({ field }) => (
-                              <FormItem>
-                                <FormLabel className="text-neutral-700 font-medium">
-                                  Month
-                                </FormLabel>
-                                <Select
-                                  onValueChange={field.onChange}
-                                  defaultValue={field.value}
-                                >
-                                  <FormControl>
-                                    <SelectTrigger className="w-full px-4 py-2 border border-neutral-300 rounded-md focus:ring-primary">
-                                      <SelectValue placeholder="Select month" />
-                                    </SelectTrigger>
-                                  </FormControl>
-                                  <SelectContent>
-                                    {months.map((month) => (
-                                      <SelectItem key={month.value} value={month.value}>
-                                        {month.label}
-                                      </SelectItem>
-                                    ))}
-                                  </SelectContent>
-                                </Select>
-                                <FormMessage />
-                              </FormItem>
-                            )}
-                          />
-
-                          <FormField
-                            control={form.control}
-                            name="year"
-                            render={({ field }) => (
-                              <FormItem>
-                                <FormLabel className="text-neutral-700 font-medium">
-                                  Year
-                                </FormLabel>
-                                <Select
-                                  onValueChange={field.onChange}
-                                  defaultValue={field.value}
-                                >
-                                  <FormControl>
-                                    <SelectTrigger className="w-full px-4 py-2 border border-neutral-300 rounded-md focus:ring-primary">
-                                      <SelectValue placeholder="Select year" />
-                                    </SelectTrigger>
-                                  </FormControl>
-                                  <SelectContent>
-                                    {years.map((year) => (
-                                      <SelectItem key={year.value} value={year.value}>
-                                        {year.label}
-                                      </SelectItem>
-                                    ))}
-                                  </SelectContent>
-                                </Select>
-                                <FormMessage />
-                              </FormItem>
-                            )}
-                          />
-                        </div>
-                      </div>
-
-                      <div className="mb-6">
-                        <h3 className="text-xl font-semibold text-neutral-800 mb-2">
-                          is equivalent in today's money
-                        </h3>
-                      </div>
-
-                      <Button
-                        type="submit"
-                        className="w-full bg-primary text-white font-semibold py-3 hover:bg-primary/90"
-                      >
-                        Calculate Now
-                      </Button>
-                    </form>
-                  </Form>
-                </CardContent>
-              </Card>
-            </div>
-
-            <div className="lg:w-1/2">
-              <Card className="bg-white rounded-lg shadow-lg overflow-hidden mb-8">
-                <CardContent className="p-8">
-                  <h3 className="text-2xl font-semibold text-neutral-800 mb-6">
-                    Current UK Inflation Rate
-                  </h3>
-                  <div className="text-center">
-                    <div className="text-5xl font-bold text-primary mb-4">2.6%</div>
-                    <p className="text-neutral-600">
-                      Source: Office for National Statistics
-                    </p>
-                  </div>
-                </CardContent>
-              </Card>
-
-              {result && (
-                <Card className="bg-white rounded-lg shadow-lg overflow-hidden">
-                  <CardContent className="p-8">
-                    <h3 className="text-2xl font-semibold text-neutral-800 mb-6">
-                      Calculation Results
-                    </h3>
-                    <div className="space-y-4">
-                      <div className="p-4 bg-neutral-50 rounded-lg">
-                        <div className="font-medium text-neutral-700">Original Value:</div>
-                        <div className="text-2xl font-semibold text-neutral-800">
-                          £{result.originalValue.toLocaleString("en-GB", {
-                            minimumFractionDigits: 2,
-                            maximumFractionDigits: 2,
-                          })}
-                        </div>
-                      </div>
-
-                      <div className="p-4 bg-neutral-50 rounded-lg">
-                        <div className="font-medium text-neutral-700">Today's Equivalent Value:</div>
-                        <div className="text-2xl font-semibold text-primary">
-                          £{result.todayValue.toLocaleString("en-GB", {
-                            minimumFractionDigits: 2,
-                            maximumFractionDigits: 2,
-                          })}
-                        </div>
-                      </div>
-
-                      <div className="p-4 bg-neutral-50 rounded-lg">
-                        <div className="font-medium text-neutral-700">
-                          Growth Rate Needed to Match Inflation:
-                        </div>
-                        <div className="text-2xl font-semibold text-secondary">
-                          {result.growthRate.toLocaleString("en-GB", {
-                            minimumFractionDigits: 2,
-                            maximumFractionDigits: 2,
-                          })}%
-                        </div>
+                    <div className="mb-6 flex flex-col">
+                      <h3 className="text-xl font-semibold text-neutral-800 mb-2">
+                        is equivalent in today's money
+                      </h3>
+                      <div className="flex-grow flex items-end">
+                        <Button
+                          type="submit"
+                          className="w-full bg-primary text-white font-semibold py-3 hover:bg-primary/90"
+                        >
+                          Calculate Now
+                        </Button>
                       </div>
                     </div>
-                  </CardContent>
-                </Card>
-              )}
-            </div>
-          </div>
+                  </div>
+                </form>
+              </Form>
+            </CardContent>
+          </Card>
+
+          {/* Current UK Inflation Rate */}
+          <Card className="bg-white rounded-lg shadow-lg overflow-hidden mb-8">
+            <CardContent className="p-8">
+              <h3 className="text-2xl font-semibold text-neutral-800 mb-6 text-center">
+                Current UK Inflation Rate
+              </h3>
+              <div className="text-center">
+                <div className="text-5xl font-bold text-primary mb-4">2.6%</div>
+                <p className="text-neutral-600">
+                  Source: Office for National Statistics
+                </p>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Results section */}
+          {result && (
+            <Card className="bg-white rounded-lg shadow-lg overflow-hidden">
+              <CardContent className="p-8">
+                <h3 className="text-2xl font-semibold text-neutral-800 mb-6 text-center">
+                  Calculation Results
+                </h3>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div className="p-4 bg-neutral-50 rounded-lg">
+                    <div className="font-medium text-neutral-700">Original Value:</div>
+                    <div className="text-2xl font-semibold text-neutral-800">
+                      £{result.originalValue.toLocaleString("en-GB", {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2,
+                      })}
+                    </div>
+                  </div>
+
+                  <div className="p-4 bg-neutral-50 rounded-lg">
+                    <div className="font-medium text-neutral-700">Today's Equivalent Value:</div>
+                    <div className="text-2xl font-semibold text-primary">
+                      £{result.todayValue.toLocaleString("en-GB", {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2,
+                      })}
+                    </div>
+                  </div>
+
+                  <div className="p-4 bg-neutral-50 rounded-lg">
+                    <div className="font-medium text-neutral-700">
+                      Growth Rate Needed to Match Inflation:
+                    </div>
+                    <div className="text-2xl font-semibold text-secondary">
+                      {result.growthRate.toLocaleString("en-GB", {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2,
+                      })}%
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          )}
         </div>
       </section>
     </>
