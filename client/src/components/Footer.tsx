@@ -2,7 +2,7 @@ import { Link } from "wouter";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { apiRequest } from "@/lib/queryClient";
 import { NotepadTextDashed, Phone, MapPin, Clock, Instagram, Facebook, Linkedin, Twitter, Mail } from "lucide-react";
 import logoPath from "@assets/Property Investments.png";
@@ -10,6 +10,17 @@ import logoPath from "@assets/Property Investments.png";
 const Footer = () => {
   const { toast } = useToast();
   const [email, setEmail] = useState("");
+
+  // WordPress plugin integration hook
+  useEffect(() => {
+    if ((window as any).wpData && typeof (window as any).wpData.integratePlugin === 'function') {
+      // WordPress footer widget integration
+      (window as any).wpData.integratePlugin('widgets', {
+        area: 'footer-widgets',
+        location: 'footer'
+      });
+    }
+  }, []);
 
   const handleNewsletterSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -40,7 +51,7 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-neutral-800 text-white py-12">
+    <footer className="bg-neutral-800 text-white py-12" id="wp-footer">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="lg:flex justify-between mb-8">
           <div className="lg:w-1/4 mb-8 lg:mb-0">
@@ -88,6 +99,11 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
+                <Link href="/inflation-calculator">
+                  <a className="text-neutral-400 hover:text-white transition">Inflation Calculator</a>
+                </Link>
+              </li>
+              <li>
                 <Link href="/contact">
                   <a className="text-neutral-400 hover:text-white transition">Contact Us</a>
                 </Link>
@@ -100,11 +116,11 @@ const Footer = () => {
             <ul className="space-y-2">
               <li className="flex items-start">
                 <Mail className="text-neutral-400 h-5 w-5 mr-2 mt-1" />
-                <span className="text-neutral-400">info@propertyinvestments.com</span>
+                <span className="text-neutral-400">info@kr-propertries.co.uk</span>
               </li>
               <li className="flex items-start">
                 <Phone className="text-neutral-400 h-5 w-5 mr-2 mt-1" />
-                <span className="text-neutral-400">+44 (0) 1234 567890</span>
+                <span className="text-neutral-400">02036332783</span>
               </li>
               <li className="flex items-start">
                 <MapPin className="text-neutral-400 h-5 w-5 mr-2 mt-1" />
@@ -135,7 +151,7 @@ const Footer = () => {
         </div>
 
         <div className="pt-8 border-t border-neutral-700 text-center text-neutral-400">
-          <p>&copy; {new Date().getFullYear()} Property Investments. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} KR Property Investments. All rights reserved.</p>
         </div>
       </div>
     </footer>

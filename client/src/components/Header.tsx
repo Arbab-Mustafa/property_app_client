@@ -9,6 +9,7 @@ const navLinks = [
   { name: "About Us", path: "/about" },
   { name: "Invest With Us", path: "/invest" },
   { name: "Updates", path: "/updates" },
+  { name: "Inflation Calculator", path: "/inflation-calculator" },
   { name: "Contact Us", path: "/contact" },
 ];
 
@@ -36,17 +37,28 @@ const Header = () => {
     };
   }, []);
 
+  // WordPress plugin integration hook point
+  useEffect(() => {
+    if ((window as any).wpData && typeof (window as any).wpData.integratePlugin === 'function') {
+      // WordPress menu integration example
+      (window as any).wpData.integratePlugin('menu', {
+        element: 'header-menu',
+        location: 'primary'
+      });
+    }
+  }, []);
+
   return (
-    <header className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? "bg-white shadow-md" : "bg-white shadow-md"}`}>
+    <header className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? "bg-white shadow-md" : "bg-white shadow-md"}`} id="wp-header">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-4">
           <div className="flex items-center">
             <Link href="/">
-              <img src={logoPath} alt="Property Investments Logo" className="h-10 cursor-pointer" />
+              <img src={logoPath} alt="Property Investments Logo" className="h-12 cursor-pointer" />
             </Link>
           </div>
 
-          <nav className="hidden md:flex space-x-8">
+          <nav className="hidden md:flex space-x-8" id="header-menu">
             {navLinks.map((link) => (
               <Link key={link.path} href={link.path}>
                 <a className={`font-medium transition hover:text-primary ${location === link.path ? "text-primary" : "text-neutral-700"}`}>

@@ -10,6 +10,7 @@ import About from "@/pages/About";
 import Invest from "@/pages/Invest";
 import Updates from "@/pages/Updates";
 import Contact from "@/pages/Contact";
+import InflationCalculator from "@/pages/InflationCalculator";
 
 function Router() {
   return (
@@ -19,10 +20,28 @@ function Router() {
       <Route path="/invest" component={Invest} />
       <Route path="/updates" component={Updates} />
       <Route path="/contact" component={Contact} />
+      <Route path="/inflation-calculator" component={InflationCalculator} />
       <Route component={NotFound} />
     </Switch>
   );
 }
+
+// WordPress integration support
+const wordPressData = {
+  site: {
+    name: "KR Property Investments",
+    description: "Expert property investment opportunities"
+  },
+  plugins: {},
+  integratePlugin: (pluginName: string, config: any) => {
+    // This function would handle WordPress plugin integration
+    (wordPressData.plugins as any)[pluginName] = config;
+    return true;
+  }
+};
+
+// Make WordPress data available globally for plugin integration
+(window as any).wpData = wordPressData;
 
 function App() {
   return (

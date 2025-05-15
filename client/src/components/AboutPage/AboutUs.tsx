@@ -1,21 +1,26 @@
 const AboutUs = () => {
   return (
-    <section className="section-anchor py-16 bg-white">
+    <section className="section-anchor py-16 bg-white" id="wp-content-about-us">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold text-neutral-800 mb-4">About Us</h2>
           <p className="text-neutral-600 max-w-2xl mx-auto">
-            Get to know the team behind Property Investments.
+            Get to know the team behind KR Property Investments.
           </p>
         </div>
         
         <div className="lg:flex items-center">
           <div className="lg:w-1/2 mb-8 lg:mb-0 lg:pr-12">
-            <img 
-              src="https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1050&h=700" 
-              alt="Property Investment Team" 
-              className="rounded-lg shadow-lg w-full h-auto"
-            />
+            <figure className="relative">
+              <img 
+                src="https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1050&h=700" 
+                alt="Aaron and Stevie - Property Investment Team" 
+                className="rounded-lg shadow-lg w-full h-auto"
+              />
+              <figcaption className="mt-2 text-center text-sm text-neutral-600">
+                Aaron and Stevie, founders of KR Property Investments
+              </figcaption>
+            </figure>
           </div>
           
           <div className="lg:w-1/2">
