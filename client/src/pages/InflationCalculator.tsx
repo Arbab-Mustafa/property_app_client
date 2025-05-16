@@ -60,35 +60,41 @@ const InflationCalculator = () => {
     growthRate: number;
   } | null>(null);
 
-  // ✅ Step 1: Load Baserow API token from .env
+  // Load Baserow API token from environment variables
   const token = import.meta.env.VITE_BASEROW_API_TOKEN;
 
-  // Function to save calculation history to our database
-  const saveCalculationHistory = async (formData: FormValues, todayValue: number) => {
+  // Function to submit data directly to Baserow
+  const submitToBaserow = async (formData: FormValues, todayValue: number) => {
     try {
-      const response = await fetch("/api/calculationHistory", {
-        method: "POST",
-        headers: { 
-          "Content-Type": "application/json" 
-        },
-        body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          amount: parseFloat(formData.amount.replace(/[^0-9.]/g, "")),
-          month: formData.month,
-          year: formData.year,
-          adjustedAmount: todayValue,
-          source: formData.source || "Website",
-        }),
-      });
+      // Baserow API endpoint for your table
+      const baserowResponse = await fetch(
+        "https://api.baserow.io/api/database/rows/table/540880/?user_field_names=true",
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Token ${token}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            Name: formData.name,
+            Email: formData.email,
+            Amount: parseFloat(formData.amount.replace(/[^0-9.]/g, "")),
+            Month: formData.month,
+            Year: formData.year,
+            "Inflation Adjusted Amount": todayValue,
+            "Submission Date": new Date().toISOString(),
+            "Source/Campaign": formData.source || "Website",
+          }),
+        }
+      );
 
-      if (!response.ok) {
-        console.error("Failed to save calculation history");
+      if (!baserowResponse.ok) {
+        console.error("Failed to submit to Baserow");
       } else {
-        console.log("Calculation history saved ✅");
+        console.log("Submitted to Baserow ✅");
       }
     } catch (error) {
-      console.error("Error saving calculation history:", error);
+      console.error("Error sending to Baserow:", error);
     }
   };
   
@@ -133,8 +139,8 @@ const InflationCalculator = () => {
           growthRate: responseData.data.growthRate,
         });
         
-        // Save the calculation to our database
-        await saveCalculationHistory(data, responseData.data.todayValue);
+        // Submit the data to Baserow
+        await submitToBaserow(data, responseData.data.todayValue);
       } else {
         console.error("API error:", responseData.error);
       }
