@@ -140,14 +140,16 @@ const InflationCalculator = () => {
       console.log("API response:", responseData);
       
       if (responseData.success && responseData.data) {
+        // Update the UI with the calculation results
         setResult({
           originalValue: responseData.data.originalValue,
           todayValue: responseData.data.todayValue,
           growthRate: responseData.data.growthRate,
         });
         
-        // Submit the data to Baserow
-        await submitToBaserow(data, responseData.data.todayValue);
+        // Submit the data to Baserow only after UI is updated
+        // This ensures we only submit once per user action
+        submitToBaserow(data, responseData.data.todayValue);
       } else {
         console.error("API error:", responseData.error);
       }
