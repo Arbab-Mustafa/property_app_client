@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Helmet } from "react-helmet";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -59,6 +59,8 @@ const InflationCalculator = () => {
     todayValue: number;
     growthRate: number;
   } | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const isSubmittingRef = useRef(false);
 
   // Load Baserow API token from environment variables
   const token = import.meta.env.VITE_BASEROW_API_TOKEN;
@@ -118,7 +120,16 @@ const InflationCalculator = () => {
   });
 
   const calculateInflation = async (data: FormValues) => {
+    // Prevent duplicate submissions
+    if (isSubmittingRef.current) {
+      return;
+    }
+    
     try {
+      // Set submission state to prevent multiple submissions
+      setIsSubmitting(true);
+      isSubmittingRef.current = true;
+      
       const response = await fetch("/api/inflation", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -147,15 +158,18 @@ const InflationCalculator = () => {
           growthRate: responseData.data.growthRate,
         });
         
-        // Submit the data to Baserow only after UI is updated
-        // This ensures we only submit once per user action
-        submitToBaserow(data, responseData.data.todayValue);
+        // Submit the data to Baserow only once
+        await submitToBaserow(data, responseData.data.todayValue);
       } else {
         console.error("API error:", responseData.error);
       }
     } catch (error) {
       console.error("Error calculating inflation:", error);
       // You could add error state handling here
+    } finally {
+      // Reset submission state
+      setIsSubmitting(false);
+      isSubmittingRef.current = false;
     }
   };
 
