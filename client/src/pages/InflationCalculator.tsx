@@ -66,6 +66,9 @@ const InflationCalculator = () => {
   // Function to submit data directly to Baserow
   const submitToBaserow = async (formData: FormValues, todayValue: number) => {
     try {
+      // Log the Baserow token (first few characters only for security)
+      console.log("Using Baserow token:", token ? `${token.substring(0, 5)}...` : "No token available");
+      
       // Baserow API endpoint for your table
       const baserowResponse = await fetch(
         "https://api.baserow.io/api/database/rows/table/540880/?user_field_names=true",
@@ -79,8 +82,8 @@ const InflationCalculator = () => {
             Name: formData.name,
             Email: formData.email,
             Amount: parseFloat(formData.amount.replace(/[^0-9.]/g, "")),
-            Month: formData.month,
-            Year: formData.year,
+            Month: parseInt(formData.month),
+            Year: parseInt(formData.year),
             "Inflation Adjusted Amount": todayValue,
             "Submission Date": new Date().toISOString(),
             "Source/Campaign": formData.source || "Website",
@@ -88,8 +91,12 @@ const InflationCalculator = () => {
         }
       );
 
+      const responseText = await baserowResponse.text();
+      console.log("Baserow response status:", baserowResponse.status);
+      console.log("Baserow response:", responseText);
+
       if (!baserowResponse.ok) {
-        console.error("Failed to submit to Baserow");
+        console.error("Failed to submit to Baserow:", responseText);
       } else {
         console.log("Submitted to Baserow ✅");
       }
