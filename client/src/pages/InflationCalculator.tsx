@@ -23,9 +23,12 @@ import {
 } from "@/components/ui/form";
 
 const formSchema = z.object({
+  name: z.string().min(1, "Please enter your name"),
+  email: z.string().email("Please enter a valid email"),
   amount: z.string().min(1, "Please enter an amount"),
   year: z.string().min(1, "Please select a year"),
   month: z.string().min(1, "Please select a month"),
+  source: z.string().optional(),
 });
 
 type FormValues = z.infer<typeof formSchema>;
@@ -60,34 +63,50 @@ const InflationCalculator = () => {
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
+      name: "",
+      email: "",
       amount: "",
       year: new Date().getFullYear().toString(),
       month: (new Date().getMonth() + 1).toString(),
+      source: "",
     },
   });
 
-  const calculateInflation = (data: FormValues) => {
+  const calculateInflation = async (data: FormValues) => {
     const amount = parseFloat(data.amount.replace(/[^0-9.]/g, ""));
     const year = parseInt(data.year);
     const month = parseInt(data.month);
 
-    // Simple inflation calculation (sample calculation - would be replaced with actual calculation)
     const currentYear = new Date().getFullYear();
     const currentMonth = new Date().getMonth() + 1;
-    
-    // Calculate years difference
+
     const yearsDiff = (currentYear - year) + ((currentMonth - month) / 12);
-    
-    // Using 2.6% annual inflation rate
+
     const inflationRate = 0.026;
     const todayValue = amount * Math.pow(1 + inflationRate, yearsDiff);
     const growthRate = (Math.pow(todayValue / amount, 1 / yearsDiff) - 1) * 100;
-    
+
     setResult({
       originalValue: amount,
       todayValue: todayValue,
       growthRate: growthRate,
     });
+
+    // Optional: Send data to your backend
+    try {
+      await fetch("/api/inflation", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          ...data,
+          amount,
+          year,
+          month,
+        }),
+      });
+    } catch (error) {
+      console.error("Error sending form data:", error);
+    }
   };
 
   return (
@@ -117,7 +136,6 @@ const InflationCalculator = () => {
             </p>
           </div>
 
-          {/* Full-width calculator */}
           <Card className="bg-white rounded-lg shadow-lg overflow-hidden mb-8">
             <CardContent className="p-8">
               <Form {...form}>
@@ -125,19 +143,73 @@ const InflationCalculator = () => {
                   onSubmit={form.handleSubmit(calculateInflation)}
                   className="space-y-6"
                 >
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                  {/* New User Info Fields */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <FormField
+                      control={form.control}
+                      name="name"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="text-neutral-700 font-medium">Your Name</FormLabel>
+                          <FormControl>
+                            <Input
+                              placeholder="Jane Doe"
+                              className="w-full px-4 py-2 border border-neutral-300 rounded-md focus:ring-primary"
+                              {...field}
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={form.control}
+                      name="email"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="text-neutral-700 font-medium">Your Email</FormLabel>
+                          <FormControl>
+                            <Input
+                              type="email"
+                              placeholder="jane@example.com"
+                              className="w-full px-4 py-2 border border-neutral-300 rounded-md focus:ring-primary"
+                              {...field}
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+
+                  <FormField
+                    control={form.control}
+                    name="source"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-neutral-700 font-medium">Campaign Source (optional)</FormLabel>
+                        <FormControl>
+                          <Input
+                            placeholder="e.g. Facebook Ad, Newsletter, etc."
+                            className="w-full px-4 py-2 border border-neutral-300 rounded-md focus:ring-primary"
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  {/* Calculation Form */}
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-6">
                     <div className="mb-6">
-                      <h3 className="text-xl font-semibold text-neutral-800 mb-2">
-                        Show me how much
-                      </h3>
+                      <h3 className="text-xl font-semibold text-neutral-800 mb-2">Show me how much</h3>
                       <FormField
                         control={form.control}
                         name="amount"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel className="text-neutral-700 font-medium">
-                              Amount (£)
-                            </FormLabel>
+                            <FormLabel className="text-neutral-700 font-medium">Amount (£)</FormLabel>
                             <FormControl>
                               <Input
                                 placeholder="10000"
@@ -152,18 +224,14 @@ const InflationCalculator = () => {
                     </div>
 
                     <div className="mb-6">
-                      <h3 className="text-xl font-semibold text-neutral-800 mb-2">
-                        in
-                      </h3>
+                      <h3 className="text-xl font-semibold text-neutral-800 mb-2">in</h3>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <FormField
                           control={form.control}
                           name="month"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel className="text-neutral-700 font-medium">
-                                Month
-                              </FormLabel>
+                              <FormLabel className="text-neutral-700 font-medium">Month</FormLabel>
                               <Select
                                 onValueChange={field.onChange}
                                 defaultValue={field.value}
@@ -185,15 +253,12 @@ const InflationCalculator = () => {
                             </FormItem>
                           )}
                         />
-
                         <FormField
                           control={form.control}
                           name="year"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel className="text-neutral-700 font-medium">
-                                Year
-                              </FormLabel>
+                              <FormLabel className="text-neutral-700 font-medium">Year</FormLabel>
                               <Select
                                 onValueChange={field.onChange}
                                 defaultValue={field.value}
@@ -219,9 +284,7 @@ const InflationCalculator = () => {
                     </div>
 
                     <div className="mb-6 flex flex-col">
-                      <h3 className="text-xl font-semibold text-neutral-800 mb-2">
-                        is equivalent in today's money
-                      </h3>
+                      <h3 className="text-xl font-semibold text-neutral-800 mb-2">is equivalent in today's money</h3>
                       <div className="flex-grow flex items-end">
                         <Button
                           type="submit"
@@ -237,7 +300,6 @@ const InflationCalculator = () => {
             </CardContent>
           </Card>
 
-          {/* Current UK Inflation Rate */}
           <Card className="bg-white rounded-lg shadow-lg overflow-hidden mb-8">
             <CardContent className="p-8">
               <h3 className="text-2xl font-semibold text-neutral-800 mb-6 text-center">
@@ -245,14 +307,11 @@ const InflationCalculator = () => {
               </h3>
               <div className="text-center">
                 <div className="text-5xl font-bold text-primary mb-4">2.6%</div>
-                <p className="text-neutral-600">
-                  Source: Office for National Statistics
-                </p>
+                <p className="text-neutral-600">Source: Office for National Statistics</p>
               </div>
             </CardContent>
           </Card>
 
-          {/* Results section */}
           {result && (
             <Card className="bg-white rounded-lg shadow-lg overflow-hidden">
               <CardContent className="p-8">
