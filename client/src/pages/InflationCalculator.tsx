@@ -60,6 +60,38 @@ const InflationCalculator = () => {
     growthRate: number;
   } | null>(null);
 
+  // ✅ Step 1: Load Baserow API token from .env
+  const token = import.meta.env.VITE_BASEROW_API_TOKEN;
+
+  // Function to save calculation history to our database
+  const saveCalculationHistory = async (formData: FormValues, todayValue: number) => {
+    try {
+      const response = await fetch("/api/calculationHistory", {
+        method: "POST",
+        headers: { 
+          "Content-Type": "application/json" 
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          amount: parseFloat(formData.amount.replace(/[^0-9.]/g, "")),
+          month: formData.month,
+          year: formData.year,
+          adjustedAmount: todayValue,
+          source: formData.source || "Website",
+        }),
+      });
+
+      if (!response.ok) {
+        console.error("Failed to save calculation history");
+      } else {
+        console.log("Calculation history saved ✅");
+      }
+    } catch (error) {
+      console.error("Error saving calculation history:", error);
+    }
+  };
+  
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -100,6 +132,9 @@ const InflationCalculator = () => {
           todayValue: responseData.data.todayValue,
           growthRate: responseData.data.growthRate,
         });
+        
+        // Save the calculation to our database
+        await saveCalculationHistory(data, responseData.data.todayValue);
       } else {
         console.error("API error:", responseData.error);
       }

@@ -96,4 +96,59 @@ export class MemStorage implements IStorage {
   }
 }
 
-export const storage = new MemStorage();
+import { db } from "./db";
+import { eq } from "drizzle-orm";
+
+// Database Storage implementation
+export class DatabaseStorage implements IStorage {
+  async getUser(id: number): Promise<User | undefined> {
+    const [user] = await db.select().from(users).where(eq(users.id, id));
+    return user || undefined;
+  }
+
+  async getUserByUsername(username: string): Promise<User | undefined> {
+    const [user] = await db.select().from(users).where(eq(users.username, username));
+    return user || undefined;
+  }
+
+  async createUser(insertUser: InsertUser): Promise<User> {
+    const [user] = await db
+      .insert(users)
+      .values(insertUser)
+      .returning();
+    return user;
+  }
+
+  async getContactSubmission(id: number): Promise<Contact | undefined> {
+    const [contact] = await db.select().from(contactSubmissions).where(eq(contactSubmissions.id, id));
+    return contact || undefined;
+  }
+
+  async createContactSubmission(data: InsertContact): Promise<Contact> {
+    const [contact] = await db
+      .insert(contactSubmissions)
+      .values(data)
+      .returning();
+    return contact;
+  }
+
+  async getNewsletterSubscription(id: number): Promise<Newsletter | undefined> {
+    const [newsletter] = await db.select().from(newsletterSubscriptions).where(eq(newsletterSubscriptions.id, id));
+    return newsletter || undefined;
+  }
+
+  async getNewsletterByEmail(email: string): Promise<Newsletter | undefined> {
+    const [newsletter] = await db.select().from(newsletterSubscriptions).where(eq(newsletterSubscriptions.email, email));
+    return newsletter || undefined;
+  }
+
+  async createNewsletterSubscription(data: InsertNewsletter): Promise<Newsletter> {
+    const [newsletter] = await db
+      .insert(newsletterSubscriptions)
+      .values(data)
+      .returning();
+    return newsletter;
+  }
+}
+
+export const storage = new DatabaseStorage();
