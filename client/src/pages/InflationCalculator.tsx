@@ -73,39 +73,39 @@ const InflationCalculator = () => {
   });
 
   const calculateInflation = async (data: FormValues) => {
-    const amount = parseFloat(data.amount.replace(/[^0-9.]/g, ""));
-    const year = parseInt(data.year);
-    const month = parseInt(data.month);
-
-    const currentYear = new Date().getFullYear();
-    const currentMonth = new Date().getMonth() + 1;
-
-    const yearsDiff = (currentYear - year) + ((currentMonth - month) / 12);
-
-    const inflationRate = 0.026;
-    const todayValue = amount * Math.pow(1 + inflationRate, yearsDiff);
-    const growthRate = (Math.pow(todayValue / amount, 1 / yearsDiff) - 1) * 100;
-
-    setResult({
-      originalValue: amount,
-      todayValue: todayValue,
-      growthRate: growthRate,
-    });
-
-    // Optional: Send data to your backend
     try {
-      await fetch("/api/inflation", {
+      const response = await fetch("/api/inflation", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          ...data,
-          amount,
-          year,
-          month,
+          name: data.name,
+          email: data.email,
+          amount: data.amount,
+          year: data.year,
+          month: data.month,
+          source: data.source || 'Website'
         }),
       });
+
+      if (!response.ok) {
+        throw new Error("Failed to calculate inflation");
+      }
+
+      const responseData = await response.json();
+      console.log("API response:", responseData);
+      
+      if (responseData.success && responseData.data) {
+        setResult({
+          originalValue: responseData.data.originalValue,
+          todayValue: responseData.data.todayValue,
+          growthRate: responseData.data.growthRate,
+        });
+      } else {
+        console.error("API error:", responseData.error);
+      }
     } catch (error) {
-      console.error("Error sending form data:", error);
+      console.error("Error calculating inflation:", error);
+      // You could add error state handling here
     }
   };
 
