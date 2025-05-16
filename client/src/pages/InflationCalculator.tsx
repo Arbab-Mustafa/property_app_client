@@ -71,31 +71,38 @@ const InflationCalculator = () => {
       // Log the Baserow token (first few characters only for security)
       console.log("Using Baserow token:", token ? `${token.substring(0, 5)}...` : "No token available");
       
+      // Prepare the data to send to Baserow
+      const data = {
+        Name: formData.name,
+        Email: formData.email,
+        Amount: parseFloat(formData.amount.replace(/[^0-9.]/g, "")),
+        Month: parseInt(formData.month),
+        Year: parseInt(formData.year),
+        "Inflation Adjusted Amount": todayValue,
+        "Submission Date": new Date().toISOString(),
+        "Source/Campaign": formData.source || "Website",
+      };
+      
+      console.log("Sending to Baserow:", data);
+      
       // Baserow API endpoint for your table
       const baserowResponse = await fetch(
         "https://api.baserow.io/api/database/rows/table/540880/?user_field_names=true",
         {
           method: "POST",
           headers: {
-            Authorization: `Token ${token}`,
+            "Authorization": `Token ${token}`,
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({
-            Name: formData.name,
-            Email: formData.email,
-            Amount: parseFloat(formData.amount.replace(/[^0-9.]/g, "")),
-            Month: parseInt(formData.month),
-            Year: parseInt(formData.year),
-            "Inflation Adjusted Amount": todayValue,
-            "Submission Date": new Date().toISOString(),
-            "Source/Campaign": formData.source || "Website",
-          }),
+          body: JSON.stringify(data),
         }
       );
 
       const responseText = await baserowResponse.text();
+      console.log("Full Baserow request URL:", "https://api.baserow.io/api/database/rows/table/540880/?user_field_names=true");
       console.log("Baserow response status:", baserowResponse.status);
-      console.log("Baserow response:", responseText);
+      console.log("Baserow response headers:", Object.fromEntries([...baserowResponse.headers]));
+      console.log("Baserow response body:", responseText);
 
       if (!baserowResponse.ok) {
         console.error("Failed to submit to Baserow:", responseText);
