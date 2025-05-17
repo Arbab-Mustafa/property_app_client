@@ -1,5 +1,5 @@
-// Use fetch (already available) to send emails via SendGrid API
-import fetch from 'node-fetch';
+// Use SendGrid's provided library for email functionality
+import sgMail from '@sendgrid/mail';
 
 interface InflationReportData {
   name: string;
