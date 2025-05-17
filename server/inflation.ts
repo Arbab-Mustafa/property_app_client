@@ -1,4 +1,5 @@
 import express from 'express';
+import { sendInflationReport } from './email';
 
 const router = express.Router();
 
@@ -60,9 +61,6 @@ router.post('/api/inflation', async (req, res) => {
                       ((new Date().getMonth() + 1 - numericMonth) / 12);
     const growthRate = (Math.pow(adjustedAmount / numericAmount, 1 / yearsDiff) - 1) * 100;
 
-    // Store submission data for later integration with Baserow
-    // This would be where we'd save to a database or external service
-    
     console.log('Calculated results:', {
       originalAmount: numericAmount,
       adjustedAmount,
@@ -75,6 +73,31 @@ router.post('/api/inflation', async (req, res) => {
         source
       }
     });
+
+    // Send email report if email is provided
+    if (email) {
+      try {
+        // Send the email report asynchronously
+        sendInflationReport({
+          name,
+          email,
+          amount: numericAmount,
+          month: numericMonth,
+          year: numericYear,
+          todayValue: adjustedAmount,
+          growthRate: parseFloat(growthRate.toFixed(2))
+        }).then(emailResult => {
+          if (emailResult.success) {
+            console.log(`Email report sent to ${email}`);
+          } else {
+            console.error(`Failed to send email report: ${emailResult.error}`);
+          }
+        });
+      } catch (emailError) {
+        console.error('Error sending email report:', emailError);
+        // Continue processing even if email sending fails
+      }
+    }
 
     // Return the calculated results
     return res.json({
