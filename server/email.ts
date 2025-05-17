@@ -150,41 +150,38 @@ export async function sendInflationReport(data: InflationReportData) {
       </div>
     `;
 
-    // Create SendGrid API payload
-    const sendgridPayload = {
-      personalizations: [
-        {
-          to: [{ email: email, name: name }],
-          subject: 'Your Property Investment Inflation Calculator Results',
-        }
-      ],
-      from: { email: 'info@kr-properties.co.uk', name: 'Property Investments' },
-      content: [
-        {
-          type: 'text/html',
-          value: htmlContent
-        }
-      ]
+    // Set the API key for SendGrid
+    sgMail.setApiKey(sendgridApiKey);
+
+    // Create email message
+    const msg = {
+      to: email,
+      from: { 
+        email: 'info@kr-properties.co.uk', 
+        name: 'Property Investments' 
+      },
+      subject: `Your Property Investment Inflation Report (£${amount})`,
+      html: htmlContent,
     };
 
-    // Send request to SendGrid API
-    const response = await fetch('https://api.sendgrid.com/v3/mail/send', {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${sendgridApiKey}`,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(sendgridPayload)
-    });
-
-    // Check response
-    if (response.ok) {
+    try {
+      // Send email using SendGrid client library
+      await sgMail.send(msg);
       console.log(`Inflation calculator report email sent to ${email}`);
       return { success: true };
-    } else {
-      const errorText = await response.text();
-      console.error('SendGrid API error:', errorText);
-      return { success: false, error: `SendGrid API error: ${response.status} - ${errorText}` };
+    } catch (sendError) {
+      console.error('SendGrid send error:', sendError);
+      if (sendError.response) {
+        console.error('SendGrid error details:', sendError.response.body);
+        return { 
+          success: false, 
+          error: `SendGrid send error: ${JSON.stringify(sendError.response.body)}` 
+        };
+      }
+      return { 
+        success: false, 
+        error: sendError.message || 'Unknown SendGrid error' 
+      };
     }
   } catch (error) {
     console.error('Error sending inflation report email:', error);
