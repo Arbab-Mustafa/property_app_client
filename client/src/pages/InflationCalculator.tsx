@@ -494,6 +494,84 @@ const InflationCalculator = () => {
                     <strong>Property Investments typically provide returns of 8-12% per year</strong>, significantly outpacing inflation and helping you build real wealth over time.
                   </p>
                 </div>
+                
+                <div className="mt-6">
+                  <h4 className="text-lg font-medium text-neutral-800 mb-3">How Your Money Could Have Grown</h4>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div className="p-4 bg-red-50 border border-red-200 rounded-lg">
+                      <div className="font-medium text-neutral-700">Bank Savings (1%)</div>
+                      <div className="text-xl font-semibold text-red-600">
+                        £{(result.originalValue * Math.pow(1.01, result.yearsDiff)).toLocaleString("en-GB", {
+                          minimumFractionDigits: 2,
+                          maximumFractionDigits: 2,
+                        })}
+                      </div>
+                      <div className="text-sm text-neutral-600 mt-1">
+                        {(Math.pow(1.01, result.yearsDiff) * 100 - 100).toFixed(1)}% growth
+                      </div>
+                      <div className="text-sm font-medium text-red-700 mt-2">
+                        Lost to inflation: -£{(result.todayValue - (result.originalValue * Math.pow(1.01, result.yearsDiff))).toLocaleString("en-GB", {
+                          minimumFractionDigits: 2,
+                          maximumFractionDigits: 2,
+                        })}
+                      </div>
+                    </div>
+                    
+                    <div className="p-4 bg-amber-50 border border-amber-200 rounded-lg">
+                      <div className="font-medium text-neutral-700">Cash ISA (2-3%)</div>
+                      <div className="text-xl font-semibold text-amber-600">
+                        £{(result.originalValue * Math.pow(1.025, result.yearsDiff)).toLocaleString("en-GB", {
+                          minimumFractionDigits: 2,
+                          maximumFractionDigits: 2,
+                        })}
+                      </div>
+                      <div className="text-sm text-neutral-600 mt-1">
+                        {(Math.pow(1.025, result.yearsDiff) * 100 - 100).toFixed(1)}% growth
+                      </div>
+                      <div className="text-sm font-medium text-amber-700 mt-2">
+                        {result.todayValue > (result.originalValue * Math.pow(1.025, result.yearsDiff)) ? (
+                          <>Lost to inflation: -£{(result.todayValue - (result.originalValue * Math.pow(1.025, result.yearsDiff))).toLocaleString("en-GB", {
+                            minimumFractionDigits: 2,
+                            maximumFractionDigits: 2,
+                          })}</>
+                        ) : (
+                          <>Beat inflation by: £{((result.originalValue * Math.pow(1.025, result.yearsDiff)) - result.todayValue).toLocaleString("en-GB", {
+                            minimumFractionDigits: 2,
+                            maximumFractionDigits: 2,
+                          })}</>
+                        )}
+                      </div>
+                    </div>
+                    
+                    <div className="p-4 bg-green-50 border border-green-200 rounded-lg">
+                      <div className="font-medium text-neutral-700">Property Investment (10%)</div>
+                      <div className="text-xl font-semibold text-green-600">
+                        £{(result.originalValue * Math.pow(1.1, result.yearsDiff)).toLocaleString("en-GB", {
+                          minimumFractionDigits: 2,
+                          maximumFractionDigits: 2,
+                        })}
+                      </div>
+                      <div className="text-sm text-neutral-600 mt-1">
+                        {(Math.pow(1.1, result.yearsDiff) * 100 - 100).toFixed(1)}% growth
+                      </div>
+                      <div className="text-sm font-medium text-green-700 mt-2">
+                        Beat inflation by: £{((result.originalValue * Math.pow(1.1, result.yearsDiff)) - result.todayValue).toLocaleString("en-GB", {
+                          minimumFractionDigits: 2,
+                          maximumFractionDigits: 2,
+                        })}
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="mt-4 text-center">
+                    <a 
+                      href="/invest" 
+                      className="inline-block px-6 py-3 bg-primary text-white font-semibold rounded-md hover:bg-primary/90 transition-colors"
+                    >
+                      Learn More About Our Property Investments
+                    </a>
+                  </div>
+                </div>
               </CardContent>
             </Card>
           )}
