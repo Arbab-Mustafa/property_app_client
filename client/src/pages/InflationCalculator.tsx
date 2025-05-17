@@ -395,7 +395,8 @@ const InflationCalculator = () => {
                 <h3 className="text-2xl font-semibold text-neutral-800 mb-6 text-center">
                   Calculation Results
                 </h3>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  {/* First row */}
                   <div className="p-4 bg-neutral-50 rounded-lg">
                     <div className="font-medium text-neutral-700">Original Value:</div>
                     <div className="text-2xl font-semibold text-neutral-800">
@@ -403,6 +404,9 @@ const InflationCalculator = () => {
                         minimumFractionDigits: 2,
                         maximumFractionDigits: 2,
                       })}
+                    </div>
+                    <div className="text-sm text-neutral-600 mt-1">
+                      {months[result.startYear % 12]} {result.startYear}
                     </div>
                   </div>
 
@@ -414,19 +418,81 @@ const InflationCalculator = () => {
                         maximumFractionDigits: 2,
                       })}
                     </div>
+                    <div className="text-sm text-neutral-600 mt-1">
+                      As of {result.endYear}
+                    </div>
                   </div>
 
                   <div className="p-4 bg-neutral-50 rounded-lg">
                     <div className="font-medium text-neutral-700">
-                      Growth Rate Needed to Match Inflation:
+                      Loss in Value:
                     </div>
-                    <div className="text-2xl font-semibold text-secondary">
-                      {result.growthRate.toLocaleString("en-GB", {
+                    <div className="text-2xl font-semibold text-red-500">
+                      -£{result.lossInValue.toLocaleString("en-GB", {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2,
+                      })}
+                    </div>
+                    <div className="text-sm text-neutral-600 mt-1">
+                      Due to inflation
+                    </div>
+                  </div>
+                  
+                  {/* Second row */}
+                  <div className="p-4 bg-neutral-50 rounded-lg">
+                    <div className="font-medium text-neutral-700">
+                      Increase Over Time:
+                    </div>
+                    <div className="text-2xl font-semibold text-amber-600">
+                      {result.percentageIncrease.toLocaleString("en-GB", {
                         minimumFractionDigits: 2,
                         maximumFractionDigits: 2,
                       })}%
                     </div>
+                    <div className="text-sm text-neutral-600 mt-1">
+                      Cost of goods and services
+                    </div>
                   </div>
+                  
+                  <div className="p-4 bg-neutral-50 rounded-lg">
+                    <div className="font-medium text-neutral-700">
+                      Annual Growth Rate Needed:
+                    </div>
+                    <div className="text-2xl font-semibold text-secondary">
+                      {result.annualGrowthRate.toLocaleString("en-GB", {
+                        minimumFractionDigits: 1,
+                        maximumFractionDigits: 1,
+                      })}%
+                    </div>
+                    <div className="text-sm text-neutral-600 mt-1">
+                      To keep pace with inflation
+                    </div>
+                  </div>
+                  
+                  <div className="p-4 bg-neutral-50 rounded-lg">
+                    <div className="font-medium text-neutral-700">
+                      Time Period:
+                    </div>
+                    <div className="text-2xl font-semibold text-blue-600">
+                      {result.yearsDiff.toLocaleString("en-GB", {
+                        minimumFractionDigits: 1,
+                        maximumFractionDigits: 1,
+                      })} years
+                    </div>
+                    <div className="text-sm text-neutral-600 mt-1">
+                      From {result.startYear} to {result.endYear}
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="mt-6 p-5 border border-amber-200 bg-amber-50 rounded-md">
+                  <h4 className="text-lg font-medium text-amber-800 mb-2">What this means:</h4>
+                  <p className="text-amber-700">
+                    Your £{result.originalValue.toLocaleString("en-GB")} from {result.startYear} would need to have grown by an average of <strong>{result.annualGrowthRate.toFixed(1)}%</strong> per year just to have kept pace with inflation. If you achieved a lower rate of growth, the real value of your money would have fallen.
+                  </p>
+                  <p className="text-amber-700 mt-2">
+                    <strong>Property Investments typically provide returns of 8-12% per year</strong>, significantly outpacing inflation and helping you build real wealth over time.
+                  </p>
                 </div>
               </CardContent>
             </Card>
