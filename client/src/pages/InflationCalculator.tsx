@@ -57,7 +57,13 @@ const InflationCalculator = () => {
   const [result, setResult] = useState<{
     originalValue: number;
     todayValue: number;
-    growthRate: number;
+    lossInValue: number;
+    percentageLoss: number;
+    percentageIncrease: number;
+    annualGrowthRate: number;
+    startYear: number;
+    endYear: number;
+    yearsDiff: number;
   } | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const isSubmittingRef = useRef(false);
@@ -162,12 +168,8 @@ const InflationCalculator = () => {
       console.log("API response:", responseData);
       
       if (responseData.success && responseData.data) {
-        // Update the UI with the calculation results
-        setResult({
-          originalValue: responseData.data.originalValue,
-          todayValue: responseData.data.todayValue,
-          growthRate: responseData.data.growthRate,
-        });
+        // Update the UI with the enhanced calculation results
+        setResult(responseData.data);
         
         // Submit the data to Baserow only once
         await submitToBaserow(data, responseData.data.todayValue);
