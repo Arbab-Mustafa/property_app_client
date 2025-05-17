@@ -52,7 +52,6 @@ export async function sendInflationReport(data: InflationReportData) {
       style: 'currency',
       currency: 'GBP'
     });
-    const formattedGrowthRate = growthRate.toFixed(2);
 
     // Get month name
     const monthNames = [
@@ -62,13 +61,13 @@ export async function sendInflationReport(data: InflationReportData) {
     const monthName = monthNames[month - 1];
 
     // Format additional values for display
-    const formattedLossInValue = lossInValue.toLocaleString('en-GB', {
+    const formattedLossInValue = data.lossInValue.toLocaleString('en-GB', {
       style: 'currency',
       currency: 'GBP'
     });
-    const formattedPercentageIncrease = percentageIncrease.toFixed(2);
-    const formattedAnnualGrowthRate = annualGrowthRate.toFixed(1);
-    const formattedYearsDiff = yearsDiff.toFixed(1);
+    const formattedPercentageIncrease = data.percentageIncrease.toFixed(2);
+    const formattedAnnualGrowthRate = data.annualGrowthRate.toFixed(1);
+    const formattedYearsDiff = data.yearsDiff.toFixed(1);
     
     // Create the enhanced email HTML content based on the spreadsheet format
     const htmlContent = `

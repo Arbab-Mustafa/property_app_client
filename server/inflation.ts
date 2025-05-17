@@ -4,7 +4,7 @@ import { sendInflationReport } from './email';
 const router = express.Router();
 
 // RPI Index data from the spreadsheet (1987-2024)
-const rpiIndexData = {
+const rpiIndexData: Record<number, number> = {
   1987: 101.9,
   1988: 106.9,
   1989: 115.2,
