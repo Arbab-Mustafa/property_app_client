@@ -89,11 +89,11 @@ export async function sendInflationReport(data: InflationReportData) {
             </tr>
             <tr>
               <td style="padding: 8px; font-weight: bold;">Start Date:</td>
-              <td style="padding: 8px;">${monthName} ${startYear}</td>
+              <td style="padding: 8px;">${monthName} ${data.startYear}</td>
             </tr>
             <tr>
               <td style="padding: 8px; font-weight: bold;">End Date:</td>
-              <td style="padding: 8px;">Present (${endYear})</td>
+              <td style="padding: 8px;">Present (${data.endYear})</td>
             </tr>
             <tr style="background-color: #f0f0f0;">
               <td style="padding: 8px; font-weight: bold;">Future Value (Inflation-Adjusted Amount):</td>
@@ -126,7 +126,7 @@ export async function sendInflationReport(data: InflationReportData) {
           <p style="margin: 0 0 10px 0;"><strong>What this means:</strong></p>
           <p>The cost of goods and services increased by <strong>${formattedPercentageIncrease}%</strong> over this period.</p>
           <p>Your ${formattedOriginalAmount} would need to have grown by an average of <strong>${formattedAnnualGrowthRate}%</strong> per year, just to have kept pace with inflation. If you achieved a lower rate of growth, the real value of your money would have fallen.</p>
-          <p style="margin-top: 10px; font-size: 0.9em;">*Figures based on the Retail Price Index (RPI) as of ${endYear}. Source: Office for National Statistics.</p>
+          <p style="margin-top: 10px; font-size: 0.9em;">*Figures based on the Retail Price Index (RPI) as of ${data.endYear}. Source: Office for National Statistics.</p>
         </div>
         
         <div style="background-color: #f97316; color: white; padding: 20px; border-radius: 5px; margin: 25px 0;">
