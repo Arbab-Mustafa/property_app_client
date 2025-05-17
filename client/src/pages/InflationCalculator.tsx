@@ -65,14 +65,11 @@ const InflationCalculator = () => {
   // Load Baserow API token from environment variables
   const token = import.meta.env.VITE_BASEROW_API_TOKEN;
 
-  // Function to submit data directly to Baserow
+  // Direct function to submit data to Baserow using your suggested approach
   const submitToBaserow = async (formData: FormValues, todayValue: number) => {
     try {
-      // Log the Baserow token (first few characters only for security)
-      console.log("Using Baserow token:", token ? `${token.substring(0, 5)}...` : "No token available");
-      
-      // Prepare the data to send to Baserow
-      const data = {
+      // Prepare the row data for Baserow
+      const rowData = {
         Name: formData.name,
         Email: formData.email,
         Amount: parseFloat(formData.amount.replace(/[^0-9.]/g, "")),
@@ -83,34 +80,41 @@ const InflationCalculator = () => {
         "Source/Campaign": formData.source || "Website",
       };
       
-      console.log("Sending to Baserow:", data);
+      console.log("Submitting row to Baserow:", rowData);
       
-      // Baserow API endpoint for your table
-      const baserowResponse = await fetch(
+      // Submit to Baserow API
+      const response = await fetch(
         "https://api.baserow.io/api/database/rows/table/540880/?user_field_names=true",
         {
           method: "POST",
           headers: {
-            "Authorization": `Token ${token}`,
+            Authorization: `Token ${token}`,
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(data),
+          body: JSON.stringify(rowData),
         }
       );
-
-      const responseText = await baserowResponse.text();
-      console.log("Full Baserow request URL:", "https://api.baserow.io/api/database/rows/table/540880/?user_field_names=true");
-      console.log("Baserow response status:", baserowResponse.status);
-      console.log("Baserow response headers:", Object.fromEntries([...baserowResponse.headers]));
-      console.log("Baserow response body:", responseText);
-
-      if (!baserowResponse.ok) {
-        console.error("Failed to submit to Baserow:", responseText);
+      
+      console.log("Baserow response status:", response.status);
+      
+      // Try to parse as JSON first
+      let data;
+      try {
+        data = await response.json();
+        console.log("Baserow response data:", data);
+      } catch(err) {
+        const text = await response.text();
+        console.log("Baserow response text:", text);
+      }
+      
+      if (response.ok) {
+        alert("Submitted to Baserow ✅");
       } else {
-        console.log("Submitted to Baserow ✅");
+        alert("Failed to submit to Baserow ❌");
       }
     } catch (error) {
-      console.error("Error sending to Baserow:", error);
+      console.error("Error submitting to Baserow:", error);
+      alert("Something went wrong with Baserow submission ❌");
     }
   };
   
