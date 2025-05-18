@@ -38,54 +38,57 @@ const Invest = () => {
             no need for you to spend time negotiating with agents, coordinating with
             builders, or sourcing solicitors and mortgage brokers.
           </p>
-          
-          {/* Services Section in the Green Area */}
-          <div className="container mx-auto mt-16 mb-24">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
-              {/* Find You A Deal */}
-              <div className="text-center">
-                <div className="flex justify-center mb-6">
-                  <img src={findDealIcon} alt="Find you a deal icon" className="h-24 w-24" />
-                </div>
-                <h2 className="text-2xl font-bold text-cream-100 mb-4">Find You A Deal</h2>
-                <p className="text-cream-100 mb-6">
-                  If you haven't got the time or experience to find yourself a good investment, 
-                  we can help you with that.
-                </p>
-                <Button 
-                  className="bg-cream-100 text-emerald-600 hover:bg-opacity-90 rounded-full"
-                >
-                  Find Out More
-                </Button>
-              </div>
-
-              {/* Invest With Us */}
-              <div className="text-center">
-                <div className="flex justify-center mb-6">
-                  <img src={investWithUsIcon} alt="Invest with us icon" className="h-24 w-24" />
-                </div>
-                <h2 className="text-2xl font-bold text-cream-100 mb-4">Invest With Us</h2>
-                <p className="text-cream-100 mb-6">
-                  If you like the idea of earning a return from property, but not having the headache of 
-                  purchasing one you can earn great returns from investing in our deals.
-                </p>
-                <Button 
-                  className="bg-cream-100 text-emerald-600 hover:bg-opacity-90 rounded-full"
-                >
-                  Find Out More
-                </Button>
-              </div>
-            </div>
-          </div>
         </div>
         
-        {/* Skyline image directly after text */}
+        {/* Skyline with overlaid services section */}
         <div className="w-screen relative left-1/2 -translate-x-1/2" style={{ marginBottom: "-1px" }}>
+          {/* Skyline as background */}
           <img 
             src={skylineImage} 
             alt="City skyline" 
             className="w-full h-auto translate-y-1 min-w-[100vw]"
           />
+          
+          {/* Services Section overlaid on skyline */}
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="container mx-auto px-4 pt-8 pb-40">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
+                {/* Find You A Deal */}
+                <div className="text-center bg-emerald-600 bg-opacity-80 rounded-xl p-8">
+                  <div className="flex justify-center mb-6">
+                    <img src={findDealIcon} alt="Find you a deal icon" className="h-24 w-24" />
+                  </div>
+                  <h2 className="text-2xl font-bold text-cream-100 mb-4">Find You A Deal</h2>
+                  <p className="text-cream-100 mb-6">
+                    If you haven't got the time or experience to find yourself a good investment, 
+                    we can help you with that.
+                  </p>
+                  <Button 
+                    className="bg-cream-100 text-emerald-600 hover:bg-opacity-90 rounded-full"
+                  >
+                    Find Out More
+                  </Button>
+                </div>
+
+                {/* Invest With Us */}
+                <div className="text-center bg-emerald-600 bg-opacity-80 rounded-xl p-8">
+                  <div className="flex justify-center mb-6">
+                    <img src={investWithUsIcon} alt="Invest with us icon" className="h-24 w-24" />
+                  </div>
+                  <h2 className="text-2xl font-bold text-cream-100 mb-4">Invest With Us</h2>
+                  <p className="text-cream-100 mb-6">
+                    If you like the idea of earning a return from property, but not having the headache of 
+                    purchasing one you can earn great returns from investing in our deals.
+                  </p>
+                  <Button 
+                    className="bg-cream-100 text-emerald-600 hover:bg-opacity-90 rounded-full"
+                  >
+                    Find Out More
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
