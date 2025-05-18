@@ -65,8 +65,7 @@ const Invest = () => {
                 we can help you with that.
               </p>
               <Button 
-                variant="outline" 
-                className="border-emerald-600 text-emerald-600 hover:bg-emerald-600 hover:text-white rounded-full"
+                className="bg-emerald-600 text-white hover:bg-emerald-700 rounded-full"
               >
                 Find Out More
               </Button>

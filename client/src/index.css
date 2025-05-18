@@ -27,8 +27,8 @@
   --radius: 0.5rem;
 
   /* Custom colors for What We Do page */
-  --emerald-600: 160 84% 39%;
-  --emerald-700: 156 72% 26%;
+  --emerald-600: 164 100% 28%;  /* #008e6d */
+  --emerald-700: 164 100% 22%;
   --cream-100: 48 100% 93%;
 
   --chart-1: var(--muted-foreground);
