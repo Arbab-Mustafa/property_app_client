@@ -7,7 +7,7 @@ import logoPath from "@assets/Property Investments.png";
 const navLinks = [
   { name: "Home", path: "/" },
   { name: "About Us", path: "/about" },
-  { name: "Invest With Us", path: "/invest" },
+  { name: "What We Do", path: "/invest" },
   { name: "Updates", path: "/updates" },
   { name: "Inflation Calculator", path: "/inflation-calculator" },
   { name: "Book A Call", path: "/book-call" },
