@@ -151,7 +151,12 @@ const Footer = () => {
         </div>
 
         <div className="pt-8 border-t border-neutral-700 text-center text-neutral-400">
-          <p>&copy; {new Date().getFullYear()} KR Property Investments. All rights reserved.</p>
+          <p className="mb-2">&copy; {new Date().getFullYear()} KR Property Investments. All rights reserved.</p>
+          <div className="flex justify-center space-x-4 text-sm">
+            <Link href="/terms">
+              <a className="text-neutral-400 hover:text-white transition">Terms & Conditions</a>
+            </Link>
+          </div>
         </div>
       </div>
     </footer>
