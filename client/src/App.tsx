@@ -11,6 +11,7 @@ import Invest from "@/pages/Invest";
 import Updates from "@/pages/Updates";
 import Contact from "@/pages/Contact";
 import InflationCalculator from "@/pages/InflationCalculator";
+import BookCall from "@/pages/BookCall";
 
 function Router() {
   return (
@@ -21,6 +22,7 @@ function Router() {
       <Route path="/updates" component={Updates} />
       <Route path="/contact" component={Contact} />
       <Route path="/inflation-calculator" component={InflationCalculator} />
+      <Route path="/book-call" component={BookCall} />
       <Route component={NotFound} />
     </Switch>
   );
