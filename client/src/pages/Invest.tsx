@@ -30,8 +30,8 @@ const Invest = () => {
           <div className="flex justify-center mb-12">
             <img src={chartIcon} alt="Chart icon" className="h-36 w-36" />
           </div>
-          <p className="text-xl md:text-2xl max-w-3xl mx-auto mb-16">
-            <span className="font-semibold">Working with people that simply want a higher return on their money</span>
+          <p className="text-xl md:text-2xl max-w-2xl mx-auto mb-16">
+            <span className="font-semibold">Working with people that want higher returns</span>
           </p>
           <p className="text-lg md:text-xl max-w-3xl mx-auto mb-20">
             Discover how we provide end-to-end solutions for cash-flowing properties—
