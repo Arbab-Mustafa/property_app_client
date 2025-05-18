@@ -1,22 +1,25 @@
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
-import propertyBgImage from "../../assets/krhomepage.png";
+import propertyBgImage from "../../assets/kr-homepage.png";
 
 const Hero = () => {
   return (
     <section 
-      className="section-anchor relative min-h-[90vh] flex items-center pt-24 pb-20" 
+      className="section-anchor relative min-h-[90vh] flex items-center py-20" 
       id="wp-content-hero"
     >
-      {/* Background Image - Using img element for better control */}
-      <img 
-        src={propertyBgImage} 
-        alt="Property investment growth chart" 
-        className="absolute inset-0 w-full h-full object-cover object-center z-0"
-      />
+      {/* Background Image */}
+      <div 
+        className="absolute inset-0 z-0 bg-cover bg-center" 
+        style={{ 
+          backgroundImage: `url(${propertyBgImage})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center'
+        }}
+      ></div>
       
-      {/* Overlay - reduced opacity to show more of the image */}
-      <div className="absolute inset-0 bg-black bg-opacity-20 z-10"></div>
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-black bg-opacity-30 z-10"></div>
       
       {/* Content */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-20">
