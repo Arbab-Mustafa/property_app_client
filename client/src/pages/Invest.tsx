@@ -43,11 +43,13 @@ const Invest = () => {
       
       {/* Skyline image as transition between sections */}
       <div className="bg-emerald-600 relative">
-        <img 
-          src={skylineImage} 
-          alt="City skyline" 
-          className="w-full h-auto relative z-10"
-        />
+        <div className="w-full" style={{ marginBottom: "-1px" }}>
+          <img 
+            src={skylineImage} 
+            alt="City skyline" 
+            className="w-full h-auto translate-y-1"
+          />
+        </div>
       </div>
 
       {/* Services Section with Cream Background */}
