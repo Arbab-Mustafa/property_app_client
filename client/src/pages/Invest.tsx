@@ -1,8 +1,8 @@
 import { Helmet } from "react-helmet";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
-import { TrendingUp } from "lucide-react";
 import skylineImage from "../assets/skyline1.png";
+import chartIcon from "../assets/icons3/chart.png";
 import findDealIcon from "../assets/icons2/13.png";
 import investWithUsIcon from "../assets/icons2/14.png";
 
@@ -28,7 +28,7 @@ const Invest = () => {
         <div className="container mx-auto max-w-4xl">
           <h1 className="text-4xl md:text-5xl font-bold mb-12">What We Do?</h1>
           <div className="flex justify-center mb-12">
-            <TrendingUp size={60} className="text-cream-100" />
+            <img src={chartIcon} alt="Chart icon" className="h-16 w-16" />
           </div>
           <p className="text-xl md:text-2xl max-w-3xl mx-auto mb-16">
             <span className="font-semibold">Attention Investors & High Net-Worth Individuals:</span>
