@@ -1,3 +1,6 @@
+import { Dumbbell, GalleryThumbnails, Mountain, BadgeCheck, Target, Clock3 } from "lucide-react";
+import teamImage from "../../assets/team/aaron-stevie.png";
+
 const AboutUs = () => {
   return (
     <section className="section-anchor py-16 bg-white" id="wp-content-about-us">
@@ -9,15 +12,15 @@ const AboutUs = () => {
           </p>
         </div>
         
-        <div className="lg:flex items-center">
+        <div className="lg:flex items-center mb-16">
           <div className="lg:w-1/2 mb-8 lg:mb-0 lg:pr-12">
             <figure className="relative">
               <img 
-                src="https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1050&h=700" 
+                src={teamImage}
                 alt="Aaron and Stevie - Property Investment Team" 
-                className="rounded-lg shadow-lg w-full h-auto"
+                className="rounded-full shadow-lg w-80 h-80 object-cover mx-auto"
               />
-              <figcaption className="mt-2 text-center text-sm text-neutral-600">
+              <figcaption className="mt-4 text-center text-sm text-neutral-600">
                 Aaron and Stevie, founders of KR Property Investments
               </figcaption>
             </figure>
@@ -29,29 +32,78 @@ const AboutUs = () => {
               We are Aaron and Stevie, a passionate and driven team with a proven track record in property investment.
             </p>
             
-            <h4 className="text-xl font-semibold text-neutral-800 mb-2 mt-6">Active Lifestyles</h4>
-            <p className="text-neutral-600 mb-4">
-              We thrive on challenge and discipline, with Stevie competing in CrossFit and weightlifting, and Aaron excelling in Brazilian Jiu-Jitsu. These values of perseverance and focus are integral to how we approach our property investments.
-            </p>
+            <div className="flex items-start mt-6 mb-4">
+              <div className="flex-shrink-0 bg-primary/10 p-3 rounded-lg mr-4">
+                <Dumbbell className="h-6 w-6 text-primary" />
+              </div>
+              <div>
+                <h4 className="text-xl font-semibold text-neutral-800 mb-2">Active Lifestyles</h4>
+                <p className="text-neutral-600">
+                  We thrive on challenge and discipline, with Stevie competing in CrossFit and weightlifting, and Aaron excelling in Brazilian Jiu-Jitsu. These values of perseverance and focus are integral to how we approach our property investments.
+                </p>
+              </div>
+            </div>
             
-            <h4 className="text-xl font-semibold text-neutral-800 mb-2">Long-Term Vision</h4>
-            <p className="text-neutral-600 mb-4">
-              Our dream is to live abroad in Cape Town, South Africa, while continuing to grow a thriving property portfolio.
-            </p>
+            <div className="flex items-start mt-6 mb-4">
+              <div className="flex-shrink-0 bg-primary/10 p-3 rounded-lg mr-4">
+                <Mountain className="h-6 w-6 text-primary" />
+              </div>
+              <div>
+                <h4 className="text-xl font-semibold text-neutral-800 mb-2">Long-Term Vision</h4>
+                <p className="text-neutral-600">
+                  Our dream is to live abroad in Cape Town, South Africa, while continuing to grow a thriving property portfolio.
+                </p>
+              </div>
+            </div>
             
-            <h4 className="text-xl font-semibold text-neutral-800 mb-2">Experience</h4>
-            <p className="text-neutral-600 mb-4">
-              Since 2017, we've been building a portfolio in the Lincolnshire area, specialising in social housing and collaborating closely with housing providers and charities.
-            </p>
-            
-            <h4 className="text-xl font-semibold text-neutral-800 mb-2">Proven Results</h4>
-            <p className="text-neutral-600 mb-4">
+            <div className="flex items-start mt-6 mb-4">
+              <div className="flex-shrink-0 bg-primary/10 p-3 rounded-lg mr-4">
+                <Clock3 className="h-6 w-6 text-primary" />
+              </div>
+              <div>
+                <h4 className="text-xl font-semibold text-neutral-800 mb-2">Experience</h4>
+                <p className="text-neutral-600">
+                  Since 2017, we've been building a portfolio in the Lincolnshire area, specialising in social housing and collaborating closely with housing providers and charities.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div className="grid md:grid-cols-3 gap-8 mt-12">
+          <div className="bg-white rounded-lg p-6 shadow-md border border-gray-100">
+            <div className="flex items-center mb-4">
+              <div className="bg-primary/10 p-3 rounded-lg mr-4">
+                <BadgeCheck className="h-6 w-6 text-primary" />
+              </div>
+              <h4 className="text-xl font-semibold text-neutral-800">Proven Results</h4>
+            </div>
+            <p className="text-neutral-600">
               In 2024 alone, we sourced and project-managed 12 successful social housing developments.
             </p>
-            
-            <h4 className="text-xl font-semibold text-neutral-800 mb-2">Future Goals</h4>
-            <p className="text-neutral-600 mb-4">
+          </div>
+          
+          <div className="bg-white rounded-lg p-6 shadow-md border border-gray-100">
+            <div className="flex items-center mb-4">
+              <div className="bg-primary/10 p-3 rounded-lg mr-4">
+                <Target className="h-6 w-6 text-primary" />
+              </div>
+              <h4 className="text-xl font-semibold text-neutral-800">Future Goals</h4>
+            </div>
+            <p className="text-neutral-600">
               We aim to purchase 12 additional properties in 2025, expanding our ability to meet growing demand in the sector.
+            </p>
+          </div>
+          
+          <div className="bg-white rounded-lg p-6 shadow-md border border-gray-100">
+            <div className="flex items-center mb-4">
+              <div className="bg-primary/10 p-3 rounded-lg mr-4">
+                <GalleryThumbnails className="h-6 w-6 text-primary" />
+              </div>
+              <h4 className="text-xl font-semibold text-neutral-800">Our Portfolio</h4>
+            </div>
+            <p className="text-neutral-600">
+              Our growing portfolio includes a mix of residential properties and social housing developments across Lincolnshire and beyond.
             </p>
           </div>
         </div>
