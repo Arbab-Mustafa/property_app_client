@@ -23,9 +23,9 @@ const Invest = () => {
         <meta property="og:type" content="website" />
       </Helmet>
       
-      {/* Hero Section with Green Background and Skyline Overlay */}
-      <section className="bg-emerald-600 text-white px-4 text-center relative pt-16 pb-32">
-        <div className="container mx-auto max-w-4xl relative z-10">
+      {/* Hero Section with Green Background */}
+      <section className="bg-emerald-600 text-white px-4 text-center pt-16 pb-12 relative">
+        <div className="container mx-auto max-w-4xl">
           <h1 className="text-4xl md:text-5xl font-bold mb-6">What We Do?</h1>
           <div className="flex justify-center mb-8">
             <TrendingUp size={48} className="text-cream-100" />
@@ -33,22 +33,22 @@ const Invest = () => {
           <p className="text-xl md:text-2xl max-w-3xl mx-auto mb-12">
             <span className="font-semibold">Attention Investors & High Net-Worth Individuals:</span>
           </p>
-          <p className="text-lg md:text-xl max-w-3xl mx-auto">
+          <p className="text-lg md:text-xl max-w-3xl mx-auto mb-8">
             Discover how we provide end-to-end solutions for cash-flowing properties—
             no need for you to spend time negotiating with agents, coordinating with
             builders, or sourcing solicitors and mortgage brokers.
           </p>
         </div>
-        
-        {/* City Skyline Image overlaid at the bottom */}
-        <div className="absolute bottom-0 left-0 right-0">
-          <img 
-            src={skylineImage} 
-            alt="City skyline" 
-            className="w-full h-auto"
-          />
-        </div>
       </section>
+      
+      {/* Skyline image as transition between sections */}
+      <div className="bg-emerald-600 relative">
+        <img 
+          src={skylineImage} 
+          alt="City skyline" 
+          className="w-full h-auto relative z-10"
+        />
+      </div>
 
       {/* Services Section with Cream Background */}
       <section className="bg-cream-100 py-16 px-4">
