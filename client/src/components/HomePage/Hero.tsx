@@ -14,7 +14,7 @@ const Hero = () => {
         style={{ 
           backgroundImage: `url(${propertyBgImage})`,
           backgroundSize: '110%', /* Zoomed out slightly to show more of the image */
-          backgroundPosition: 'center top'
+          backgroundPosition: '60% top' /* Moved image slightly to the right */
         }}
       ></div>
       
