@@ -28,7 +28,7 @@ const Invest = () => {
         <div className="container mx-auto max-w-4xl">
           <h1 className="text-4xl md:text-5xl font-bold mb-12">What We Do?</h1>
           <div className="flex justify-center mb-12">
-            <img src={chartIcon} alt="Chart icon" className="h-16 w-16" />
+            <img src={chartIcon} alt="Chart icon" className="h-24 w-24" />
           </div>
           <p className="text-xl md:text-2xl max-w-3xl mx-auto mb-16">
             <span className="font-semibold">Attention Investors & High Net-Worth Individuals:</span>
@@ -56,7 +56,7 @@ const Invest = () => {
                 {/* Find You A Deal */}
                 <div className="text-center">
                   <div className="flex justify-center mb-6">
-                    <img src={findDealIcon} alt="Find you a deal icon" className="h-24 w-24" />
+                    <img src={findDealIcon} alt="Find you a deal icon" className="h-32 w-32" />
                   </div>
                   <h2 className="text-2xl font-bold text-emerald-600 mb-4">Find You A Deal</h2>
                   <p className="text-emerald-600 mb-6">
@@ -73,7 +73,7 @@ const Invest = () => {
                 {/* Invest With Us */}
                 <div className="text-center">
                   <div className="flex justify-center mb-6">
-                    <img src={investWithUsIcon} alt="Invest with us icon" className="h-24 w-24" />
+                    <img src={investWithUsIcon} alt="Invest with us icon" className="h-32 w-32" />
                   </div>
                   <h2 className="text-2xl font-bold text-emerald-600 mb-4">Invest With Us</h2>
                   <p className="text-emerald-600 mb-6">
