@@ -57,9 +57,7 @@ const Invest = () => {
             {/* Find You A Deal */}
             <div className="text-center">
               <div className="flex justify-center mb-6">
-                <div className="rounded-full bg-white p-6 border-2 border-emerald-600 flex items-center justify-center">
-                  <img src={findDealIcon} alt="Find you a deal icon" className="h-12 w-12" />
-                </div>
+                <img src={findDealIcon} alt="Find you a deal icon" className="h-24 w-24" />
               </div>
               <h2 className="text-2xl font-bold text-emerald-600 mb-4">Find You A Deal</h2>
               <p className="text-gray-700 mb-6">
@@ -77,9 +75,7 @@ const Invest = () => {
             {/* Invest With Us */}
             <div className="text-center">
               <div className="flex justify-center mb-6">
-                <div className="rounded-full bg-white p-6 border-2 border-emerald-600 flex items-center justify-center">
-                  <img src={investWithUsIcon} alt="Invest with us icon" className="h-12 w-12" />
-                </div>
+                <img src={investWithUsIcon} alt="Invest with us icon" className="h-24 w-24" />
               </div>
               <h2 className="text-2xl font-bold text-emerald-600 mb-4">Invest With Us</h2>
               <p className="text-gray-700 mb-6">
