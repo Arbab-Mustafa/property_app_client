@@ -43,6 +43,20 @@ const Hero = () => {
               </Button>
             </Link>
           </div>
+          
+          {/* Handwriting style arrow and text */}
+          <div className="relative mt-6 ml-8 sm:ml-32">
+            <div className="flex items-center">
+              <div className="transform -rotate-45">
+                <svg width="50" height="40" viewBox="0 0 50 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M1 20 L40 20 L30 10 M40 20 L30 30" stroke="white" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </div>
+              <p className="text-white text-lg italic font-bold ml-3" style={{ fontFamily: 'cursive', textShadow: '1px 1px 2px rgba(0,0,0,0.5)' }}>
+                How hard is your money working for you?
+              </p>
+            </div>
+          </div>
 
         </div>
       </div>
