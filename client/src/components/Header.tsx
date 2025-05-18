@@ -83,19 +83,19 @@ const Header = () => {
                   <DropdownMenuContent>
                     {link.dropdownItems?.map((item) => (
                       <DropdownMenuItem key={item.path} asChild>
-                        <Link href={item.path}>
-                          <a className="w-full cursor-pointer">{item.name}</a>
-                        </Link>
+                        <a href={item.path} className="w-full cursor-pointer">{item.name}</a>
                       </DropdownMenuItem>
                     ))}
                   </DropdownMenuContent>
                 </DropdownMenu>
               ) : (
-                <Link key={link.path} href={link.path}>
-                  <a className={`font-medium transition hover:text-primary ${location === link.path ? "text-primary" : "text-neutral-700"}`}>
-                    {link.name}
-                  </a>
-                </Link>
+                <a 
+                  key={link.path}
+                  href={link.path}
+                  className={`font-medium transition hover:text-primary ${location === link.path ? "text-primary" : "text-neutral-700"}`}
+                >
+                  {link.name}
+                </a>
               )
             ))}
           </nav>
@@ -116,14 +116,34 @@ const Header = () => {
           <div className="md:hidden pb-4">
             <div className="flex flex-col space-y-3">
               {navLinks.map((link) => (
-                <Link key={link.path} href={link.path}>
+                link.isDropdown ? (
+                  <div key={link.path} className="space-y-2">
+                    <div className="font-medium text-neutral-700">
+                      {link.name}
+                    </div>
+                    <div className="pl-4 space-y-2">
+                      {link.dropdownItems?.map((item) => (
+                        <a 
+                          key={item.path}
+                          href={item.path}
+                          className="font-medium py-1 block transition hover:text-primary text-neutral-600"
+                          onClick={() => setIsOpen(false)}
+                        >
+                          {item.name}
+                        </a>
+                      ))}
+                    </div>
+                  </div>
+                ) : (
                   <a 
+                    key={link.path}
+                    href={link.path}
                     className={`font-medium py-2 transition hover:text-primary ${location === link.path ? "text-primary" : "text-neutral-700"}`}
                     onClick={() => setIsOpen(false)}
                   >
                     {link.name}
                   </a>
-                </Link>
+                )
               ))}
             </div>
           </div>
