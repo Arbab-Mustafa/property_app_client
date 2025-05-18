@@ -90,19 +90,6 @@ const Invest = () => {
         </div>
       </section>
 
-      {/* Additional content area */}
-      <section className="bg-cream-100 py-16 px-4">
-        <div className="container mx-auto">
-          <div className="text-center">
-            <h2 className="text-3xl font-bold text-emerald-600 mb-8">Your Investment Journey</h2>
-            <p className="text-gray-700 mb-6 max-w-2xl mx-auto">
-              With our proven track record and expert guidance, investing in property has never been more 
-              accessible. We handle all the details so you can focus on the returns.
-            </p>
-          </div>
-        </div>
-      </section>
-
       {/* CTA Section */}
       <section className="bg-cream-100 pb-16 pt-8">
         <div className="container mx-auto text-center">
