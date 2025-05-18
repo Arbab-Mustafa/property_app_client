@@ -1,6 +1,6 @@
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
-import propertyBgImage from "../../assets/kr-homepage.png";
+import propertyBgImage from "../../assets/krhomepage.png";
 
 const Hero = () => {
   return (
@@ -18,8 +18,8 @@ const Hero = () => {
         }}
       ></div>
       
-      {/* Overlay */}
-      <div className="absolute inset-0 bg-black bg-opacity-30 z-10"></div>
+      {/* Overlay - reduced opacity to show more of the image */}
+      <div className="absolute inset-0 bg-black bg-opacity-20 z-10"></div>
       
       {/* Content */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-20">
