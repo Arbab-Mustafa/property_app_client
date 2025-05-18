@@ -5,7 +5,7 @@ import propertyBgImage from "../../assets/kr-homepage.png";
 const Hero = () => {
   return (
     <section 
-      className="section-anchor relative min-h-[90vh] flex items-center py-20" 
+      className="section-anchor relative min-h-[90vh] flex items-center py-20 mt-8" 
       id="wp-content-hero"
     >
       {/* Background Image */}
