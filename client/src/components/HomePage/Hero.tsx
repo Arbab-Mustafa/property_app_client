@@ -1,38 +1,70 @@
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
+import propertyBgImage from "../../assets/kr-homepage.png";
 
 const Hero = () => {
   return (
-    <section className="section-anchor pt-28 pb-16 bg-gradient-to-b from-white to-neutral-100" id="wp-content-hero">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="lg:flex items-center">
-          <div className="lg:w-1/2 mb-12 lg:mb-0">
-            <h1 className="text-4xl md:text-5xl font-bold text-neutral-800 mb-6">
-              <span className="block mb-2">Invest in property.</span> 
-              <span className="text-primary">Secure your future.</span>
-            </h1>
-            <p className="text-xl text-neutral-600 mb-8">
-              We collaborate with people with pots of cash and give them a higher return than they would in a bank or ISA.
-            </p>
-            <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-              <Link href="/invest">
-                <Button className="px-6 py-3 h-auto bg-primary text-white font-semibold hover:bg-primary/90">
-                  Start Investing
-                </Button>
-              </Link>
-              <Link href="/about">
-                <Button variant="outline" className="px-6 py-3 h-auto text-primary border-primary font-semibold hover:bg-neutral-50">
-                  Learn More
-                </Button>
-              </Link>
-            </div>
+    <section 
+      className="section-anchor relative min-h-[90vh] flex items-center py-20" 
+      id="wp-content-hero"
+    >
+      {/* Background Image */}
+      <div 
+        className="absolute inset-0 z-0 bg-cover bg-center" 
+        style={{ 
+          backgroundImage: `url(${propertyBgImage})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center'
+        }}
+      ></div>
+      
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-black bg-opacity-30 z-10"></div>
+      
+      {/* Content */}
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-20">
+        <div className="max-w-3xl">
+          <h1 className="text-5xl md:text-6xl font-bold text-white mb-6 drop-shadow-lg">
+            <span className="block mb-2">Invest in property.</span> 
+            <span className="text-amber-400">Secure your future.</span>
+          </h1>
+          <p className="text-xl text-white mb-8 drop-shadow-md">
+            We collaborate with investors to deliver returns significantly higher than traditional banking or ISAs through strategic property investments.
+          </p>
+          <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+            <Link href="/invest">
+              <Button className="px-6 py-3 h-auto bg-primary text-white font-semibold hover:bg-primary/90 shadow-md">
+                Start Investing
+              </Button>
+            </Link>
+            <Link href="/inflation-calculator">
+              <Button className="px-6 py-3 h-auto bg-white text-primary font-semibold hover:bg-gray-100 shadow-md">
+                Try Our Inflation Calculator
+              </Button>
+            </Link>
           </div>
-          <div className="lg:w-1/2">
-            <img 
-              src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1050&h=700" 
-              alt="Modern Property Investment Building" 
-              className="w-full h-auto rounded-lg shadow-xl"
-            />
+          
+          {/* Property Stats Card */}
+          <div className="mt-12 bg-white bg-opacity-90 p-6 rounded-lg shadow-lg max-w-lg">
+            <h3 className="text-xl font-semibold text-neutral-800 mb-3">Our Property Investment Benefits</h3>
+            <div className="grid grid-cols-2 gap-4">
+              <div className="bg-amber-50 p-3 rounded-md">
+                <div className="font-bold text-2xl text-primary">8-12%</div>
+                <div className="text-sm text-neutral-600">Annual Returns</div>
+              </div>
+              <div className="bg-amber-50 p-3 rounded-md">
+                <div className="font-bold text-2xl text-primary">100%</div>
+                <div className="text-sm text-neutral-600">Asset-Backed</div>
+              </div>
+              <div className="bg-amber-50 p-3 rounded-md">
+                <div className="font-bold text-2xl text-primary">£5M+</div>
+                <div className="text-sm text-neutral-600">Under Management</div>
+              </div>
+              <div className="bg-amber-50 p-3 rounded-md">
+                <div className="font-bold text-2xl text-primary">15+ Yrs</div>
+                <div className="text-sm text-neutral-600">Experience</div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
