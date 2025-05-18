@@ -59,7 +59,7 @@ const Invest = () => {
                     <img src={findDealIcon} alt="Find you a deal icon" className="h-36 w-36" />
                   </div>
                   <h2 className="text-2xl font-bold text-emerald-600 mb-4">Find You A Deal</h2>
-                  <p className="text-emerald-600 mb-6 max-w-xs mx-auto">
+                  <p className="text-emerald-600 mb-6 max-w-[150px] mx-auto">
                     We help you find great investment properties with minimal effort.
                   </p>
                   <Button 
@@ -75,7 +75,7 @@ const Invest = () => {
                     <img src={investWithUsIcon} alt="Invest with us icon" className="h-36 w-36" />
                   </div>
                   <h2 className="text-2xl font-bold text-emerald-600 mb-4">Invest With Us</h2>
-                  <p className="text-emerald-600 mb-6 max-w-xs mx-auto">
+                  <p className="text-emerald-600 mb-6 max-w-[150px] mx-auto">
                     Earn great returns from property without the headache of purchasing one yourself.
                   </p>
                   <Button 
