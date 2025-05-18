@@ -41,6 +41,13 @@ export default {
           DEFAULT: "hsl(var(--destructive))",
           foreground: "hsl(var(--destructive-foreground))",
         },
+        emerald: {
+          "600": "hsl(var(--emerald-600))",
+          "700": "hsl(var(--emerald-700))",
+        },
+        cream: {
+          "100": "hsl(var(--cream-100))",
+        },
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

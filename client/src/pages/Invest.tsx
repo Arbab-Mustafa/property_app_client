@@ -38,21 +38,50 @@ const Invest = () => {
         </div>
       </section>
 
-      {/* City Skyline Graphic - Using divs to create a simplified version */}
+      {/* City Skyline Graphic with house outlines */}
       <div className="h-24 bg-emerald-600 relative overflow-hidden">
-        <div className="absolute bottom-0 left-0 right-0 h-8 bg-cream-100"></div>
-        <div className="absolute bottom-0 left-0 right-0 flex justify-around">
-          {[...Array(10)].map((_, i) => (
-            <div 
-              key={i} 
-              className="bg-cream-100" 
-              style={{
-                height: `${Math.floor(Math.random() * 80) + 20}px`,
-                width: `${Math.floor(Math.random() * 30) + 20}px`,
-                marginRight: '8px'
-              }}
-            ></div>
-          ))}
+        <div className="absolute bottom-0 left-0 right-0 h-6 bg-cream-100"></div>
+        <div className="absolute bottom-0 left-0 right-0 flex justify-between px-4">
+          {/* House 1 - small house */}
+          <div className="relative bg-cream-100 h-14 w-16">
+            <div className="absolute top-0 left-0 right-0 h-5 bg-cream-100" 
+              style={{ clipPath: 'polygon(0 100%, 50% 0, 100% 100%)' }}></div>
+          </div>
+          
+          {/* House 2 - tall building */}
+          <div className="relative bg-cream-100 h-20 w-12">
+            <div className="absolute top-3 right-3 w-3 h-3 bg-emerald-600"></div>
+            <div className="absolute top-8 right-3 w-3 h-3 bg-emerald-600"></div>
+          </div>
+          
+          {/* House 3 - medium house */}
+          <div className="relative bg-cream-100 h-10 w-14"></div>
+          
+          {/* House 4 - small building with windows */}
+          <div className="relative bg-cream-100 h-16 w-10">
+            <div className="absolute top-3 left-2 w-2 h-2 bg-emerald-600"></div>
+            <div className="absolute top-7 left-2 w-2 h-2 bg-emerald-600"></div>
+          </div>
+          
+          {/* House 5 - medium building with pointy roof */}
+          <div className="relative">
+            <div className="bg-cream-100 h-12 w-12"></div>
+            <div className="absolute top-0 left-0 right-0 h-6 bg-cream-100 -translate-y-6" 
+              style={{ clipPath: 'polygon(0 100%, 50% 0, 100% 100%)' }}></div>
+          </div>
+          
+          {/* House 6 - tall apartment */}
+          <div className="relative bg-cream-100 h-20 w-12">
+            <div className="absolute top-2 left-2 w-2 h-2 bg-emerald-600"></div>
+            <div className="absolute top-6 left-2 w-2 h-2 bg-emerald-600"></div>
+            <div className="absolute top-10 left-2 w-2 h-2 bg-emerald-600"></div>
+            <div className="absolute top-2 right-2 w-2 h-2 bg-emerald-600"></div>
+            <div className="absolute top-6 right-2 w-2 h-2 bg-emerald-600"></div>
+            <div className="absolute top-10 right-2 w-2 h-2 bg-emerald-600"></div>
+          </div>
+          
+          {/* House 7 - small house */}
+          <div className="relative bg-cream-100 h-12 w-16"></div>
         </div>
       </div>
 
