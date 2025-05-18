@@ -2,7 +2,7 @@ import { Helmet } from "react-helmet";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { TrendingUp } from "lucide-react";
-import skylineImage from "../assets/skyline.png";
+import skylineImage from "../assets/skyline1.png";
 import findDealIcon from "../assets/icons2/13.png";
 import investWithUsIcon from "../assets/icons2/14.png";
 
