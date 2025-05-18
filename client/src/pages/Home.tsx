@@ -2,6 +2,7 @@ import { Helmet } from "react-helmet";
 import Hero from "@/components/HomePage/Hero";
 import Stats from "@/components/HomePage/Stats";
 import StatsCard from "@/components/HomePage/StatsCard";
+import WhyInvest from "@/components/HomePage/WhyInvest";
 import InstagramFeed from "@/components/HomePage/InstagramFeed";
 
 const Home = () => {
@@ -17,6 +18,7 @@ const Home = () => {
       
       <Hero />
       <Stats />
+      <WhyInvest />
       <StatsCard />
       <InstagramFeed />
     </>
