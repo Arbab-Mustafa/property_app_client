@@ -10,7 +10,7 @@ const Layout = ({ children }: LayoutProps) => {
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
-      <main className="flex-grow pt-16">{children}</main> {/* Reduced padding to minimize gap while still preventing content from being hidden */}
+      <main className="flex-grow">{children}</main> {/* Removed padding to eliminate the gap */}
       <Footer />
     </div>
   );
