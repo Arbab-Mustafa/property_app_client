@@ -54,34 +54,34 @@ const Invest = () => {
             <div className="container mx-auto px-4 pt-8 pb-40">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
                 {/* Find You A Deal */}
-                <div className="text-center bg-emerald-600 bg-opacity-80 rounded-xl p-8">
+                <div className="text-center">
                   <div className="flex justify-center mb-6">
                     <img src={findDealIcon} alt="Find you a deal icon" className="h-24 w-24" />
                   </div>
-                  <h2 className="text-2xl font-bold text-cream-100 mb-4">Find You A Deal</h2>
-                  <p className="text-cream-100 mb-6">
+                  <h2 className="text-2xl font-bold text-emerald-600 mb-4">Find You A Deal</h2>
+                  <p className="text-emerald-600 mb-6">
                     If you haven't got the time or experience to find yourself a good investment, 
                     we can help you with that.
                   </p>
                   <Button 
-                    className="bg-cream-100 text-emerald-600 hover:bg-opacity-90 rounded-full"
+                    className="bg-emerald-600 text-cream-100 hover:bg-emerald-700 rounded-full"
                   >
                     Find Out More
                   </Button>
                 </div>
 
                 {/* Invest With Us */}
-                <div className="text-center bg-emerald-600 bg-opacity-80 rounded-xl p-8">
+                <div className="text-center">
                   <div className="flex justify-center mb-6">
                     <img src={investWithUsIcon} alt="Invest with us icon" className="h-24 w-24" />
                   </div>
-                  <h2 className="text-2xl font-bold text-cream-100 mb-4">Invest With Us</h2>
-                  <p className="text-cream-100 mb-6">
+                  <h2 className="text-2xl font-bold text-emerald-600 mb-4">Invest With Us</h2>
+                  <p className="text-emerald-600 mb-6">
                     If you like the idea of earning a return from property, but not having the headache of 
                     purchasing one you can earn great returns from investing in our deals.
                   </p>
                   <Button 
-                    className="bg-cream-100 text-emerald-600 hover:bg-opacity-90 rounded-full"
+                    className="bg-emerald-600 text-cream-100 hover:bg-emerald-700 rounded-full"
                   >
                     Find Out More
                   </Button>
