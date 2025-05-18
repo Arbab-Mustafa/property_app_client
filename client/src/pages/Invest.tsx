@@ -41,11 +41,11 @@ const Invest = () => {
         </div>
         
         {/* Skyline image directly after text */}
-        <div className="w-full" style={{ marginBottom: "-1px" }}>
+        <div className="w-screen relative left-1/2 -translate-x-1/2" style={{ marginBottom: "-1px" }}>
           <img 
             src={skylineImage} 
             alt="City skyline" 
-            className="w-full h-auto translate-y-1"
+            className="w-full h-auto translate-y-1 min-w-[100vw]"
           />
         </div>
       </section>
