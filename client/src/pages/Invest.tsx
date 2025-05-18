@@ -59,7 +59,7 @@ const Invest = () => {
                     <img src={findDealIcon} alt="Find you a deal icon" className="h-36 w-36" />
                   </div>
                   <h2 className="text-2xl font-bold text-emerald-600 mb-4">Find You A Deal</h2>
-                  <p className="text-emerald-600 mb-6 max-w-[150px] mx-auto">
+                  <p className="text-emerald-600 mb-6 max-w-[250px] mx-auto">
                     If you haven't got the time or experience to find yourself a good investment, we can help you with that.
                   </p>
                   <Button 
@@ -75,7 +75,7 @@ const Invest = () => {
                     <img src={investWithUsIcon} alt="Invest with us icon" className="h-36 w-36" />
                   </div>
                   <h2 className="text-2xl font-bold text-emerald-600 mb-4">Invest With Us</h2>
-                  <p className="text-emerald-600 mb-6 max-w-[150px] mx-auto">
+                  <p className="text-emerald-600 mb-6 max-w-[250px] mx-auto">
                     If you like the idea of earning a return from Property, but not having the headache of purchasing one you can earn great returns from investing in our deals.
                   </p>
                   <Button 
