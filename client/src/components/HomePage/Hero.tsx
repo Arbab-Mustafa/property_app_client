@@ -42,29 +42,7 @@ const Hero = () => {
               </Button>
             </Link>
           </div>
-          
-          {/* Property Stats Card */}
-          <div className="mt-12 bg-white bg-opacity-90 p-6 rounded-lg shadow-lg max-w-lg">
-            <h3 className="text-xl font-semibold text-neutral-800 mb-3">Our Property Investment Benefits</h3>
-            <div className="grid grid-cols-2 gap-4">
-              <div className="bg-amber-50 p-3 rounded-md">
-                <div className="font-bold text-2xl text-primary">8-12%</div>
-                <div className="text-sm text-neutral-600">Annual Returns</div>
-              </div>
-              <div className="bg-amber-50 p-3 rounded-md">
-                <div className="font-bold text-2xl text-primary">100%</div>
-                <div className="text-sm text-neutral-600">Asset-Backed</div>
-              </div>
-              <div className="bg-amber-50 p-3 rounded-md">
-                <div className="font-bold text-2xl text-primary">£5M+</div>
-                <div className="text-sm text-neutral-600">Under Management</div>
-              </div>
-              <div className="bg-amber-50 p-3 rounded-md">
-                <div className="font-bold text-2xl text-primary">15+ Yrs</div>
-                <div className="text-sm text-neutral-600">Experience</div>
-              </div>
-            </div>
-          </div>
+
         </div>
       </div>
     </section>
