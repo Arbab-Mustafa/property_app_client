@@ -24,16 +24,16 @@ const Invest = () => {
       </Helmet>
       
       {/* Hero Section with Green Background */}
-      <section className="bg-emerald-600 text-white px-4 text-center pt-16 pb-12 relative">
+      <section className="bg-emerald-600 text-white px-4 text-center pt-24 pb-20 relative">
         <div className="container mx-auto max-w-4xl">
-          <h1 className="text-4xl md:text-5xl font-bold mb-6">What We Do?</h1>
-          <div className="flex justify-center mb-8">
-            <TrendingUp size={48} className="text-cream-100" />
+          <h1 className="text-4xl md:text-5xl font-bold mb-12">What We Do?</h1>
+          <div className="flex justify-center mb-12">
+            <TrendingUp size={60} className="text-cream-100" />
           </div>
-          <p className="text-xl md:text-2xl max-w-3xl mx-auto mb-12">
+          <p className="text-xl md:text-2xl max-w-3xl mx-auto mb-16">
             <span className="font-semibold">Attention Investors & High Net-Worth Individuals:</span>
           </p>
-          <p className="text-lg md:text-xl max-w-3xl mx-auto mb-8">
+          <p className="text-lg md:text-xl max-w-3xl mx-auto mb-16">
             Discover how we provide end-to-end solutions for cash-flowing properties—
             no need for you to spend time negotiating with agents, coordinating with
             builders, or sourcing solicitors and mortgage brokers.
