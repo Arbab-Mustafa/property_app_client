@@ -57,7 +57,7 @@ const Footer = () => {
           <div className="lg:w-1/4 mb-8 lg:mb-0">
             <img src={logoPath} alt="Property Investments Logo" className="h-12 mb-4" />
             <p className="text-neutral-400 mb-4">
-              Property investment experts helping you achieve higher returns through strategic real estate investments.
+              Since 2017, We've Focused on What Works: Property Investments That Deliver Real Returns.
             </p>
             <div className="flex space-x-4">
               <a href="#" className="text-neutral-400 hover:text-white transition">
