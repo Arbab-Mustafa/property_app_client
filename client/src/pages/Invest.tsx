@@ -60,7 +60,7 @@ const Invest = () => {
                   </div>
                   <h2 className="text-2xl font-bold text-emerald-600 mb-4">Find You A Deal</h2>
                   <p className="text-emerald-600 mb-6 max-w-[150px] mx-auto">
-                    We help you find great investment properties with minimal effort.
+                    If you haven't got the time or experience to find yourself a good investment, we can help you with that.
                   </p>
                   <Button 
                     className="bg-emerald-600 text-cream-100 hover:bg-emerald-700 rounded-full"
@@ -76,7 +76,7 @@ const Invest = () => {
                   </div>
                   <h2 className="text-2xl font-bold text-emerald-600 mb-4">Invest With Us</h2>
                   <p className="text-emerald-600 mb-6 max-w-[150px] mx-auto">
-                    Earn great returns from property without the headache of purchasing one yourself.
+                    If you like the idea of earning a return from Property, but not having the headache of purchasing one you can earn great returns from investing in our deals.
                   </p>
                   <Button 
                     className="bg-emerald-600 text-cream-100 hover:bg-emerald-700 rounded-full"
