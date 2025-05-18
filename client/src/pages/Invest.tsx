@@ -3,8 +3,8 @@ import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { TrendingUp } from "lucide-react";
 import skylineImage from "../assets/skyline.png";
-import findDealIcon from "../assets/icons/13.png";
-import investWithUsIcon from "../assets/icons/14.png";
+import findDealIcon from "../assets/icons2/13.png";
+import investWithUsIcon from "../assets/icons2/14.png";
 
 const Invest = () => {
   return (
