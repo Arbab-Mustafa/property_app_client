@@ -1,13 +1,27 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import logoPath from "@assets/Property Investments.png";
 
 const navLinks = [
   { name: "Home", path: "/" },
   { name: "About Us", path: "/about" },
-  { name: "What We Do", path: "/invest" },
+  { 
+    name: "What We Do", 
+    path: "/invest",
+    isDropdown: true,
+    dropdownItems: [
+      { name: "Find You A Deal", path: "/invest#find-deal" },
+      { name: "Invest With Us", path: "/invest#invest-with-us" }
+    ]
+  },
   { name: "Updates", path: "/updates" },
   { name: "Inflation Calculator", path: "/inflation-calculator" },
   { name: "Book A Call", path: "/book-call" },
@@ -61,11 +75,28 @@ const Header = () => {
 
           <nav className="hidden md:flex space-x-8" id="header-menu">
             {navLinks.map((link) => (
-              <Link key={link.path} href={link.path}>
-                <a className={`font-medium transition hover:text-primary ${location === link.path ? "text-primary" : "text-neutral-700"}`}>
-                  {link.name}
-                </a>
-              </Link>
+              link.isDropdown ? (
+                <DropdownMenu key={link.path}>
+                  <DropdownMenuTrigger className="flex items-center font-medium transition hover:text-primary">
+                    {link.name} <ChevronDown className="h-4 w-4 ml-1" />
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent>
+                    {link.dropdownItems?.map((item) => (
+                      <DropdownMenuItem key={item.path} asChild>
+                        <Link href={item.path}>
+                          <a className="w-full cursor-pointer">{item.name}</a>
+                        </Link>
+                      </DropdownMenuItem>
+                    ))}
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              ) : (
+                <Link key={link.path} href={link.path}>
+                  <a className={`font-medium transition hover:text-primary ${location === link.path ? "text-primary" : "text-neutral-700"}`}>
+                    {link.name}
+                  </a>
+                </Link>
+              )
             ))}
           </nav>
 
