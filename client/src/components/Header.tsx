@@ -77,8 +77,13 @@ const Header = () => {
             {navLinks.map((link) => (
               link.isDropdown ? (
                 <DropdownMenu key={link.path}>
-                  <DropdownMenuTrigger className="flex items-center font-medium transition hover:text-primary">
-                    {link.name} <ChevronDown className="h-4 w-4 ml-1" />
+                  <DropdownMenuTrigger asChild>
+                    <a 
+                      href={link.path} 
+                      className="flex items-center font-medium transition hover:text-primary"
+                    >
+                      {link.name} <ChevronDown className="h-4 w-4 ml-1" />
+                    </a>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent>
                     {link.dropdownItems?.map((item) => (
@@ -118,9 +123,13 @@ const Header = () => {
               {navLinks.map((link) => (
                 link.isDropdown ? (
                   <div key={link.path} className="space-y-2">
-                    <div className="font-medium text-neutral-700">
+                    <a 
+                      href={link.path}
+                      className="font-medium text-neutral-700 block"
+                      onClick={() => setIsOpen(false)}
+                    >
                       {link.name}
-                    </div>
+                    </a>
                     <div className="pl-4 space-y-2">
                       {link.dropdownItems?.map((item) => (
                         <a 
