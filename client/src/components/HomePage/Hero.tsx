@@ -28,7 +28,7 @@ const Hero = () => {
             <span className="block mb-2">Lasting Wealth,</span>
             <span className="text-amber-400">Built with Property</span>
           </h1>
-          <p className="text-xl text-white mb-8 drop-shadow-md">
+          <p className="text-xl text-white mb-8 drop-shadow-md max-w-lg mx-auto sm:mx-0">
             We collaborate with investors to deliver returns significantly higher than traditional banking or ISAs through strategic property investments.
           </p>
           <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
