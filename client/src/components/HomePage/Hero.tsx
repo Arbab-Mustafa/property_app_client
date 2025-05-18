@@ -25,7 +25,7 @@ const Hero = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-20">
         <div className="max-w-3xl">
           <h1 className="text-5xl md:text-6xl font-bold text-white mb-6 drop-shadow-lg">
-            <span className="block mb-2">Building Wealth That Works</span> 
+            <span className="block mb-2">Lasting Wealth, Built with Property</span> 
             <span className="text-amber-400">Through Real Estate You Can Trust.</span>
           </h1>
           <p className="text-xl text-white mb-8 drop-shadow-md">
