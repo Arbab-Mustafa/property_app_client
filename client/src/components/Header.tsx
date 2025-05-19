@@ -22,6 +22,7 @@ const navLinks = [
       { name: "Invest With Us", path: "/invest#invest-with-us" }
     ]
   },
+  { name: "Case Studies", path: "/case-studies" },
   { name: "Updates", path: "/updates" },
   { name: "Inflation Calculator", path: "/inflation-calculator" },
   { name: "Book A Call", path: "/book-call" },
