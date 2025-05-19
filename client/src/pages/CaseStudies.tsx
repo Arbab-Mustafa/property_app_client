@@ -84,7 +84,7 @@ const CaseStudies = () => {
         {/* Hero/Header Section */}
         <div className="relative">
           <img 
-            src={propertyImage}
+            src={caseStudy1Image}
             alt="Property Investment Case Studies" 
             className="w-full h-[500px] object-cover"
           />
