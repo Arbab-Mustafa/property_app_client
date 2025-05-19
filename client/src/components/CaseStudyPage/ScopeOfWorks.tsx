@@ -12,7 +12,7 @@ const ScopeOfWorks = ({
   textColor = "text-black"
 }: ScopeOfWorksProps) => {
   return (
-    <div className={`${backgroundColor} p-8 shadow-md my-8 w-full`}>
+    <div className={`${backgroundColor} p-8 shadow-md w-full`}>
       <div className="max-w-6xl mx-auto">
         <h2 className={`text-3xl font-bold mb-6 text-center ${textColor}`}>Scope Of Works</h2>
         

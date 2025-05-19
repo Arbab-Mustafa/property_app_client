@@ -14,7 +14,7 @@ const ProjectSummary = ({
   title = "Summary"
 }: ProjectSummaryProps) => {
   return (
-    <div className={`${backgroundColor} ${textColor} p-8 shadow-md my-8 w-full`}>
+    <div className={`${backgroundColor} ${textColor} p-8 shadow-md w-full`}>
       <div className="max-w-6xl mx-auto">
         <h3 className="text-2xl font-bold mb-4">{title}</h3>
         <ul className="space-y-2">

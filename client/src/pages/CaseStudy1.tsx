@@ -71,7 +71,7 @@ const CaseStudy1 = () => {
   ];
 
   return (
-    <>
+    <div className="bg-white">
       <Helmet>
         <title>2 Bed Mid-Terraced Property | KR Property Investments</title>
         <meta name="description" content="Detailed case study of our mid-terraced property investment in Grimsby with complete financial breakdown and returns analysis." />
@@ -80,139 +80,139 @@ const CaseStudy1 = () => {
         <meta property="og:type" content="website" />
       </Helmet>
       
-      <div className="bg-white">
-        {/* Property Image with Overlay */}
-        <div className="relative">
-          <img 
-            src={caseStudy1Image}
-            alt="2 Bed Mid-Terraced Property" 
-            className="w-full h-auto object-contain"
-          />
-          <div className="absolute inset-0 flex flex-col justify-center">
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-              <div className="bg-primary/80 p-6 rounded-lg max-w-2xl">
-                <div className="flex justify-between items-center mb-4">
-                  <h1 className="text-3xl md:text-4xl font-bold text-white">
-                    2 Bed Mid-Terraced Property
-                  </h1>
-                </div>
-                <p className="text-xl text-white mb-4">
-                  A detailed case study of our successful property investment in Grimsby.
-                </p>
-                <Link href="/case-studies">
-                  <a className="inline-flex items-center font-medium text-white hover:text-white/80">
-                    <ArrowLeft className="mr-2 h-4 w-4" /> Back to Case Studies
-                  </a>
-                </Link>
+      {/* Property Image with Overlay */}
+      <div className="relative">
+        <img 
+          src={caseStudy1Image}
+          alt="2 Bed Mid-Terraced Property" 
+          className="w-full h-auto object-contain"
+        />
+        <div className="absolute inset-0 flex flex-col justify-center">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="bg-primary/80 p-6 rounded-lg max-w-2xl">
+              <div className="flex justify-between items-center mb-4">
+                <h1 className="text-3xl md:text-4xl font-bold text-white">
+                  2 Bed Mid-Terraced Property
+                </h1>
               </div>
+              <p className="text-xl text-white mb-4">
+                A detailed case study of our successful property investment in Grimsby.
+              </p>
+              <Link href="/case-studies">
+                <a className="inline-flex items-center font-medium text-white hover:text-white/80">
+                  <ArrowLeft className="mr-2 h-4 w-4" /> Back to Case Studies
+                </a>
+              </Link>
             </div>
           </div>
         </div>
-        
-        {/* Project Background Section */}
-        <div className="bg-orange-400 p-8 shadow-md w-full">
-          <div className="flex flex-col md:flex-row gap-8 max-w-6xl mx-auto">
-            <div className="md:w-1/2">
-              <h2 className="text-3xl font-bold mb-4">
-                Project Background & Deal Structure
-              </h2>
-              <p className="mb-4">
-                A 2 bedroom mid-terraced property requiring modernisation, suited to provide housing for a family and leased to a charity on a long-term commercial lease.
-              </p>
-              <p className="mb-4">
-                We have an established relationship with a charity who expressed interest in this property, after passing all their criteria checks.
-              </p>
-              <p className="mb-4">
-                The charity offered a 5 year lease on this unit, following renovation and having onboarded the property.
-              </p>
-            </div>
-            <div className="md:w-1/2">
-              <img 
-                src={caseStudy1Image} 
-                alt="Property front view" 
-                className="w-full h-auto rounded-lg shadow-md"
-              />
-            </div>
-          </div>
-        </div>
-        
-        {/* Location Section */}
-        <div className="bg-green-500 p-8 shadow-md mb-10 w-full">
-          <div className="flex flex-col md:flex-row gap-8 items-center max-w-6xl mx-auto">
-            <div className="md:w-1/2">
-              <h2 className="text-3xl font-bold mb-4 text-white">
-                Location
-              </h2>
-              <p className="text-white mb-4">
-                This property is located in Grimsby, Lincolnshire, an area with strong rental demand and excellent investment potential for family homes.
-              </p>
-              <p className="text-white mb-4">
-                The location offers good transport links, with access to local amenities and schools, making it an attractive option for families and tenants.
-              </p>
-              <p className="text-white mb-4">
-                Property prices in this area remain affordable, allowing for higher yields compared to many other parts of the UK.
-              </p>
-            </div>
-            <div className="md:w-1/2">
-              <GoogleMapEmbed 
-                address="Grimsby, Lincolnshire, UK" 
-                height="350px" 
-                borderRadius="8px"
-              />
-            </div>
-          </div>
-        </div>
-        
-        {/* Floorplans Section */}
-        <div className="bg-black p-8 shadow-md mb-10 w-full">
-          <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl font-bold mb-6 text-white text-center">
-              Floorplans
+      </div>
+      
+      {/* Project Background Section */}
+      <div className="bg-orange-400 p-8 shadow-md w-full">
+        <div className="flex flex-col md:flex-row gap-8 max-w-6xl mx-auto">
+          <div className="md:w-1/2">
+            <h2 className="text-3xl font-bold mb-4">
+              Project Background & Deal Structure
             </h2>
-            <div className="flex justify-center">
-              <img 
-                src={floorplansImage} 
-                alt="Property floorplans" 
-                className="w-full max-w-3xl h-auto rounded-lg"
-              />
-            </div>
+            <p className="mb-4">
+              A 2 bedroom mid-terraced property requiring modernisation, suited to provide housing for a family and leased to a charity on a long-term commercial lease.
+            </p>
+            <p className="mb-4">
+              We have an established relationship with a charity who expressed interest in this property, after passing all their criteria checks.
+            </p>
+            <p className="mb-4">
+              The charity offered a 5 year lease on this unit, following renovation and having onboarded the property.
+            </p>
+          </div>
+          <div className="md:w-1/2">
+            <img 
+              src={caseStudy1Image} 
+              alt="Property front view" 
+              className="w-full h-auto rounded-lg shadow-md"
+            />
           </div>
         </div>
-        
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Property Overview */}
-          <FinancialTable 
-            title="Property Overview" 
-            items={propertyOverviewItems} 
-            summary={{ label: "Monthly Cashflow", value: "£380.00" }}
-            backgroundColor="bg-blue-500"
-            textColor="text-white"
-          />
-          
-          {/* Scope of Works */}
-          <ScopeOfWorks workItems={scopeItems} />
-          
-          {/* Financial Data */}
-          <FinancialTable 
-            title="Upfront Cost" 
-            items={upfrontCostItems} 
-            summary={{ label: "Total Acquisition Costs", value: "£25,785.00" }}
-            backgroundColor="bg-orange-400"
-          />
-          
-          <FinancialTable 
-            title="Return On Investment" 
-            items={roiItems} 
-            summary={{ label: "Return On Money Left In", value: "33.32%" }}
-            backgroundColor="bg-green-500"
-            textColor="text-white"
-          />
-          
-          {/* Deal Summary */}
-          <ProjectSummary items={summaryPoints} />
-          
+      </div>
+      
+      {/* Location Section */}
+      <div className="bg-green-500 p-8 shadow-md w-full">
+        <div className="flex flex-col md:flex-row gap-8 items-center max-w-6xl mx-auto">
+          <div className="md:w-1/2">
+            <h2 className="text-3xl font-bold mb-4 text-white">
+              Location
+            </h2>
+            <p className="text-white mb-4">
+              This property is located in Grimsby, Lincolnshire, an area with strong rental demand and excellent investment potential for family homes.
+            </p>
+            <p className="text-white mb-4">
+              The location offers good transport links, with access to local amenities and schools, making it an attractive option for families and tenants.
+            </p>
+            <p className="text-white mb-4">
+              Property prices in this area remain affordable, allowing for higher yields compared to many other parts of the UK.
+            </p>
+          </div>
+          <div className="md:w-1/2">
+            <GoogleMapEmbed 
+              address="Grimsby, Lincolnshire, UK" 
+              height="350px" 
+              borderRadius="8px"
+            />
+          </div>
+        </div>
+      </div>
+      
+      {/* Floorplans Section */}
+      <div className="bg-black p-8 shadow-md w-full">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-3xl font-bold mb-6 text-white text-center">
+            Floorplans
+          </h2>
+          <div className="flex justify-center">
+            <img 
+              src={floorplansImage} 
+              alt="Property floorplans" 
+              className="w-full max-w-3xl h-auto rounded-lg"
+            />
+          </div>
+        </div>
+      </div>
+      
+      {/* Property Overview */}
+      <FinancialTable 
+        title="Property Overview" 
+        items={propertyOverviewItems} 
+        summary={{ label: "Monthly Cashflow", value: "£380.00" }}
+        backgroundColor="bg-blue-500"
+        textColor="text-white"
+      />
+      
+      {/* Scope of Works */}
+      <ScopeOfWorks workItems={scopeItems} />
+      
+      {/* Financial Data */}
+      <FinancialTable 
+        title="Upfront Cost" 
+        items={upfrontCostItems} 
+        summary={{ label: "Total Acquisition Costs", value: "£25,785.00" }}
+        backgroundColor="bg-orange-400"
+      />
+      
+      <FinancialTable 
+        title="Return On Investment" 
+        items={roiItems} 
+        summary={{ label: "Return On Money Left In", value: "33.32%" }}
+        backgroundColor="bg-green-500"
+        textColor="text-white"
+      />
+      
+      {/* Deal Summary */}
+      <ProjectSummary items={summaryPoints} />
+      
+      <div className="bg-white p-8 w-full">
+        <div className="max-w-6xl mx-auto">
           {/* Call to Action */}
-          <div className="flex justify-center my-16">
+          <div className="flex justify-center my-8">
             <Link href="/contact">
               <a className="bg-green-500 hover:bg-green-600 text-white font-bold py-4 px-8 rounded-lg text-xl transition duration-300 shadow-lg">
                 Join To See Property Deals 1st
@@ -221,7 +221,7 @@ const CaseStudy1 = () => {
           </div>
           
           {/* Back to Case Studies Button */}
-          <div className="flex justify-center mb-10">
+          <div className="flex justify-center mt-4">
             <Link href="/case-studies">
               <a className="inline-flex items-center font-medium text-primary hover:text-primary/80">
                 <ArrowLeft className="mr-2 h-4 w-4" /> Back to Case Studies
@@ -230,7 +230,7 @@ const CaseStudy1 = () => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
