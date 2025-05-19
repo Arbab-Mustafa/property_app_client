@@ -93,7 +93,7 @@ const CaseStudy1 = () => {
               <div className="bg-primary/80 p-6 rounded-lg max-w-md">
                 <div className="flex justify-between items-center mb-4">
                   <h1 className="text-3xl md:text-4xl font-bold text-white">
-                    2 Bed Mid-Terraced Property
+                    Social Housing 2 Bedroom family house
                   </h1>
                 </div>
                 <p className="text-xl text-white mb-4">
