@@ -10,7 +10,6 @@ import GoogleMapEmbed from "@/components/CaseStudyPage/GoogleMapEmbed";
 // Import the case study images
 import caseStudy1Image from "../assets/case-studies/case-study-1.jpg";
 import floorplansImage from "../assets/case-studies/20.jpg";
-import backgroundImage from "../assets/case-studies/background.png";
 
 const CaseStudy1 = () => {
   // Property overview data
@@ -81,19 +80,17 @@ const CaseStudy1 = () => {
         <meta property="og:type" content="website" />
       </Helmet>
       
-      <div 
-        className="min-h-screen bg-white"
-        style={{
-          backgroundImage: `url(${backgroundImage})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundAttachment: 'fixed',
-          backgroundRepeat: 'no-repeat'
-        }}
-      >
+      <div className="bg-white">
         {/* Hero/Header Section */}
-        <div className="relative bg-black/50">
-          <div className="pt-40 pb-20 flex items-center">
+        <div className="relative">
+          <div className="w-full h-[500px] overflow-hidden">
+            <img 
+              src={caseStudy1Image}
+              alt="3 Bed Mid-Terraced Property" 
+              className="w-full h-full object-cover object-center scale-110"
+            />
+          </div>
+          <div className="absolute inset-0 flex items-center bg-gradient-to-r from-black/70 to-transparent">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
               <div className="max-w-3xl">
                 <h1 className="text-5xl font-bold text-white mb-6">
