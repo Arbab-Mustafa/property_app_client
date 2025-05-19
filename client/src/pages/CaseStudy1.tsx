@@ -81,38 +81,30 @@ const CaseStudy1 = () => {
       </Helmet>
       
       <div className="bg-white">
-        {/* Hero/Header Section */}
-        <div className="relative">
-          <div className="w-full h-[500px] overflow-hidden">
-            <img 
-              src={caseStudy1Image}
-              alt="2 Bed Mid-Terraced Property" 
-              className="w-full h-full object-cover object-center scale-110"
-            />
-          </div>
-          <div className="absolute inset-0 flex items-center">
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-              <div className="max-w-3xl bg-primary/80 p-6 rounded-lg">
-                <h1 className="text-5xl font-bold text-white mb-6">
-                  2 Bed Mid-Terraced Property
-                </h1>
-                <p className="text-xl text-white mb-8">
-                  A detailed case study of our successful property investment in Grimsby.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Back to Case Studies Button */}
-          <div className="my-4">
+        {/* Case Study Header */}
+        <div className="pt-8 pb-0 container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center mb-4">
+            <h1 className="text-4xl md:text-5xl font-bold text-primary">
+              2 Bed Mid-Terraced Property
+            </h1>
             <Link href="/case-studies">
               <a className="inline-flex items-center font-medium text-primary hover:text-primary/80">
                 <ArrowLeft className="mr-2 h-4 w-4" /> Back to Case Studies
               </a>
             </Link>
           </div>
+          <p className="text-xl text-gray-700 mb-6">
+            A detailed case study of our successful property investment in Grimsby.
+          </p>
+        </div>
+        
+        {/* Property Image */}
+        <div className="w-full">
+          <img 
+            src={caseStudy1Image}
+            alt="2 Bed Mid-Terraced Property" 
+            className="w-full object-cover max-h-[500px]"
+          />
         </div>
           
         {/* Project Background Section */}
