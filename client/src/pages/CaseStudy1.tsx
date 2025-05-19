@@ -81,30 +81,32 @@ const CaseStudy1 = () => {
       </Helmet>
       
       <div className="bg-white">
-        {/* Case Study Header */}
-        <div className="pt-8 pb-0 container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center mb-4">
-            <h1 className="text-4xl md:text-5xl font-bold text-primary">
-              2 Bed Mid-Terraced Property
-            </h1>
-            <Link href="/case-studies">
-              <a className="inline-flex items-center font-medium text-primary hover:text-primary/80">
-                <ArrowLeft className="mr-2 h-4 w-4" /> Back to Case Studies
-              </a>
-            </Link>
-          </div>
-          <p className="text-xl text-gray-700 mb-6">
-            A detailed case study of our successful property investment in Grimsby.
-          </p>
-        </div>
-        
-        {/* Property Image */}
-        <div className="w-full">
+        {/* Property Image with Overlay */}
+        <div className="relative">
           <img 
             src={caseStudy1Image}
             alt="2 Bed Mid-Terraced Property" 
             className="w-full h-auto object-contain"
           />
+          <div className="absolute inset-0 flex flex-col justify-center">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="bg-primary/80 p-6 rounded-lg max-w-2xl">
+                <div className="flex justify-between items-center mb-4">
+                  <h1 className="text-3xl md:text-4xl font-bold text-white">
+                    2 Bed Mid-Terraced Property
+                  </h1>
+                </div>
+                <p className="text-xl text-white mb-4">
+                  A detailed case study of our successful property investment in Grimsby.
+                </p>
+                <Link href="/case-studies">
+                  <a className="inline-flex items-center font-medium text-white hover:text-white/80">
+                    <ArrowLeft className="mr-2 h-4 w-4" /> Back to Case Studies
+                  </a>
+                </Link>
+              </div>
+            </div>
+          </div>
         </div>
           
         {/* Project Background Section */}
