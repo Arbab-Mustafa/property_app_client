@@ -108,9 +108,9 @@ const CaseStudy1 = () => {
             </div>
           </div>
         </div>
-          
+        
         {/* Project Background Section */}
-        <div className="bg-orange-400 p-8 shadow-md mb-10 w-full">
+        <div className="bg-orange-400 p-8 shadow-md w-full">
           <div className="flex flex-col md:flex-row gap-8 max-w-6xl mx-auto">
             <div className="md:w-1/2">
               <h2 className="text-3xl font-bold mb-4">
