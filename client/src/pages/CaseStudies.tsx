@@ -132,10 +132,11 @@ const CaseStudies = () => {
                     <p className="text-sm font-medium">Current Value: <span className="font-bold">£68,500</span></p>
                   </div>
                   
-                  <button onClick={() => document.getElementById('featured-case-study')?.scrollIntoView({ behavior: 'smooth' })} 
-                    className="inline-flex items-center font-medium text-primary hover:text-primary/80">
-                    View Full Case Study <ArrowRight className="ml-2 h-4 w-4" />
-                  </button>
+                  <Link href="/case-studies/property-1">
+                    <a className="inline-flex items-center font-medium text-primary hover:text-primary/80">
+                      View Full Case Study <ArrowRight className="ml-2 h-4 w-4" />
+                    </a>
+                  </Link>
                 </div>
               </div>
               
@@ -160,10 +161,11 @@ const CaseStudies = () => {
                     <p className="text-sm font-medium">Current Value: <span className="font-bold">£75,000</span></p>
                   </div>
                   
-                  <button onClick={() => document.getElementById('featured-case-study')?.scrollIntoView({ behavior: 'smooth' })} 
-                    className="inline-flex items-center font-medium text-primary hover:text-primary/80">
-                    View Full Case Study <ArrowRight className="ml-2 h-4 w-4" />
-                  </button>
+                  <Link href="/case-studies/property-2">
+                    <a className="inline-flex items-center font-medium text-primary hover:text-primary/80">
+                      View Full Case Study <ArrowRight className="ml-2 h-4 w-4" />
+                    </a>
+                  </Link>
                 </div>
               </div>
               
