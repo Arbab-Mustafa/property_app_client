@@ -134,27 +134,35 @@ const CaseStudy1 = () => {
       
       {/* Location Section */}
       <div className="bg-green-500 p-8 shadow-md w-full">
-        <div className="flex flex-col md:flex-row gap-8 items-center max-w-6xl mx-auto">
-          <div className="md:w-1/2">
-            <h2 className="text-3xl font-bold mb-4 text-white">
-              Location
-            </h2>
-            <p className="text-white mb-4">
-              This property is located in Grimsby, Lincolnshire, an area with strong rental demand and excellent investment potential for family homes.
-            </p>
-            <p className="text-white mb-4">
-              The location offers good transport links, with access to local amenities and schools, making it an attractive option for families and tenants.
-            </p>
-            <p className="text-white mb-4">
-              Property prices in this area remain affordable, allowing for higher yields compared to many other parts of the UK.
-            </p>
-          </div>
-          <div className="md:w-1/2">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-3xl font-bold mb-6 text-white">
+            Location
+          </h2>
+          
+          <div className="mb-6">
             <GoogleMapEmbed 
               address="Grimsby, Lincolnshire, UK" 
               height="350px" 
               borderRadius="8px"
             />
+          </div>
+          
+          <div className="flex flex-col md:flex-row gap-8">
+            <div className="md:w-1/3">
+              <p className="text-white mb-4">
+                This property is located in Grimsby, Lincolnshire, an area with strong rental demand and excellent investment potential for family homes.
+              </p>
+            </div>
+            <div className="md:w-1/3">
+              <p className="text-white mb-4">
+                The location offers good transport links, with access to local amenities and schools, making it an attractive option for families and tenants.
+              </p>
+            </div>
+            <div className="md:w-1/3">
+              <p className="text-white mb-4">
+                Property prices in this area remain affordable, allowing for higher yields compared to many other parts of the UK.
+              </p>
+            </div>
           </div>
         </div>
       </div>
