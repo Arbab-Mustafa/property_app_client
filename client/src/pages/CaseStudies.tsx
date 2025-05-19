@@ -83,13 +83,14 @@ const CaseStudies = () => {
       <div className="bg-white">
         {/* Hero/Header Section */}
         <div className="relative">
-          <img 
-            src={caseStudy1Image}
-            alt="Property Investment Case Studies" 
-            className="w-full h-[500px] object-cover"
-          />
-          <div className="absolute inset-0 bg-black/50"></div>
-          <div className="absolute inset-0 flex items-center">
+          <div className="w-full h-[500px] overflow-hidden">
+            <img 
+              src={caseStudy1Image}
+              alt="Property Investment Case Studies" 
+              className="w-full h-full object-cover object-center scale-110"
+            />
+          </div>
+          <div className="absolute inset-0 flex items-center bg-gradient-to-r from-black/70 to-transparent">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
               <div className="max-w-3xl">
                 <h1 className="text-5xl font-bold text-white mb-6">
