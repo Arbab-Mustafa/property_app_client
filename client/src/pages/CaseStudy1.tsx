@@ -113,18 +113,24 @@ const CaseStudy1 = () => {
       {/* Project Background Section */}
       <div className="bg-orange-400 p-8 shadow-md w-full">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl font-bold mb-4">
-            Project Background & Deal Structure
-          </h2>
-          <p className="mb-4">
-            A 2 bedroom mid-terraced property requiring modernisation, suited to provide housing for a family and leased to a charity on a long-term commercial lease.
-          </p>
-          <p className="mb-4">
-            We have an established relationship with a charity who expressed interest in this property, after passing all their criteria checks.
-          </p>
-          <p className="mb-4">
-            The charity offered a 5 year lease on this unit, following renovation and having onboarded the property.
-          </p>
+          <div className="flex flex-col md:flex-row gap-8">
+            <div className="md:w-2/3 order-2 md:order-1">
+              <p className="mb-4">
+                A 2 bedroom mid-terraced property requiring modernisation, suited to provide housing for a family and leased to a charity on a long-term commercial lease.
+              </p>
+              <p className="mb-4">
+                We have an established relationship with a charity who expressed interest in this property, after passing all their criteria checks.
+              </p>
+              <p className="mb-4">
+                The charity offered a 5 year lease on this unit, following renovation and having onboarded the property.
+              </p>
+            </div>
+            <div className="md:w-1/3 order-1 md:order-2">
+              <h2 className="text-3xl font-bold">
+                Project Background & Deal Structure
+              </h2>
+            </div>
+          </div>
         </div>
       </div>
       
