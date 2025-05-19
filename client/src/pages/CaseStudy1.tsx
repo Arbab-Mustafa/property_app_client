@@ -122,13 +122,13 @@ const CaseStudy1 = () => {
                   Project Background & Deal Structure
                 </h2>
                 <p className="mb-4">
-                  A 3 bedroom mid-terraced property requiring modernisation, ideally suited to provide housing for a family and leased to a Registered Provider on a long-term commercial lease.
+                  A 2 bedroom mid-terraced property requiring modernisation, suited to provide housing for a family and leased to a charity on a long-term commercial lease.
                 </p>
                 <p className="mb-4">
-                  We have an established relationship with a Registered Provider (RP) who expressed interest in this property, after passing all their criteria checks.
+                  We have an established relationship with a charity who expressed interest in this property, after passing all their criteria checks.
                 </p>
                 <p className="mb-4">
-                  The RP offered a 10 year lease on this unit, following renovation and having onboarded the property.
+                  The charity offered a 5 year lease on this unit, following renovation and having onboarded the property.
                 </p>
               </div>
               <div className="md:w-1/2">
