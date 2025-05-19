@@ -115,8 +115,10 @@ const CaseStudy1 = () => {
         <div className="max-w-6xl mx-auto">
           <div className="flex flex-col md:flex-row gap-8">
             <div className="md:w-1/3">
-              <h2 className="text-3xl font-bold">
-                Project Background & Deal Structure
+              <h2 className="text-3xl font-bold leading-tight">
+                Project<br />
+                Background &<br />
+                Deal Structure
               </h2>
             </div>
             <div className="md:w-2/3">
