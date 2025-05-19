@@ -90,9 +90,9 @@ const CaseStudy1 = () => {
               className="w-full h-full object-cover object-center scale-110"
             />
           </div>
-          <div className="absolute inset-0 flex items-center bg-gradient-to-r from-black/70 to-transparent">
+          <div className="absolute inset-0 flex items-center">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-              <div className="max-w-3xl">
+              <div className="max-w-3xl bg-primary/80 p-6 rounded-lg">
                 <h1 className="text-5xl font-bold text-white mb-6">
                   3 Bed Mid-Terraced Property
                 </h1>
