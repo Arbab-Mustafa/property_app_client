@@ -103,7 +103,7 @@ const CaseStudy1 = () => {
           <img 
             src={caseStudy1Image}
             alt="2 Bed Mid-Terraced Property" 
-            className="w-full object-cover max-h-[500px]"
+            className="w-full h-auto object-contain"
           />
         </div>
           
