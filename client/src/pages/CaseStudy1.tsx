@@ -73,9 +73,9 @@ const CaseStudy1 = () => {
   return (
     <>
       <Helmet>
-        <title>3 Bed Mid-Terraced Property | KR Property Investments</title>
+        <title>2 Bed Mid-Terraced Property | KR Property Investments</title>
         <meta name="description" content="Detailed case study of our mid-terraced property investment in Grimsby with complete financial breakdown and returns analysis." />
-        <meta property="og:title" content="3 Bed Mid-Terraced Property | KR Property Investments" />
+        <meta property="og:title" content="2 Bed Mid-Terraced Property | KR Property Investments" />
         <meta property="og:description" content="Detailed case study of our mid-terraced property investment in Grimsby with complete financial breakdown and returns analysis." />
         <meta property="og:type" content="website" />
       </Helmet>
@@ -86,7 +86,7 @@ const CaseStudy1 = () => {
           <div className="w-full h-[500px] overflow-hidden">
             <img 
               src={caseStudy1Image}
-              alt="3 Bed Mid-Terraced Property" 
+              alt="2 Bed Mid-Terraced Property" 
               className="w-full h-full object-cover object-center scale-110"
             />
           </div>
@@ -94,7 +94,7 @@ const CaseStudy1 = () => {
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
               <div className="max-w-3xl bg-primary/80 p-6 rounded-lg">
                 <h1 className="text-5xl font-bold text-white mb-6">
-                  3 Bed Mid-Terraced Property
+                  2 Bed Mid-Terraced Property
                 </h1>
                 <p className="text-xl text-white mb-8">
                   A detailed case study of our successful property investment in Grimsby.
@@ -113,63 +113,65 @@ const CaseStudy1 = () => {
               </a>
             </Link>
           </div>
+        </div>
           
-          {/* Project Background Section */}
-          <div className="bg-orange-400 p-8 rounded-lg shadow-md mb-10">
-            <div className="flex flex-col md:flex-row gap-8">
-              <div className="md:w-1/2">
-                <h2 className="text-3xl font-bold mb-4">
-                  Project Background & Deal Structure
-                </h2>
-                <p className="mb-4">
-                  A 2 bedroom mid-terraced property requiring modernisation, suited to provide housing for a family and leased to a charity on a long-term commercial lease.
-                </p>
-                <p className="mb-4">
-                  We have an established relationship with a charity who expressed interest in this property, after passing all their criteria checks.
-                </p>
-                <p className="mb-4">
-                  The charity offered a 5 year lease on this unit, following renovation and having onboarded the property.
-                </p>
-              </div>
-              <div className="md:w-1/2">
-                <img 
-                  src={caseStudy1Image} 
-                  alt="Property front view" 
-                  className="w-full h-auto rounded-lg shadow-md"
-                />
-              </div>
+        {/* Project Background Section */}
+        <div className="bg-orange-400 p-8 shadow-md mb-10 w-full">
+          <div className="flex flex-col md:flex-row gap-8 max-w-6xl mx-auto">
+            <div className="md:w-1/2">
+              <h2 className="text-3xl font-bold mb-4">
+                Project Background & Deal Structure
+              </h2>
+              <p className="mb-4">
+                A 2 bedroom mid-terraced property requiring modernisation, suited to provide housing for a family and leased to a charity on a long-term commercial lease.
+              </p>
+              <p className="mb-4">
+                We have an established relationship with a charity who expressed interest in this property, after passing all their criteria checks.
+              </p>
+              <p className="mb-4">
+                The charity offered a 5 year lease on this unit, following renovation and having onboarded the property.
+              </p>
+            </div>
+            <div className="md:w-1/2">
+              <img 
+                src={caseStudy1Image} 
+                alt="Property front view" 
+                className="w-full h-auto rounded-lg shadow-md"
+              />
             </div>
           </div>
-          
-          {/* Location Section */}
-          <div className="bg-green-500 p-8 rounded-lg shadow-md mb-10">
-            <div className="flex flex-col md:flex-row gap-8 items-center">
-              <div className="md:w-1/2">
-                <h2 className="text-3xl font-bold mb-4 text-white">
-                  Location
-                </h2>
-                <p className="text-white mb-4">
-                  This property is located in Grimsby, Lincolnshire, an area with strong rental demand and excellent investment potential for family homes.
-                </p>
-                <p className="text-white mb-4">
-                  The location offers good transport links, with access to local amenities and schools, making it an attractive option for families and tenants.
-                </p>
-                <p className="text-white mb-4">
-                  Property prices in this area remain affordable, allowing for higher yields compared to many other parts of the UK.
-                </p>
-              </div>
-              <div className="md:w-1/2">
-                <GoogleMapEmbed 
-                  address="Grimsby, Lincolnshire, UK" 
-                  height="350px" 
-                  borderRadius="8px"
-                />
-              </div>
+        </div>
+        
+        {/* Location Section */}
+        <div className="bg-green-500 p-8 shadow-md mb-10 w-full">
+          <div className="flex flex-col md:flex-row gap-8 items-center max-w-6xl mx-auto">
+            <div className="md:w-1/2">
+              <h2 className="text-3xl font-bold mb-4 text-white">
+                Location
+              </h2>
+              <p className="text-white mb-4">
+                This property is located in Grimsby, Lincolnshire, an area with strong rental demand and excellent investment potential for family homes.
+              </p>
+              <p className="text-white mb-4">
+                The location offers good transport links, with access to local amenities and schools, making it an attractive option for families and tenants.
+              </p>
+              <p className="text-white mb-4">
+                Property prices in this area remain affordable, allowing for higher yields compared to many other parts of the UK.
+              </p>
+            </div>
+            <div className="md:w-1/2">
+              <GoogleMapEmbed 
+                address="Grimsby, Lincolnshire, UK" 
+                height="350px" 
+                borderRadius="8px"
+              />
             </div>
           </div>
-          
-          {/* Floorplans Section */}
-          <div className="bg-black p-8 rounded-lg shadow-md mb-10">
+        </div>
+        
+        {/* Floorplans Section */}
+        <div className="bg-black p-8 shadow-md mb-10 w-full">
+          <div className="max-w-6xl mx-auto">
             <h2 className="text-3xl font-bold mb-6 text-white text-center">
               Floorplans
             </h2>
@@ -181,7 +183,9 @@ const CaseStudy1 = () => {
               />
             </div>
           </div>
-          
+        </div>
+        
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           {/* Property Overview */}
           <FinancialTable 
             title="Property Overview" 
