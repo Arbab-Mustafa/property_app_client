@@ -6,6 +6,7 @@ import CaseStudyHeader from "@/components/CaseStudyPage/CaseStudyHeader";
 import FinancialTable from "@/components/CaseStudyPage/FinancialTable";
 import ProjectSummary from "@/components/CaseStudyPage/ProjectSummary";
 import ScopeOfWorks from "@/components/CaseStudyPage/ScopeOfWorks";
+import GoogleMapEmbed from "@/components/CaseStudyPage/GoogleMapEmbed";
 
 // Import the case study images
 import propertyImage from "../assets/case-studies/18.jpg";
@@ -229,20 +230,20 @@ const CaseStudies = () => {
                     Location
                   </h2>
                   <p className="text-white mb-4">
-                    A 3 bedroom mid-terraced property requiring modernisation, ideally suited for conversion into a 4 bedroom house of multiple occupancy (HMO) and leased to a Registered Provider on a long-term commercial lease.
+                    This property is located in Grimsby, Lincolnshire, an area with strong rental demand and excellent investment potential for both family homes and HMOs.
                   </p>
                   <p className="text-white mb-4">
-                    We have an established relationship with a Registered Provider (RP) who expressed interest in this property, after passing all their criteria checks.
+                    The location offers good transport links, with access to local amenities and schools, making it an attractive option for families and tenants.
                   </p>
                   <p className="text-white mb-4">
-                    The RP offered a 10 year lease on this unit, following renovation and having onboarded the property.
+                    Property prices in this area remain affordable, allowing for higher yields compared to many other parts of the UK.
                   </p>
                 </div>
                 <div className="md:w-1/2">
-                  <img 
-                    src={locationImage} 
-                    alt="Property location map" 
-                    className="w-full h-auto rounded-lg shadow-md"
+                  <GoogleMapEmbed 
+                    address="Grimsby, Lincolnshire, UK" 
+                    height="350px" 
+                    borderRadius="8px"
                   />
                 </div>
               </div>
