@@ -9,7 +9,7 @@ import GoogleMapEmbed from "@/components/CaseStudyPage/GoogleMapEmbed";
 
 // Import the case study images
 import caseStudy1Image from "../assets/case-studies/case-study-1.jpg";
-import floorplansImage from "../assets/case-studies/20.jpg";
+import floorplansImage from "../assets/case-studies/floorplan.png";
 
 const CaseStudy1 = () => {
   // Property overview data
