@@ -8,7 +8,7 @@ import ScopeOfWorks from "@/components/CaseStudyPage/ScopeOfWorks";
 import GoogleMapEmbed from "@/components/CaseStudyPage/GoogleMapEmbed";
 
 // Import the case study images
-import caseStudy1Image from "../assets/case-studies/case-study-1.jpg";
+import caseStudy1Image from "@assets/Screenshot 2025-05-19 at 13.07.54.png";
 import floorplansImage from "../assets/case-studies/floorplan.png";
 
 const CaseStudy1 = () => {
