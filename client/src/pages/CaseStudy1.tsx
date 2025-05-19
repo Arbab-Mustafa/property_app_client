@@ -104,9 +104,9 @@ const CaseStudy1 = () => {
           </div>
         </div>
         
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           {/* Back to Case Studies Button */}
-          <div className="mb-10">
+          <div className="my-4">
             <Link href="/case-studies">
               <a className="inline-flex items-center font-medium text-primary hover:text-primary/80">
                 <ArrowLeft className="mr-2 h-4 w-4" /> Back to Case Studies
