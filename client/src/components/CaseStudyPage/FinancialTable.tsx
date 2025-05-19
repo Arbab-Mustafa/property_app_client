@@ -21,10 +21,10 @@ const FinancialTable: React.FC<FinancialTableProps> = ({
   textColor = "text-black"
 }) => {
   return (
-    <div className={`${backgroundColor} p-8 rounded-lg shadow-md my-8`}>
+    <div className={`${backgroundColor} p-8 rounded-lg shadow-md my-8 w-full`}>
       <h2 className={`text-3xl font-bold mb-6 text-center ${textColor}`}>{title}</h2>
       
-      <div className="bg-cream-100 rounded overflow-hidden max-w-2xl mx-auto">
+      <div className="bg-cream-100 rounded overflow-hidden max-w-4xl mx-auto w-full">
         <div className="grid grid-cols-2 bg-cream-200 font-semibold">
           <div className="p-4 border-r border-gray-300">Item</div>
           <div className="p-4 text-right">75% (LTV)</div>
