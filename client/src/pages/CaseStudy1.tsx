@@ -112,27 +112,33 @@ const CaseStudy1 = () => {
       
       {/* Project Background Section */}
       <div className="bg-orange-400 p-8 shadow-md w-full">
-        <div className="flex flex-col md:flex-row gap-8 max-w-6xl mx-auto">
-          <div className="md:w-1/2">
-            <h2 className="text-3xl font-bold mb-4">
-              Project Background & Deal Structure
-            </h2>
-            <p className="mb-4">
-              A 2 bedroom mid-terraced property requiring modernisation, suited to provide housing for a family and leased to a charity on a long-term commercial lease.
-            </p>
-            <p className="mb-4">
-              We have an established relationship with a charity who expressed interest in this property, after passing all their criteria checks.
-            </p>
-            <p className="mb-4">
-              The charity offered a 5 year lease on this unit, following renovation and having onboarded the property.
-            </p>
-          </div>
-          <div className="md:w-1/2">
-            <img 
-              src={caseStudy1Image} 
-              alt="Property front view" 
-              className="w-full h-auto rounded-lg shadow-md"
-            />
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-3xl font-bold mb-4">
+            Project Background & Deal Structure
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <p className="mb-4">
+                A 2 bedroom mid-terraced property requiring modernisation, suited to provide housing for a family and leased to a charity on a long-term commercial lease.
+              </p>
+              <p className="mb-4">
+                We have an established relationship with a charity who expressed interest in this property, after passing all their criteria checks.
+              </p>
+              <p className="mb-4">
+                The charity offered a 5 year lease on this unit, following renovation and having onboarded the property.
+              </p>
+            </div>
+            <div>
+              <p className="mb-4">
+                The investment strategy for this property follows our tested formula of acquiring properties with strong potential returns, conducting targeted renovations to maximize value, and securing stable long-term leases with reputable organizations.
+              </p>
+              <p className="mb-4">
+                This approach minimizes vacancy risks and provides our investors with consistent and predictable monthly income while the property continues to appreciate in value over time.
+              </p>
+              <p className="mb-4">
+                By focusing on areas with high rental demand like Grimsby, we're able to achieve higher than average yields compared to many other parts of the UK property market.
+              </p>
+            </div>
           </div>
         </div>
       </div>
