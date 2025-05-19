@@ -53,7 +53,7 @@ const Footer = () => {
   return (
     <footer className="bg-neutral-800 text-white py-12" id="wp-footer">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="lg:flex justify-between mb-8">
+        <div className="lg:flex justify-between gap-10 mb-8">
           <div className="lg:w-1/4 mb-8 lg:mb-0">
             <img src={logoPath} alt="Property Investments Logo" className="h-12 mb-4" />
             <p className="text-neutral-400 mb-4">
@@ -75,7 +75,7 @@ const Footer = () => {
             </div>
           </div>
 
-          <div className="lg:w-1/4 mb-8 lg:mb-0">
+          <div className="lg:w-1/5 mb-8 lg:mb-0">
             <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
             <ul className="space-y-2">
               <li>
@@ -111,7 +111,7 @@ const Footer = () => {
             </ul>
           </div>
 
-          <div className="lg:w-1/4 mb-8 lg:mb-0">
+          <div className="lg:w-1/5 mb-8 lg:mb-0">
             <h4 className="text-lg font-semibold mb-4">Contact</h4>
             <ul className="space-y-2">
               <li className="flex items-start">
