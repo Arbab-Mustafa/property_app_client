@@ -12,31 +12,36 @@ import caseStudy1Image from "../assets/case-studies/case-study-1.jpg";
 import floorplansImage from "../assets/case-studies/20.jpg";
 
 const CaseStudy1 = () => {
-  // Upfront cost data
-  const upfrontCostItems = [
-    { label: "Purchase Price:", value: "£27,500.00" },
-    { label: "Stamp Duty:", value: "£825.00" },
-    { label: "Legal Fees:", value: "£1,500.00" },
-    { label: "Survey Fees:", value: "£440.00" },
-    { label: "Initial Refurbishment:", value: "£13,900.00" }
+  // Property overview data
+  const propertyOverviewItems = [
+    { label: "GDV (estimated):", value: "£72,000.00" },
+    { label: "Mortgage Loan (75%):", value: "£54,000.00" },
+    { label: "Mortgage Payment (6%):", value: "£270.00 per month" },
+    { label: "Rent:", value: "£650.00 per month" },
+    { label: "Management:", value: "£0.00" },
+    { label: "Monthly Cashflow:", value: "£380.00" }
   ];
 
-  // Cashflow data
-  const cashflowItems = [
-    { label: "Annual Rental Income:", value: "£15,600.00" },
-    { label: "Mortgage Interest:", value: "-£3,780.00" },
-    { label: "Service Charge:", value: "-£480.00" },
-    { label: "Property Management:", value: "-£1,560.00" },
-    { label: "Annual Net Cashflow:", value: "£5,985.00" }
+  // Upfront cost data
+  const upfrontCostItems = [
+    { label: "Purchase Price:", value: "£55,700.00" },
+    { label: "Mortgage Loan (75%):", value: "£41,775.00" },
+    { label: "Deposit (25%):", value: "£13,925.00" },
+    { label: "Refurbishment:", value: "£5,000.00" },
+    { label: "White Goods:", value: "£1,000.00" },
+    { label: "Stamp Duty:", value: "£2,785.00" },
+    { label: "Survey:", value: "£500.00" },
+    { label: "Legal Fees:", value: "£2,000.00" },
+    { label: "Broker Fees:", value: "£500.00" },
+    { label: "Other Fees:", value: "£200.00" }
   ];
 
   // ROI data
   const roiItems = [
-    { label: "Money Left In:", value: "£34,595.00" },
-    { label: "Annual Rental Income:", value: "£15,600.00" },
-    { label: "Annual Expenses:", value: "£5,820.00" },
-    { label: "Annual Net Cashflow:", value: "£5,985.00" },
-    { label: "Return On Investment:", value: "15.20%" }
+    { label: "Back in the Bank (after 6-12 months):", value: "£12,100.00" },
+    { label: "Estimated Money Left In:", value: "£13,685.00" },
+    { label: "Potential Cash Flow Per Annum:", value: "£4,560.00" },
+    { label: "Return On Money Left In:", value: "33.32%" }
   ];
 
   // Scope of work items
@@ -55,14 +60,14 @@ const CaseStudy1 = () => {
 
   // Project summary points
   const summaryPoints = [
-    "Purchase price: £27,500",
-    "Total renovation costs: £13,900",
-    "Post-renovation value: £68,500",
-    "Equity created: £27,100",
-    "10-year commercial lease with Registered Provider",
-    "Annual rental income: £15,600",
-    "Net annual cashflow: £5,985",
-    "ROI: 15.20%"
+    "Purchase price: £55,700",
+    "Total renovation costs: £5,000",
+    "Post-renovation value: £72,000",
+    "Equity created: £16,300",
+    "Monthly rental income: £650",
+    "Monthly cashflow: £380",
+    "Annual net cashflow: £4,560",
+    "ROI: 33.32%"
   ];
 
   return (
@@ -177,6 +182,15 @@ const CaseStudy1 = () => {
             </div>
           </div>
           
+          {/* Property Overview */}
+          <FinancialTable 
+            title="Property Overview" 
+            items={propertyOverviewItems} 
+            summary={{ label: "Monthly Cashflow", value: "£380.00" }}
+            backgroundColor="bg-blue-500"
+            textColor="text-white"
+          />
+          
           {/* Scope of Works */}
           <ScopeOfWorks workItems={scopeItems} />
           
@@ -184,23 +198,16 @@ const CaseStudy1 = () => {
           <FinancialTable 
             title="Upfront Cost" 
             items={upfrontCostItems} 
-            summary={{ label: "Acquisition Costs", value: 44165.00 }}
+            summary={{ label: "Total Acquisition Costs", value: "£25,785.00" }}
             backgroundColor="bg-orange-400"
-          />
-          
-          <FinancialTable 
-            title="Cashflow Numbers" 
-            items={cashflowItems} 
-            summary={{ label: "Cashflow", value: "£498.75 PCM" }}
-            backgroundColor="bg-cream-100"
-            textColor="text-black"
           />
           
           <FinancialTable 
             title="Return On Investment" 
             items={roiItems} 
-            summary={{ label: "Return On Money Left In", value: "15.20%" }}
-            backgroundColor="bg-orange-400"
+            summary={{ label: "Return On Money Left In", value: "33.32%" }}
+            backgroundColor="bg-green-500"
+            textColor="text-white"
           />
           
           {/* Deal Summary */}
