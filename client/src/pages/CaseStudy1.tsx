@@ -96,9 +96,7 @@ const CaseStudy1 = () => {
                     Social Housing 2 Bedroom family house
                   </h1>
                 </div>
-                <p className="text-xl text-white mb-4">
-                  A detailed case study of our successful property investment in Grimsby.
-                </p>
+
                 <Link href="/case-studies">
                   <a className="inline-flex items-center font-medium text-white hover:text-white/80">
                     <ArrowLeft className="mr-2 h-4 w-4" /> Back to Case Studies
