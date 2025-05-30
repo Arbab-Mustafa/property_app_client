@@ -18,8 +18,8 @@ const navLinks = [
     path: "/invest",
     isDropdown: true,
     dropdownItems: [
-      { name: "Find You A Deal", path: "/invest#find-deal" },
-      { name: "Invest With Us", path: "/invest#invest-with-us" }
+      { name: "Find You A Deal", path: "/find-you-a-deal" },
+      { name: "Invest With Us", path: "/invest-with-us" }
     ]
   },
   { name: "Case Studies", path: "/case-studies" },
