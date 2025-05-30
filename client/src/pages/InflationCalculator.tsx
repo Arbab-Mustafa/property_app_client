@@ -1,8 +1,12 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Helmet } from "react-helmet";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
+import { Bar } from 'react-chartjs-2';
+
+ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 import {
   Select,
   SelectContent,
@@ -66,10 +70,27 @@ const InflationCalculator = () => {
     yearsDiff: number;
   } | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [chartImage, setChartImage] = useState<string | null>(null);
   const isSubmittingRef = useRef(false);
+  const chartRef = useRef<any>(null);
 
   // Load Baserow API token from environment variables
   const token = import.meta.env.VITE_BASEROW_API_TOKEN;
+
+  // Generate chart image after results are set
+  useEffect(() => {
+    if (result && chartRef.current) {
+      // Small delay to ensure chart is rendered
+      const timer = setTimeout(() => {
+        if (chartRef.current && chartRef.current.canvas) {
+          const chartImageBase64 = chartRef.current.toBase64Image();
+          setChartImage(chartImageBase64);
+        }
+      }, 500);
+      
+      return () => clearTimeout(timer);
+    }
+  }, [result]);
 
   // Direct function to submit data to Baserow using your suggested approach
   const submitToBaserow = async (formData: FormValues, todayValue: number) => {
@@ -156,7 +177,8 @@ const InflationCalculator = () => {
           amount: data.amount,
           year: data.year,
           month: data.month,
-          source: data.source || 'Website'
+          source: data.source || 'Website',
+          chartImage: chartImage // Include chart image if available
         }),
       });
 
@@ -481,6 +503,75 @@ const InflationCalculator = () => {
                     </div>
                     <div className="text-sm text-neutral-600 mt-1">
                       From {result.startYear} to {result.endYear}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Chart Visualization */}
+                <div className="mt-8">
+                  <h4 className="text-xl font-semibold text-neutral-800 mb-4 text-center">
+                    Visual Comparison: Original vs Inflation-Adjusted Value
+                  </h4>
+                  <div className="bg-neutral-50 p-6 rounded-lg">
+                    <div style={{ height: '400px', width: '100%' }}>
+                      <Bar
+                        ref={chartRef}
+                        data={{
+                          labels: [`Original Amount (${result.startYear})`, `Equivalent Value Today (${result.endYear})`],
+                          datasets: [
+                            {
+                              label: 'Value in British Pounds (£)',
+                              data: [result.originalValue, result.todayValue],
+                              backgroundColor: [
+                                'rgba(59, 130, 246, 0.8)', // Blue for original
+                                'rgba(239, 68, 68, 0.8)'   // Red for today's equivalent
+                              ],
+                              borderColor: [
+                                'rgba(59, 130, 246, 1)',
+                                'rgba(239, 68, 68, 1)'
+                              ],
+                              borderWidth: 2,
+                            },
+                          ],
+                        }}
+                        options={{
+                          responsive: true,
+                          maintainAspectRatio: false,
+                          plugins: {
+                            title: {
+                              display: true,
+                              text: 'Impact of Inflation on Your Money',
+                              font: {
+                                size: 16,
+                                weight: 'bold'
+                              }
+                            },
+                            legend: {
+                              display: false
+                            },
+                            tooltip: {
+                              callbacks: {
+                                label: function(context) {
+                                  return `£${context.parsed.y.toLocaleString('en-GB', {
+                                    minimumFractionDigits: 2,
+                                    maximumFractionDigits: 2,
+                                  })}`;
+                                }
+                              }
+                            }
+                          },
+                          scales: {
+                            y: {
+                              beginAtZero: true,
+                              ticks: {
+                                callback: function(value) {
+                                  return '£' + value.toLocaleString('en-GB');
+                                }
+                              }
+                            }
+                          }
+                        }}
+                      />
                     </div>
                   </div>
                 </div>
