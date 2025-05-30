@@ -110,17 +110,69 @@ export async function sendInflationReport(data: InflationReportData) {
         
         ${chartImage ? `
         <div style="margin: 30px 0;">
-          <h2 style="color: #008e6d; margin: 0 0 20px 0; font-size: 20px;">📊 Visual Comparison</h2>
+          <h2 style="color: #008e6d; margin: 0 0 20px 0; font-size: 20px;">📊 Visual Impact of Inflation</h2>
           <div style="text-align: center; margin: 20px 0;">
+            <p style="font-size: 18px; font-weight: bold; color: #333; margin-bottom: 15px;">
+              ${formattedOriginalAmount} back then equals ${formattedTodayValue} today — thanks to inflation.
+            </p>
             <img src="cid:chart-image" alt="Inflation Impact Chart" style="max-width: 100%; height: auto; border: 1px solid #ddd; border-radius: 8px;" />
             <p style="font-size: 12px; color: #666; margin-top: 10px; font-style: italic;">
               Visual comparison showing your original amount versus what you would need today to have the same purchasing power.
             </p>
           </div>
         </div>
+        ` : ''}
+        
+        <div style="margin: 30px 0;">
+          <h2 style="color: #008e6d; margin: 0 0 20px 0; font-size: 20px;">💰 How Your Money Could Have Grown</h2>
+          <p style="margin-bottom: 20px; color: #333;">Here's how your ${formattedOriginalAmount} from ${year} would have performed across different investment options:</p>
+          
+          <div style="display: grid; gap: 15px; margin: 20px 0;">
+            <!-- Bank Savings -->
+            <div style="background-color: #fee2e2; border-left: 4px solid #dc2626; padding: 20px; border-radius: 8px;">
+              <h3 style="color: #dc2626; margin: 0 0 10px 0; font-size: 16px; font-weight: bold;">Bank Savings (1%)</h3>
+              <div style="font-size: 20px; font-weight: bold; color: #333; margin-bottom: 5px;">
+                £${(amount * Math.pow(1.01, yearsDiff)).toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+              </div>
+              <div style="color: #666; font-size: 14px; margin-bottom: 5px;">
+                ${((Math.pow(1.01, yearsDiff) - 1) * 100).toFixed(1)}% growth
+              </div>
+              <div style="color: #dc2626; font-size: 14px; font-weight: bold;">
+                Lost to inflation: -${formattedLossInValue}
+              </div>
+            </div>
+            
+            <!-- Cash ISA -->
+            <div style="background-color: #fef3c7; border-left: 4px solid #f59e0b; padding: 20px; border-radius: 8px;">
+              <h3 style="color: #f59e0b; margin: 0 0 10px 0; font-size: 16px; font-weight: bold;">Cash ISA (2.5%)</h3>
+              <div style="font-size: 20px; font-weight: bold; color: #333; margin-bottom: 5px;">
+                £${(amount * Math.pow(1.025, yearsDiff)).toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+              </div>
+              <div style="color: #666; font-size: 14px; margin-bottom: 5px;">
+                ${((Math.pow(1.025, yearsDiff) - 1) * 100).toFixed(1)}% growth
+              </div>
+              <div style="color: #f59e0b; font-size: 14px; font-weight: bold;">
+                Lost to inflation: -£${(todayValue - (amount * Math.pow(1.025, yearsDiff))).toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+              </div>
+            </div>
+            
+            <!-- Property Investment -->
+            <div style="background-color: #d1fae5; border-left: 4px solid #008e6d; padding: 20px; border-radius: 8px;">
+              <h3 style="color: #008e6d; margin: 0 0 10px 0; font-size: 16px; font-weight: bold;">Property Investment (10%)</h3>
+              <div style="font-size: 20px; font-weight: bold; color: #333; margin-bottom: 5px;">
+                £${(amount * Math.pow(1.10, yearsDiff)).toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+              </div>
+              <div style="color: #666; font-size: 14px; margin-bottom: 5px;">
+                ${((Math.pow(1.10, yearsDiff) - 1) * 100).toFixed(1)}% growth
+              </div>
+              <div style="color: #008e6d; font-size: 14px; font-weight: bold;">
+                Beat inflation by: +£${((amount * Math.pow(1.10, yearsDiff)) - todayValue).toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+              </div>
+            </div>
+          </div>
+        </div>
         
         <div style="border-top: 2px solid #ddd; margin: 30px 0 20px 0;"></div>
-        ` : ''}
         
         <div style="margin: 30px 0;">
           <h2 style="color: #008e6d; margin: 0 0 20px 0; font-size: 20px;">🧾 What This Means</h2>
