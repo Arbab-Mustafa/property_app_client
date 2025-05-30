@@ -10,8 +10,8 @@ const CaseStudies = () => {
       title: "2-Bed Flip – Manchester",
       type: "Victorian Terrace",
       summary: "Complete renovation of a Victorian terrace in Manchester's Northern Quarter with modern upgrades.",
-      roi: "15.2% Return",
-      link: "/case-studies/property-1"
+      roi: "12.2% Return",
+      link: "/case-studies/manchester-flip"
     },
     {
       id: "property-2",
