@@ -1,5 +1,7 @@
 import { Helmet } from "react-helmet";
 import AboutUs from "@/components/AboutPage/AboutUs";
+import TeamSection from "@/components/AboutPage/TeamSection";
+import Timeline from "@/components/AboutPage/Timeline";
 
 const About = () => {
   return (
@@ -13,6 +15,8 @@ const About = () => {
       </Helmet>
       
       <AboutUs />
+      <TeamSection />
+      <Timeline />
     </>
   );
 };

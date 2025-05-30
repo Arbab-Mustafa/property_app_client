@@ -108,6 +108,46 @@ const AboutUs = () => {
             </p>
           </div>
         </div>
+
+        {/* Credentials Section */}
+        <div className="mt-20">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              Our Track Record
+            </h2>
+            <div className="w-20 h-1 bg-primary mx-auto mb-6"></div>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Years of experience delivering consistent results for our investors.
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+            <div className="bg-gradient-to-br from-primary to-primary/80 text-white shadow-lg hover:shadow-xl transition-shadow duration-300 rounded-lg">
+              <div className="p-6 text-center">
+                <div className="text-3xl lg:text-4xl font-bold mb-2">65+</div>
+                <div className="text-white/90 font-medium text-sm lg:text-base">Clients</div>
+              </div>
+            </div>
+            <div className="bg-gradient-to-br from-primary to-primary/80 text-white shadow-lg hover:shadow-xl transition-shadow duration-300 rounded-lg">
+              <div className="p-6 text-center">
+                <div className="text-3xl lg:text-4xl font-bold mb-2">£1.2M+</div>
+                <div className="text-white/90 font-medium text-sm lg:text-base">Capital Raised</div>
+              </div>
+            </div>
+            <div className="bg-gradient-to-br from-primary to-primary/80 text-white shadow-lg hover:shadow-xl transition-shadow duration-300 rounded-lg">
+              <div className="p-6 text-center">
+                <div className="text-3xl lg:text-4xl font-bold mb-2">100+</div>
+                <div className="text-white/90 font-medium text-sm lg:text-base">Property Deals</div>
+              </div>
+            </div>
+            <div className="bg-gradient-to-br from-primary to-primary/80 text-white shadow-lg hover:shadow-xl transition-shadow duration-300 rounded-lg">
+              <div className="p-6 text-center">
+                <div className="text-3xl lg:text-4xl font-bold mb-2">Since 2017</div>
+                <div className="text-white/90 font-medium text-sm lg:text-base">Operating</div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );
