@@ -112,7 +112,7 @@ export async function sendInflationReport(data: InflationReportData) {
         <div style="margin: 30px 0;">
           <h2 style="color: #008e6d; margin: 0 0 20px 0; font-size: 20px;">📊 Visual Comparison</h2>
           <div style="text-align: center; margin: 20px 0;">
-            <img src="${chartImage}" alt="Inflation Impact Chart" style="max-width: 100%; height: auto; border: 1px solid #ddd; border-radius: 8px;" />
+            <img src="cid:chart-image" alt="Inflation Impact Chart" style="max-width: 100%; height: auto; border: 1px solid #ddd; border-radius: 8px;" />
             <p style="font-size: 12px; color: #666; margin-top: 10px; font-style: italic;">
               Visual comparison showing your original amount versus what you would need today to have the same purchasing power.
             </p>
@@ -155,8 +155,8 @@ export async function sendInflationReport(data: InflationReportData) {
     // Set the API key for SendGrid
     sgMail.setApiKey(sendgridApiKey);
 
-    // Create email message
-    const msg = {
+    // Prepare email message with optional chart attachment
+    const msg: any = {
       to: email,
       from: { 
         email: 'info@kr-properties.co.uk', 
@@ -165,6 +165,22 @@ export async function sendInflationReport(data: InflationReportData) {
       subject: 'Your Inflation Report – See How Much Value You\'ve Lost',
       html: htmlContent,
     };
+
+    // Add chart as attachment if provided
+    if (chartImage && chartImage.startsWith('data:image/')) {
+      // Extract base64 content from data URL
+      const base64Content = chartImage.split(',')[1];
+      
+      msg.attachments = [{
+        content: base64Content,
+        filename: 'inflation_chart.png',
+        type: 'image/png',
+        disposition: 'inline',
+        content_id: 'chart-image'
+      }];
+
+      console.log('Chart attachment added to email');
+    }
 
     try {
       // Send email using SendGrid client library

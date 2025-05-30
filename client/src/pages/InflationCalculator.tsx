@@ -71,26 +71,12 @@ const InflationCalculator = () => {
   } | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [chartImage, setChartImage] = useState<string | null>(null);
+  const [lastFormData, setLastFormData] = useState<FormValues | null>(null);
   const isSubmittingRef = useRef(false);
   const chartRef = useRef<any>(null);
 
   // Load Baserow API token from environment variables
   const token = import.meta.env.VITE_BASEROW_API_TOKEN;
-
-  // Generate chart image after results are set
-  useEffect(() => {
-    if (result && chartRef.current) {
-      // Small delay to ensure chart is rendered
-      const timer = setTimeout(() => {
-        if (chartRef.current && chartRef.current.canvas) {
-          const chartImageBase64 = chartRef.current.toBase64Image();
-          setChartImage(chartImageBase64);
-        }
-      }, 500);
-      
-      return () => clearTimeout(timer);
-    }
-  }, [result]);
 
   // Direct function to submit data to Baserow using your suggested approach
   const submitToBaserow = async (formData: FormValues, todayValue: number) => {
@@ -157,6 +143,49 @@ const InflationCalculator = () => {
     },
   });
 
+  // Generate chart image after results are set and send email with chart
+  useEffect(() => {
+    if (result && chartRef.current) {
+      // Small delay to ensure chart is rendered
+      const timer = setTimeout(async () => {
+        if (chartRef.current && chartRef.current.canvas) {
+          const chartImageBase64 = chartRef.current.toBase64Image();
+          setChartImage(chartImageBase64);
+          console.log('Chart image generated:', chartImageBase64 ? 'Success' : 'Failed');
+          
+          // Send email with chart if we have user data
+          if (lastFormData && lastFormData.email && chartImageBase64) {
+            try {
+              const emailResponse = await fetch("/api/inflation-email", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                  name: lastFormData.name,
+                  email: lastFormData.email,
+                  amount: lastFormData.amount,
+                  year: lastFormData.year,
+                  month: lastFormData.month,
+                  chartImage: chartImageBase64,
+                  calculationData: result
+                }),
+              });
+              
+              if (emailResponse.ok) {
+                console.log('Chart email sent successfully');
+              } else {
+                console.error('Failed to send chart email');
+              }
+            } catch (emailError) {
+              console.error("Error sending chart email:", emailError);
+            }
+          }
+        }
+      }, 1500);
+      
+      return () => clearTimeout(timer);
+    }
+  }, [result, lastFormData]);
+
   const calculateInflation = async (data: FormValues) => {
     // Prevent duplicate submissions
     if (isSubmittingRef.current) {
@@ -168,6 +197,10 @@ const InflationCalculator = () => {
       setIsSubmitting(true);
       isSubmittingRef.current = true;
       
+      // Store form data for later chart email
+      setLastFormData(data);
+      
+      // First, calculate without chart for immediate response
       const response = await fetch("/api/inflation", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -177,8 +210,7 @@ const InflationCalculator = () => {
           amount: data.amount,
           year: data.year,
           month: data.month,
-          source: data.source || 'Website',
-          chartImage: chartImage // Include chart image if available
+          source: data.source || 'Website'
         }),
       });
 
@@ -195,32 +227,6 @@ const InflationCalculator = () => {
         
         // Submit the data to Baserow only once
         await submitToBaserow(data, responseData.data.todayValue);
-        
-        // Wait a moment for chart to render, then send email with chart
-        setTimeout(async () => {
-          if (chartRef.current) {
-            const chartImageBase64 = chartRef.current.toBase64Image();
-            
-            // Send a follow-up request with the chart image for email
-            try {
-              await fetch("/api/inflation-email", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                  name: data.name,
-                  email: data.email,
-                  amount: data.amount,
-                  year: data.year,
-                  month: data.month,
-                  chartImage: chartImageBase64,
-                  calculationData: responseData.data
-                }),
-              });
-            } catch (emailError) {
-              console.error("Error sending chart email:", emailError);
-            }
-          }
-        }, 1000);
       } else {
         console.error("API error:", responseData.error);
       }
