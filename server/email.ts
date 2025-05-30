@@ -65,87 +65,73 @@ export async function sendInflationReport(data: InflationReportData) {
       style: 'currency',
       currency: 'GBP'
     });
-    const formattedPercentageIncrease = data.percentageIncrease.toFixed(2);
+    const formattedPercentageIncrease = data.percentageIncrease.toFixed(1);
     const formattedAnnualGrowthRate = data.annualGrowthRate.toFixed(1);
-    const formattedYearsDiff = data.yearsDiff.toFixed(1);
+    const formattedYearsDiff = data.yearsDiff.toFixed(0);
     
-    // Create the enhanced email HTML content based on the spreadsheet format
+    // Current year
+    const currentYear = new Date().getFullYear();
+    
+    // Percentage increase text
+    const percentageIncreaseText = `increased by ${formattedPercentageIncrease}%`;
+    
+    // Create the new structured email HTML content
     const htmlContent = `
-      <div style="font-family: Arial, sans-serif; max-width: 700px; margin: 0 auto; padding: 20px; border: 1px solid #e5e5e5; border-radius: 5px;">
-        <div style="text-align: center; margin-bottom: 20px;">
-          <h1 style="color: #f97316; margin-bottom: 10px;">Property Investments</h1>
-          <p style="font-size: 18px; color: #333;">Detailed Inflation Calculator Results</p>
+      <div style="font-family: Arial, sans-serif; max-width: 700px; margin: 0 auto; padding: 20px; line-height: 1.6; color: #333;">
+        
+        <div style="text-align: left; margin-bottom: 30px; border-bottom: 2px solid #ddd; padding-bottom: 15px;">
+          <h1 style="color: #008e6d; margin: 0; font-size: 24px; font-weight: bold;">Property Investments</h1>
+          <p style="margin: 5px 0 0 0; font-size: 16px; color: #666;">Detailed Inflation Calculator Results</p>
         </div>
         
-        <p>Hello ${name},</p>
+        <p style="margin-bottom: 20px;">Hello ${name},</p>
         
-        <p>Thank you for using our Inflation Calculator. Here is your detailed inflation report:</p>
+        <p style="margin-bottom: 25px;">Thank you for using our Inflation Calculator. Below is your detailed report based on the Retail Price Index (RPI) data up to ${currentYear}.</p>
         
-        <div style="background-color: #f9f9f9; padding: 20px; border-radius: 5px; margin: 20px 0;">
-          <table style="width: 100%; border-collapse: collapse;">
-            <tr>
-              <td style="padding: 8px; font-weight: bold; width: 50%;">Original Amount:</td>
-              <td style="padding: 8px;">${formattedOriginalAmount}</td>
-            </tr>
-            <tr>
-              <td style="padding: 8px; font-weight: bold;">Start Date:</td>
-              <td style="padding: 8px;">${monthName} ${data.startYear}</td>
-            </tr>
-            <tr>
-              <td style="padding: 8px; font-weight: bold;">End Date:</td>
-              <td style="padding: 8px;">Present (${data.endYear})</td>
-            </tr>
-            <tr style="background-color: #f0f0f0;">
-              <td style="padding: 8px; font-weight: bold;">Future Value (Inflation-Adjusted Amount):</td>
-              <td style="padding: 8px; font-weight: bold; color: #f97316;">${formattedTodayValue}</td>
-            </tr>
-            <tr>
-              <td style="padding: 8px; font-weight: bold;">Loss in Value (£):</td>
-              <td style="padding: 8px;">-${formattedLossInValue}</td>
-            </tr>
-            <tr>
-              <td style="padding: 8px; font-weight: bold;">Percentage Loss Over Time (%):</td>
-              <td style="padding: 8px;">100%</td>
-            </tr>
-            <tr style="background-color: #f0f0f0;">
-              <td style="padding: 8px; font-weight: bold;">Percentage increase in that time:</td>
-              <td style="padding: 8px; font-weight: bold;">${formattedPercentageIncrease}%</td>
-            </tr>
-            <tr style="background-color: #f0f0f0;">
-              <td style="padding: 8px; font-weight: bold;">To keep up with inflation, money should have grown by:</td>
-              <td style="padding: 8px; font-weight: bold;">${formattedAnnualGrowthRate}% per year</td>
-            </tr>
-            <tr>
-              <td style="padding: 8px; font-weight: bold;">Time period:</td>
-              <td style="padding: 8px;">${formattedYearsDiff} years</td>
-            </tr>
-          </table>
+        <div style="border-top: 2px solid #ddd; margin: 30px 0 20px 0;"></div>
+        
+        <div style="margin: 30px 0;">
+          <h2 style="color: #008e6d; margin: 0 0 20px 0; font-size: 20px;">📊 Inflation Report Summary</h2>
+          <ul style="list-style: none; padding: 0; margin: 0;">
+            <li style="margin-bottom: 8px;">• <strong>Original Amount:</strong> ${formattedOriginalAmount}</li>
+            <li style="margin-bottom: 8px;">• <strong>Start Date:</strong> ${monthName} ${year}</li>
+            <li style="margin-bottom: 8px;">• <strong>End Date:</strong> Present (${currentYear})</li>
+            <li style="margin-bottom: 8px;">• <strong>Inflation-Adjusted Value (${currentYear}):</strong> ${formattedTodayValue}</li>
+            <li style="margin-bottom: 8px;">• <strong>Real-Term Loss in Value:</strong> -${formattedLossInValue}</li>
+            <li style="margin-bottom: 8px;">• <strong>Percentage Increase in Cost of Living:</strong> ${formattedPercentageIncrease}%</li>
+            <li style="margin-bottom: 8px;">• <strong>Required Growth to Keep Up with Inflation:</strong> ${formattedAnnualGrowthRate}% annually</li>
+            <li style="margin-bottom: 8px;">• <strong>Time Period:</strong> ${formattedYearsDiff} years</li>
+          </ul>
         </div>
         
-        <div style="margin: 25px 0; padding: 15px; border-left: 4px solid #f97316; background-color: #fff8f3;">
-          <p style="margin: 0 0 10px 0;"><strong>What this means:</strong></p>
-          <p>The cost of goods and services increased by <strong>${formattedPercentageIncrease}%</strong> over this period.</p>
-          <p>Your ${formattedOriginalAmount} would need to have grown by an average of <strong>${formattedAnnualGrowthRate}%</strong> per year, just to have kept pace with inflation. If you achieved a lower rate of growth, the real value of your money would have fallen.</p>
-          <p style="margin-top: 10px; font-size: 0.9em;">*Figures based on the Retail Price Index (RPI) as of ${data.endYear}. Source: Office for National Statistics.</p>
+        <div style="border-top: 2px solid #ddd; margin: 30px 0 20px 0;"></div>
+        
+        <div style="margin: 30px 0;">
+          <h2 style="color: #008e6d; margin: 0 0 20px 0; font-size: 20px;">🧾 What This Means</h2>
+          <p style="margin-bottom: 15px;">Since ${year}, the cost of goods and services in the UK has ${percentageIncreaseText}. That means your ${formattedOriginalAmount} would now need to be worth over ${formattedTodayValue} just to have the same purchasing power.</p>
+          <p style="margin-bottom: 15px;">If the money stayed in a low-interest account or savings, its real-world value has significantly decreased.</p>
+          <p style="margin-bottom: 15px; font-style: italic; background-color: #f8f9fa; padding: 15px; border-left: 4px solid #008e6d;">"Not investing is like pouring water into a leaky bucket. Over time, no matter how full it looks, you're left with much less than you started with."</p>
         </div>
         
-        <div style="background-color: #f97316; color: white; padding: 20px; border-radius: 5px; margin: 25px 0;">
-          <h2 style="margin-top: 0; font-size: 20px;">How Property Investments Can Help</h2>
-          <p>At Property Investments, we consistently help our clients achieve returns that significantly outperform inflation through carefully selected property investments.</p>
-          <p>Our average annual returns range from 8-12%, providing protection against inflation while building real wealth over time.</p>
-          <p><a href="https://kr-properties.co.uk/invest" style="color: white; font-weight: bold; text-decoration: underline;">Learn more about our investment opportunities →</a></p>
+        <div style="border-top: 2px solid #ddd; margin: 30px 0 20px 0;"></div>
+        
+        <div style="margin: 30px 0;">
+          <h2 style="color: #008e6d; margin: 0 0 20px 0; font-size: 20px;">📞 Let's Talk</h2>
+          <p style="margin-bottom: 15px;">Want to find out how to protect your money and grow it confidently?</p>
+          
+          <div style="text-align: center; margin: 25px 0;">
+            <a href="https://kr-properties.co.uk/contact" style="display: inline-block; background-color: #008e6d; color: white; text-decoration: none; padding: 15px 30px; border-radius: 5px; font-weight: bold; font-size: 16px;">Book a Personal Consultation →</a>
+          </div>
+          
+          <p style="margin-bottom: 5px;">Or contact us directly:</p>
+          <p style="margin: 5px 0;"><strong>Email:</strong> info@kr-properties.co.uk</p>
+          <p style="margin: 5px 0;"><strong>Phone:</strong> 020 3633 2783</p>
         </div>
         
-        <p>If you'd like to discuss how we can help you achieve better returns on your investments, please contact us for a personal consultation.</p>
+        <div style="border-top: 2px solid #ddd; margin: 30px 0 20px 0;"></div>
         
-        <div style="text-align: center; margin: 30px 0 20px;">
-          <a href="https://kr-properties.co.uk/contact" style="display: inline-block; background-color: #f97316; color: white; text-decoration: none; padding: 12px 25px; border-radius: 4px; font-weight: bold;">Book a Consultation</a>
-        </div>
-        
-        <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #e5e5e5; color: #666; font-size: 12px; text-align: center;">
-          <p>Property Investments Ltd</p>
-          <p>Email: info@kr-properties.co.uk | Phone: 02036332783</p>
-          <p>© 2025 Property Investments. All rights reserved.</p>
+        <div style="text-align: center; color: #666; font-size: 12px; margin-top: 30px;">
+          <p style="margin: 0;">© ${currentYear} kr property investments. All rights reserved.</p>
         </div>
       </div>
     `;
@@ -160,7 +146,7 @@ export async function sendInflationReport(data: InflationReportData) {
         email: 'info@kr-properties.co.uk', 
         name: 'Property Investments' 
       },
-      subject: `Your Property Investment Inflation Report (£${amount})`,
+      subject: 'Your Inflation Report – See How Much Value You\'ve Lost',
       html: htmlContent,
     };
 
@@ -169,7 +155,7 @@ export async function sendInflationReport(data: InflationReportData) {
       await sgMail.send(msg);
       console.log(`Inflation calculator report email sent to ${email}`);
       return { success: true };
-    } catch (sendError) {
+    } catch (sendError: any) {
       console.error('SendGrid send error:', sendError);
       if (sendError.response) {
         console.error('SendGrid error details:', sendError.response.body);
