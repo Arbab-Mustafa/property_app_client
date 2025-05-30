@@ -144,7 +144,8 @@ router.post('/api/inflation', async (req, res) => {
       amount,
       month,
       year,
-      source
+      source,
+      chartImage
     } = req.body;
 
     // Simple validation
@@ -197,7 +198,8 @@ router.post('/api/inflation', async (req, res) => {
           annualGrowthRate: inflationData.annualGrowthRate,
           startYear: inflationData.startYear,
           endYear: inflationData.endYear,
-          yearsDiff: inflationData.yearsDiff
+          yearsDiff: inflationData.yearsDiff,
+          chartImage: chartImage
         }).then(emailResult => {
           if (emailResult.success) {
             console.log(`Enhanced email report sent to ${email}`);
@@ -222,6 +224,56 @@ router.post('/api/inflation', async (req, res) => {
       success: false,
       error: 'Internal server error processing your request' 
     });
+  }
+});
+
+// Separate endpoint for sending email with chart image
+router.post('/api/inflation-email', async (req, res) => {
+  try {
+    const {
+      name,
+      email,
+      amount,
+      month,
+      year,
+      chartImage,
+      calculationData
+    } = req.body;
+
+    if (!email || !calculationData || !chartImage) {
+      return res.status(400).json({ 
+        success: false,
+        error: 'Missing required data for email' 
+      });
+    }
+
+    // Send email with chart image
+    const emailResult = await sendInflationReport({
+      name,
+      email,
+      amount: parseFloat(amount),
+      month: parseInt(month),
+      year: parseInt(year),
+      todayValue: calculationData.todayValue,
+      lossInValue: calculationData.lossInValue,
+      percentageIncrease: calculationData.percentageIncrease,
+      annualGrowthRate: calculationData.annualGrowthRate,
+      startYear: calculationData.startYear,
+      endYear: calculationData.endYear,
+      yearsDiff: calculationData.yearsDiff,
+      chartImage: chartImage
+    });
+
+    if (emailResult.success) {
+      console.log(`Email with chart sent to ${email}`);
+      res.json({ success: true, message: 'Email sent successfully' });
+    } else {
+      console.error(`Failed to send email: ${emailResult.error}`);
+      res.status(500).json({ success: false, error: emailResult.error });
+    }
+  } catch (error) {
+    console.error('Error sending email with chart:', error);
+    res.status(500).json({ success: false, error: 'Failed to send email' });
   }
 });
 

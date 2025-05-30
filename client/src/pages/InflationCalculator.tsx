@@ -195,6 +195,32 @@ const InflationCalculator = () => {
         
         // Submit the data to Baserow only once
         await submitToBaserow(data, responseData.data.todayValue);
+        
+        // Wait a moment for chart to render, then send email with chart
+        setTimeout(async () => {
+          if (chartRef.current) {
+            const chartImageBase64 = chartRef.current.toBase64Image();
+            
+            // Send a follow-up request with the chart image for email
+            try {
+              await fetch("/api/inflation-email", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                  name: data.name,
+                  email: data.email,
+                  amount: data.amount,
+                  year: data.year,
+                  month: data.month,
+                  chartImage: chartImageBase64,
+                  calculationData: responseData.data
+                }),
+              });
+            } catch (emailError) {
+              console.error("Error sending chart email:", emailError);
+            }
+          }
+        }, 1000);
       } else {
         console.error("API error:", responseData.error);
       }

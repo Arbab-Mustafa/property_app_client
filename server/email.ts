@@ -14,6 +14,7 @@ interface InflationReportData {
   startYear: number;
   endYear: number;
   yearsDiff: number;
+  chartImage?: string;
 }
 
 /**
@@ -40,7 +41,8 @@ export async function sendInflationReport(data: InflationReportData) {
       annualGrowthRate,
       startYear,
       endYear,
-      yearsDiff
+      yearsDiff,
+      chartImage
     } = data;
     
     // Format values for display
@@ -105,6 +107,20 @@ export async function sendInflationReport(data: InflationReportData) {
         </div>
         
         <div style="border-top: 2px solid #ddd; margin: 30px 0 20px 0;"></div>
+        
+        ${chartImage ? `
+        <div style="margin: 30px 0;">
+          <h2 style="color: #008e6d; margin: 0 0 20px 0; font-size: 20px;">📊 Visual Comparison</h2>
+          <div style="text-align: center; margin: 20px 0;">
+            <img src="${chartImage}" alt="Inflation Impact Chart" style="max-width: 100%; height: auto; border: 1px solid #ddd; border-radius: 8px;" />
+            <p style="font-size: 12px; color: #666; margin-top: 10px; font-style: italic;">
+              Visual comparison showing your original amount versus what you would need today to have the same purchasing power.
+            </p>
+          </div>
+        </div>
+        
+        <div style="border-top: 2px solid #ddd; margin: 30px 0 20px 0;"></div>
+        ` : ''}
         
         <div style="margin: 30px 0;">
           <h2 style="color: #008e6d; margin: 0 0 20px 0; font-size: 20px;">🧾 What This Means</h2>
