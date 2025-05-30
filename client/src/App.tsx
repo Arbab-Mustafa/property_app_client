@@ -16,6 +16,7 @@ import Terms from "@/pages/Terms";
 import CaseStudies from "@/pages/CaseStudies";
 import CaseStudy1 from "@/pages/CaseStudy1";
 import CaseStudy2 from "@/pages/CaseStudy2";
+import FindYouADeal from "@/pages/FindYouADeal";
 
 function Router() {
   return (
@@ -30,6 +31,7 @@ function Router() {
       <Route path="/case-studies" component={CaseStudies} />
       <Route path="/case-studies/property-1" component={CaseStudy1} />
       <Route path="/case-studies/property-2" component={CaseStudy2} />
+      <Route path="/find-you-a-deal" component={FindYouADeal} />
       <Route path="/terms" component={Terms} />
       <Route component={NotFound} />
     </Switch>
