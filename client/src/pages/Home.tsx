@@ -4,6 +4,8 @@ import Stats from "@/components/HomePage/Stats";
 import StatsCard from "@/components/HomePage/StatsCard";
 import WhyInvest from "@/components/HomePage/WhyInvest";
 import InstagramFeed from "@/components/HomePage/InstagramFeed";
+import Testimonials from "@/components/HomePage/Testimonials";
+import CredentialsStats from "@/components/HomePage/CredentialsStats";
 
 const Home = () => {
   return (
@@ -17,9 +19,10 @@ const Home = () => {
       </Helmet>
       
       <Hero />
-      <Stats />
       <WhyInvest />
       <StatsCard />
+      <Testimonials />
+      <CredentialsStats />
       <InstagramFeed />
     </>
   );
