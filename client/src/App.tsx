@@ -11,6 +11,7 @@ import Invest from "@/pages/Invest";
 import Updates from "@/pages/Updates";
 import Contact from "@/pages/Contact";
 import InflationCalculator from "@/pages/InflationCalculator";
+import InflationLanding from "@/pages/InflationLanding";
 import BookCall from "@/pages/BookCall";
 import Terms from "@/pages/Terms";
 import CaseStudies from "@/pages/CaseStudies";
@@ -29,6 +30,7 @@ function Router() {
       <Route path="/updates" component={Updates} />
       <Route path="/contact" component={Contact} />
       <Route path="/inflation-calculator" component={InflationCalculator} />
+      <Route path="/landing" component={InflationLanding} />
       <Route path="/book-call" component={BookCall} />
       <Route path="/case-studies" component={CaseStudies} />
       <Route path="/case-studies/property-1" component={CaseStudy1} />
