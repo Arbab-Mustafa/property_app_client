@@ -236,58 +236,57 @@ export default function InflationLanding() {
         <meta property="og:type" content="website" />
       </Helmet>
 
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 py-8 px-4">
+      <div className="min-h-screen bg-white py-12 px-4">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12">
             <div className="mb-8">
-              <div className="w-20 h-20 md:w-24 md:h-24 mx-auto bg-red-600 rounded-full flex items-center justify-center">
-                <span className="text-3xl md:text-4xl text-white font-bold">£</span>
-                <span className="text-2xl md:text-3xl text-white ml-1">↓</span>
+              <div className="w-16 h-16 mx-auto bg-blue-100 rounded-full flex items-center justify-center">
+                <svg className="w-8 h-8 text-blue-600" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+                </svg>
               </div>
             </div>
             
-            <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
-              Is Your Money <span className="text-red-600">Shrinking</span> While You Sleep?
+            <h1 className="text-4xl font-semibold text-center text-slate-800 mt-10 mb-4">
+              Is Your Money Shrinking While You Sleep?
             </h1>
-            <p className="text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-              Find out how much inflation is secretly eroding your savings — and how smart investors are 
-              <span className="text-emerald-600 font-semibold"> flipping the script</span>.
+            <p className="text-lg text-center text-gray-600 mb-6 max-w-2xl mx-auto">
+              Find out how much inflation is secretly eroding your savings and learn how to protect your wealth.
             </p>
           </div>
 
           <div className="mb-12">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto">
-              <div className="text-center p-4 bg-white rounded-lg shadow-sm border">
-                <div className="text-sm font-semibold text-emerald-600">FCA Compliant</div>
-                <div className="text-xs text-gray-500">Regulated</div>
+              <div className="text-center p-4 bg-blue-50 rounded-lg border border-blue-100">
+                <div className="text-sm font-medium text-blue-700">FCA Compliant</div>
+                <div className="text-xs text-blue-600">Regulated</div>
               </div>
-              <div className="text-center p-4 bg-white rounded-lg shadow-sm border">
-                <div className="text-sm font-semibold text-emerald-600">Since 2017</div>
-                <div className="text-xs text-gray-500">8+ Years</div>
+              <div className="text-center p-4 bg-blue-50 rounded-lg border border-blue-100">
+                <div className="text-sm font-medium text-blue-700">Since 2017</div>
+                <div className="text-xs text-blue-600">8+ Years</div>
               </div>
-              <div className="text-center p-4 bg-white rounded-lg shadow-sm border">
-                <div className="text-sm font-semibold text-emerald-600">£1.2M+ Raised</div>
-                <div className="text-xs text-gray-500">Capital</div>
+              <div className="text-center p-4 bg-blue-50 rounded-lg border border-blue-100">
+                <div className="text-sm font-medium text-blue-700">£1.2M+ Raised</div>
+                <div className="text-xs text-blue-600">Capital</div>
               </div>
-              <div className="text-center p-4 bg-white rounded-lg shadow-sm border">
-                <div className="text-sm font-semibold text-emerald-600">100+ Deals</div>
-                <div className="text-xs text-gray-500">Completed</div>
+              <div className="text-center p-4 bg-blue-50 rounded-lg border border-blue-100">
+                <div className="text-sm font-medium text-blue-700">100+ Deals</div>
+                <div className="text-xs text-blue-600">Completed</div>
               </div>
             </div>
           </div>
 
           {!showResults ? (
             <div>
-              <Card className="mb-8 shadow-xl border-0">
-                <CardHeader className="text-center bg-emerald-600 text-white rounded-t-lg">
-                  <CardTitle className="text-2xl md:text-3xl">Inflation Impact Calculator</CardTitle>
-                  <CardDescription className="text-emerald-100 text-lg">
-                    See exactly how much purchasing power you've lost
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className="p-8">
-                  <Form {...form}>
-                    <form onSubmit={form.handleSubmit(calculateInflation)} className="space-y-6">
+              <div className="bg-blue-50 p-6 rounded-lg shadow-md mb-8 max-w-3xl mx-auto">
+                <div className="text-center mb-6">
+                  <h2 className="text-2xl font-medium text-slate-800 mb-2">Inflation Impact Calculator</h2>
+                  <p className="text-gray-600">
+                    See exactly how much purchasing power you've lost over time
+                  </p>
+                </div>
+                <Form {...form}>
+                  <form onSubmit={form.handleSubmit(calculateInflation)} className="space-y-6">
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <FormField
                           control={form.control}
@@ -402,14 +401,14 @@ export default function InflationLanding() {
                       <Button 
                         type="submit" 
                         disabled={isSubmitting}
-                        className="w-full h-14 text-xl font-bold bg-red-600 hover:bg-red-700 text-white shadow-lg"
+                        className="bg-blue-600 text-white font-medium px-6 py-3 rounded hover:bg-blue-700 w-full"
                       >
-                        {isSubmitting ? "Calculating..." : "🔍 Reveal My Losses"}
+                        {isSubmitting ? "Calculating..." : "Calculate Impact"}
                       </Button>
                     </form>
                   </Form>
 
-                  <div className="text-center mt-6 pt-4 border-t border-gray-200">
+                  <div className="text-center mt-6 pt-4 border-t border-blue-200">
                     <p className="text-sm text-gray-600">
                       📈 <strong>Current UK Inflation Rate:</strong> 3.2% (April 2025)<br />
                       <a 
@@ -422,107 +421,109 @@ export default function InflationLanding() {
                       </a>
                     </p>
                   </div>
-                </CardContent>
-              </Card>
+                </div>
 
-              <div className="mb-8 text-center">
-                <blockquote className="bg-white p-6 rounded-lg shadow-sm border-l-4 border-emerald-600 max-w-2xl mx-auto">
-                  <p className="text-lg italic text-gray-700 mb-3">
-                    I had no idea I was losing that much — now I'm earning 10% instead.
+                <div className="max-w-2xl mx-auto mt-8 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                  <p className="text-blue-800 italic text-center">
+                    <strong>Did you know?</strong> £10,000 in 2010 would need to be worth over £17,000 today just to keep its value.
                   </p>
-                  <cite className="text-sm font-semibold text-emerald-600">
-                    – James, Private Investor
-                  </cite>
-                </blockquote>
-              </div>
+                </div>
 
-              <div className="mb-8 text-center">
-                <blockquote className="bg-gray-100 p-6 rounded-lg shadow-sm max-w-2xl mx-auto">
-                  <p className="text-lg italic text-gray-700 mb-3">
-                    Inflation is taxation without legislation.
-                  </p>
-                  <cite className="text-sm font-semibold text-gray-600">
-                    – Milton Friedman
-                  </cite>
-                </blockquote>
+                <div className="mb-8 text-center mt-8">
+                  <blockquote className="bg-white p-6 rounded-lg shadow-sm border-l-4 border-blue-300 max-w-2xl mx-auto">
+                    <p className="text-lg italic text-gray-700 mb-3">
+                      I had no idea I was losing that much — now I'm earning 10% instead.
+                    </p>
+                    <cite className="text-sm font-semibold text-blue-600">
+                      – James, Private Investor
+                    </cite>
+                  </blockquote>
+                </div>
               </div>
-            </div>
           ) : (
             <div className="space-y-8">
-              <Card className="shadow-xl border-0">
-                <CardHeader className="bg-red-600 text-white rounded-t-lg text-center">
-                  <CardTitle className="text-2xl md:text-3xl">Your Inflation Impact Report</CardTitle>
-                </CardHeader>
-                <CardContent className="p-8">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-                    <div className="text-center">
-                      <h3 className="text-lg font-medium text-gray-600 mb-2">Original Amount ({result?.startYear})</h3>
-                      <p className="text-3xl font-bold text-emerald-600">
-                        £{result?.originalValue.toLocaleString()}
-                      </p>
-                    </div>
-                    <div className="text-center">
-                      <h3 className="text-lg font-medium text-gray-600 mb-2">Needed Today ({result?.endYear})</h3>
-                      <p className="text-3xl font-bold text-red-600">
-                        £{result?.todayValue.toLocaleString()}
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="text-center mb-8">
-                    <h3 className="text-lg font-medium text-gray-600 mb-2">Real Value Lost to Inflation</h3>
-                    <p className="text-4xl font-bold text-red-600">
-                      -£{result?.lossInValue.toLocaleString()}
-                    </p>
-                    <p className="text-xl text-gray-600 mt-2">
-                      ({result?.percentageIncrease}% increase in cost of living)
+              <div className="bg-white p-8 rounded-lg shadow-md max-w-3xl mx-auto border border-blue-100">
+                <div className="text-center mb-6">
+                  <h2 className="text-2xl font-medium text-slate-800 mb-4">Your Inflation Impact Report</h2>
+                </div>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                  <div className="text-center">
+                    <h3 className="text-lg font-medium text-gray-600 mb-2">Original Amount ({result?.startYear})</h3>
+                    <p className="text-3xl font-bold text-blue-600">
+                      £{result?.originalValue.toLocaleString()}
                     </p>
                   </div>
+                  <div className="text-center">
+                    <h3 className="text-lg font-medium text-gray-600 mb-2">Needed Today ({result?.endYear})</h3>
+                    <p className="text-3xl font-bold text-red-600">
+                      £{result?.todayValue.toLocaleString()}
+                    </p>
+                  </div>
+                </div>
 
-                  {chartData && (
-                    <div className="mb-8">
-                      <Bar ref={chartRef} data={chartData} options={chartOptions} />
-                    </div>
-                  )}
-                </CardContent>
-              </Card>
+                <div className="text-center mb-8">
+                  <h3 className="text-lg font-medium text-gray-600 mb-2">Real Value Lost to Inflation</h3>
+                  <p className="text-4xl font-bold text-red-600">
+                    -£{result?.lossInValue.toLocaleString()}
+                  </p>
+                  <p className="text-xl text-gray-600 mt-2">
+                    ({result?.percentageIncrease}% increase in cost of living)
+                  </p>
+                </div>
 
-              <Card className="shadow-xl border-0 bg-gradient-to-r from-emerald-600 to-emerald-700 text-white">
-                <CardContent className="p-8 text-center">
-                  <h2 className="text-3xl md:text-4xl font-bold mb-6">
-                    Your Money Doesn't Have to Shrink
+                {chartData && (
+                  <div className="mb-8">
+                    <Bar ref={chartRef} data={chartData} options={chartOptions} />
+                  </div>
+                )}
+              </div>
+
+              <div className="bg-green-50 p-8 rounded-lg shadow-md max-w-3xl mx-auto border border-green-200">
+                <div className="text-center">
+                  <h2 className="text-2xl font-medium text-slate-800 mb-4">
+                    Want to stop losing value to inflation?
                   </h2>
-                  <p className="text-xl md:text-2xl mb-8 leading-relaxed">
-                    Learn how our investors are earning <strong>8–12% annually</strong>, 
-                    backed by real UK property assets that grow with inflation.
+                  <p className="text-lg text-gray-700 mb-6">
+                    Learn how our investors are earning 8-12% annually, backed by real UK property assets that grow with inflation.
                   </p>
                   <Button 
-                    size="lg"
-                    className="h-16 px-8 text-xl font-bold bg-white text-emerald-600 hover:bg-gray-100 shadow-lg"
+                    className="bg-blue-600 text-white font-medium px-6 py-3 rounded hover:bg-blue-700"
                     onClick={() => window.open('/contact', '_blank')}
                   >
-                    📞 Book a Free 15-Min Strategy Call
+                    Book your free 15-min consultation
                   </Button>
-                  <p className="text-emerald-100 mt-4 text-lg">
-                    No obligation • Personalized advice • Proven strategies
+                  <p className="text-gray-600 mt-4 text-sm">
+                    No obligation - Personalized advice - Proven strategies
                   </p>
-                </CardContent>
-              </Card>
+                </div>
+              </div>
 
               <div className="text-center mt-8">
-                <div className="bg-gray-50 p-6 rounded-lg shadow-sm max-w-2xl mx-auto">
-                  <h3 className="text-lg font-semibold text-gray-800 mb-4">Mini FAQ</h3>
+                <div className="bg-blue-50 p-6 rounded-lg border border-blue-200 max-w-2xl mx-auto">
+                  <h3 className="text-lg font-medium text-slate-800 mb-4">Common Questions</h3>
                   <div className="text-left space-y-3">
                     <div>
-                      <strong className="text-emerald-600">Q: How accurate are these calculations?</strong>
-                      <p className="text-gray-600">Based on official UK RPI data from the Office for National Statistics.</p>
+                      <strong className="text-blue-700">How accurate are these calculations?</strong>
+                      <p className="text-gray-600 text-sm">Based on official UK RPI data from the Office for National Statistics.</p>
                     </div>
                     <div>
-                      <strong className="text-emerald-600">Q: What happens after I book a call?</strong>
-                      <p className="text-gray-600">Free 15-minute consultation to discuss your investment goals and options.</p>
+                      <strong className="text-blue-700">What happens after I book a call?</strong>
+                      <p className="text-gray-600 text-sm">Free 15-minute consultation to discuss your investment goals and options.</p>
                     </div>
                   </div>
                 </div>
+              </div>
+
+              <div className="mb-8 text-center mt-8">
+                <blockquote className="bg-white p-6 rounded-lg shadow-sm border-l-4 border-green-300 max-w-2xl mx-auto">
+                  <p className="text-lg italic text-gray-700 mb-3">
+                    I had no idea I was losing that much — now I'm earning 10% instead.
+                  </p>
+                  <cite className="text-sm font-medium text-green-600">
+                    – James, Private Investor
+                  </cite>
+                </blockquote>
               </div>
             </div>
           )}
