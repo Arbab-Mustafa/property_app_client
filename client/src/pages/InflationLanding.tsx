@@ -236,52 +236,52 @@ export default function InflationLanding() {
         <meta property="og:type" content="website" />
       </Helmet>
 
-      <div className="min-h-screen bg-white py-12 px-4">
+      <div className="min-h-screen bg-gray-50 py-12 px-4" style={{ backgroundColor: '#F9FAFB' }}>
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12">
             <div className="mb-8">
-              <div className="w-16 h-16 mx-auto bg-blue-100 rounded-full flex items-center justify-center">
-                <svg className="w-8 h-8 text-blue-600" fill="currentColor" viewBox="0 0 24 24">
+              <div className="w-16 h-16 mx-auto rounded-full flex items-center justify-center" style={{ backgroundColor: '#C58B25' }}>
+                <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
                 </svg>
               </div>
             </div>
             
-            <h1 className="text-4xl font-semibold text-center text-slate-800 mt-10 mb-4">
+            <h1 className="text-4xl font-bold text-center mt-10 mb-4" style={{ color: '#1A355E' }}>
               Is Your Money Shrinking While You Sleep?
             </h1>
-            <p className="text-lg text-center text-gray-600 mb-6 max-w-2xl mx-auto">
+            <p className="text-lg text-center mb-6 max-w-2xl mx-auto" style={{ color: '#6B7280' }}>
               Find out how much inflation is secretly eroding your savings and learn how to protect your wealth.
             </p>
           </div>
 
           <div className="mb-12">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto">
-              <div className="text-center p-4 bg-blue-50 rounded-lg border border-blue-100">
-                <div className="text-sm font-medium text-blue-700">FCA Compliant</div>
-                <div className="text-xs text-blue-600">Regulated</div>
+              <div className="text-center p-4 bg-white rounded-lg border-2 border-gray-200 shadow-sm">
+                <div className="text-sm font-semibold" style={{ color: '#1A355E' }}>FCA Compliant</div>
+                <div className="text-xs" style={{ color: '#6B7280' }}>Regulated</div>
               </div>
-              <div className="text-center p-4 bg-blue-50 rounded-lg border border-blue-100">
-                <div className="text-sm font-medium text-blue-700">Since 2017</div>
-                <div className="text-xs text-blue-600">8+ Years</div>
+              <div className="text-center p-4 bg-white rounded-lg border-2 border-gray-200 shadow-sm">
+                <div className="text-sm font-semibold" style={{ color: '#1A355E' }}>Since 2017</div>
+                <div className="text-xs" style={{ color: '#6B7280' }}>8+ Years</div>
               </div>
-              <div className="text-center p-4 bg-blue-50 rounded-lg border border-blue-100">
-                <div className="text-sm font-medium text-blue-700">£1.2M+ Raised</div>
-                <div className="text-xs text-blue-600">Capital</div>
+              <div className="text-center p-4 bg-white rounded-lg border-2 border-gray-200 shadow-sm">
+                <div className="text-sm font-semibold" style={{ color: '#1A355E' }}>£1.2M+ Raised</div>
+                <div className="text-xs" style={{ color: '#6B7280' }}>Capital</div>
               </div>
-              <div className="text-center p-4 bg-blue-50 rounded-lg border border-blue-100">
-                <div className="text-sm font-medium text-blue-700">100+ Deals</div>
-                <div className="text-xs text-blue-600">Completed</div>
+              <div className="text-center p-4 bg-white rounded-lg border-2 border-gray-200 shadow-sm">
+                <div className="text-sm font-semibold" style={{ color: '#1A355E' }}>100+ Deals</div>
+                <div className="text-xs" style={{ color: '#6B7280' }}>Completed</div>
               </div>
             </div>
           </div>
 
           {!showResults ? (
             <div>
-              <div className="bg-blue-50 p-6 rounded-lg shadow-md mb-8 max-w-3xl mx-auto">
+              <div className="bg-white p-6 rounded-lg shadow-md mb-8 max-w-3xl mx-auto border border-gray-200">
                 <div className="text-center mb-6">
-                  <h2 className="text-2xl font-medium text-slate-800 mb-2">Inflation Impact Calculator</h2>
-                  <p className="text-gray-600">
+                  <h2 className="text-2xl font-bold mb-2" style={{ color: '#1A355E' }}>Inflation Impact Calculator</h2>
+                  <p style={{ color: '#6B7280' }}>
                     See exactly how much purchasing power you've lost over time
                   </p>
                 </div>
@@ -401,21 +401,25 @@ export default function InflationLanding() {
                       <Button 
                         type="submit" 
                         disabled={isSubmitting}
-                        className="bg-blue-600 text-white font-medium px-6 py-3 rounded hover:bg-blue-700 w-full"
+                        className="text-white font-medium px-6 py-3 rounded w-full transition-colors"
+                        style={{ backgroundColor: '#F97316' }}
+                        onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#EA580C'}
+                        onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#F97316'}
                       >
-                        {isSubmitting ? "Calculating..." : "Calculate Impact"}
+                        {isSubmitting ? "Calculating..." : "Reveal My Losses"}
                       </Button>
                     </form>
                   </Form>
 
-                  <div className="text-center mt-6 pt-4 border-t border-blue-200">
-                    <p className="text-sm text-gray-600">
+                  <div className="text-center mt-6 pt-4" style={{ borderTop: '1px solid #C58B25' }}>
+                    <p className="text-sm" style={{ color: '#6B7280' }}>
                       📈 <strong>Current UK Inflation Rate:</strong> 3.2% (April 2025)<br />
                       <a 
                         href="https://www.ons.gov.uk/economy/inflationandpriceindices" 
                         target="_blank" 
                         rel="noopener noreferrer"
-                        className="text-blue-600 hover:text-blue-800 underline"
+                        className="underline hover:no-underline"
+                        style={{ color: '#F97316' }}
                       >
                         Source: Office for National Statistics (ONS)
                       </a>
@@ -423,18 +427,18 @@ export default function InflationLanding() {
                   </div>
                 </div>
 
-                <div className="max-w-2xl mx-auto mt-8 p-4 bg-blue-50 border border-blue-200 rounded-lg">
-                  <p className="text-blue-800 italic text-center">
+                <div className="max-w-2xl mx-auto mt-8 p-4 bg-white border rounded-lg" style={{ borderColor: '#C58B25' }}>
+                  <p className="italic text-center" style={{ color: '#1A355E' }}>
                     <strong>Did you know?</strong> £10,000 in 2010 would need to be worth over £17,000 today just to keep its value.
                   </p>
                 </div>
 
                 <div className="mb-8 text-center mt-8">
-                  <blockquote className="bg-white p-6 rounded-lg shadow-sm border-l-4 border-blue-300 max-w-2xl mx-auto">
-                    <p className="text-lg italic text-gray-700 mb-3">
+                  <blockquote className="bg-white p-6 rounded-lg shadow-sm border-l-4 max-w-2xl mx-auto" style={{ borderLeftColor: '#C58B25' }}>
+                    <p className="text-lg italic mb-3" style={{ color: '#6B7280' }}>
                       I had no idea I was losing that much — now I'm earning 10% instead.
                     </p>
-                    <cite className="text-sm font-semibold text-blue-600">
+                    <cite className="text-sm font-semibold" style={{ color: '#1A355E' }}>
                       – James, Private Investor
                     </cite>
                   </blockquote>
@@ -442,20 +446,20 @@ export default function InflationLanding() {
               </div>
           ) : (
             <div className="space-y-8">
-              <div className="bg-white p-8 rounded-lg shadow-md max-w-3xl mx-auto border border-blue-100">
+              <div className="bg-white p-8 rounded-lg shadow-md max-w-3xl mx-auto border border-gray-200">
                 <div className="text-center mb-6">
-                  <h2 className="text-2xl font-medium text-slate-800 mb-4">Your Inflation Impact Report</h2>
+                  <h2 className="text-2xl font-bold mb-4" style={{ color: '#1A355E' }}>Your Inflation Impact Report</h2>
                 </div>
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
                   <div className="text-center">
-                    <h3 className="text-lg font-medium text-gray-600 mb-2">Original Amount ({result?.startYear})</h3>
-                    <p className="text-3xl font-bold text-blue-600">
+                    <h3 className="text-lg font-medium mb-2" style={{ color: '#6B7280' }}>Original Amount ({result?.startYear})</h3>
+                    <p className="text-3xl font-bold" style={{ color: '#1A355E' }}>
                       £{result?.originalValue.toLocaleString()}
                     </p>
                   </div>
                   <div className="text-center">
-                    <h3 className="text-lg font-medium text-gray-600 mb-2">Needed Today ({result?.endYear})</h3>
+                    <h3 className="text-lg font-medium mb-2" style={{ color: '#6B7280' }}>Needed Today ({result?.endYear})</h3>
                     <p className="text-3xl font-bold text-red-600">
                       £{result?.todayValue.toLocaleString()}
                     </p>
@@ -463,11 +467,11 @@ export default function InflationLanding() {
                 </div>
 
                 <div className="text-center mb-8">
-                  <h3 className="text-lg font-medium text-gray-600 mb-2">Real Value Lost to Inflation</h3>
+                  <h3 className="text-lg font-medium mb-2" style={{ color: '#6B7280' }}>Real Value Lost to Inflation</h3>
                   <p className="text-4xl font-bold text-red-600">
                     -£{result?.lossInValue.toLocaleString()}
                   </p>
-                  <p className="text-xl text-gray-600 mt-2">
+                  <p className="text-xl mt-2" style={{ color: '#6B7280' }}>
                     ({result?.percentageIncrease}% increase in cost of living)
                   </p>
                 </div>
@@ -479,48 +483,51 @@ export default function InflationLanding() {
                 )}
               </div>
 
-              <div className="bg-green-50 p-8 rounded-lg shadow-md max-w-3xl mx-auto border border-green-200">
+              <div className="bg-white p-8 rounded-lg shadow-md max-w-3xl mx-auto border-2" style={{ borderColor: '#C58B25' }}>
                 <div className="text-center">
-                  <h2 className="text-2xl font-medium text-slate-800 mb-4">
+                  <h2 className="text-2xl font-bold mb-4" style={{ color: '#1A355E' }}>
                     Want to stop losing value to inflation?
                   </h2>
-                  <p className="text-lg text-gray-700 mb-6">
+                  <p className="text-lg mb-6" style={{ color: '#6B7280' }}>
                     Learn how our investors are earning 8-12% annually, backed by real UK property assets that grow with inflation.
                   </p>
                   <Button 
-                    className="bg-blue-600 text-white font-medium px-6 py-3 rounded hover:bg-blue-700"
+                    className="text-white font-medium px-6 py-3 rounded transition-colors"
+                    style={{ backgroundColor: '#F97316' }}
+                    onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#EA580C'}
+                    onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#F97316'}
                     onClick={() => window.open('/contact', '_blank')}
                   >
                     Book your free 15-min consultation
                   </Button>
-                  <p className="text-gray-600 mt-4 text-sm">
+                  <p className="mt-4 text-sm" style={{ color: '#6B7280' }}>
                     No obligation - Personalized advice - Proven strategies
                   </p>
                 </div>
               </div>
 
               <div className="text-center mt-8">
-                <div className="bg-blue-50 p-6 rounded-lg border border-blue-200 max-w-2xl mx-auto">
-                  <h3 className="text-lg font-medium text-slate-800 mb-4">Common Questions</h3>
+                <div className="bg-white p-6 rounded-lg border border-gray-200 max-w-2xl mx-auto">
+                  <h3 className="text-lg font-bold mb-4" style={{ color: '#1A355E' }}>Common Questions</h3>
                   <div className="text-left space-y-3">
                     <div>
-                      <strong className="text-blue-700">How accurate are these calculations?</strong>
-                      <p className="text-gray-600 text-sm">Based on official UK RPI data from the Office for National Statistics.</p>
+                      <strong style={{ color: '#F97316' }}>How accurate are these calculations?</strong>
+                      <p className="text-sm" style={{ color: '#6B7280' }}>Based on official UK RPI data from the Office for National Statistics.</p>
                     </div>
                     <div>
-                      <strong className="text-blue-700">What happens after I book a call?</strong>
-                      <p className="text-gray-600 text-sm">Free 15-minute consultation to discuss your investment goals and options.</p>
+                      <strong style={{ color: '#F97316' }}>What happens after I book a call?</strong>
+                      <p className="text-sm" style={{ color: '#6B7280' }}>Free 15-minute consultation to discuss your investment goals and options.</p>
                     </div>
                   </div>
                 </div>
               </div>
 
               <div className="mb-8 text-center mt-8">
-                <blockquote className="bg-white p-6 rounded-lg shadow-sm border-l-4 border-green-300 max-w-2xl mx-auto">
-                  <p className="text-lg italic text-gray-700 mb-3">
+                <blockquote className="bg-white p-6 rounded-lg shadow-sm border-l-4 max-w-2xl mx-auto" style={{ borderLeftColor: '#C58B25' }}>
+                  <p className="text-lg italic mb-3" style={{ color: '#6B7280' }}>
                     I had no idea I was losing that much — now I'm earning 10% instead.
                   </p>
-                  <cite className="text-sm font-medium text-green-600">
+                  <cite className="text-sm font-semibold" style={{ color: '#1A355E' }}>
                     – James, Private Investor
                   </cite>
                 </blockquote>
@@ -528,8 +535,8 @@ export default function InflationLanding() {
             </div>
           )}
 
-          <div className="text-center mt-12 text-gray-600">
-            <p className="text-lg">
+          <div className="text-center mt-12">
+            <p className="text-lg" style={{ color: '#6B7280' }}>
               Trusted by 65+ investors • £1.2M+ capital raised • Since 2017
             </p>
           </div>
