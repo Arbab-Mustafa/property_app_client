@@ -182,36 +182,7 @@ router.post('/api/inflation', async (req, res) => {
       }
     });
 
-    // Send enhanced email report if email is provided
-    if (email) {
-      try {
-        // Send the email report asynchronously with detailed data
-        sendInflationReport({
-          name,
-          email,
-          amount: numericAmount,
-          month: numericMonth,
-          year: numericYear,
-          todayValue: inflationData.todayValue,
-          lossInValue: inflationData.lossInValue,
-          percentageIncrease: inflationData.percentageIncrease,
-          annualGrowthRate: inflationData.annualGrowthRate,
-          startYear: inflationData.startYear,
-          endYear: inflationData.endYear,
-          yearsDiff: inflationData.yearsDiff,
-          chartImage: chartImage
-        }).then(emailResult => {
-          if (emailResult.success) {
-            console.log(`Enhanced email report sent to ${email}`);
-          } else {
-            console.error(`Failed to send enhanced email report: ${emailResult.error}`);
-          }
-        });
-      } catch (emailError) {
-        console.error('Error sending enhanced email report:', emailError);
-        // Continue processing even if email sending fails
-      }
-    }
+    // Note: Email will be sent separately with chart from the frontend after chart generation
 
     // Return the detailed inflation results
     return res.json({

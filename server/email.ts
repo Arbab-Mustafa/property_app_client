@@ -212,9 +212,9 @@ export async function sendInflationReport(data: InflationReportData) {
       to: email,
       from: { 
         email: 'info@kr-properties.co.uk', 
-        name: 'Property Investments' 
+        name: 'KR Property Investments' 
       },
-      subject: 'Your Inflation Report – See How Much Value You\'ve Lost',
+      subject: 'How Hard Is Your Money Working for You? See Your Inflation Report',
       html: htmlContent,
     };
 
