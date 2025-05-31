@@ -1,0 +1,52 @@
+Please redesign and refine the Contact Us page for a UK-based property investment company. This page should speak directly to private investors, JV partners, and deal sourcers — not general inquiries.
+
+🎯 Tone: Clear, professional, and trust-building
+🎨 Styling: Match brand palette — off-white background (#F9FAFB), trust navy (#1A355E), soft gold accents (#C58B25)
+
+🔧 Replace existing text and structure with:
+
+1. 🟦 Hero Section:
+Headline:
+“Start the Conversation About Making Your Money Work Smarter”
+→ Bold, centered, navy blue (#1A355E), font size `text-3xl md:text-4xl`
+
+Subheadline:
+“Whether you’re looking to earn passive income through secured property lending, co-invest on a project, or just want access to high-performing deals — we’re here to help. Drop us a message and we’ll get back to you within 1 working day.”
+→ Style as `text-lg text-gray-600 max-w-2xl mx-auto text-center mb-6`
+
+2. 🧠 Trust Badge Section (below intro, optional small font with icons):
+- “🔒 All investments secured against UK property”
+- “£1.2M+ raised from private investors”
+- “100+ property transactions since 2017”
+
+3. 📝 Contact Form (Styled cleanly):
+Fields:
+- Name
+- Email
+- Phone (optional)
+- Investment Amount (dropdown: £25k–50k, £50k–100k, £100k–250k, £250k+)
+- **What are you interested in?** (dropdown):
+  • Lending for fixed returns  
+  • Joint venture opportunities  
+  • Sourcing deals  
+  • Just asking questions
+- Message box (label: “Tell us a little about your goals or questions…”)
+- Submit button styled as: `bg-[#F97316] text-white rounded px-6 py-3`
+
+4. 📬 Sidebar or Section:
+Add clear contact details:
+- Email: info@kr-properties.co.uk  
+- Phone: 020 3633 2783  
+- Office hours (optional): “We reply within 1 working day”
+
+5. 💬 Testimonial Box (below form):
+Quote:
+  “I had a few simple questions and got a clear, honest answer — now I’m earning 10% returns, completely passively.”
+— James, Investor since 2022
+
+6. 📱 Mobile Responsive:
+Stack form above contact info. Use padding and whitespace to improve readability.
+
+🛠️ Do not remove or break:
+- Any existing SendGrid functionality
+- Contact form submission logic
