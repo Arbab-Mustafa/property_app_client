@@ -56,7 +56,6 @@ export default function InflationLanding() {
     },
   });
 
-  // Generate chart image after results are set and send email with chart
   useEffect(() => {
     if (result && chartRef.current) {
       const timer = setTimeout(async () => {
@@ -239,8 +238,14 @@ export default function InflationLanding() {
 
       <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 py-8 px-4">
         <div className="max-w-4xl mx-auto">
-          {/* Header Section */}
           <div className="text-center mb-12">
+            <div className="mb-8">
+              <div className="w-20 h-20 md:w-24 md:h-24 mx-auto bg-red-600 rounded-full flex items-center justify-center">
+                <span className="text-3xl md:text-4xl text-white font-bold">£</span>
+                <span className="text-2xl md:text-3xl text-white ml-1">↓</span>
+              </div>
+            </div>
+            
             <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
               Is Your Money <span className="text-red-600">Shrinking</span> While You Sleep?
             </h1>
@@ -250,89 +255,88 @@ export default function InflationLanding() {
             </p>
           </div>
 
+          <div className="mb-12">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto">
+              <div className="text-center p-4 bg-white rounded-lg shadow-sm border">
+                <div className="text-sm font-semibold text-emerald-600">FCA Compliant</div>
+                <div className="text-xs text-gray-500">Regulated</div>
+              </div>
+              <div className="text-center p-4 bg-white rounded-lg shadow-sm border">
+                <div className="text-sm font-semibold text-emerald-600">Since 2017</div>
+                <div className="text-xs text-gray-500">8+ Years</div>
+              </div>
+              <div className="text-center p-4 bg-white rounded-lg shadow-sm border">
+                <div className="text-sm font-semibold text-emerald-600">£1.2M+ Raised</div>
+                <div className="text-xs text-gray-500">Capital</div>
+              </div>
+              <div className="text-center p-4 bg-white rounded-lg shadow-sm border">
+                <div className="text-sm font-semibold text-emerald-600">100+ Deals</div>
+                <div className="text-xs text-gray-500">Completed</div>
+              </div>
+            </div>
+          </div>
+
           {!showResults ? (
-            /* Calculator Form */
-            <Card className="mb-8 shadow-xl border-0">
-              <CardHeader className="text-center bg-emerald-600 text-white rounded-t-lg">
-                <CardTitle className="text-2xl md:text-3xl">Inflation Impact Calculator</CardTitle>
-                <CardDescription className="text-emerald-100 text-lg">
-                  See exactly how much purchasing power you've lost
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="p-8">
-                <Form {...form}>
-                  <form onSubmit={form.handleSubmit(calculateInflation)} className="space-y-6">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      <FormField
-                        control={form.control}
-                        name="name"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel className="text-lg font-medium">Your Name</FormLabel>
-                            <FormControl>
-                              <Input 
-                                placeholder="Enter your name" 
-                                className="h-12 text-lg"
-                                {...field} 
-                              />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
+            <div>
+              <Card className="mb-8 shadow-xl border-0">
+                <CardHeader className="text-center bg-emerald-600 text-white rounded-t-lg">
+                  <CardTitle className="text-2xl md:text-3xl">Inflation Impact Calculator</CardTitle>
+                  <CardDescription className="text-emerald-100 text-lg">
+                    See exactly how much purchasing power you've lost
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="p-8">
+                  <Form {...form}>
+                    <form onSubmit={form.handleSubmit(calculateInflation)} className="space-y-6">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <FormField
+                          control={form.control}
+                          name="name"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel className="text-lg font-medium">Your Name</FormLabel>
+                              <FormControl>
+                                <Input 
+                                  placeholder="Enter your name" 
+                                  className="h-12 text-lg"
+                                  {...field} 
+                                />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+
+                        <FormField
+                          control={form.control}
+                          name="email"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel className="text-lg font-medium">Email Address</FormLabel>
+                              <FormControl>
+                                <Input 
+                                  placeholder="Enter your email" 
+                                  type="email"
+                                  className="h-12 text-lg"
+                                  {...field} 
+                                />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                      </div>
 
                       <FormField
                         control={form.control}
-                        name="email"
+                        name="amount"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel className="text-lg font-medium">Email Address</FormLabel>
+                            <FormLabel className="text-lg font-medium">Investment Amount (£)</FormLabel>
                             <FormControl>
                               <Input 
-                                placeholder="Enter your email" 
-                                type="email"
-                                className="h-12 text-lg"
-                                {...field} 
-                              />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                    </div>
-
-                    <FormField
-                      control={form.control}
-                      name="amount"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel className="text-lg font-medium">Investment Amount (£)</FormLabel>
-                          <FormControl>
-                            <Input 
-                              placeholder="e.g., 50000" 
-                              type="number"
-                              className="h-12 text-lg"
-                              {...field} 
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      <FormField
-                        control={form.control}
-                        name="year"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel className="text-lg font-medium">Year You Had This Money</FormLabel>
-                            <FormControl>
-                              <Input 
-                                placeholder="e.g., 2015" 
+                                placeholder="e.g., 50000" 
                                 type="number"
-                                min="1987"
-                                max={new Date().getFullYear()}
                                 className="h-12 text-lg"
                                 {...field} 
                               />
@@ -342,50 +346,108 @@ export default function InflationLanding() {
                         )}
                       />
 
-                      <FormField
-                        control={form.control}
-                        name="month"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel className="text-lg font-medium">Month</FormLabel>
-                            <FormControl>
-                              <select 
-                                className="w-full h-12 text-lg border border-input bg-background px-3 py-2 rounded-md"
-                                {...field}
-                              >
-                                <option value="1">January</option>
-                                <option value="2">February</option>
-                                <option value="3">March</option>
-                                <option value="4">April</option>
-                                <option value="5">May</option>
-                                <option value="6">June</option>
-                                <option value="7">July</option>
-                                <option value="8">August</option>
-                                <option value="9">September</option>
-                                <option value="10">October</option>
-                                <option value="11">November</option>
-                                <option value="12">December</option>
-                              </select>
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                    </div>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <FormField
+                          control={form.control}
+                          name="year"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel className="text-lg font-medium">Year You Had This Money</FormLabel>
+                              <FormControl>
+                                <Input 
+                                  placeholder="e.g., 2015" 
+                                  type="number"
+                                  min="1987"
+                                  max={new Date().getFullYear()}
+                                  className="h-12 text-lg"
+                                  {...field} 
+                                />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
 
-                    <Button 
-                      type="submit" 
-                      disabled={isSubmitting}
-                      className="w-full h-14 text-xl font-bold bg-red-600 hover:bg-red-700 text-white shadow-lg"
-                    >
-                      {isSubmitting ? "Calculating..." : "🔍 Reveal My Losses"}
-                    </Button>
-                  </form>
-                </Form>
-              </CardContent>
-            </Card>
+                        <FormField
+                          control={form.control}
+                          name="month"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel className="text-lg font-medium">Month</FormLabel>
+                              <FormControl>
+                                <select 
+                                  className="w-full h-12 text-lg border border-input bg-background px-3 py-2 rounded-md"
+                                  {...field}
+                                >
+                                  <option value="1">January</option>
+                                  <option value="2">February</option>
+                                  <option value="3">March</option>
+                                  <option value="4">April</option>
+                                  <option value="5">May</option>
+                                  <option value="6">June</option>
+                                  <option value="7">July</option>
+                                  <option value="8">August</option>
+                                  <option value="9">September</option>
+                                  <option value="10">October</option>
+                                  <option value="11">November</option>
+                                  <option value="12">December</option>
+                                </select>
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                      </div>
+
+                      <Button 
+                        type="submit" 
+                        disabled={isSubmitting}
+                        className="w-full h-14 text-xl font-bold bg-red-600 hover:bg-red-700 text-white shadow-lg"
+                      >
+                        {isSubmitting ? "Calculating..." : "🔍 Reveal My Losses"}
+                      </Button>
+                    </form>
+                  </Form>
+
+                  <div className="text-center mt-6 pt-4 border-t border-gray-200">
+                    <p className="text-sm text-gray-600">
+                      📈 <strong>Current UK Inflation Rate:</strong> 3.2% (April 2025)<br />
+                      <a 
+                        href="https://www.ons.gov.uk/economy/inflationandpriceindices" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="text-blue-600 hover:text-blue-800 underline"
+                      >
+                        Source: Office for National Statistics (ONS)
+                      </a>
+                    </p>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <div className="mb-8 text-center">
+                <blockquote className="bg-white p-6 rounded-lg shadow-sm border-l-4 border-emerald-600 max-w-2xl mx-auto">
+                  <p className="text-lg italic text-gray-700 mb-3">
+                    I had no idea I was losing that much — now I'm earning 10% instead.
+                  </p>
+                  <cite className="text-sm font-semibold text-emerald-600">
+                    – James, Private Investor
+                  </cite>
+                </blockquote>
+              </div>
+
+              <div className="mb-8 text-center">
+                <blockquote className="bg-gray-100 p-6 rounded-lg shadow-sm max-w-2xl mx-auto">
+                  <p className="text-lg italic text-gray-700 mb-3">
+                    Inflation is taxation without legislation.
+                  </p>
+                  <cite className="text-sm font-semibold text-gray-600">
+                    – Milton Friedman
+                  </cite>
+                </blockquote>
+              </div>
+            </div>
           ) : (
-            /* Results Section */
             <div className="space-y-8">
               <Card className="shadow-xl border-0">
                 <CardHeader className="bg-red-600 text-white rounded-t-lg text-center">
@@ -425,7 +487,6 @@ export default function InflationLanding() {
                 </CardContent>
               </Card>
 
-              {/* Call to Action Section */}
               <Card className="shadow-xl border-0 bg-gradient-to-r from-emerald-600 to-emerald-700 text-white">
                 <CardContent className="p-8 text-center">
                   <h2 className="text-3xl md:text-4xl font-bold mb-6">
@@ -447,10 +508,25 @@ export default function InflationLanding() {
                   </p>
                 </CardContent>
               </Card>
+
+              <div className="text-center mt-8">
+                <div className="bg-gray-50 p-6 rounded-lg shadow-sm max-w-2xl mx-auto">
+                  <h3 className="text-lg font-semibold text-gray-800 mb-4">Mini FAQ</h3>
+                  <div className="text-left space-y-3">
+                    <div>
+                      <strong className="text-emerald-600">Q: How accurate are these calculations?</strong>
+                      <p className="text-gray-600">Based on official UK RPI data from the Office for National Statistics.</p>
+                    </div>
+                    <div>
+                      <strong className="text-emerald-600">Q: What happens after I book a call?</strong>
+                      <p className="text-gray-600">Free 15-minute consultation to discuss your investment goals and options.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           )}
 
-          {/* Trust Indicators */}
           <div className="text-center mt-12 text-gray-600">
             <p className="text-lg">
               Trusted by 65+ investors • £1.2M+ capital raised • Since 2017
