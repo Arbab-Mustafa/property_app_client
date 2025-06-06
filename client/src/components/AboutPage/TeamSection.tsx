@@ -23,14 +23,14 @@ const TeamSection = () => {
   ];
 
   return (
-    <section className="py-16 bg-white">
+    <section className="py-16" style={{ backgroundColor: '#F9FAFB' }}>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4" style={{ color: '#1A355E' }}>
             Meet the Founders
           </h2>
-          <div className="w-20 h-1 bg-primary mx-auto mb-6"></div>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <div className="w-20 h-1 mx-auto mb-6" style={{ backgroundColor: '#C58B25' }}></div>
+          <p className="text-xl max-w-3xl mx-auto text-base leading-relaxed" style={{ color: '#6B7280' }}>
             The experienced team behind KR Property Investments
           </p>
         </div>
@@ -46,28 +46,46 @@ const TeamSection = () => {
                     className="w-full h-full object-cover"
                   />
                 </div>
-                <h3 className="text-2xl font-semibold text-gray-900 mb-1">
+                <h3 className="text-2xl font-semibold mb-1" style={{ color: '#1A355E' }}>
                   {member.name}
                 </h3>
-                <p className="text-primary font-medium mb-4">
+                <p className="font-medium mb-4" style={{ color: '#F97316' }}>
                   {member.title}
                 </p>
               </div>
               
-              <p className="text-gray-600 mb-6 leading-relaxed">
+              <p className="mb-6 leading-relaxed text-base" style={{ color: '#6B7280' }}>
                 {member.bio}
               </p>
               
               <div className="flex justify-center space-x-4">
                 <a 
                   href={`mailto:${member.email}`}
-                  className="flex items-center justify-center w-10 h-10 bg-primary/10 text-primary rounded-full hover:bg-primary hover:text-white transition-colors duration-300"
+                  className="flex items-center justify-center w-10 h-10 rounded-full hover:text-white transition-colors duration-300"
+                  style={{ backgroundColor: 'rgba(249, 115, 22, 0.1)', color: '#F97316' }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor = '#F97316';
+                    e.currentTarget.style.color = 'white';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = 'rgba(249, 115, 22, 0.1)';
+                    e.currentTarget.style.color = '#F97316';
+                  }}
                 >
                   <Mail className="h-5 w-5" />
                 </a>
                 <a 
                   href={member.linkedin}
-                  className="flex items-center justify-center w-10 h-10 bg-primary/10 text-primary rounded-full hover:bg-primary hover:text-white transition-colors duration-300"
+                  className="flex items-center justify-center w-10 h-10 rounded-full hover:text-white transition-colors duration-300"
+                  style={{ backgroundColor: 'rgba(249, 115, 22, 0.1)', color: '#F97316' }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor = '#F97316';
+                    e.currentTarget.style.color = 'white';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = 'rgba(249, 115, 22, 0.1)';
+                    e.currentTarget.style.color = '#F97316';
+                  }}
                 >
                   <Linkedin className="h-5 w-5" />
                 </a>
