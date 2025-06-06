@@ -28,15 +28,15 @@ const InvestWithUs = () => {
       </Helmet>
 
       {/* Hero Section */}
-      <section className="py-20 pt-24" style={{ backgroundColor: '#F9FAFB' }}>
+      <section className="py-20 pt-24 text-white" style={{ background: 'linear-gradient(135deg, #1A355E 0%, #2B4A7D 100%)' }}>
         <div className="container mx-auto px-4 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold mb-6" style={{ color: '#1A355E' }}>Invest With Us</h1>
-          <p className="text-xl md:text-2xl max-w-3xl mx-auto mb-8 leading-relaxed" style={{ color: '#6B7280' }}>
+          <h1 className="text-4xl md:text-5xl font-bold mb-6">Invest With Us</h1>
+          <p className="text-xl md:text-2xl max-w-3xl mx-auto mb-8 leading-relaxed text-white/90">
             Earn strong returns through property investment without owning or managing a property. 
             Perfect for investors who want exposure to property without the operational complexities.
           </p>
           <div className="flex justify-center">
-            <PiggyBank className="h-20 w-20" style={{ color: '#F97316' }} />
+            <PiggyBank className="h-20 w-20 text-white/80" />
           </div>
         </div>
       </section>

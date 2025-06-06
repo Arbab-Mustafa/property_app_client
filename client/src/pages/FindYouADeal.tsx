@@ -32,15 +32,15 @@ const FindYouADeal = () => {
       </Helmet>
 
       {/* Hero Section */}
-      <section className="py-20 pt-24" style={{ backgroundColor: '#F9FAFB' }}>
+      <section className="py-20 pt-24 text-white" style={{ background: 'linear-gradient(135deg, #1A355E 0%, #2B4A7D 100%)' }}>
         <div className="container mx-auto px-4 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold mb-6" style={{ color: '#1A355E' }}>Find You a Deal</h1>
-          <p className="text-xl md:text-2xl max-w-3xl mx-auto mb-8 leading-relaxed" style={{ color: '#6B7280' }}>
+          <h1 className="text-4xl md:text-5xl font-bold mb-6">Find You a Deal</h1>
+          <p className="text-xl md:text-2xl max-w-3xl mx-auto mb-8 leading-relaxed text-white/90">
             Professional deal sourcing for investors who want great opportunities 
             without the time or expertise to find them themselves.
           </p>
           <div className="flex justify-center">
-            <Search className="h-20 w-20" style={{ color: '#F97316' }} />
+            <Search className="h-20 w-20 text-white/80" />
           </div>
         </div>
       </section>
