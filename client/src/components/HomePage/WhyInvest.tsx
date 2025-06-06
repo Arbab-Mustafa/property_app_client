@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Building, TrendingUp, Landmark, Scale, Building2, Plus, Minus } from "lucide-react";
+import stackedBlocksIcon from "@assets/stacked blocks.png";
 
 const WhyInvest = () => {
   const [openItems, setOpenItems] = useState<number[]>([]);
@@ -15,7 +16,8 @@ const WhyInvest = () => {
     {
       title: "A Market Backed by Fundamentals — Not Hype",
       description: "The UK property market isn't just resilient — it's driven by one of the most basic economic principles: supply and demand. The UK has faced a chronic housing shortage for years, with new builds struggling to keep pace with population growth.",
-      icon: Building,
+      icon: "custom",
+      customIcon: stackedBlocksIcon,
     },
     {
       title: "Predictable Income in Uncertain Times",
@@ -65,8 +67,16 @@ const WhyInvest = () => {
                 aria-expanded={openItems.includes(index)}
               >
                 <div className="flex items-center">
-                  <div className="p-2 rounded-lg mr-4 bg-[1A355E]" style={{ backgroundColor: '#F97316', opacity: 0.1 }}>
-                    <feature.icon className="h-5 w-5" style={{ color: '#F97316' }} />
+                  <div className="p-2 rounded-lg mr-4" style={{ backgroundColor: '#F97316', opacity: 0.1 }}>
+                    {feature.icon === "custom" ? (
+                      <img 
+                        src={feature.customIcon} 
+                        alt="Stacked blocks icon" 
+                        className="h-5 w-5 object-contain"
+                      />
+                    ) : (
+                      <feature.icon className="h-5 w-5" style={{ color: '#F97316' }} />
+                    )}
                   </div>
                   <h3 className="font-bold text-lg" style={{ color: '#1A355E' }}>
                     {feature.title}
