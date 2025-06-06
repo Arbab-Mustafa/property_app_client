@@ -56,31 +56,31 @@ const InvestWithUs = () => {
 
           <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
             <div className="text-center">
-              <div className="bg-primary/10 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-6">
-                <span className="text-3xl font-bold text-primary">1</span>
+              <div className="rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-6" style={{ backgroundColor: 'rgba(249, 115, 22, 0.1)' }}>
+                <span className="text-3xl font-bold" style={{ color: '#F97316' }}>1</span>
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-4">You Invest</h3>
-              <p className="text-gray-600">
+              <h3 className="text-xl font-bold mb-4" style={{ color: '#1A355E' }}>You Invest</h3>
+              <p style={{ color: '#6B7280' }}>
                 Choose your investment amount and review the specific property deal we've sourced and analyzed.
               </p>
             </div>
 
             <div className="text-center">
-              <div className="bg-primary/10 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-6">
-                <span className="text-3xl font-bold text-primary">2</span>
+              <div className="rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-6" style={{ backgroundColor: 'rgba(249, 115, 22, 0.1)' }}>
+                <span className="text-3xl font-bold" style={{ color: '#F97316' }}>2</span>
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-4">We Manage the Deal</h3>
-              <p className="text-gray-600">
+              <h3 className="text-xl font-bold mb-4" style={{ color: '#1A355E' }}>We Manage the Deal</h3>
+              <p style={{ color: '#6B7280' }}>
                 Our team handles everything from purchase to tenant management, renovations, and ongoing property operations.
               </p>
             </div>
 
             <div className="text-center">
-              <div className="bg-primary/10 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-6">
-                <span className="text-3xl font-bold text-primary">3</span>
+              <div className="rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-6" style={{ backgroundColor: 'rgba(249, 115, 22, 0.1)' }}>
+                <span className="text-3xl font-bold" style={{ color: '#F97316' }}>3</span>
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-4">You Receive Regular Returns</h3>
-              <p className="text-gray-600">
+              <h3 className="text-xl font-bold mb-4" style={{ color: '#1A355E' }}>You Receive Regular Returns</h3>
+              <p style={{ color: '#6B7280' }}>
                 Earn consistent monthly or quarterly returns based on rental income and property appreciation.
               </p>
             </div>
@@ -89,14 +89,14 @@ const InvestWithUs = () => {
       </section>
 
       {/* Why It Works Section */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-16" style={{ backgroundColor: '#F9FAFB' }}>
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4" style={{ color: '#1A355E' }}>
               Why It Works
             </h2>
-            <div className="w-20 h-1 bg-primary mx-auto mb-6"></div>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <div className="w-20 h-1 mx-auto mb-6" style={{ backgroundColor: '#C58B25' }}></div>
+            <p className="text-xl max-w-3xl mx-auto leading-relaxed" style={{ color: '#6B7280' }}>
               The benefits that make this investment approach so attractive to our clients.
             </p>
           </div>
@@ -104,36 +104,36 @@ const InvestWithUs = () => {
           <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
             <div className="bg-white rounded-lg p-8 shadow-md hover:shadow-lg transition-shadow duration-300 border border-gray-100">
               <div className="flex items-center justify-center mb-6">
-                <div className="bg-primary/10 p-4 rounded-lg">
-                  <Users className="h-8 w-8 text-primary" />
+                <div className="p-4 rounded-lg" style={{ backgroundColor: 'rgba(249, 115, 22, 0.1)' }}>
+                  <Users className="h-8 w-8" style={{ color: '#F97316' }} />
                 </div>
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-4 text-center">Hands-Off Investment</h3>
-              <p className="text-gray-600 text-center">
+              <h3 className="text-xl font-bold mb-4 text-center" style={{ color: '#1A355E' }}>Hands-Off Investment</h3>
+              <p className="text-center leading-relaxed" style={{ color: '#6B7280' }}>
                 No tenant calls, maintenance issues, or property management headaches. We handle all operational aspects while you enjoy the returns.
               </p>
             </div>
 
             <div className="bg-white rounded-lg p-8 shadow-md hover:shadow-lg transition-shadow duration-300 border border-gray-100">
               <div className="flex items-center justify-center mb-6">
-                <div className="bg-primary/10 p-4 rounded-lg">
-                  <Shield className="h-8 w-8 text-primary" />
+                <div className="p-4 rounded-lg" style={{ backgroundColor: 'rgba(249, 115, 22, 0.1)' }}>
+                  <Shield className="h-8 w-8" style={{ color: '#F97316' }} />
                 </div>
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-4 text-center">Capital Protected</h3>
-              <p className="text-gray-600 text-center">
+              <h3 className="text-xl font-bold mb-4 text-center" style={{ color: '#1A355E' }}>Capital Protected</h3>
+              <p className="text-center leading-relaxed" style={{ color: '#6B7280' }}>
                 Your investment is secured by the underlying property asset, with transparent legal structures protecting your capital.
               </p>
             </div>
 
             <div className="bg-white rounded-lg p-8 shadow-md hover:shadow-lg transition-shadow duration-300 border border-gray-100">
               <div className="flex items-center justify-center mb-6">
-                <div className="bg-primary/10 p-4 rounded-lg">
-                  <TrendingUp className="h-8 w-8 text-primary" />
+                <div className="p-4 rounded-lg" style={{ backgroundColor: 'rgba(249, 115, 22, 0.1)' }}>
+                  <TrendingUp className="h-8 w-8" style={{ color: '#F97316' }} />
                 </div>
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-4 text-center">Proven Track Record</h3>
-              <p className="text-gray-600 text-center">
+              <h3 className="text-xl font-bold mb-4 text-center" style={{ color: '#1A355E' }}>Proven Track Record</h3>
+              <p className="text-center leading-relaxed" style={{ color: '#6B7280' }}>
                 Historical returns of 8-15% annually across our portfolio, significantly outperforming traditional savings and ISAs.
               </p>
             </div>
@@ -142,33 +142,33 @@ const InvestWithUs = () => {
       </section>
 
       {/* Testimonials Section */}
-      <section className="py-16 bg-white">
+      <section className="py-16" style={{ backgroundColor: '#F9FAFB' }}>
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4" style={{ color: '#1A355E' }}>
               What Our Investors Say
             </h2>
-            <div className="w-20 h-1 bg-primary mx-auto mb-6"></div>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <div className="w-20 h-1 mx-auto mb-6" style={{ backgroundColor: '#C58B25' }}></div>
+            <p className="text-xl max-w-3xl mx-auto leading-relaxed" style={{ color: '#6B7280' }}>
               Real feedback from investors who chose our hands-off investment approach.
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             {testimonials.map((testimonial, index) => (
-              <div key={index} className="bg-gray-50 rounded-lg p-8 relative">
+              <div key={index} className="bg-white rounded-lg p-8 relative shadow-md">
                 <div className="absolute top-4 left-4">
-                  <Quote className="h-8 w-8 text-primary/20" />
+                  <Quote className="h-8 w-8" style={{ color: 'rgba(249, 115, 22, 0.2)' }} />
                 </div>
                 <div className="mt-6">
-                  <p className="text-gray-700 mb-6 italic leading-relaxed">
+                  <p className="mb-6 italic leading-relaxed" style={{ color: '#6B7280' }}>
                     "{testimonial.quote}"
                   </p>
                   <div className="border-t pt-4">
-                    <p className="font-semibold text-gray-900 mb-1">
+                    <p className="font-semibold mb-1" style={{ color: '#1A355E' }}>
                       – {testimonial.author}
                     </p>
-                    <p className="text-primary font-medium">
+                    <p className="font-medium" style={{ color: '#F97316' }}>
                       {testimonial.returns}
                     </p>
                   </div>
@@ -180,7 +180,7 @@ const InvestWithUs = () => {
       </section>
 
       {/* Start Earning Section */}
-      <section className="py-16 bg-primary text-white">
+      <section className="py-16 text-white" style={{ backgroundColor: '#F97316' }}>
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-6">
             Start Earning Today
@@ -208,7 +208,7 @@ const InvestWithUs = () => {
           </div>
 
           <Link href="/book-call">
-            <Button className="bg-white text-primary hover:bg-gray-100 px-8 py-4 rounded-lg text-lg font-semibold">
+            <Button className="bg-white px-8 py-4 rounded-md text-lg font-semibold hover:shadow-lg transition-all duration-300" style={{ color: '#F97316' }}>
               Book a Personal Consultation
             </Button>
           </Link>
