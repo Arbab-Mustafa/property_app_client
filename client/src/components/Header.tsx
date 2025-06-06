@@ -8,7 +8,8 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-// Logo temporarily removed due to missing asset
+import desktopLogo from "../assets/desktop-Property-Investments.png";
+import mobileLogo from "../assets/mobile-Property-Investments.png";
 
 const navLinks = [
   { name: "Home", path: "/" },
@@ -70,9 +71,18 @@ const Header = () => {
         <div className="flex justify-between items-center py-4">
           <div className="flex items-center">
             <Link href="/">
-              <div className="h-12 flex items-center cursor-pointer">
-                <h1 className="text-xl font-bold text-gray-800">KR Property Investments</h1>
-              </div>
+              {/* Desktop Logo */}
+              <img 
+                src={desktopLogo} 
+                alt="KR Property Investments" 
+                className="h-10 cursor-pointer hidden md:block" 
+              />
+              {/* Mobile Logo */}
+              <img 
+                src={mobileLogo} 
+                alt="KR Property Investments" 
+                className="h-10 cursor-pointer block md:hidden" 
+              />
             </Link>
           </div>
 
