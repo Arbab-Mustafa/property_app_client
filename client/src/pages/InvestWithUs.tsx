@@ -180,7 +180,7 @@ const InvestWithUs = () => {
       </section>
 
       {/* Start Earning Section */}
-      <section className="py-16 text-white" style={{ backgroundColor: '#F97316' }}>
+      <section className="py-16 text-white" style={{ backgroundColor: '#1A355E' }}>
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-6">
             Start Earning Today
@@ -208,7 +208,7 @@ const InvestWithUs = () => {
           </div>
 
           <Link href="/book-call">
-            <Button className="bg-white px-8 py-4 rounded-md text-lg font-semibold hover:shadow-lg transition-all duration-300" style={{ color: '#F97316' }}>
+            <Button className="bg-white px-8 py-4 rounded-md text-lg font-semibold hover:shadow-lg transition-all duration-300" style={{ color: '#1A355E' }}>
               Book a Personal Consultation
             </Button>
           </Link>
