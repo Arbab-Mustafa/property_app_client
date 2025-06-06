@@ -28,28 +28,28 @@ const InvestWithUs = () => {
       </Helmet>
 
       {/* Hero Section */}
-      <section className="bg-primary text-white py-20">
+      <section className="py-20 pt-24" style={{ backgroundColor: '#F9FAFB' }}>
         <div className="container mx-auto px-4 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold mb-6">Invest With Us</h1>
-          <p className="text-xl md:text-2xl max-w-3xl mx-auto mb-8">
+          <h1 className="text-4xl md:text-5xl font-bold mb-6" style={{ color: '#1A355E' }}>Invest With Us</h1>
+          <p className="text-xl md:text-2xl max-w-3xl mx-auto mb-8 leading-relaxed" style={{ color: '#6B7280' }}>
             Earn strong returns through property investment without owning or managing a property. 
             Perfect for investors who want exposure to property without the operational complexities.
           </p>
           <div className="flex justify-center">
-            <PiggyBank className="h-20 w-20 text-white/80" />
+            <PiggyBank className="h-20 w-20" style={{ color: '#F97316' }} />
           </div>
         </div>
       </section>
 
       {/* How It Works Section */}
-      <section className="py-16 bg-white">
+      <section className="py-16" style={{ backgroundColor: '#F9FAFB' }}>
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4" style={{ color: '#1A355E' }}>
               How It Works
             </h2>
-            <div className="w-20 h-1 bg-primary mx-auto mb-6"></div>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <div className="w-20 h-1 mx-auto mb-6" style={{ backgroundColor: '#C58B25' }}></div>
+            <p className="text-xl max-w-3xl mx-auto leading-relaxed" style={{ color: '#6B7280' }}>
               A simple three-step process that puts your money to work in property investments.
             </p>
           </div>
