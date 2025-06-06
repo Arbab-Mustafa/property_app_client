@@ -9,7 +9,7 @@ const StatsCard = () => {
           <div className="bg-white p-6 rounded-lg shadow-lg">
             <h3 className="text-xl font-semibold mb-3" style={{ color: '#1A355E' }}>Our Property Investment Benefits</h3>
             <div className="grid grid-cols-2 gap-4">
-              <div className="p-3 rounded-md bg-[C58B25]" style={{ backgroundColor: '#F97316', opacity: 0.1 }}>
+              <div className="p-3 rounded-md bg-[#C58B25]" style={{ backgroundColor: '#F97316', opacity: 0.1 }}>
                 <div className="font-bold text-2xl" style={{ color: '#F97316' }}>8-12%</div>
                 <div className="text-sm" style={{ color: '#6B7280' }}>Annual Returns</div>
               </div>
