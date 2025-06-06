@@ -25,7 +25,6 @@ const navLinks = [
   { name: "Case Studies", path: "/case-studies" },
   { name: "Updates", path: "/updates" },
   { name: "Inflation Calculator", path: "/inflation-calculator" },
-  { name: "Financial Quiz", path: "/financial-literacy" },
   { name: "Book A Call", path: "/book-call" },
   { name: "Contact Us", path: "/contact" },
 ];

@@ -230,15 +230,7 @@ const InflationCalculator = () => {
       <div className="min-h-screen pt-20 pb-12 px-4" style={{ backgroundColor: '#F9FAFB' }}>
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12">
-            <div className="mb-8 pt-8">
-              <div className="w-16 h-16 mx-auto rounded-full flex items-center justify-center" style={{ backgroundColor: '#C58B25' }}>
-                <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
-                </svg>
-              </div>
-            </div>
-            
-            <h1 className="text-4xl font-bold text-center mt-10 mb-4" style={{ color: '#1A355E' }}>
+            <h1 className="text-4xl font-bold text-center mb-4" style={{ color: '#1A355E' }}>
               Is Your Money Shrinking While You Sleep?
             </h1>
             <p className="text-lg text-center mb-6 max-w-2xl mx-auto" style={{ color: '#6B7280' }}>
@@ -246,38 +238,7 @@ const InflationCalculator = () => {
             </p>
           </div>
 
-          <div className="mb-12">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto">
-              <div className="text-center p-4 bg-white rounded-lg border-2 border-gray-200 shadow-sm">
-                <div className="text-sm font-semibold" style={{ color: '#1A355E' }}>FCA Compliant</div>
-                <div className="text-xs" style={{ color: '#6B7280' }}>Regulated</div>
-              </div>
-              <div className="text-center p-4 bg-white rounded-lg border-2 border-gray-200 shadow-sm">
-                <div className="text-sm font-semibold" style={{ color: '#1A355E' }}>Since 2017</div>
-                <div className="text-xs" style={{ color: '#6B7280' }}>8+ Years</div>
-              </div>
-              <div className="text-center p-4 bg-white rounded-lg border-2 border-gray-200 shadow-sm">
-                <div className="text-sm font-semibold" style={{ color: '#1A355E' }}>£1.2M+ Raised</div>
-                <div className="text-xs" style={{ color: '#6B7280' }}>Capital</div>
-              </div>
-              <div className="text-center p-4 bg-white rounded-lg border-2 border-gray-200 shadow-sm">
-                <div className="text-sm font-semibold" style={{ color: '#1A355E' }}>100+ Deals</div>
-                <div className="text-xs" style={{ color: '#6B7280' }}>Completed</div>
-              </div>
-            </div>
-          </div>
-
           <div className="py-10">
-            {/* Visual Icon */}
-            <div className="text-center mb-8">
-              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full shadow-lg" style={{ backgroundColor: '#F97316' }}>
-                <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M7 14l5-5 5 5z"/>
-                  <path d="M12 3v18M3 12h18" stroke="currentColor" strokeWidth="2" opacity="0.3"/>
-                </svg>
-              </div>
-              <p className="text-sm mt-2" style={{ color: '#C58B25' }}>Your money is shrinking</p>
-            </div>
 
             <div className="p-8 rounded-lg shadow-lg mb-8 max-w-3xl mx-auto border border-gray-200" style={{ backgroundColor: '#FAF9F6' }}>
               <div className="text-center mb-8">
