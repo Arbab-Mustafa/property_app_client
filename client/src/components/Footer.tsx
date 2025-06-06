@@ -5,7 +5,7 @@ import { useToast } from "@/hooks/use-toast";
 import { useState, useEffect } from "react";
 import { apiRequest } from "@/lib/queryClient";
 import { NotepadTextDashed, Phone, MapPin, Clock, Instagram, Facebook, Linkedin, Twitter, Mail } from "lucide-react";
-import logoPath from "@assets/Property Investments.png";
+// Logo temporarily removed due to missing asset
 
 const Footer = () => {
   const { toast } = useToast();
@@ -55,7 +55,9 @@ const Footer = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="lg:flex justify-between gap-10 mb-8">
           <div className="lg:w-1/4 mb-8 lg:mb-0">
-            <img src={logoPath} alt="Property Investments Logo" className="h-12 mb-4" />
+            <div className="h-12 mb-4 flex items-center">
+              <h3 className="text-xl font-bold text-white">KR Property Investments</h3>
+            </div>
             <p className="text-neutral-400 mb-4">
               Helping You Achieve Stronger Returns Through Strategic Property Investments — Since 2017
             </p>
