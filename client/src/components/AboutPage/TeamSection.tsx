@@ -10,15 +10,15 @@ const TeamSection = () => {
       bio: "Passionate about property investment with expertise in Brazilian Jiu-Jitsu. Brings discipline and strategic thinking to every investment decision.",
       image: teamImage,
       email: "aaron@kr-properties.co.uk",
-      linkedin: "#"
+      linkedin: "https://www.linkedin.com/in/aaronremy/"
     },
     {
       name: "Stevie",
       title: "Co-Founder", 
       bio: "CrossFit and weightlifting competitor who applies the same dedication to building successful property portfolios. Focuses on client relationships and deal structuring.",
       image: teamImage,
-      email: "stevie@kr-properties.co.uk",
-      linkedin: "#"
+      email: "stephanie@kr-properties.co.uk",
+      linkedin: "https://www.linkedin.com/in/stephanie-kuch-7526b654/"
     }
   ];
 
@@ -76,6 +76,8 @@ const TeamSection = () => {
                 </a>
                 <a 
                   href={member.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="flex items-center justify-center w-10 h-10 rounded-full hover:text-white transition-colors duration-300"
                   style={{ backgroundColor: 'rgba(249, 115, 22, 0.1)', color: '#F97316' }}
                   onMouseEnter={(e) => {
