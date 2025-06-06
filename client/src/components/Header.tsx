@@ -81,29 +81,29 @@ const Header = () => {
               link.isDropdown ? (
                 <DropdownMenu key={link.path}>
                   <DropdownMenuTrigger asChild>
-                    <a 
+                    <Link 
                       href={link.path} 
                       className="flex items-center font-medium transition hover:text-primary"
                     >
                       {link.name} <ChevronDown className="h-4 w-4 ml-1" />
-                    </a>
+                    </Link>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent>
                     {link.dropdownItems?.map((item) => (
                       <DropdownMenuItem key={item.path} asChild>
-                        <a href={item.path} className="w-full cursor-pointer">{item.name}</a>
+                        <Link href={item.path} className="w-full cursor-pointer">{item.name}</Link>
                       </DropdownMenuItem>
                     ))}
                   </DropdownMenuContent>
                 </DropdownMenu>
               ) : (
-                <a 
+                <Link 
                   key={link.path}
                   href={link.path}
                   className={`font-medium transition hover:text-primary ${location === link.path ? "text-primary" : "text-neutral-700"}`}
                 >
                   {link.name}
-                </a>
+                </Link>
               )
             ))}
           </nav>
