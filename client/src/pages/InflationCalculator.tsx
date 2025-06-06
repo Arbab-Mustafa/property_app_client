@@ -75,13 +75,22 @@ const InflationCalculator = () => {
   const isSubmittingRef = useRef(false);
   const chartRef = useRef<any>(null);
 
-  // Load Baserow API token from environment variables
   const token = import.meta.env.VITE_BASEROW_API_TOKEN;
 
-  // Direct function to submit data to Baserow using your suggested approach
+  const form = useForm<FormValues>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      name: "",
+      email: "",
+      amount: "",
+      year: "",
+      month: "",
+      source: "Website",
+    },
+  });
+
   const submitToBaserow = async (formData: FormValues, todayValue: number) => {
     try {
-      // Prepare the row data for Baserow
       const rowData = {
         Name: formData.name,
         Email: formData.email,
@@ -95,112 +104,43 @@ const InflationCalculator = () => {
       
       console.log("Submitting row to Baserow:", rowData);
       
-      // Submit to Baserow API
       const response = await fetch(
         "https://api.baserow.io/api/database/rows/table/540880/?user_field_names=true",
         {
           method: "POST",
           headers: {
-            Authorization: `Token ${token}`,
+            "Authorization": `Token ${token}`,
             "Content-Type": "application/json",
           },
           body: JSON.stringify(rowData),
         }
       );
-      
+
       console.log("Baserow response status:", response.status);
       
-      // Try to parse as JSON first
-      let data;
-      try {
-        data = await response.json();
-        console.log("Baserow response data:", data);
-      } catch(err) {
-        const text = await response.text();
-        console.log("Baserow response text:", text);
+      if (!response.ok) {
+        throw new Error(`Baserow API error: ${response.status}`);
       }
+
+      const responseData = await response.json();
+      console.log("Baserow response data:", responseData);
       
-      if (response.ok) {
-        alert("Submitted to Baserow ✅");
-      } else {
-        alert("Failed to submit to Baserow ❌");
-      }
+      return responseData;
     } catch (error) {
       console.error("Error submitting to Baserow:", error);
-      alert("Something went wrong with Baserow submission ❌");
+      throw error;
     }
   };
-  
-  const form = useForm<FormValues>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      name: "",
-      email: "",
-      amount: "",
-      year: new Date().getFullYear().toString(),
-      month: (new Date().getMonth() + 1).toString(),
-      source: "",
-    },
-  });
-
-  // Generate chart image after results are set and send email with chart
-  useEffect(() => {
-    if (result && chartRef.current) {
-      // Small delay to ensure chart is rendered
-      const timer = setTimeout(async () => {
-        if (chartRef.current && chartRef.current.canvas) {
-          const chartImageBase64 = chartRef.current.toBase64Image();
-          setChartImage(chartImageBase64);
-          console.log('Chart image generated:', chartImageBase64 ? 'Success' : 'Failed');
-          
-          // Send email with chart if we have user data
-          if (lastFormData && lastFormData.email && chartImageBase64) {
-            try {
-              const emailResponse = await fetch("/api/inflation-email", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                  name: lastFormData.name,
-                  email: lastFormData.email,
-                  amount: lastFormData.amount,
-                  year: lastFormData.year,
-                  month: lastFormData.month,
-                  chartImage: chartImageBase64,
-                  calculationData: result
-                }),
-              });
-              
-              if (emailResponse.ok) {
-                console.log('Chart email sent successfully');
-              } else {
-                console.error('Failed to send chart email');
-              }
-            } catch (emailError) {
-              console.error("Error sending chart email:", emailError);
-            }
-          }
-        }
-      }, 1500);
-      
-      return () => clearTimeout(timer);
-    }
-  }, [result, lastFormData]);
 
   const calculateInflation = async (data: FormValues) => {
-    // Prevent duplicate submissions
-    if (isSubmittingRef.current) {
-      return;
-    }
+    if (isSubmittingRef.current) return;
     
+    setIsSubmitting(true);
+    isSubmittingRef.current = true;
+
     try {
-      // Set submission state to prevent multiple submissions
-      setIsSubmitting(true);
-      isSubmittingRef.current = true;
-      
-      // Store form data for later chart email
       setLastFormData(data);
       
-      // First, calculate without chart for immediate response
       const response = await fetch("/api/inflation", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -222,33 +162,64 @@ const InflationCalculator = () => {
       console.log("API response:", responseData);
       
       if (responseData.success && responseData.data) {
-        // Update the UI with the enhanced calculation results
         setResult(responseData.data);
-        
-        // Submit the data to Baserow only once
         await submitToBaserow(data, responseData.data.todayValue);
       } else {
         console.error("API error:", responseData.error);
       }
     } catch (error) {
       console.error("Error calculating inflation:", error);
-      // You could add error state handling here
     } finally {
-      // Reset submission state
       setIsSubmitting(false);
       isSubmittingRef.current = false;
+    }
+  };
+
+  const chartData = result ? {
+    labels: [`${result.startYear}`, `${result.endYear}`],
+    datasets: [
+      {
+        label: 'Value',
+        data: [result.originalValue, result.todayValue],
+        backgroundColor: ['#1A355E', '#F97316'],
+        borderColor: ['#1A355E', '#F97316'],
+        borderWidth: 1,
+      },
+    ],
+  } : null;
+
+  const chartOptions = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: 'top' as const,
+      },
+      title: {
+        display: true,
+        text: 'Inflation Impact Over Time',
+      },
+    },
+    scales: {
+      y: {
+        beginAtZero: true,
+        ticks: {
+          callback: function(value: any) {
+            return '£' + value.toLocaleString();
+          }
+        }
+      }
     }
   };
 
   return (
     <>
       <Helmet>
-        <title>Inflation Calculator | Property Investments</title>
+        <title>UK Inflation Calculator | KR Property Investments</title>
         <meta
           name="description"
           content="Calculate how inflation affects your savings over time and determine the growth rate needed to keep pace with inflation."
         />
-        <meta property="og:title" content="Inflation Calculator | Property Investments" />
+        <meta property="og:title" content="UK Inflation Calculator | KR Property Investments" />
         <meta
           property="og:description"
           content="Calculate how inflation affects your savings over time."
@@ -256,11 +227,11 @@ const InflationCalculator = () => {
         <meta property="og:type" content="website" />
       </Helmet>
 
-      <section className="section-anchor py-16 bg-neutral-50">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="min-h-screen py-12 px-4" style={{ backgroundColor: '#F9FAFB' }}>
+        <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-neutral-800 mb-4">Inflation Calculator</h2>
-            <p className="text-neutral-600 max-w-2xl mx-auto">
+            <h1 className="text-3xl md:text-4xl font-bold mb-4" style={{ color: '#1A355E' }}>UK Inflation Calculator</h1>
+            <p className="text-lg max-w-2xl mx-auto" style={{ color: '#6B7280' }}>
               Find out the growth rate needed for your savings to have kept up with inflation. 
               This calculator shows the effect of inflation on the real value of your savings 
               and the growth rate you would have needed to keep pace with inflation.
@@ -270,22 +241,18 @@ const InflationCalculator = () => {
           <Card className="bg-white rounded-lg shadow-lg overflow-hidden mb-8">
             <CardContent className="p-8">
               <Form {...form}>
-                <form
-                  onSubmit={form.handleSubmit(calculateInflation)}
-                  className="space-y-6"
-                >
-                  {/* New User Info Fields */}
+                <form onSubmit={form.handleSubmit(calculateInflation)} className="space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <FormField
                       control={form.control}
                       name="name"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="text-neutral-700 font-medium">Your Name</FormLabel>
+                          <FormLabel className="font-medium" style={{ color: '#1A355E' }}>Your Name</FormLabel>
                           <FormControl>
                             <Input
                               placeholder="Jane Doe"
-                              className="w-full px-4 py-2 border border-neutral-300 rounded-md focus:ring-primary"
+                              className="w-full px-4 py-2 border border-gray-300 rounded-md"
                               {...field}
                             />
                           </FormControl>
@@ -298,12 +265,12 @@ const InflationCalculator = () => {
                       name="email"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="text-neutral-700 font-medium">Your Email</FormLabel>
+                          <FormLabel className="font-medium" style={{ color: '#1A355E' }}>Your Email</FormLabel>
                           <FormControl>
                             <Input
                               type="email"
                               placeholder="jane@example.com"
-                              className="w-full px-4 py-2 border border-neutral-300 rounded-md focus:ring-primary"
+                              className="w-full px-4 py-2 border border-gray-300 rounded-md"
                               {...field}
                             />
                           </FormControl>
@@ -313,38 +280,19 @@ const InflationCalculator = () => {
                     />
                   </div>
 
-                  <FormField
-                    control={form.control}
-                    name="source"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel className="text-neutral-700 font-medium">Campaign Source (optional)</FormLabel>
-                        <FormControl>
-                          <Input
-                            placeholder="e.g. Facebook Ad, Newsletter, etc."
-                            className="w-full px-4 py-2 border border-neutral-300 rounded-md focus:ring-primary"
-                            {...field}
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-
-                  {/* Calculation Form */}
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-6">
-                    <div className="mb-6">
-                      <h3 className="text-xl font-semibold text-neutral-800 mb-2">Show me how much</h3>
+                  <div className="text-center">
+                    <h3 className="text-xl font-bold mb-6" style={{ color: '#1A355E' }}>Calculate Your Inflation Impact</h3>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
                       <FormField
                         control={form.control}
                         name="amount"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel className="text-neutral-700 font-medium">Amount (£)</FormLabel>
+                            <FormLabel className="font-medium" style={{ color: '#1A355E' }}>Amount (£)</FormLabel>
                             <FormControl>
                               <Input
-                                placeholder="10000"
-                                className="w-full px-4 py-2 border border-neutral-300 rounded-md focus:ring-primary"
+                                placeholder="e.g., 10000"
+                                className="w-full px-4 py-2 border border-gray-300 rounded-md"
                                 {...field}
                               />
                             </FormControl>
@@ -352,78 +300,69 @@ const InflationCalculator = () => {
                           </FormItem>
                         )}
                       />
+                      
+                      <FormField
+                        control={form.control}
+                        name="month"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel className="font-medium" style={{ color: '#1A355E' }}>Month</FormLabel>
+                            <Select onValueChange={field.onChange} defaultValue={field.value}>
+                              <FormControl>
+                                <SelectTrigger className="w-full px-4 py-2 border border-gray-300 rounded-md">
+                                  <SelectValue placeholder="Select month" />
+                                </SelectTrigger>
+                              </FormControl>
+                              <SelectContent>
+                                {months.map((month) => (
+                                  <SelectItem key={month.value} value={month.value}>
+                                    {month.label}
+                                  </SelectItem>
+                                ))}
+                              </SelectContent>
+                            </Select>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+
+                      <FormField
+                        control={form.control}
+                        name="year"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel className="font-medium" style={{ color: '#1A355E' }}>Year</FormLabel>
+                            <Select onValueChange={field.onChange} defaultValue={field.value}>
+                              <FormControl>
+                                <SelectTrigger className="w-full px-4 py-2 border border-gray-300 rounded-md">
+                                  <SelectValue placeholder="Select year" />
+                                </SelectTrigger>
+                              </FormControl>
+                              <SelectContent>
+                                {years.map((year) => (
+                                  <SelectItem key={year.value} value={year.value}>
+                                    {year.label}
+                                  </SelectItem>
+                                ))}
+                              </SelectContent>
+                            </Select>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
                     </div>
 
                     <div className="mb-6">
-                      <h3 className="text-xl font-semibold text-neutral-800 mb-2">in</h3>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <FormField
-                          control={form.control}
-                          name="month"
-                          render={({ field }) => (
-                            <FormItem>
-                              <FormLabel className="text-neutral-700 font-medium">Month</FormLabel>
-                              <Select
-                                onValueChange={field.onChange}
-                                defaultValue={field.value}
-                              >
-                                <FormControl>
-                                  <SelectTrigger className="w-full px-4 py-2 border border-neutral-300 rounded-md focus:ring-primary">
-                                    <SelectValue placeholder="Select month" />
-                                  </SelectTrigger>
-                                </FormControl>
-                                <SelectContent>
-                                  {months.map((month) => (
-                                    <SelectItem key={month.value} value={month.value}>
-                                      {month.label}
-                                    </SelectItem>
-                                  ))}
-                                </SelectContent>
-                              </Select>
-                              <FormMessage />
-                            </FormItem>
-                          )}
-                        />
-                        <FormField
-                          control={form.control}
-                          name="year"
-                          render={({ field }) => (
-                            <FormItem>
-                              <FormLabel className="text-neutral-700 font-medium">Year</FormLabel>
-                              <Select
-                                onValueChange={field.onChange}
-                                defaultValue={field.value}
-                              >
-                                <FormControl>
-                                  <SelectTrigger className="w-full px-4 py-2 border border-neutral-300 rounded-md focus:ring-primary">
-                                    <SelectValue placeholder="Select year" />
-                                  </SelectTrigger>
-                                </FormControl>
-                                <SelectContent>
-                                  {years.map((year) => (
-                                    <SelectItem key={year.value} value={year.value}>
-                                      {year.label}
-                                    </SelectItem>
-                                  ))}
-                                </SelectContent>
-                              </Select>
-                              <FormMessage />
-                            </FormItem>
-                          )}
-                        />
-                      </div>
-                    </div>
-
-                    <div className="mb-6 flex flex-col">
-                      <h3 className="text-xl font-semibold text-neutral-800 mb-2">is equivalent in today's money</h3>
-                      <div className="flex-grow flex items-end">
-                        <Button
-                          type="submit"
-                          className="w-full bg-primary text-white font-semibold py-3 hover:bg-primary/90"
-                        >
-                          Calculate Now
-                        </Button>
-                      </div>
+                      <Button
+                        type="submit"
+                        className="w-full md:w-auto px-8 py-3 text-white font-semibold rounded transition-colors"
+                        style={{ backgroundColor: '#F97316' }}
+                        onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#EA580C'}
+                        onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#F97316'}
+                        disabled={isSubmitting}
+                      >
+                        {isSubmitting ? "Calculating..." : "Calculate Now"}
+                      </Button>
                     </div>
                   </div>
                 </form>
@@ -433,12 +372,12 @@ const InflationCalculator = () => {
 
           <Card className="bg-white rounded-lg shadow-lg overflow-hidden mb-8">
             <CardContent className="p-8">
-              <h3 className="text-2xl font-semibold text-neutral-800 mb-6 text-center">
+              <h3 className="text-2xl font-bold text-center mb-6" style={{ color: '#1A355E' }}>
                 Current UK Inflation Rate
               </h3>
               <div className="text-center">
-                <div className="text-5xl font-bold text-primary mb-4">2.6%</div>
-                <p className="text-neutral-600">Source: Office for National Statistics</p>
+                <div className="text-5xl font-bold mb-4" style={{ color: '#F97316' }}>2.6%</div>
+                <p style={{ color: '#6B7280' }}>Source: Office for National Statistics</p>
               </div>
             </CardContent>
           </Card>
@@ -446,39 +385,38 @@ const InflationCalculator = () => {
           {result && (
             <Card className="bg-white rounded-lg shadow-lg overflow-hidden">
               <CardContent className="p-8">
-                <h3 className="text-2xl font-semibold text-neutral-800 mb-6 text-center">
+                <h3 className="text-2xl font-bold text-center mb-6" style={{ color: '#1A355E' }}>
                   Calculation Results
                 </h3>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                  {/* First row */}
-                  <div className="p-4 bg-neutral-50 rounded-lg">
-                    <div className="font-medium text-neutral-700">Original Value:</div>
-                    <div className="text-2xl font-semibold text-neutral-800">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                  <div className="p-4 rounded-lg border border-gray-200">
+                    <div className="font-medium mb-2" style={{ color: '#6B7280' }}>Original Value:</div>
+                    <div className="text-2xl font-semibold" style={{ color: '#1A355E' }}>
                       £{result.originalValue.toLocaleString("en-GB", {
                         minimumFractionDigits: 2,
                         maximumFractionDigits: 2,
                       })}
                     </div>
-                    <div className="text-sm text-neutral-600 mt-1">
+                    <div className="text-sm mt-1" style={{ color: '#6B7280' }}>
                       {result.startYear}
                     </div>
                   </div>
 
-                  <div className="p-4 bg-neutral-50 rounded-lg">
-                    <div className="font-medium text-neutral-700">Today's Equivalent Value:</div>
-                    <div className="text-2xl font-semibold text-primary">
+                  <div className="p-4 rounded-lg border border-gray-200">
+                    <div className="font-medium mb-2" style={{ color: '#6B7280' }}>Today's Equivalent Value:</div>
+                    <div className="text-2xl font-semibold" style={{ color: '#F97316' }}>
                       £{result.todayValue.toLocaleString("en-GB", {
                         minimumFractionDigits: 2,
                         maximumFractionDigits: 2,
                       })}
                     </div>
-                    <div className="text-sm text-neutral-600 mt-1">
+                    <div className="text-sm mt-1" style={{ color: '#6B7280' }}>
                       As of {result.endYear}
                     </div>
                   </div>
 
-                  <div className="p-4 bg-neutral-50 rounded-lg">
-                    <div className="font-medium text-neutral-700">
+                  <div className="p-4 rounded-lg border border-gray-200">
+                    <div className="font-medium mb-2" style={{ color: '#6B7280' }}>
                       Loss in Value:
                     </div>
                     <div className="text-2xl font-semibold text-red-500">
@@ -487,219 +425,41 @@ const InflationCalculator = () => {
                         maximumFractionDigits: 2,
                       })}
                     </div>
-                    <div className="text-sm text-neutral-600 mt-1">
+                    <div className="text-sm mt-1" style={{ color: '#6B7280' }}>
                       Due to inflation
-                    </div>
-                  </div>
-                  
-                  {/* Second row */}
-                  <div className="p-4 bg-neutral-50 rounded-lg">
-                    <div className="font-medium text-neutral-700">
-                      Increase Over Time:
-                    </div>
-                    <div className="text-2xl font-semibold text-amber-600">
-                      {result.percentageIncrease.toLocaleString("en-GB", {
-                        minimumFractionDigits: 2,
-                        maximumFractionDigits: 2,
-                      })}%
-                    </div>
-                    <div className="text-sm text-neutral-600 mt-1">
-                      Cost of goods and services
-                    </div>
-                  </div>
-                  
-                  <div className="p-4 bg-neutral-50 rounded-lg">
-                    <div className="font-medium text-neutral-700">
-                      Annual Growth Rate Needed:
-                    </div>
-                    <div className="text-2xl font-semibold text-secondary">
-                      {result.annualGrowthRate.toLocaleString("en-GB", {
-                        minimumFractionDigits: 1,
-                        maximumFractionDigits: 1,
-                      })}%
-                    </div>
-                    <div className="text-sm text-neutral-600 mt-1">
-                      To keep pace with inflation
-                    </div>
-                  </div>
-                  
-                  <div className="p-4 bg-neutral-50 rounded-lg">
-                    <div className="font-medium text-neutral-700">
-                      Time Period:
-                    </div>
-                    <div className="text-2xl font-semibold text-blue-600">
-                      {result.yearsDiff.toLocaleString("en-GB", {
-                        minimumFractionDigits: 1,
-                        maximumFractionDigits: 1,
-                      })} years
-                    </div>
-                    <div className="text-sm text-neutral-600 mt-1">
-                      From {result.startYear} to {result.endYear}
                     </div>
                   </div>
                 </div>
 
-                {/* Chart Visualization */}
-                <div className="mt-8">
-                  <h4 className="text-xl font-semibold text-neutral-800 mb-4 text-center">
-                    Visual Comparison: Original vs Inflation-Adjusted Value
+                {chartData && (
+                  <div className="mb-8">
+                    <Bar ref={chartRef} data={chartData} options={chartOptions} />
+                  </div>
+                )}
+
+                <div className="text-center p-6 rounded-lg border-2" style={{ borderColor: '#C58B25' }}>
+                  <h4 className="text-xl font-bold mb-4" style={{ color: '#1A355E' }}>
+                    Don't let inflation erode your wealth
                   </h4>
-                  <div className="bg-neutral-50 p-6 rounded-lg">
-                    <div style={{ height: '400px', width: '100%' }}>
-                      <Bar
-                        ref={chartRef}
-                        data={{
-                          labels: [`Original Amount (${result.startYear})`, `Equivalent Value Today (${result.endYear})`],
-                          datasets: [
-                            {
-                              label: 'Value in British Pounds (£)',
-                              data: [result.originalValue, result.todayValue],
-                              backgroundColor: [
-                                'rgba(59, 130, 246, 0.8)', // Blue for original
-                                'rgba(239, 68, 68, 0.8)'   // Red for today's equivalent
-                              ],
-                              borderColor: [
-                                'rgba(59, 130, 246, 1)',
-                                'rgba(239, 68, 68, 1)'
-                              ],
-                              borderWidth: 2,
-                            },
-                          ],
-                        }}
-                        options={{
-                          responsive: true,
-                          maintainAspectRatio: false,
-                          plugins: {
-                            title: {
-                              display: true,
-                              text: 'Impact of Inflation on Your Money',
-                              font: {
-                                size: 16,
-                                weight: 'bold'
-                              }
-                            },
-                            legend: {
-                              display: false
-                            },
-                            tooltip: {
-                              callbacks: {
-                                label: function(context) {
-                                  return `£${context.parsed.y.toLocaleString('en-GB', {
-                                    minimumFractionDigits: 2,
-                                    maximumFractionDigits: 2,
-                                  })}`;
-                                }
-                              }
-                            }
-                          },
-                          scales: {
-                            y: {
-                              beginAtZero: true,
-                              ticks: {
-                                callback: function(value) {
-                                  return '£' + value.toLocaleString('en-GB');
-                                }
-                              }
-                            }
-                          }
-                        }}
-                      />
-                    </div>
-                  </div>
-                </div>
-                
-                <div className="mt-6 p-5 border border-amber-200 bg-amber-50 rounded-md">
-                  <h4 className="text-lg font-medium text-amber-800 mb-2">What this means:</h4>
-                  <p className="text-amber-700">
-                    Your £{result.originalValue.toLocaleString("en-GB")} from {result.startYear} would need to have grown by an average of <strong>{result.annualGrowthRate.toFixed(1)}%</strong> per year just to have kept pace with inflation. If you achieved a lower rate of growth, the real value of your money would have fallen.
+                  <p className="mb-6" style={{ color: '#6B7280' }}>
+                    Our property investment opportunities typically return 8-12% annually, 
+                    helping you stay ahead of inflation while your money is secured against real UK property.
                   </p>
-                  <p className="text-amber-700 mt-2">
-                    <strong>Property Investments typically provide returns of 8-12% per year</strong>, significantly outpacing inflation and helping you build real wealth over time.
-                  </p>
-                </div>
-                
-                <div className="mt-6">
-                  <h4 className="text-lg font-medium text-neutral-800 mb-3">How Your Money Could Have Grown</h4>
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div className="p-4 bg-red-50 border border-red-200 rounded-lg">
-                      <div className="font-medium text-neutral-700">Bank Savings (1%)</div>
-                      <div className="text-xl font-semibold text-red-600">
-                        £{(result.originalValue * Math.pow(1.01, result.yearsDiff)).toLocaleString("en-GB", {
-                          minimumFractionDigits: 2,
-                          maximumFractionDigits: 2,
-                        })}
-                      </div>
-                      <div className="text-sm text-neutral-600 mt-1">
-                        {(Math.pow(1.01, result.yearsDiff) * 100 - 100).toFixed(1)}% growth
-                      </div>
-                      <div className="text-sm font-medium text-red-700 mt-2">
-                        Lost to inflation: -£{(result.todayValue - (result.originalValue * Math.pow(1.01, result.yearsDiff))).toLocaleString("en-GB", {
-                          minimumFractionDigits: 2,
-                          maximumFractionDigits: 2,
-                        })}
-                      </div>
-                    </div>
-                    
-                    <div className="p-4 bg-amber-50 border border-amber-200 rounded-lg">
-                      <div className="font-medium text-neutral-700">Cash ISA (2-3%)</div>
-                      <div className="text-xl font-semibold text-amber-600">
-                        £{(result.originalValue * Math.pow(1.025, result.yearsDiff)).toLocaleString("en-GB", {
-                          minimumFractionDigits: 2,
-                          maximumFractionDigits: 2,
-                        })}
-                      </div>
-                      <div className="text-sm text-neutral-600 mt-1">
-                        {(Math.pow(1.025, result.yearsDiff) * 100 - 100).toFixed(1)}% growth
-                      </div>
-                      <div className="text-sm font-medium text-amber-700 mt-2">
-                        {result.todayValue > (result.originalValue * Math.pow(1.025, result.yearsDiff)) ? (
-                          <>Lost to inflation: -£{(result.todayValue - (result.originalValue * Math.pow(1.025, result.yearsDiff))).toLocaleString("en-GB", {
-                            minimumFractionDigits: 2,
-                            maximumFractionDigits: 2,
-                          })}</>
-                        ) : (
-                          <>Beat inflation by: £{((result.originalValue * Math.pow(1.025, result.yearsDiff)) - result.todayValue).toLocaleString("en-GB", {
-                            minimumFractionDigits: 2,
-                            maximumFractionDigits: 2,
-                          })}</>
-                        )}
-                      </div>
-                    </div>
-                    
-                    <div className="p-4 bg-green-50 border border-green-200 rounded-lg">
-                      <div className="font-medium text-neutral-700">Property Investment (10%)</div>
-                      <div className="text-xl font-semibold text-green-600">
-                        £{(result.originalValue * Math.pow(1.1, result.yearsDiff)).toLocaleString("en-GB", {
-                          minimumFractionDigits: 2,
-                          maximumFractionDigits: 2,
-                        })}
-                      </div>
-                      <div className="text-sm text-neutral-600 mt-1">
-                        {(Math.pow(1.1, result.yearsDiff) * 100 - 100).toFixed(1)}% growth
-                      </div>
-                      <div className="text-sm font-medium text-green-700 mt-2">
-                        Beat inflation by: £{((result.originalValue * Math.pow(1.1, result.yearsDiff)) - result.todayValue).toLocaleString("en-GB", {
-                          minimumFractionDigits: 2,
-                          maximumFractionDigits: 2,
-                        })}
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <div className="mt-4 text-center">
-                    <a 
-                      href="/invest" 
-                      className="inline-block px-6 py-3 bg-primary text-white font-semibold rounded-md hover:bg-primary/90 transition-colors"
-                    >
-                      Learn More About Our Property Investments
-                    </a>
-                  </div>
+                  <a 
+                    href="/contact" 
+                    className="inline-block px-6 py-3 text-white font-semibold rounded-md transition-colors"
+                    style={{ backgroundColor: '#F97316' }}
+                    onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#EA580C'}
+                    onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#F97316'}
+                  >
+                    Learn More About Our Property Investments
+                  </a>
                 </div>
               </CardContent>
             </Card>
           )}
         </div>
-      </section>
+      </div>
     </>
   );
 };
