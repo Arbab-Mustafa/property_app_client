@@ -1,7 +1,16 @@
-import React from "react";
-import { Building, TrendingUp, Landmark, Scale, Building2 } from "lucide-react";
+import React, { useState } from "react";
+import { Building, TrendingUp, Landmark, Scale, Building2, Plus, Minus } from "lucide-react";
 
 const WhyInvest = () => {
+  const [openItems, setOpenItems] = useState<number[]>([]);
+
+  const toggleItem = (index: number) => {
+    setOpenItems(prev => 
+      prev.includes(index) 
+        ? prev.filter(item => item !== index)
+        : [...prev, index]
+    );
+  };
   const features = [
     {
       title: "A Market Backed by Fundamentals — Not Hype",
@@ -43,19 +52,46 @@ const WhyInvest = () => {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
+        <div className="max-w-4xl mx-auto mt-12 space-y-4">
           {features.map((feature, index) => (
             <div 
               key={index} 
-              className="bg-white rounded-lg p-8 shadow-md hover:shadow-lg transition-shadow duration-300 flex flex-col h-full border border-gray-100"
+              className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden"
+              style={{ backgroundColor: '#F9FAFB' }}
             >
-              <div className="flex items-center mb-4">
-                <div className="bg-primary/10 p-3 rounded-lg mr-4">
-                  <feature.icon className="h-6 w-6 text-primary" />
+              <button
+                onClick={() => toggleItem(index)}
+                className="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-50 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-inset"
+                aria-expanded={openItems.includes(index)}
+              >
+                <div className="flex items-center">
+                  <div className="bg-primary/10 p-2 rounded-lg mr-4">
+                    <feature.icon className="h-5 w-5 text-primary" />
+                  </div>
+                  <h3 className="font-bold text-lg" style={{ color: '#1A355E' }}>
+                    {feature.title}
+                  </h3>
                 </div>
-                <h3 className="font-semibold text-lg text-gray-900">{feature.title}</h3>
+                <div className="flex-shrink-0 ml-4">
+                  {openItems.includes(index) ? (
+                    <Minus className="h-5 w-5" style={{ color: '#1A355E' }} />
+                  ) : (
+                    <Plus className="h-5 w-5" style={{ color: '#1A355E' }} />
+                  )}
+                </div>
+              </button>
+              
+              <div 
+                className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                  openItems.includes(index) ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+                }`}
+              >
+                <div className="px-6 pb-4">
+                  <p className="text-base leading-relaxed" style={{ color: '#6B7280' }}>
+                    {feature.description}
+                  </p>
+                </div>
               </div>
-              <p className="text-gray-600 mt-2 flex-grow">{feature.description}</p>
             </div>
           ))}
         </div>

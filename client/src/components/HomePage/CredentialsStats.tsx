@@ -4,15 +4,15 @@ import { Card, CardContent } from "@/components/ui/card";
 const CredentialsStats = () => {
   const stats = [
     {
-      value: "65+",
+      value: "16+",
       label: "Clients"
     },
     {
-      value: "£1.2M+",
+      value: "£700k+",
       label: "Capital Raised"
     },
     {
-      value: "100+",
+      value: "30+",
       label: "Property Deals"
     },
     {
