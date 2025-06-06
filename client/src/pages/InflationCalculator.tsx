@@ -228,28 +228,35 @@ const InflationCalculator = () => {
         <meta property="og:type" content="website" />
       </Helmet>
 
-      <div className="min-h-screen pt-20 pb-12 px-4" style={{ backgroundColor: '#F9FAFB' }}>
-        <div className="max-w-6xl mx-auto">
-          {/* Hero Section */}
-          <div className="text-center mb-12 pt-12">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-              <div className="text-left lg:text-left">
-                <h1 className="text-4xl lg:text-5xl font-bold mb-6" style={{ color: '#1A355E' }}>
-                  Is Your Money Shrinking While You Sleep?
-                </h1>
-                <p className="text-lg mb-8" style={{ color: '#6B7280' }}>
-                  Find out how much inflation is secretly eroding your savings and learn how to protect your wealth.
-                </p>
-              </div>
-              <div className="flex justify-center lg:justify-end">
-                <img 
-                  src={heroImagePath} 
-                  alt="Inflation Calculator - Financial Growth Illustration" 
-                  className="w-full max-w-md h-auto"
-                />
-              </div>
+      {/* Hero Section with Background Image */}
+      <div 
+        className="relative min-h-screen pt-20 pb-12"
+        style={{
+          backgroundImage: `url(${heroImagePath})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center bottom',
+          backgroundRepeat: 'no-repeat'
+        }}
+      >
+        {/* Overlay for better text readability */}
+        <div className="absolute inset-0 bg-white bg-opacity-80"></div>
+        
+        <div className="relative z-10 flex items-center justify-center min-h-screen px-4">
+          <div className="text-center max-w-4xl mx-auto">
+            <div className="pt-32 pb-12">
+              <h1 className="text-4xl lg:text-6xl font-bold mb-6" style={{ color: '#1A355E' }}>
+                Is Your Money Shrinking While You Sleep?
+              </h1>
+              <p className="text-xl mb-8 max-w-2xl mx-auto" style={{ color: '#6B7280' }}>
+                Find out how much inflation is secretly eroding your savings and learn how to protect your wealth.
+              </p>
             </div>
           </div>
+        </div>
+      </div>
+
+      <div className="py-12 px-4" style={{ backgroundColor: '#F9FAFB' }}>
+        <div className="max-w-6xl mx-auto">
 
           <div className="py-10">
 
