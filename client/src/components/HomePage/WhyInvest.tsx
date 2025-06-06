@@ -65,7 +65,7 @@ const WhyInvest = () => {
                 aria-expanded={openItems.includes(index)}
               >
                 <div className="flex items-center">
-                  <div className="p-2 rounded-lg mr-4" style={{ backgroundColor: '#F97316', opacity: 0.1 }}>
+                  <div className="p-2 rounded-lg mr-4 bg-[1A355E]" style={{ backgroundColor: '#F97316', opacity: 0.1 }}>
                     <feature.icon className="h-5 w-5" style={{ color: '#F97316' }} />
                   </div>
                   <h3 className="font-bold text-lg" style={{ color: '#1A355E' }}>
