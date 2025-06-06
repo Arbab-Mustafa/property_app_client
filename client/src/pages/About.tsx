@@ -14,9 +14,11 @@ const About = () => {
         <meta property="og:type" content="website" />
       </Helmet>
       
-      <AboutUs />
-      <TeamSection />
-      <Timeline />
+      <div className="about-page-container" style={{ backgroundColor: '#F9FAFB', minHeight: '100vh' }}>
+        <AboutUs />
+        <TeamSection />
+        <Timeline />
+      </div>
     </>
   );
 };

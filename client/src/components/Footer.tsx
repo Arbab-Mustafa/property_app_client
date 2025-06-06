@@ -79,38 +79,38 @@ const Footer = () => {
             <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
             <ul className="space-y-2">
               <li>
-                <Link href="/">
-                  <a className="text-neutral-400 hover:text-white transition">Home</a>
+                <Link href="/" className="text-neutral-400 hover:text-white transition">
+                  Home
                 </Link>
               </li>
               <li>
-                <Link href="/about">
-                  <a className="text-neutral-400 hover:text-white transition">About Us</a>
+                <Link href="/about" className="text-neutral-400 hover:text-white transition">
+                  About Us
                 </Link>
               </li>
               <li>
-                <Link href="/invest">
-                  <a className="text-neutral-400 hover:text-white transition">What We Do</a>
+                <Link href="/invest" className="text-neutral-400 hover:text-white transition">
+                  What We Do
                 </Link>
               </li>
               <li>
-                <Link href="/updates">
-                  <a className="text-neutral-400 hover:text-white transition">Updates</a>
+                <Link href="/updates" className="text-neutral-400 hover:text-white transition">
+                  Updates
                 </Link>
               </li>
               <li>
-                <Link href="/inflation-calculator">
-                  <a className="text-neutral-400 hover:text-white transition">Inflation Calculator</a>
+                <Link href="/inflation-calculator" className="text-neutral-400 hover:text-white transition">
+                  Inflation Calculator
                 </Link>
               </li>
               <li>
-                <Link href="/financial-literacy">
-                  <a className="text-neutral-400 hover:text-white transition">Financial Quiz</a>
+                <Link href="/financial-literacy" className="text-neutral-400 hover:text-white transition">
+                  Financial Quiz
                 </Link>
               </li>
               <li>
-                <Link href="/contact">
-                  <a className="text-neutral-400 hover:text-white transition">Contact Us</a>
+                <Link href="/contact" className="text-neutral-400 hover:text-white transition">
+                  Contact Us
                 </Link>
               </li>
             </ul>
@@ -158,18 +158,16 @@ const Footer = () => {
         <div className="pt-8 border-t border-neutral-700">
           <div className="text-center mb-6">
             <p className="text-lg font-semibold text-white mb-3">Want to see our real results?</p>
-            <Link href="/case-studies">
-              <a className="inline-block bg-primary hover:bg-primary/90 text-white font-semibold py-3 px-6 rounded-lg transition duration-300 shadow-lg hover:shadow-xl">
-                View Our Case Studies
-              </a>
+            <Link href="/case-studies" className="inline-block bg-primary hover:bg-primary/90 text-white font-semibold py-3 px-6 rounded-lg transition duration-300 shadow-lg hover:shadow-xl">
+              View Our Case Studies
             </Link>
           </div>
           
           <div className="text-center text-neutral-400">
             <p className="mb-2">&copy; {new Date().getFullYear()} KR Property Investments. All rights reserved.</p>
             <div className="flex justify-center space-x-4 text-sm">
-              <Link href="/terms">
-                <a className="text-neutral-400 hover:text-white transition">Terms & Conditions</a>
+              <Link href="/terms" className="text-neutral-400 hover:text-white transition">
+                Terms & Conditions
               </Link>
             </div>
           </div>
