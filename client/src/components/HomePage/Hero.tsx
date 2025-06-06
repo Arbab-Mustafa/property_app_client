@@ -10,11 +10,10 @@ const Hero = () => {
     >
       {/* Background Image */}
       <div 
-        className="absolute inset-0 z-0 bg-cover bg-center" 
+        className="absolute inset-0 z-0 home-hero-bg" 
         style={{ 
           backgroundImage: `url(${propertyBgImage})`,
-          backgroundSize: '110%', /* Zoomed out slightly to show more of the image */
-          backgroundPosition: '60% top' /* Moved image slightly to the right */
+          backgroundRepeat: 'no-repeat'
         }}
       ></div>
       

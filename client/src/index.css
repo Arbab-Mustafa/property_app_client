@@ -51,6 +51,19 @@
   }
 }
 
+/* Home page hero background - desktop and mobile responsive */
+.home-hero-bg {
+  background-size: 110%;
+  background-position: 60% top;
+}
+
+@media (max-width: 768px) {
+  .home-hero-bg {
+    background-size: cover;
+    background-position: center center;
+  }
+}
+
 .dark {
   --background: 20 14.3% 4.1%;
   --foreground: 0 0% 95%;
