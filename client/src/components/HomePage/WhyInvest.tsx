@@ -40,14 +40,14 @@ const WhyInvest = () => {
   ];
 
   return (
-    <section className="py-16 bg-gradient-to-b from-white to-gray-50">
+    <section className="py-16" style={{ backgroundColor: '#F9FAFB' }}>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4" style={{ color: '#1A355E' }}>
             Why Invest in the UK Property Market?
           </h2>
-          <div className="w-20 h-1 bg-primary mx-auto mb-6"></div>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <div className="w-20 h-1 mx-auto mb-6" style={{ backgroundColor: '#C58B25' }}></div>
+          <p className="text-xl max-w-3xl mx-auto leading-relaxed" style={{ color: '#6B7280' }}>
             The UK property market offers stability, growth potential, and protection against inflation.
           </p>
         </div>
@@ -65,8 +65,8 @@ const WhyInvest = () => {
                 aria-expanded={openItems.includes(index)}
               >
                 <div className="flex items-center">
-                  <div className="bg-primary/10 p-2 rounded-lg mr-4">
-                    <feature.icon className="h-5 w-5 text-primary" />
+                  <div className="p-2 rounded-lg mr-4" style={{ backgroundColor: '#F97316', opacity: 0.1 }}>
+                    <feature.icon className="h-5 w-5" style={{ color: '#F97316' }} />
                   </div>
                   <h3 className="font-bold text-lg" style={{ color: '#1A355E' }}>
                     {feature.title}
@@ -97,7 +97,7 @@ const WhyInvest = () => {
         </div>
 
         <div className="mt-16 text-center">
-          <p className="text-xl text-gray-700 font-medium italic">
+          <p className="text-xl font-medium italic leading-relaxed" style={{ color: '#6B7280' }}>
             "You're not just buying property — you're buying into a high-demand rental market without the premium price tag."
           </p>
         </div>

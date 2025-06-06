@@ -18,12 +18,14 @@ const Home = () => {
         <meta property="og:type" content="website" />
       </Helmet>
       
-      <Hero />
-      <WhyInvest />
-      <StatsCard />
-      <Testimonials />
-      <CredentialsStats />
-      <InstagramFeed />
+      <div className="homepage-container" style={{ backgroundColor: '#F9FAFB' }}>
+        <Hero />
+        <WhyInvest />
+        <StatsCard />
+        <Testimonials />
+        <CredentialsStats />
+        <InstagramFeed />
+      </div>
     </>
   );
 };

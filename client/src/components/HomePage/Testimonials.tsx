@@ -18,14 +18,14 @@ const Testimonials = () => {
   ];
 
   return (
-    <section className="py-16 bg-gray-50">
+    <section className="py-16" style={{ backgroundColor: '#F9FAFB' }}>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4" style={{ color: '#1A355E' }}>
             What Our Clients Say
           </h2>
-          <div className="w-20 h-1 bg-primary mx-auto mb-6"></div>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <div className="w-20 h-1 mx-auto mb-6" style={{ backgroundColor: '#C58B25' }}></div>
+          <p className="text-xl max-w-3xl mx-auto leading-relaxed" style={{ color: '#6B7280' }}>
             Real results from real people who trusted us with their investments.
           </p>
         </div>
