@@ -11,7 +11,7 @@ const StatsCard = () => {
             <div className="grid grid-cols-2 gap-4">
               <div className="p-3 rounded-md bg-[#c58b25]" style={{ backgroundColor: '#F97316', opacity: 0.1 }}>
                 <div className="font-bold text-2xl text-[#f9fafb]" style={{ color: '#F97316' }}>8-12%</div>
-                <div className="text-sm" style={{ color: '#6B7280' }}>Annual Returns</div>
+                <div className="text-sm text-[#1a355e]" style={{ color: '#6B7280' }}>Annual Returns</div>
               </div>
               <div className="p-3 rounded-md bg-[#c58b25]" style={{ backgroundColor: '#F97316', opacity: 0.1 }}>
                 <div className="font-bold text-2xl text-[#fff]" style={{ color: '#F97316' }}>100%</div>
