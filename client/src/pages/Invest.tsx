@@ -23,17 +23,17 @@ const Invest = () => {
         <meta property="og:type" content="website" />
       </Helmet>
       
-      {/* Hero Section with Green Background */}
-      <section className="bg-emerald-600 text-white px-4 text-center pt-24 pb-12">
+      {/* Hero Section */}
+      <section className="px-4 text-center pt-24 pb-12" style={{ backgroundColor: '#F9FAFB' }}>
         <div className="container mx-auto max-w-4xl">
-          <h1 className="text-4xl md:text-5xl font-bold mb-12">What We Do</h1>
+          <h1 className="text-4xl md:text-5xl font-bold mb-12" style={{ color: '#1A355E' }}>What We Do</h1>
           <div className="flex justify-center mb-12">
             <img src={chartIcon} alt="Chart icon" className="h-36 w-36" />
           </div>
           <p className="text-xl md:text-2xl max-w-lg mx-auto mb-8">
-            <span className="font-semibold">Hands-free, end-to-end property investment solutions</span>
+            <span className="font-semibold" style={{ color: '#1A355E' }}>Hands-free, end-to-end property investment solutions</span>
           </p>
-          <p className="text-lg md:text-xl max-w-3xl mx-auto">
+          <p className="text-lg md:text-xl max-w-3xl mx-auto leading-relaxed" style={{ color: '#6B7280' }}>
             We handle everything from deal sourcing to completion, so you can earn higher returns 
             without the hassle of managing agents, builders, solicitors, or mortgage brokers.
           </p>
@@ -41,12 +41,12 @@ const Invest = () => {
       </section>
 
       {/* Services Selection */}
-      <section className="bg-white py-16">
+      <section className="py-16" style={{ backgroundColor: '#F9FAFB' }}>
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4" style={{ color: '#1A355E' }}>
             Choose the option that fits your goals
           </h2>
-          <div className="w-20 h-1 bg-primary mx-auto mb-12"></div>
+          <div className="w-20 h-1 mx-auto mb-12" style={{ backgroundColor: '#C58B25' }}></div>
           
           <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
             {/* Find You A Deal Card */}
@@ -54,24 +54,24 @@ const Invest = () => {
               <div className="flex justify-center mb-6">
                 <img src={findDealIcon} alt="Find you a deal icon" className="h-24 w-24" />
               </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-4 text-center">Find You A Deal</h3>
-              <ul className="text-gray-600 mb-6 space-y-2">
+              <h3 className="text-2xl font-bold mb-4 text-center" style={{ color: '#1A355E' }}>Find You A Deal</h3>
+              <ul className="mb-6 space-y-2 text-base leading-relaxed" style={{ color: '#6B7280' }}>
                 <li className="flex items-start">
-                  <span className="text-primary mr-2">•</span>
+                  <span className="mr-2" style={{ color: '#F97316' }}>•</span>
                   Complete deal sourcing and market analysis
                 </li>
                 <li className="flex items-start">
-                  <span className="text-primary mr-2">•</span>
+                  <span className="mr-2" style={{ color: '#F97316' }}>•</span>
                   Risk assessment and investment review
                 </li>
                 <li className="flex items-start">
-                  <span className="text-primary mr-2">•</span>
+                  <span className="mr-2" style={{ color: '#F97316' }}>•</span>
                   Access to our professional network
                 </li>
               </ul>
               <div className="text-center">
                 <Link href="/find-you-a-deal">
-                  <Button className="bg-primary hover:bg-primary/90 text-white px-6 py-3 rounded-lg">
+                  <Button className="text-white px-6 py-3 rounded-md hover:shadow-lg transition-all duration-300" style={{ backgroundColor: '#F97316' }}>
                     Learn More
                   </Button>
                 </Link>
@@ -83,24 +83,24 @@ const Invest = () => {
               <div className="flex justify-center mb-6">
                 <img src={investWithUsIcon} alt="Invest with us icon" className="h-24 w-24" />
               </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-4 text-center">Invest With Us</h3>
-              <ul className="text-gray-600 mb-6 space-y-2">
+              <h3 className="text-2xl font-bold mb-4 text-center" style={{ color: '#1A355E' }}>Invest With Us</h3>
+              <ul className="mb-6 space-y-2 text-base leading-relaxed" style={{ color: '#6B7280' }}>
                 <li className="flex items-start">
-                  <span className="text-primary mr-2">•</span>
+                  <span className="mr-2" style={{ color: '#F97316' }}>•</span>
                   Hands-off property investment opportunities
                 </li>
                 <li className="flex items-start">
-                  <span className="text-primary mr-2">•</span>
+                  <span className="mr-2" style={{ color: '#F97316' }}>•</span>
                   Earn returns without property ownership
                 </li>
                 <li className="flex items-start">
-                  <span className="text-primary mr-2">•</span>
+                  <span className="mr-2" style={{ color: '#F97316' }}>•</span>
                   Professional deal management included
                 </li>
               </ul>
               <div className="text-center">
                 <Link href="/invest-with-us">
-                  <Button className="bg-primary hover:bg-primary/90 text-white px-6 py-3 rounded-lg">
+                  <Button className="text-white px-6 py-3 rounded-md hover:shadow-lg transition-all duration-300" style={{ backgroundColor: '#F97316' }}>
                     Get Started
                   </Button>
                 </Link>
@@ -111,15 +111,16 @@ const Invest = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="bg-gray-50 py-16">
+      <section className="py-16" style={{ backgroundColor: '#F9FAFB' }}>
         <div className="container mx-auto text-center px-4">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">Ready to get started?</h2>
-          <p className="text-gray-600 mb-8 max-w-2xl mx-auto">
+          <h2 className="text-2xl font-bold mb-4" style={{ color: '#1A355E' }}>Ready to get started?</h2>
+          <p className="mb-8 max-w-2xl mx-auto text-lg leading-relaxed" style={{ color: '#6B7280' }}>
             Book a consultation to discuss which option is right for your investment goals.
           </p>
           <Link href="/book-call">
             <Button 
-              className="bg-primary hover:bg-primary/90 text-white px-8 py-3 rounded-lg text-lg"
+              className="text-white px-8 py-3 rounded-md text-lg hover:shadow-lg transition-all duration-300"
+              style={{ backgroundColor: '#F97316' }}
             >
               Book A Call
             </Button>
