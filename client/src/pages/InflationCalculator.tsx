@@ -229,7 +229,7 @@ const InflationCalculator = () => {
 
       <div className="min-h-screen pt-20 pb-12 px-4" style={{ backgroundColor: '#F9FAFB' }}>
         <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-12">
+          <div className="text-center mb-12 pt-12">
             <h1 className="text-4xl font-bold text-center mb-4" style={{ color: '#1A355E' }}>
               Is Your Money Shrinking While You Sleep?
             </h1>
