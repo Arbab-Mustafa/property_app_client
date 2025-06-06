@@ -37,14 +37,14 @@ const Testimonials = () => {
               className="bg-white rounded-lg p-8 shadow-md hover:shadow-lg transition-shadow duration-300 relative"
             >
               <div className="absolute top-4 left-4">
-                <Quote className="h-8 w-8 text-primary/20" />
+                <Quote className="h-8 w-8" style={{ color: '#C58B25', opacity: 0.3 }} />
               </div>
               <div className="mt-6">
-                <p className="text-gray-700 mb-6 italic leading-relaxed">
+                <p className="mb-6 italic leading-relaxed" style={{ color: '#6B7280' }}>
                   "{testimonial.quote}"
                 </p>
-                <div className="border-t pt-4">
-                  <p className="font-semibold text-gray-900">
+                <div className="border-t pt-4" style={{ borderColor: '#C58B25', opacity: 0.2 }}>
+                  <p className="font-semibold" style={{ color: '#1A355E' }}>
                     – {testimonial.author}
                   </p>
                 </div>
