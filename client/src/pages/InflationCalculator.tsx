@@ -230,11 +230,9 @@ const InflationCalculator = () => {
 
       {/* Hero Section with Background Image */}
       <div 
-        className="relative min-h-screen pt-20 pb-12"
+        className="relative min-h-screen pt-20 pb-12 hero-bg"
         style={{
           backgroundImage: `url(${heroImagePath})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center bottom',
           backgroundRepeat: 'no-repeat'
         }}
       >

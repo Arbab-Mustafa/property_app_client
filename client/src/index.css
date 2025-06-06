@@ -38,6 +38,19 @@
   --chart-5: var(--muted-foreground);
 }
 
+/* Hero background image responsive handling */
+.hero-bg {
+  background-size: cover;
+  background-position: center bottom;
+}
+
+@media (max-width: 768px) {
+  .hero-bg {
+    background-size: 180% auto;
+    background-position: center 70%;
+  }
+}
+
 .dark {
   --background: 20 14.3% 4.1%;
   --foreground: 0 0% 95%;
