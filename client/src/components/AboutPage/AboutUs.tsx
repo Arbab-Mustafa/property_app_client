@@ -28,7 +28,7 @@ const AboutUs = () => {
           <div className="max-w-2xl text-center mb-10">
             <h3 className="text-2xl font-semibold mb-4" style={{ color: '#1A355E' }}>Who We Are</h3>
             <p className="mb-4 text-base leading-relaxed" style={{ color: '#6B7280' }}>
-              We are Aaron and Stevie, a passionate and driven team with a proven track record in property investment.
+              We are Aaron and Stevie,<br>a passionate and driven team with a proven track record in property investment.
             </p>
           </div>
           
