@@ -277,9 +277,20 @@ export default function InflationLanding() {
           </div>
 
           {!showResults ? (
-            <div>
-              <div className="bg-white p-6 rounded-lg shadow-md mb-8 max-w-3xl mx-auto border border-gray-200">
-                <div className="text-center mb-6">
+            <div className="py-10">
+              {/* Visual Icon */}
+              <div className="text-center mb-8">
+                <div className="inline-flex items-center justify-center w-16 h-16 rounded-full shadow-lg" style={{ backgroundColor: '#F97316' }}>
+                  <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M7 14l5-5 5 5z"/>
+                    <path d="M12 3v18M3 12h18" stroke="currentColor" strokeWidth="2" opacity="0.3"/>
+                  </svg>
+                </div>
+                <p className="text-sm mt-2" style={{ color: '#C58B25' }}>Your money is shrinking</p>
+              </div>
+
+              <div className="p-8 rounded-lg shadow-lg mb-8 max-w-3xl mx-auto border border-gray-200" style={{ backgroundColor: '#FAF9F6' }}>
+                <div className="text-center mb-8">
                   <h2 className="text-2xl font-bold mb-2" style={{ color: '#1A355E' }}>Inflation Impact Calculator</h2>
                   <p style={{ color: '#6B7280' }}>
                     See exactly how much purchasing power you've lost over time
@@ -401,10 +412,16 @@ export default function InflationLanding() {
                       <Button 
                         type="submit" 
                         disabled={isSubmitting}
-                        className="text-white font-medium px-6 py-3 rounded w-full transition-colors"
+                        className="text-white font-semibold px-6 py-3 rounded-lg w-full transition-all duration-200 shadow-lg hover:shadow-xl"
                         style={{ backgroundColor: '#F97316' }}
-                        onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#EA580C'}
-                        onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#F97316'}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.backgroundColor = '#EA580C';
+                          e.currentTarget.style.transform = 'translateY(-1px)';
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.backgroundColor = '#F97316';
+                          e.currentTarget.style.transform = 'translateY(0)';
+                        }}
                       >
                         {isSubmitting ? "Calculating..." : "Reveal My Losses"}
                       </Button>
@@ -522,10 +539,39 @@ export default function InflationLanding() {
                 </div>
               </div>
 
-              <div className="mb-8 text-center mt-8">
-                <blockquote className="bg-white p-6 rounded-lg shadow-sm border-l-4 max-w-2xl mx-auto" style={{ borderLeftColor: '#C58B25' }}>
+              {/* Post-Submit Call to Action */}
+              <div className="py-8">
+                <div className="bg-white p-8 rounded-lg shadow-md max-w-2xl mx-auto border-2" style={{ borderColor: '#C58B25' }}>
+                  <div className="text-center">
+                    <h3 className="text-xl font-bold mb-4" style={{ color: '#1A355E' }}>
+                      Want to protect your savings and earn more?
+                    </h3>
+                    <p className="mb-6" style={{ color: '#6B7280' }}>
+                      Book a free strategy call to learn how our investors are earning 8-12% annually.
+                    </p>
+                    <Button 
+                      className="text-white font-semibold px-6 py-3 rounded-lg transition-all duration-200 shadow-md hover:shadow-lg"
+                      style={{ backgroundColor: '#C58B25' }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.backgroundColor = '#B8761F';
+                        e.currentTarget.style.transform = 'translateY(-1px)';
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.backgroundColor = '#C58B25';
+                        e.currentTarget.style.transform = 'translateY(0)';
+                      }}
+                      onClick={() => window.open('/book-call', '_blank')}
+                    >
+                      Book My Free Call
+                    </Button>
+                  </div>
+                </div>
+              </div>
+
+              <div className="py-8 text-center">
+                <blockquote className="bg-gray-50 p-6 rounded-lg shadow-sm border max-w-2xl mx-auto" style={{ borderColor: '#C58B25' }}>
                   <p className="text-lg italic mb-3" style={{ color: '#6B7280' }}>
-                    I had no idea I was losing that much — now I'm earning 10% instead.
+                    "I had no idea I was losing that much — now I'm earning 10% instead."
                   </p>
                   <cite className="text-sm font-semibold" style={{ color: '#1A355E' }}>
                     – James, Private Investor

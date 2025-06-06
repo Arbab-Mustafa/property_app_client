@@ -1,0 +1,52 @@
+Please apply the following visual and layout improvements to enhance conversion and clarity for users. This is a continuation of the previous request — keep the existing headline and urgency banner exactly as is.
+
+🎨 Brand Theme (Reconfirm):
+- Orange CTA: #F97316
+- Navy Headings: #1A355E
+- Cool Grey Body Text: #6B7280
+- Background: #F9FAFB
+- Highlight (CTA/secondary): #C58B25
+
+📌 ADDITIONAL VISUAL IMPROVEMENTS TO MAKE:
+
+1. **CTA Button Styling** (for “Reveal My Losses” button):
+   - Use Orange (#F97316), white text, large padding (`px-6 py-3`)
+   - Rounded edges (`rounded-lg`)
+   - On hover: slight darkening or drop shadow
+
+2. **Calculator Form Container**
+   - Wrap the entire form in a card-style container
+   - Background: #FAF9F6
+   - Add padding, light shadow, and rounded corners
+   - Give the section breathing room with `py-10`
+
+3. **Add Visual Icon or Decorative Indicator**
+   - Insert a small visual near the calculator form (e.g., shrinking pound symbol or red downward arrow)
+   - Icon color: Orange or Muted Gold
+   - Use SVG or lightweight image
+
+4. **Improve Section Spacing**
+   - Ensure each section has `py-8` or `py-12` spacing
+   - Keep the layout scannable and well-structured
+
+5. **Add Testimonial Block**
+   - Below the calculator or result preview, add a bordered card with this quote:
+     “I had no idea I was losing that much — now I’m earning 10% instead.” – James, Private Investor
+   - Style: Italic, Cool Grey text, background: very light grey, subtle border
+
+6. **Post-Submit Call to Action**
+   - Below the results (after form is submitted), add:
+     “Want to protect your savings and earn more? Book a free strategy call.”
+   - Add secondary CTA button:
+     → Text: “Book My Free Call”
+     → Button color: Muted Gold (#C58B25), white text, rounded
+
+7. **Mobile Optimization**
+   - Ensure all elements stack vertically on small screens
+   - Buttons must be large enough to tap
+   - Maintain padding and readability
+
+🛠️ TECH CAUTION:
+- DO NOT break or change the SendGrid email logic
+- DO NOT alter any calculator formulas or submission fields
+- Use TailwindCSS or minimal utility classes to implement styles cleanly
