@@ -8,7 +8,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import logoPath from "@assets/Property Investments.png";
+// Logo temporarily removed due to missing asset
 
 const navLinks = [
   { name: "Home", path: "/" },
@@ -70,7 +70,9 @@ const Header = () => {
         <div className="flex justify-between items-center py-4">
           <div className="flex items-center">
             <Link href="/">
-              <img src={logoPath} alt="Property Investments Logo" className="h-12 cursor-pointer" />
+              <div className="h-12 flex items-center cursor-pointer">
+                <h1 className="text-xl font-bold text-gray-800">KR Property Investments</h1>
+              </div>
             </Link>
           </div>
 
