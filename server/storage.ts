@@ -2,12 +2,21 @@ import {
   users, 
   contactSubmissions, 
   newsletterSubscriptions, 
+  learningProgress,
+  achievements,
+  quizResults,
   type User, 
   type InsertUser, 
   type Contact,
   type InsertContact,
   type Newsletter,
-  type InsertNewsletter
+  type InsertNewsletter,
+  type LearningProgress,
+  type InsertLearningProgress,
+  type Achievement,
+  type InsertAchievement,
+  type QuizResult,
+  type InsertQuizResult
 } from "@shared/schema";
 
 export interface IStorage {
@@ -24,25 +33,50 @@ export interface IStorage {
   getNewsletterSubscription(id: number): Promise<Newsletter | undefined>;
   getNewsletterByEmail(email: string): Promise<Newsletter | undefined>;
   createNewsletterSubscription(newsletter: InsertNewsletter): Promise<Newsletter>;
+
+  // Learning progress methods
+  getLearningProgress(userId: string): Promise<LearningProgress[]>;
+  createLearningProgress(progress: InsertLearningProgress): Promise<LearningProgress>;
+  updateLearningProgress(userId: string, moduleId: string, progress: Partial<InsertLearningProgress>): Promise<LearningProgress>;
+
+  // Achievement methods
+  getUserAchievements(userId: string): Promise<Achievement[]>;
+  createAchievement(achievement: InsertAchievement): Promise<Achievement>;
+
+  // Quiz result methods
+  getQuizResults(userId: string): Promise<QuizResult[]>;
+  createQuizResult(result: InsertQuizResult): Promise<QuizResult>;
 }
 
 export class MemStorage implements IStorage {
   private users: Map<number, User>;
   private contacts: Map<number, Contact>;
   private newsletters: Map<number, Newsletter>;
+  private learningProgressMap: Map<string, LearningProgress>;
+  private achievementsMap: Map<string, Achievement>;
+  private quizResultsMap: Map<string, QuizResult>;
   
   private userId: number;
   private contactId: number;
   private newsletterId: number;
+  private progressId: number;
+  private achievementId: number;
+  private quizResultId: number;
 
   constructor() {
     this.users = new Map();
     this.contacts = new Map();
     this.newsletters = new Map();
+    this.learningProgressMap = new Map();
+    this.achievementsMap = new Map();
+    this.quizResultsMap = new Map();
     
     this.userId = 1;
     this.contactId = 1;
     this.newsletterId = 1;
+    this.progressId = 1;
+    this.achievementId = 1;
+    this.quizResultId = 1;
   }
 
   // User methods (from original file)
@@ -93,6 +127,62 @@ export class MemStorage implements IStorage {
     const newsletter: Newsletter = { ...data, id, createdAt };
     this.newsletters.set(id, newsletter);
     return newsletter;
+  }
+
+  // Learning progress methods
+  async getLearningProgress(userId: string): Promise<LearningProgress[]> {
+    return Array.from(this.learningProgressMap.values()).filter(
+      (progress) => progress.userId === userId
+    );
+  }
+
+  async createLearningProgress(data: InsertLearningProgress): Promise<LearningProgress> {
+    const id = this.progressId++;
+    const now = new Date();
+    const progress: LearningProgress = { ...data, id, createdAt: now, updatedAt: now };
+    this.learningProgressMap.set(`${userId}-${data.moduleId}`, progress);
+    return progress;
+  }
+
+  async updateLearningProgress(userId: string, moduleId: string, data: Partial<InsertLearningProgress>): Promise<LearningProgress> {
+    const key = `${userId}-${moduleId}`;
+    const existing = this.learningProgressMap.get(key);
+    if (!existing) {
+      throw new Error('Learning progress not found');
+    }
+    const updated: LearningProgress = { ...existing, ...data, updatedAt: new Date() };
+    this.learningProgressMap.set(key, updated);
+    return updated;
+  }
+
+  // Achievement methods
+  async getUserAchievements(userId: string): Promise<Achievement[]> {
+    return Array.from(this.achievementsMap.values()).filter(
+      (achievement) => achievement.userId === userId
+    );
+  }
+
+  async createAchievement(data: InsertAchievement): Promise<Achievement> {
+    const id = this.achievementId++;
+    const earnedAt = new Date();
+    const achievement: Achievement = { ...data, id, earnedAt };
+    this.achievementsMap.set(`${data.userId}-${data.badgeId}`, achievement);
+    return achievement;
+  }
+
+  // Quiz result methods
+  async getQuizResults(userId: string): Promise<QuizResult[]> {
+    return Array.from(this.quizResultsMap.values()).filter(
+      (result) => result.userId === userId
+    );
+  }
+
+  async createQuizResult(data: InsertQuizResult): Promise<QuizResult> {
+    const id = this.quizResultId++;
+    const completedAt = new Date();
+    const result: QuizResult = { ...data, id, completedAt };
+    this.quizResultsMap.set(`${data.userId}-${data.quizId}-${id}`, result);
+    return result;
   }
 }
 
@@ -148,6 +238,54 @@ export class DatabaseStorage implements IStorage {
       .values(data)
       .returning();
     return newsletter;
+  }
+
+  // Learning progress methods
+  async getLearningProgress(userId: string): Promise<LearningProgress[]> {
+    return await db.select().from(learningProgress).where(eq(learningProgress.userId, userId));
+  }
+
+  async createLearningProgress(data: InsertLearningProgress): Promise<LearningProgress> {
+    const [progress] = await db
+      .insert(learningProgress)
+      .values(data)
+      .returning();
+    return progress;
+  }
+
+  async updateLearningProgress(userId: string, moduleId: string, data: Partial<InsertLearningProgress>): Promise<LearningProgress> {
+    const [progress] = await db
+      .update(learningProgress)
+      .set({ ...data, updatedAt: new Date() })
+      .where(eq(learningProgress.userId, userId) && eq(learningProgress.moduleId, moduleId))
+      .returning();
+    return progress;
+  }
+
+  // Achievement methods
+  async getUserAchievements(userId: string): Promise<Achievement[]> {
+    return await db.select().from(achievements).where(eq(achievements.userId, userId));
+  }
+
+  async createAchievement(data: InsertAchievement): Promise<Achievement> {
+    const [achievement] = await db
+      .insert(achievements)
+      .values(data)
+      .returning();
+    return achievement;
+  }
+
+  // Quiz result methods
+  async getQuizResults(userId: string): Promise<QuizResult[]> {
+    return await db.select().from(quizResults).where(eq(quizResults.userId, userId));
+  }
+
+  async createQuizResult(data: InsertQuizResult): Promise<QuizResult> {
+    const [result] = await db
+      .insert(quizResults)
+      .values(data)
+      .returning();
+    return result;
   }
 }
 

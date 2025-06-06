@@ -20,6 +20,8 @@ import CaseStudy2 from "@/pages/CaseStudy2";
 import FindYouADeal from "@/pages/FindYouADeal";
 import InvestWithUs from "@/pages/InvestWithUs";
 import ManchesterFlip from "@/pages/ManchesterFlip";
+import FinancialLearning from "@/pages/FinancialLearning";
+import FinancialLiteracy from "@/pages/FinancialLiteracy";
 
 function Router() {
   return (
@@ -38,6 +40,8 @@ function Router() {
       <Route path="/case-studies/manchester-flip" component={ManchesterFlip} />
       <Route path="/find-you-a-deal" component={FindYouADeal} />
       <Route path="/invest-with-us" component={InvestWithUs} />
+      <Route path="/learn" component={FinancialLearning} />
+      <Route path="/financial-literacy" component={FinancialLiteracy} />
       <Route path="/terms" component={Terms} />
       <Route component={NotFound} />
     </Switch>
