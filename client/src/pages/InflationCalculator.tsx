@@ -230,29 +230,76 @@ const InflationCalculator = () => {
       <div className="min-h-screen py-12 px-4" style={{ backgroundColor: '#F9FAFB' }}>
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12">
-            <h1 className="text-3xl md:text-4xl font-bold mb-4" style={{ color: '#1A355E' }}>UK Inflation Calculator</h1>
-            <p className="text-lg max-w-2xl mx-auto" style={{ color: '#6B7280' }}>
-              Find out the growth rate needed for your savings to have kept up with inflation. 
-              This calculator shows the effect of inflation on the real value of your savings 
-              and the growth rate you would have needed to keep pace with inflation.
+            <div className="mb-8">
+              <div className="w-16 h-16 mx-auto rounded-full flex items-center justify-center" style={{ backgroundColor: '#C58B25' }}>
+                <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+                </svg>
+              </div>
+            </div>
+            
+            <h1 className="text-4xl font-bold text-center mt-10 mb-4" style={{ color: '#1A355E' }}>
+              Is Your Money Shrinking While You Sleep?
+            </h1>
+            <p className="text-lg text-center mb-6 max-w-2xl mx-auto" style={{ color: '#6B7280' }}>
+              Find out how much inflation is secretly eroding your savings and learn how to protect your wealth.
             </p>
           </div>
 
-          <Card className="bg-white rounded-lg shadow-lg overflow-hidden mb-8">
-            <CardContent className="p-8">
+          <div className="mb-12">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto">
+              <div className="text-center p-4 bg-white rounded-lg border-2 border-gray-200 shadow-sm">
+                <div className="text-sm font-semibold" style={{ color: '#1A355E' }}>FCA Compliant</div>
+                <div className="text-xs" style={{ color: '#6B7280' }}>Regulated</div>
+              </div>
+              <div className="text-center p-4 bg-white rounded-lg border-2 border-gray-200 shadow-sm">
+                <div className="text-sm font-semibold" style={{ color: '#1A355E' }}>Since 2017</div>
+                <div className="text-xs" style={{ color: '#6B7280' }}>8+ Years</div>
+              </div>
+              <div className="text-center p-4 bg-white rounded-lg border-2 border-gray-200 shadow-sm">
+                <div className="text-sm font-semibold" style={{ color: '#1A355E' }}>£1.2M+ Raised</div>
+                <div className="text-xs" style={{ color: '#6B7280' }}>Capital</div>
+              </div>
+              <div className="text-center p-4 bg-white rounded-lg border-2 border-gray-200 shadow-sm">
+                <div className="text-sm font-semibold" style={{ color: '#1A355E' }}>100+ Deals</div>
+                <div className="text-xs" style={{ color: '#6B7280' }}>Completed</div>
+              </div>
+            </div>
+          </div>
+
+          <div className="py-10">
+            {/* Visual Icon */}
+            <div className="text-center mb-8">
+              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full shadow-lg" style={{ backgroundColor: '#F97316' }}>
+                <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M7 14l5-5 5 5z"/>
+                  <path d="M12 3v18M3 12h18" stroke="currentColor" strokeWidth="2" opacity="0.3"/>
+                </svg>
+              </div>
+              <p className="text-sm mt-2" style={{ color: '#C58B25' }}>Your money is shrinking</p>
+            </div>
+
+            <div className="p-8 rounded-lg shadow-lg mb-8 max-w-3xl mx-auto border border-gray-200" style={{ backgroundColor: '#FAF9F6' }}>
+              <div className="text-center mb-8">
+                <h2 className="text-2xl font-bold mb-2" style={{ color: '#1A355E' }}>Inflation Impact Calculator</h2>
+                <p style={{ color: '#6B7280' }}>
+                  See exactly how much purchasing power you've lost over time
+                </p>
+              </div>
+              
               <Form {...form}>
                 <form onSubmit={form.handleSubmit(calculateInflation)} className="space-y-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <FormField
                       control={form.control}
                       name="name"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="font-medium" style={{ color: '#1A355E' }}>Your Name</FormLabel>
+                          <FormLabel className="text-lg font-medium" style={{ color: '#1A355E' }}>Your Name</FormLabel>
                           <FormControl>
-                            <Input
-                              placeholder="Jane Doe"
-                              className="w-full px-4 py-2 border border-gray-300 rounded-md"
+                            <Input 
+                              placeholder="Enter your name" 
+                              className="h-12 text-lg border border-gray-300 rounded-md"
                               {...field}
                             />
                           </FormControl>
@@ -265,12 +312,12 @@ const InflationCalculator = () => {
                       name="email"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="font-medium" style={{ color: '#1A355E' }}>Your Email</FormLabel>
+                          <FormLabel className="text-lg font-medium" style={{ color: '#1A355E' }}>Your Email</FormLabel>
                           <FormControl>
-                            <Input
-                              type="email"
-                              placeholder="jane@example.com"
-                              className="w-full px-4 py-2 border border-gray-300 rounded-md"
+                            <Input 
+                              type="email" 
+                              placeholder="your.email@example.com" 
+                              className="h-12 text-lg border border-gray-300 rounded-md"
                               {...field}
                             />
                           </FormControl>
@@ -280,107 +327,124 @@ const InflationCalculator = () => {
                     />
                   </div>
 
-                  <div className="text-center">
-                    <h3 className="text-xl font-bold mb-6" style={{ color: '#1A355E' }}>Calculate Your Inflation Impact</h3>
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-                      <FormField
-                        control={form.control}
-                        name="amount"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel className="font-medium" style={{ color: '#1A355E' }}>Amount (£)</FormLabel>
-                            <FormControl>
-                              <Input
-                                placeholder="e.g., 10000"
-                                className="w-full px-4 py-2 border border-gray-300 rounded-md"
-                                {...field}
-                              />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                      
-                      <FormField
-                        control={form.control}
-                        name="month"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel className="font-medium" style={{ color: '#1A355E' }}>Month</FormLabel>
-                            <Select onValueChange={field.onChange} defaultValue={field.value}>
-                              <FormControl>
-                                <SelectTrigger className="w-full px-4 py-2 border border-gray-300 rounded-md">
-                                  <SelectValue placeholder="Select month" />
-                                </SelectTrigger>
-                              </FormControl>
-                              <SelectContent>
-                                {months.map((month) => (
-                                  <SelectItem key={month.value} value={month.value}>
-                                    {month.label}
-                                  </SelectItem>
-                                ))}
-                              </SelectContent>
-                            </Select>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <FormField
+                      control={form.control}
+                      name="amount"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="text-lg font-medium" style={{ color: '#1A355E' }}>Amount (£)</FormLabel>
+                          <FormControl>
+                            <Input 
+                              placeholder="e.g., 10000" 
+                              className="h-12 text-lg border border-gray-300 rounded-md"
+                              {...field}
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
 
-                      <FormField
-                        control={form.control}
-                        name="year"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel className="font-medium" style={{ color: '#1A355E' }}>Year</FormLabel>
-                            <Select onValueChange={field.onChange} defaultValue={field.value}>
-                              <FormControl>
-                                <SelectTrigger className="w-full px-4 py-2 border border-gray-300 rounded-md">
-                                  <SelectValue placeholder="Select year" />
-                                </SelectTrigger>
-                              </FormControl>
-                              <SelectContent>
-                                {years.map((year) => (
-                                  <SelectItem key={year.value} value={year.value}>
-                                    {year.label}
-                                  </SelectItem>
-                                ))}
-                              </SelectContent>
-                            </Select>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                    </div>
+                    <FormField
+                      control={form.control}
+                      name="month"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="text-lg font-medium" style={{ color: '#1A355E' }}>Month</FormLabel>
+                          <FormControl>
+                            <select 
+                              className="w-full h-12 text-lg border border-gray-300 bg-background px-3 py-2 rounded-md"
+                              {...field}
+                            >
+                              <option value="">Select month</option>
+                              {months.map((month) => (
+                                <option key={month.value} value={month.value}>{month.label}</option>
+                              ))}
+                            </select>
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
 
-                    <div className="mb-6">
-                      <Button
-                        type="submit"
-                        className="w-full md:w-auto px-8 py-3 text-white font-semibold rounded transition-colors"
-                        style={{ backgroundColor: '#F97316' }}
-                        onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#EA580C'}
-                        onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#F97316'}
-                        disabled={isSubmitting}
-                      >
-                        {isSubmitting ? "Calculating..." : "Calculate Now"}
-                      </Button>
-                    </div>
+                    <FormField
+                      control={form.control}
+                      name="year"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="text-lg font-medium" style={{ color: '#1A355E' }}>Year</FormLabel>
+                          <FormControl>
+                            <select 
+                              className="w-full h-12 text-lg border border-gray-300 bg-background px-3 py-2 rounded-md"
+                              {...field}
+                            >
+                              <option value="">Select year</option>
+                              {years.map((year) => (
+                                <option key={year.value} value={year.value}>{year.label}</option>
+                              ))}
+                            </select>
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
                   </div>
+
+                  <Button 
+                    type="submit" 
+                    disabled={isSubmitting}
+                    className="text-white font-semibold px-6 py-3 rounded-lg w-full transition-all duration-200 shadow-lg hover:shadow-xl"
+                    style={{ backgroundColor: '#F97316' }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.backgroundColor = '#EA580C';
+                      e.currentTarget.style.transform = 'translateY(-1px)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.backgroundColor = '#F97316';
+                      e.currentTarget.style.transform = 'translateY(0)';
+                    }}
+                  >
+                    {isSubmitting ? "Calculating..." : "Reveal My Losses"}
+                  </Button>
                 </form>
               </Form>
-            </CardContent>
-          </Card>
 
-          <Card className="bg-white rounded-lg shadow-lg overflow-hidden mb-8">
-            <CardContent className="p-8">
-              <h3 className="text-2xl font-bold text-center mb-6" style={{ color: '#1A355E' }}>
-                Current UK Inflation Rate
-              </h3>
-              <div className="text-center">
-                <div className="text-5xl font-bold mb-4" style={{ color: '#F97316' }}>2.6%</div>
-                <p style={{ color: '#6B7280' }}>Source: Office for National Statistics</p>
+              <div className="text-center mt-6 pt-4" style={{ borderTop: '1px solid #C58B25' }}>
+                <p className="text-sm" style={{ color: '#6B7280' }}>
+                  📈 <strong>Current UK Inflation Rate:</strong> 2.6% (Latest ONS data)<br />
+                  <a 
+                    href="https://www.ons.gov.uk/economy/inflationandpriceindices" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="underline hover:no-underline"
+                    style={{ color: '#F97316' }}
+                  >
+                    Source: Office for National Statistics (ONS)
+                  </a>
+                </p>
               </div>
-            </CardContent>
-          </Card>
+            </div>
+
+            <div className="max-w-2xl mx-auto mt-8 p-4 bg-white border rounded-lg" style={{ borderColor: '#C58B25' }}>
+              <p className="italic text-center" style={{ color: '#1A355E' }}>
+                <strong>Did you know?</strong> £10,000 in 2010 would need to be worth over £17,000 today just to keep its value.
+              </p>
+            </div>
+
+            <div className="py-8 text-center">
+              <blockquote className="bg-gray-50 p-6 rounded-lg shadow-sm border max-w-2xl mx-auto" style={{ borderColor: '#C58B25' }}>
+                <p className="text-lg italic mb-3" style={{ color: '#6B7280' }}>
+                  "I had no idea I was losing that much — now I'm earning 10% instead."
+                </p>
+                <cite className="text-sm font-semibold" style={{ color: '#1A355E' }}>
+                  – James, Private Investor
+                </cite>
+              </blockquote>
+            </div>
+          </div>
+
+
 
           {result && (
             <Card className="bg-white rounded-lg shadow-lg overflow-hidden">
@@ -439,21 +503,55 @@ const InflationCalculator = () => {
 
                 <div className="text-center p-6 rounded-lg border-2" style={{ borderColor: '#C58B25' }}>
                   <h4 className="text-xl font-bold mb-4" style={{ color: '#1A355E' }}>
-                    Don't let inflation erode your wealth
+                    Want to stop losing value to inflation?
                   </h4>
                   <p className="mb-6" style={{ color: '#6B7280' }}>
-                    Our property investment opportunities typically return 8-12% annually, 
-                    helping you stay ahead of inflation while your money is secured against real UK property.
+                    Learn how our investors are earning 8-12% annually, backed by real UK property assets that grow with inflation.
                   </p>
-                  <a 
-                    href="/contact" 
-                    className="inline-block px-6 py-3 text-white font-semibold rounded-md transition-colors"
+                  <Button 
+                    className="text-white font-semibold px-6 py-3 rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl"
                     style={{ backgroundColor: '#F97316' }}
-                    onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#EA580C'}
-                    onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#F97316'}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.backgroundColor = '#EA580C';
+                      e.currentTarget.style.transform = 'translateY(-1px)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.backgroundColor = '#F97316';
+                      e.currentTarget.style.transform = 'translateY(0)';
+                    }}
+                    onClick={() => window.open('/contact', '_blank')}
                   >
-                    Learn More About Our Property Investments
-                  </a>
+                    Book your free 15-min consultation
+                  </Button>
+                </div>
+
+                {/* Post-Submit Call to Action */}
+                <div className="py-8">
+                  <div className="bg-white p-8 rounded-lg shadow-md max-w-2xl mx-auto border-2" style={{ borderColor: '#C58B25' }}>
+                    <div className="text-center">
+                      <h3 className="text-xl font-bold mb-4" style={{ color: '#1A355E' }}>
+                        Want to protect your savings and earn more?
+                      </h3>
+                      <p className="mb-6" style={{ color: '#6B7280' }}>
+                        Book a free strategy call to learn how our investors are earning 8-12% annually.
+                      </p>
+                      <Button 
+                        className="text-white font-semibold px-6 py-3 rounded-lg transition-all duration-200 shadow-md hover:shadow-lg"
+                        style={{ backgroundColor: '#C58B25' }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.backgroundColor = '#B8761F';
+                          e.currentTarget.style.transform = 'translateY(-1px)';
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.backgroundColor = '#C58B25';
+                          e.currentTarget.style.transform = 'translateY(0)';
+                        }}
+                        onClick={() => window.open('/book-call', '_blank')}
+                      >
+                        Book My Free Call
+                      </Button>
+                    </div>
+                  </div>
                 </div>
               </CardContent>
             </Card>
