@@ -13,7 +13,7 @@ const StatsCard = () => {
                 <div className="font-bold text-2xl" style={{ color: '#F97316' }}>8-12%</div>
                 <div className="text-sm" style={{ color: '#6B7280' }}>Annual Returns</div>
               </div>
-              <div className="p-3 rounded-md bg-[C58B25]" style={{ backgroundColor: '#F97316', opacity: 0.1 }}>
+              <div className="p-3 rounded-md bg-[#C58B25]" style={{ backgroundColor: '#F97316', opacity: 0.1 }}>
                 <div className="font-bold text-2xl" style={{ color: '#F97316' }}>100%</div>
                 <div className="text-sm" style={{ color: '#6B7280' }}>Asset-Backed</div>
               </div>
