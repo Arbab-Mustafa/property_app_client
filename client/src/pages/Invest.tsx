@@ -24,7 +24,7 @@ const Invest = () => {
       </Helmet>
       
       {/* Hero Section */}
-      <section className="px-4 text-center pt-24 pb-12" style={{ backgroundColor: '#F9FAFB' }}>
+      <section className="px-4 text-center pt-40 pb-12" style={{ backgroundColor: '#F9FAFB' }}>
         <div className="container mx-auto max-w-4xl">
           <h1 className="text-4xl md:text-5xl font-bold mb-12" style={{ color: '#1A355E' }}>What We Do</h1>
           <div className="flex justify-center mb-12">

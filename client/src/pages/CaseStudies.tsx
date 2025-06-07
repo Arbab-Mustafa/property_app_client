@@ -75,7 +75,7 @@ const CaseStudies = () => {
       </Helmet>
 
       {/* Header Section */}
-      <section className="py-16 pt-24 border-b" style={{ backgroundColor: '#F9FAFB', borderColor: '#E5E7EB' }}>
+      <section className="py-16 pt-40 border-b" style={{ backgroundColor: '#F9FAFB', borderColor: '#E5E7EB' }}>
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-4xl md:text-5xl font-bold mb-6" style={{ color: '#1A355E' }}>
             Our Property Investment Case Studies

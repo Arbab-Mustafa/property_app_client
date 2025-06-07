@@ -17,9 +17,10 @@ const Contact = () => {
       <div className="min-h-screen py-12 px-4" style={{ backgroundColor: '#F9FAFB' }}>
         <div className="max-w-6xl mx-auto">
           {/* Hero Section */}
-          <div className="text-center mb-12">
+          <div className="text-center mt-20 mb-12">
             <h1 className="text-3xl md:text-4xl font-bold mb-6" style={{ color: '#1A355E' }}>
-              Start the Conversation About Making Your Money Work Smarter
+              Want to See How Much More <br /> Your Money Could Be Doing?<br />
+              Is Your Capital Working <br />as Hard as It Should Be?
             </h1>
             <p className="text-lg max-w-2xl mx-auto text-center mb-6" style={{ color: '#6B7280' }}>
               Whether you're looking to earn passive income through secured property lending, co-invest on a project, or just want access to high-performing deals — we're here to help. Drop us a message and we'll get back to you within 1 working day.

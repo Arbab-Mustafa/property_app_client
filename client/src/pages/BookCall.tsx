@@ -23,7 +23,7 @@ const BookCall = () => {
         <div className="max-w-3xl mx-auto">
           {/* Header */}
           <div className="text-center mb-12">
-            <h1 className="text-3xl md:text-4xl font-bold text-center mt-10 mb-4" style={{ color: '#1A355E' }}>
+            <h1 className="text-3xl md:text-4xl font-bold text-center mt-28 mb-4" style={{ color: '#1A355E' }}>
               Book a Free Strategy Call to Learn How Our Investors Are Beating Inflation with UK Property
             </h1>
             <p className="text-lg text-center mb-8 max-w-2xl mx-auto" style={{ color: '#6B7280' }}>

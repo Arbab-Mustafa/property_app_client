@@ -35,7 +35,7 @@ const AboutUs = () => {
           <div className="grid md:grid-cols-3 gap-8 w-full">
             <div className="bg-white rounded-lg p-6 shadow-md border border-gray-100">
               <div className="flex items-center justify-center mb-4">
-                <div className="p-3 rounded-lg" style={{ backgroundColor: '#F97316', opacity: 0.1 }}>
+                <div className="p-3 rounded-lg" style={{ backgroundColor: '#FFF7ED' }}>
                   <Dumbbell className="h-6 w-6" style={{ color: '#F97316' }} />
                 </div>
               </div>
@@ -47,7 +47,7 @@ const AboutUs = () => {
             
             <div className="bg-white rounded-lg p-6 shadow-md border border-gray-100">
               <div className="flex items-center justify-center mb-4">
-                <div className="p-3 rounded-lg" style={{ backgroundColor: '#F97316', opacity: 0.1 }}>
+                <div className="p-3 rounded-lg" style={{ backgroundColor: '#FFF7ED' }}>
                   <Mountain className="h-6 w-6" style={{ color: '#F97316' }} />
                 </div>
               </div>
@@ -59,7 +59,7 @@ const AboutUs = () => {
             
             <div className="bg-white rounded-lg p-6 shadow-md border border-gray-100">
               <div className="flex items-center justify-center mb-4">
-                <div className="p-3 rounded-lg" style={{ backgroundColor: '#F97316', opacity: 0.1 }}>
+                <div className="p-3 rounded-lg" style={{ backgroundColor: '#FFF7ED' }}>
                   <Clock3 className="h-6 w-6" style={{ color: '#F97316' }} />
                 </div>
               </div>
@@ -74,7 +74,7 @@ const AboutUs = () => {
         <div className="grid md:grid-cols-3 gap-8 mt-12">
           <div className="bg-white rounded-lg p-6 shadow-md border border-gray-100">
             <div className="flex items-center justify-center mb-4">
-              <div className="p-3 rounded-lg" style={{ backgroundColor: '#F97316', opacity: 0.1 }}>
+              <div className="p-3 rounded-lg" style={{ backgroundColor: '#FFF7ED' }}>
                 <BadgeCheck className="h-6 w-6" style={{ color: '#F97316' }} />
               </div>
             </div>
@@ -86,7 +86,7 @@ const AboutUs = () => {
           
           <div className="bg-white rounded-lg p-6 shadow-md border border-gray-100">
             <div className="flex items-center justify-center mb-4">
-              <div className="p-3 rounded-lg" style={{ backgroundColor: '#F97316', opacity: 0.1 }}>
+              <div className="p-3 rounded-lg" style={{ backgroundColor: '#FFF7ED' }}>
                 <Target className="h-6 w-6" style={{ color: '#F97316' }} />
               </div>
             </div>
@@ -98,7 +98,7 @@ const AboutUs = () => {
           
           <div className="bg-white rounded-lg p-6 shadow-md border border-gray-100">
             <div className="flex items-center justify-center mb-4">
-              <div className="p-3 rounded-lg" style={{ backgroundColor: '#F97316', opacity: 0.1 }}>
+              <div className="p-3 rounded-lg" style={{ backgroundColor: '#FFF7ED' }}>
                 <GalleryThumbnails className="h-6 w-6" style={{ color: '#F97316' }} />
               </div>
             </div>
