@@ -55,8 +55,8 @@ const Footer = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="lg:flex justify-between gap-10 mb-8">
           <div className="lg:w-1/4 mb-8 lg:mb-0">
-            <div className="h-12 mb-4 flex items-center">
-              <img src={footerLogo} alt="KR Property Investments" className="h-10 w-auto" />
+            <div className="h-16 mb-4 flex items-center">
+              <img src={footerLogo} alt="KR Property Investments" className="h-14 w-auto" />
             </div>
             <p className="text-neutral-400 mb-4">
               Helping You Achieve Stronger Returns Through Strategic Property Investments — Since 2017
