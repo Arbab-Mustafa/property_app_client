@@ -22,6 +22,14 @@ const CaseStudies = () => {
       link: "/case-studies/property-2"
     },
     {
+      id: "social-housing-deal",
+      title: "Long-Term Social Housing – North East Lincolnshire",
+      type: "Social Housing",
+      summary: "3-bed to 4-bed conversion with 5-year lease backed by registered provider. Secure returns with zero tenant management.",
+      roi: "27% Cash-on-Cash",
+      link: "/case-studies/social-housing-deal"
+    },
+    {
       id: "property-3",
       title: "3-Bed HMO – Leeds",
       type: "Student Accommodation",

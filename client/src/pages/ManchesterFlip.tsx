@@ -53,8 +53,9 @@ const ManchesterFlip = () => {
       {/* Page Header */}
       <section className="bg-primary text-white py-16">
         <div className="container mx-auto px-4 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold mb-6">
-            2-Bed Flat Flip – Manchester (Completed 2024)
+          <h1 className="text-4xl md:text-5xl font-bold mb-6 pt-20">
+            3 Bed Converted to <br />
+            4 Bed Family House
           </h1>
           <p className="text-xl md:text-2xl max-w-4xl mx-auto">
             A successful property renovation project in Manchester's Northern Quarter, delivering strong returns 
