@@ -5,15 +5,15 @@ const Testimonials = () => {
   const testimonials = [
     {
       quote: "I was unsure where to invest, but KR guided me every step of the way. I'm now seeing 10% returns on my first project.",
-      author: "Maya D."
+      author: "Pierre R."
     },
     {
       quote: "Hands-off, honest, and effective. My savings are finally growing.",
-      author: "Thomas R."
+      author: "Madeline Kuch."
     },
     {
       quote: "As someone with no property experience, I felt supported and informed throughout the process.",
-      author: "Angela K."
+      author: "Joan Williams."
     }
   ];
 
