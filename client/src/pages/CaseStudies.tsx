@@ -96,8 +96,8 @@ const CaseStudies = () => {
               return (
                 <div key={study.id} className="bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 border border-gray-100 overflow-hidden group">
                   {/* Icon Header */}
-                  <div className="p-6 text-center border-b border-gray-100" style={{ backgroundColor: '#C58B25', opacity: 0.1 }}>
-                    <div className="inline-flex items-center justify-center w-16 h-16 rounded-full mb-4" style={{ backgroundColor: '#C58B25', opacity: 0.2 }}>
+                  <div className="p-6 text-center border-b border-gray-100" style={{ backgroundColor: '#FEF9F3' }}>
+                    <div className="inline-flex items-center justify-center w-16 h-16 rounded-full mb-4" style={{ backgroundColor: '#F3E8D1' }}>
                       <IconComponent className="h-8 w-8" style={{ color: '#C58B25' }} />
                     </div>
                     <div className="text-sm mb-1" style={{ color: '#6B7280' }}>{study.type}</div>
@@ -112,7 +112,7 @@ const CaseStudies = () => {
 
                     {/* ROI Badge */}
                     <div className="mb-6">
-                      <span className="inline-flex items-center px-3 py-1 rounded-full font-semibold text-sm" style={{ backgroundColor: '#C58B25', color: 'white', opacity: 0.9 }}>
+                      <span className="inline-flex items-center px-3 py-1 rounded-full font-semibold text-sm text-white" style={{ backgroundColor: '#C58B25' }}>
                         <TrendingUp className="h-4 w-4 mr-1" />
                         {study.roi}
                       </span>
