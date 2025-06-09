@@ -129,10 +129,7 @@ const Footer = () => {
                 <Phone className="text-neutral-400 h-5 w-5 mr-2 mt-1" />
                 <span className="text-neutral-400">02036332783</span>
               </li>
-              <li className="flex items-start">
-                <MapPin className="text-neutral-400 h-5 w-5 mr-2 mt-1" />
-                <span className="text-neutral-400">Lincolnshire, United Kingdom</span>
-              </li>
+              
             </ul>
           </div>
 

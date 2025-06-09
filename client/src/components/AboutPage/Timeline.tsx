@@ -4,13 +4,13 @@ import { CheckCircle, Home, TrendingUp, Users, Rocket } from "lucide-react";
 const Timeline = () => {
   const milestones = [
     {
-      year: "2017",
-      title: "KR Property Investments founded",
+      year: "Beginning Of 2017",
+      title: "Our Property Journey Started ",
       icon: CheckCircle,
-      description: "Started our journey in property investment"
+      description: "Invested £24,000 into our property education"
     },
     {
-      year: "2018",
+      year: "End Of 2017",
       title: "First investment deal completed",
       icon: Home,
       description: "Successfully completed our first property investment"
