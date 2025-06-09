@@ -4,58 +4,34 @@ import { CheckCircle, Home, TrendingUp, Users, Rocket } from "lucide-react";
 const Timeline = () => {
   const milestones = [
     {
-      year: "2017",
-      title: "Invested in Our Education",
+      year: "Beginning Of 2017",
+      title: "Our Property Journey Started ",
       icon: CheckCircle,
-      description: "We committed £24,000 to learn the fundamentals of property investing — and completed our first mentorship."
+      description: "Invested £24,000 into our property education"
     },
     {
-      year: "End of 2017",
-      title: "First Buy-to-Let Secured",
+      year: "End Of 2017",
+      title: "First investment deal completed",
       icon: Home,
-      description: "Our property journey began with a single BTL deal — the result of months of learning, viewing, and persistence."
-    },
-    {
-      year: "2018–2019",
-      title: "Refining Strategy, Learning the Market",
-      icon: TrendingUp,
-      description: "We spent two years actively analysing BTL and HMO opportunities, while adapting to changing market conditions."
+      description: "Successfully completed our first property investment"
     },
     {
       year: "2020",
-      title: "Second Deal During COVID",
-      icon: Home,
-      description: "Despite rising rates and lockdown challenges, we secured another buy-to-let in March and raised £100K to fund projects."
-    },
-    {
-      year: "2021",
-      title: "Gaining Momentum",
+      title: "Over £500K in capital raised",
       icon: TrendingUp,
-      description: "Two more BTLs added to the portfolio — slowly but surely building confidence, systems, and investor interest."
+      description: "Reached significant capital milestone"
     },
     {
       year: "2022",
-      title: "Continued Investment + Positioning for Scale",
+      title: "Reached 50+ private clients",
       icon: Users,
-      description: "We added another asset and began setting foundations to scale beyond our own capital."
+      description: "Built strong client base and trust"
     },
     {
-      year: "2023",
-      title: "New Network, New Direction",
+      year: "2024",
+      title: "£1.2M+ total capital raised and 100+ deals done",
       icon: Rocket,
-      description: "After joining a new property network, we pivoted into deal sourcing — unlocking access to more opportunities and connections."
-    },
-    {
-      year: "2023–2024",
-      title: "20+ Deals Sourced, Model Proven",
-      icon: CheckCircle,
-      description: "We helped investors secure 20+ deals in under 12 months — proving our ability to find, vet, and deliver value on the ground."
-    },
-    {
-      year: "2024 (So Far)",
-      title: "£700K+ Raised, 7 Deals Transacted",
-      icon: TrendingUp,
-      description: "We've now raised over £700,000 and transacted on 7 property deals, continuing to build a trusted network of private investors and partners."
+      description: "Achieved major growth milestones"
     }
   ];
 
