@@ -3,15 +3,13 @@ import teamImage from "../../assets/team/aaron-stevie.png";
 
 const AboutUs = () => {
   return (
-    <section className="section-anchor py-16 pt-24" style={{ backgroundColor: '#F9FAFB' }} id="wp-content-about-us">
+    <section className="section-anchor py-16 pt-40" style={{ backgroundColor: '#F9FAFB' }} id="wp-content-about-us">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold mb-4" style={{ color: '#1A355E' }}>About Us</h2>
-          <p className="max-w-2xl mx-auto text-base leading-relaxed" style={{ color: '#6B7280' }}>
-            Get to know the team behind KR Property Investments.
-          </p>
         </div>
-        
+
+      
         {/* Centered image section */}
         <div className="flex flex-col items-center mb-16">
           <figure className="relative mb-10">
@@ -20,9 +18,6 @@ const AboutUs = () => {
               alt="Aaron and Stevie - Property Investment Team" 
               className="rounded-full shadow-lg w-64 h-64 object-cover mx-auto"
             />
-            <figcaption className="mt-4 text-center text-sm" style={{ color: '#6B7280' }}>
-              Aaron and Stevie, founders of KR Property Investments
-            </figcaption>
           </figure>
           
           <div className="max-w-2xl text-center mb-10">

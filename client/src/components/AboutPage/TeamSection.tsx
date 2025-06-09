@@ -3,6 +3,7 @@ import { Mail, Linkedin } from "lucide-react";
 import teamImage from "../../assets/team/aaron-stevie.png";
 
 import Aaron_profile_pic from "@assets/Aaron_profile_pic.png";
+import Stevie_profile_pic from "@assets/AARON+STEVIE.png";
 
 const TeamSection = () => {
   const teamMembers = [
@@ -10,7 +11,7 @@ const TeamSection = () => {
       name: "Aaron",
       title: "Co-Founder",
       bio: "Passionate about property investment with expertise in Brazilian Jiu-Jitsu. Brings discipline and strategic thinking to every investment decision.",
-      image: teamImage,
+      image: Stevie_profile_pic,
       email: "aaron@kr-properties.co.uk",
       linkedin: "https://www.linkedin.com/in/aaronremy/"
     },
@@ -18,7 +19,7 @@ const TeamSection = () => {
       name: "Stevie",
       title: "Co-Founder", 
       bio: "CrossFit and weightlifting competitor who applies the same dedication to building successful property portfolios. Focuses on client relationships and deal structuring.",
-      image: teamImage,
+      image: Aaron_profile_pic,
       email: "stephanie@kr-properties.co.uk",
       linkedin: "https://www.linkedin.com/in/stephanie-kuch-7526b654/"
     }
@@ -43,7 +44,7 @@ const TeamSection = () => {
               <div className="text-center mb-6">
                 <div className="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden bg-gray-200">
                   <img 
-                    src={Aaron_profile_pic} 
+                    src={member.image} 
                     alt={member.name}
                     className="w-full h-full object-cover"
                   />
