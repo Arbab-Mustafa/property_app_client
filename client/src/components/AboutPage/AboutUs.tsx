@@ -136,7 +136,7 @@ const AboutUs = () => {
             </div>
             <div className="text-white shadow-lg hover:shadow-xl transition-shadow duration-300 rounded-lg" style={{ background: 'linear-gradient(135deg, #F97316 0%, #EA580C 100%)' }}>
               <div className="p-6 text-center">
-                <div className="text-3xl lg:text-4xl font-bold mb-2">100+</div>
+                <div className="text-3xl lg:text-4xl font-bold mb-2">30+</div>
                 <div className="font-medium text-sm lg:text-base" style={{ color: 'rgba(255, 255, 255, 0.9)' }}>Property Deals</div>
               </div>
             </div>
