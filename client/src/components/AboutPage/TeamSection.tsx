@@ -2,6 +2,8 @@ import React from "react";
 import { Mail, Linkedin } from "lucide-react";
 import teamImage from "../../assets/team/aaron-stevie.png";
 
+import Aaron_profile_pic from "@assets/Aaron_profile_pic.png";
+
 const TeamSection = () => {
   const teamMembers = [
     {
@@ -41,7 +43,7 @@ const TeamSection = () => {
               <div className="text-center mb-6">
                 <div className="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden bg-gray-200">
                   <img 
-                    src={member.image} 
+                    src={Aaron_profile_pic} 
                     alt={member.name}
                     className="w-full h-full object-cover"
                   />
