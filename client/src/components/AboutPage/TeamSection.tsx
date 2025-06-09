@@ -5,6 +5,7 @@ import teamImage from "../../assets/team/aaron-stevie.png";
 import Aaron_profile_pic from "@assets/Aaron_profile_pic.png";
 import Aaron_new_pic from "@assets/Aaron_profile_pic_1749471223264.png";
 import Stevie_profile_pic from "@assets/AARON+STEVIE.png";
+import Stevie_new_pic from "@assets/WhatsApp Image 2025-06-09 at 10.55.46_1749471272434.jpeg";
 
 const TeamSection = () => {
   const teamMembers = [
@@ -20,7 +21,7 @@ const TeamSection = () => {
       name: "Stevie",
       title: "Co-Founder", 
       bio: "CrossFit and weightlifting competitor who applies the same dedication to building successful property portfolios. Focuses on client relationships and deal structuring.",
-      image: Aaron_profile_pic,
+      image: Stevie_new_pic,
       email: "stephanie@kr-properties.co.uk",
       linkedin: "https://www.linkedin.com/in/stephanie-kuch-7526b654/"
     }
