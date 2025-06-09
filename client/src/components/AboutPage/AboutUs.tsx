@@ -124,7 +124,7 @@ const AboutUs = () => {
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
             <div className="text-white shadow-lg hover:shadow-xl transition-shadow duration-300 rounded-lg" style={{ background: 'linear-gradient(135deg, #F97316 0%, #EA580C 100%)' }}>
               <div className="p-6 text-center">
-                <div className="text-3xl lg:text-4xl font-bold mb-2">65+</div>
+                <div className="text-3xl lg:text-4xl font-bold mb-2">16+</div>
                 <div className="font-medium text-sm lg:text-base" style={{ color: 'rgba(255, 255, 255, 0.9)' }}>Clients</div>
               </div>
             </div>
