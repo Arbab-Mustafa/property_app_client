@@ -183,8 +183,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
       }
 
       // ✅ 2. Send to Baserow
-      const baserowToken = process.env.BASEROW_API_KEY;
-      console.log("Using Baserow token:", baserowToken ? "Token exists" : "No token found");
+      const baserowToken = process.env.VITE_BASEROW_API_TOKEN;
+      console.log("Using Baserow token:", baserowToken ? `Token exists (${baserowToken.substring(0, 8)}...)` : "No token found");
       
       if (baserowToken) {
         // Create formatted timestamp: "17 June 2025 – 2:38PM"
