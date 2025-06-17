@@ -135,6 +135,32 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Deal lead endpoint for waitlist
+  app.post("/api/send-deal-lead", async (req, res) => {
+    try {
+      const { name, email, message } = req.body;
+      
+      if (!name || !email) {
+        return res.status(400).json({ message: "Name and email are required" });
+      }
+
+      // Store in contact submissions table
+      const contactData = {
+        name,
+        email,
+        subject: "Deal Sourcing Waitlist",
+        message: message || "Interested in joining the deal sourcing waitlist"
+      };
+
+      await storage.createContactSubmission(contactData);
+      
+      res.status(200).json({ message: "Successfully joined waitlist" });
+    } catch (error) {
+      console.error("Deal lead submission error:", error);
+      res.status(500).json({ message: "Failed to submit waitlist request" });
+    }
+  });
+
   const httpServer = createServer(app);
   return httpServer;
 }
