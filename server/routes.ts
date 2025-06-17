@@ -143,33 +143,67 @@ export async function registerRoutes(app: Express): Promise<Server> {
     const { name, email, message } = req.body;
 
     try {
-      // ✅ 1. Send to SendGrid
+      // ✅ 1. Send confirmation email to user
       try {
         await sendEmail({
-          to: "aaron@kr-properties.co.uk",
-          from: "noreply@kr-properties.co.uk", // System email as sender
-          subject: "New Deal Sourcing Interest",
+          to: email,
+          from: "aaron@kr-properties.co.uk",
+          subject: "Welcome to the Deal Sourcing Waitlist! 🎯",
           html: `
-            <h3>New Lead for Deal Sourcing</h3>
-            <p><strong>Name:</strong> ${name}</p>
-            <p><strong>Email:</strong> ${email}</p>
-            <p><strong>Message:</strong> ${message || "No message provided."}</p>
+            <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+              <h2 style="color: #1A355E;">Thanks for joining our Deal Sourcing Waitlist, ${name}!</h2>
+              
+              <p>We're currently at full capacity, but you'll be the first to know when we reopen for new clients.</p>
+              
+              <p><strong>🎁 Your FREE Deal Checklist is ready!</strong></p>
+              
+              <p>As promised, here's your comprehensive Deal Checklist to help you prepare like a pro. You can download it <a href="https://drive.google.com/file/d/your-file-id/view?usp=sharing" style="color: #F97316; text-decoration: none; font-weight: bold;">here</a>.</p>
+              
+              <p>This checklist includes:</p>
+              <ul>
+                <li>✅ Key questions to ask before buying</li>
+                <li>✅ How to spot hidden costs and deal-breakers</li>
+                <li>✅ 10 due diligence checks most investors skip</li>
+                <li>✅ Methods to instantly compare ROI across deals</li>
+              </ul>
+              
+              <p>We'll be in touch as soon as we have availability.</p>
+              
+              <p style="margin-top: 30px;">Best regards,<br/>
+              <strong>Aaron from KR Property Investments</strong></p>
+              
+              <hr style="border: none; border-top: 1px solid #C58B25; margin: 30px 0;">
+              <p style="font-size: 12px; color: #6B7280;">Expected next intake: Autumn 2025</p>
+            </div>
           `,
         });
-        console.log("Email sent successfully");
+        console.log("Confirmation email sent to:", email);
       } catch (emailError) {
         console.error("Email failed:", emailError);
       }
 
       // ✅ 2. Send to Baserow
-      const baserowToken = process.env.VITE_BASEROW_API_TOKEN;
+      const baserowToken = process.env.BASEROW_API_KEY;
       console.log("Using Baserow token:", baserowToken ? "Token exists" : "No token found");
       
       if (baserowToken) {
+        // Create formatted timestamp: "17 June 2025 – 2:38PM"
+        const now = new Date();
+        const day = now.getDate();
+        const month = now.toLocaleString('en-US', { month: 'long' });
+        const year = now.getFullYear();
+        const time = now.toLocaleString('en-US', { 
+          hour: 'numeric', 
+          minute: '2-digit', 
+          hour12: true 
+        });
+        const timestamp = `${day} ${month} ${year} – ${time}`;
+
         const baserowData = {
           "field_4646200": name,
           "field_4646201": email,
-          "field_4646202": message || ""
+          "field_4646202": message || "",
+          "field_4648813": timestamp
         };
         
         console.log("Sending to Baserow:", baserowData);
