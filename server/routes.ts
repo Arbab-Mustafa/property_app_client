@@ -157,7 +157,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
               
               <p><strong>🎁 Your FREE Deal Checklist is ready!</strong></p>
               
-              <p>As promised, here's your comprehensive Deal Checklist to help you prepare like a pro. You can download it <a href="https://drive.google.com/file/d/your-file-id/view?usp=sharing" style="color: #F97316; text-decoration: none; font-weight: bold;">here</a>.</p>
+              <p>As promised, here's your comprehensive Deal Checklist to help you prepare like a pro. You can download it <a href="https://drive.google.com/file/d/1P_hHhSY2RTOcDxpRuN3egPsff71S3Mtv/view?usp=sharing" style="color: #F97316; text-decoration: none; font-weight: bold;">here</a>.</p>
               
               <p>This checklist includes:</p>
               <ul>

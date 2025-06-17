@@ -33,7 +33,7 @@ const ThankYouDealSourcing = () => {
             <li>Instantly compare ROI across deals</li>
           </ul>
           <a 
-            href="https://drive.google.com/your-pdf-link" 
+            href="https://drive.google.com/file/d/1P_hHhSY2RTOcDxpRuN3egPsff71S3Mtv/view?usp=sharing" 
             target="_blank"
             rel="noopener noreferrer"
             className="inline-block bg-[#F97316] text-white px-4 py-2 rounded hover:bg-[#ea580c] font-semibold text-sm"
@@ -56,9 +56,9 @@ const ThankYouDealSourcing = () => {
             Want to see the kind of deals we've helped investors with?
           </p>
           <Link href="/case-studies">
-            <a className="inline-block bg-[#F97316] text-white px-6 py-2 rounded hover:bg-[#ea580c] font-semibold">
+            <span className="inline-block bg-[#F97316] text-white px-6 py-2 rounded hover:bg-[#ea580c] font-semibold cursor-pointer">
               View Our Case Studies
-            </a>
+            </span>
           </Link>
         </div>
       </div>
