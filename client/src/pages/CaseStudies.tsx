@@ -6,60 +6,44 @@ import { ArrowRight, TrendingUp, Building2, Home, Mail } from "lucide-react";
 const CaseStudies = () => {
   const caseStudies = [
     {
-      id: "property-1",
-      title: "2-Bed Flip – Manchester",
-      type: "Victorian Terrace",
-      summary: "Complete renovation of a Victorian terrace in Manchester's Northern Quarter with modern upgrades.",
-      roi: "12.2% Return",
-      link: "/case-studies/manchester-flip"
-    },
-    {
-      id: "property-2",
-      title: "City Center Apartment – Birmingham", 
-      type: "Modern Development",
-      summary: "New-build apartment in Birmingham city center with high rental demand and premium finishes.",
-      roi: "12.8% Return",
-      link: "/case-studies/property-2"
-    },
-    {
-      id: "social-housing-deal",
-      title: "Long-Term Social Housing – North East Lincolnshire",
-      type: "Social Housing",
-      summary: "3-bed to 4-bed conversion with 5-year lease backed by registered provider. Secure returns with zero tenant management.",
-      roi: "27% Cash-on-Cash",
-      link: "/case-studies/social-housing-deal"
-    },
-    {
-      id: "property-3",
-      title: "3-Bed HMO – Leeds",
-      type: "Student Accommodation",
-      summary: "Converted family home into high-yield HMO near university campus with strong rental returns.",
-      roi: "18.5% Return",
+      id: "2-bed-social-housing-nelincs",
+      title: "2-Bed Social Housing – North East Lincolnshire",
+      type: "Mid-Terrace",
+      strategy: "BRR / Social Housing",
+      location: "North East Lincolnshire",
+      summary: "Light refurb including paint, carpets, cooker installation and boundary work readied this mid-terrace for social housing tenancy.",
+      roi: "33.32% ROI",
       link: "#"
     },
     {
-      id: "property-4",
-      title: "Commercial Conversion – Sheffield",
-      type: "Mixed Use Development", 
-      summary: "Former office building converted to residential apartments with retail space on ground floor.",
-      roi: "14.1% Return",
+      id: "social-housing-nelincs",
+      title: "3-Bed Social Housing – North East Lincolnshire",
+      type: "Mid-Terrace",
+      strategy: "BRR / Social Housing",
+      location: "North East Lincolnshire",
+      summary: "Full refurbishment including DPC, kitchen, bathroom, and redecoration prepared this property for long-term letting under a social housing lease.",
+      roi: "16% ROI",
       link: "#"
     },
     {
-      id: "property-5",
-      title: "Buy-to-Let Portfolio – Liverpool",
-      type: "Investment Portfolio",
-      summary: "Strategic acquisition of 4 properties in emerging Liverpool neighborhoods with growth potential.",
-      roi: "13.7% Return",
+      id: "4-bed-social-housing-nelincs",
+      title: "4-Bed Social Housing – North East Lincolnshire",
+      type: "Mid-Terrace",
+      strategy: "BRR / Social Housing",
+      location: "North East Lincolnshire",
+      summary: "Converted from 3 to 4 bedrooms to meet social housing demand. Strong long-term returns through structural reconfiguration and compliance upgrades.",
+      roi: "15.48% ROI",
       link: "#"
     },
     {
-      id: "property-6",
-      title: "Luxury Townhouse – Cheshire",
-      type: "Premium Development",
-      summary: "High-end townhouse development in affluent Cheshire location targeting professional tenants.",
-      roi: "11.9% Return",
-      link: "#"
+      id: "4-bed-family-social-housing-nelincs",
+      title: "4-Bed Family Social Housing – North East Lincolnshire",
+      type: "Mid-Terrace",
+      strategy: "BRR / Social Housing",
+      location: "North East Lincolnshire",
+      summary: "Converted from 3 to 4 bedrooms and furnished to social housing standards. Full compliance works and layout upgrades secured a 5-year tenancy.",
+      roi: "17.67% ROI",
+      link: "/case-studies/4-bed-family-social-housing-nelincs"
     }
   ];
 

@@ -1,0 +1,53 @@
+Please update the `CaseStudies.tsx` page by **replacing the existing placeholder case studies** with the real examples below.
+
+⚠️ INSTRUCTIONS:
+- ✅ Keep the current layout, style, and icons as-is
+- ✅ Only replace the content in the `caseStudies = [ ... ]` array
+- ❌ Do NOT alter any classNames, styles, or structure
+- ✅ Fix IDs to match: strategy + location (no jargon like DPC)
+
+Here’s the new case study array:
+
+```ts
+const caseStudies = [
+  {
+    id: "2-bed-social-housing-nelincs",
+    title: "2-Bed Social Housing – North East Lincolnshire",
+    type: "Mid-Terrace",
+    strategy: "BRR / Social Housing",
+    location: "North East Lincolnshire",
+    summary: "Light refurb including paint, carpets, cooker installation and boundary work readied this mid-terrace for social housing tenancy.",
+    roi: "33.32% ROI",
+    link: "#"
+  },
+  {
+    id: "social-housing-nelincs",
+    title: "3-Bed Social Housing – North East Lincolnshire",
+    type: "Mid-Terrace",
+    strategy: "BRR / Social Housing",
+    location: "North East Lincolnshire",
+    summary: "Full refurbishment including DPC, kitchen, bathroom, and redecoration prepared this property for long-term letting under a social housing lease.",
+    roi: "16% ROI",
+    link: "#"
+  },
+  {
+    id: "4-bed-social-housing-nelincs",
+    title: "4-Bed Social Housing – North East Lincolnshire",
+    type: "Mid-Terrace",
+    strategy: "BRR / Social Housing",
+    location: "North East Lincolnshire",
+    summary: "Converted from 3 to 4 bedrooms to meet social housing demand. Strong long-term returns through structural reconfiguration and compliance upgrades.",
+    roi: "15.48% ROI",
+    link: "#"
+  },
+  {
+    id: "4-bed-family-social-housing-nelincs",
+    title: "4-Bed Family Social Housing – North East Lincolnshire",
+    type: "Mid-Terrace",
+    strategy: "BRR / Social Housing",
+    location: "North East Lincolnshire",
+    summary: "Converted from 3 to 4 bedrooms and furnished to social housing standards. Full compliance works and layout upgrades secured a 5-year tenancy.",
+    roi: "17.67% ROI",
+    link: "/case-studies/4-bed-family-social-housing-nelincs"
+  }
+];
