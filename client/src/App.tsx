@@ -22,6 +22,7 @@ import ThankYouDealSourcing from "@/pages/ThankYouDealSourcing";
 import InvestWithUs from "@/pages/InvestWithUs";
 import ManchesterFlip from "@/pages/ManchesterFlip";
 import SocialHousingDeal from "@/pages/SocialHousingDeal";
+import FourBedFamilySocialHousingNelincs from "@/pages/case-studies/4-bed-family-social-housing-nelincs";
 import FinancialLearning from "@/pages/FinancialLearning";
 import FinancialLiteracy from "@/pages/FinancialLiteracy";
 
@@ -41,6 +42,7 @@ function Router() {
       <Route path="/case-studies/property-2" component={CaseStudy2} />
       <Route path="/case-studies/manchester-flip" component={ManchesterFlip} />
       <Route path="/case-studies/social-housing-deal" component={SocialHousingDeal} />
+      <Route path="/case-studies/4-bed-family-social-housing-nelincs" component={FourBedFamilySocialHousingNelincs} />
       <Route path="/find-you-a-deal" component={FindYouADeal} />
       <Route path="/thank-you-deal-sourcing" component={ThankYouDealSourcing} />
       <Route path="/invest-with-us" component={InvestWithUs} />
