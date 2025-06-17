@@ -1,9 +1,37 @@
 import { Helmet } from "react-helmet";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Calendar, DollarSign, TrendingUp, CheckCircle, Quote } from "lucide-react";
+import { ArrowRight, Calendar, DollarSign, TrendingUp, CheckCircle, Quote, FileText } from "lucide-react";
+import { useState } from "react";
 
 const FourBedFamilySocialHousingNelincs = () => {
+  const [emailSubmitted, setEmailSubmitted] = useState(false);
+
+  const handleEmailSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const form = e.target as HTMLFormElement;
+    const formData = new FormData(form);
+
+    const data = {
+      name: "Case Study Visitor",
+      email: formData.get("email"),
+      message: "Downloaded Deal Checklist from 4-Bed Family Social Housing case study",
+    };
+
+    const res = await fetch("/api/send-deal-lead", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    });
+
+    if (res.ok) {
+      setEmailSubmitted(true);
+      form.reset();
+    } else {
+      alert("Something went wrong. Please try again.");
+    }
+  };
+
   const timelineEvents = [
     {
       icon: "👀",
@@ -180,6 +208,55 @@ const FourBedFamilySocialHousingNelincs = () => {
         </div>
       </section>
 
+      {/* ROI Comparison Chart */}
+      <section className="py-16 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-12">
+            ROI Comparison
+          </h2>
+          
+          <div className="max-w-4xl mx-auto">
+            <div className="bg-white rounded-lg shadow-lg p-8">
+              <div className="grid md:grid-cols-3 gap-6 mb-6">
+                {/* High Street Bank Savings */}
+                <div className="text-center">
+                  <h3 className="text-lg font-semibold text-gray-700 mb-3">High Street Bank Savings</h3>
+                  <div className="bg-gray-100 rounded-lg p-4 h-32 flex items-end justify-center">
+                    <div className="bg-red-400 rounded-t w-16 flex items-center justify-center text-white font-bold text-sm" style={{ height: '8px' }}>
+                      0.2%
+                    </div>
+                  </div>
+                </div>
+
+                {/* Cash ISA */}
+                <div className="text-center">
+                  <h3 className="text-lg font-semibold text-gray-700 mb-3">Cash ISA</h3>
+                  <div className="bg-gray-100 rounded-lg p-4 h-32 flex items-end justify-center">
+                    <div className="bg-yellow-400 rounded-t w-16 flex items-center justify-center text-white font-bold text-sm" style={{ height: '25%' }}>
+                      4.5%
+                    </div>
+                  </div>
+                </div>
+
+                {/* KR Social Housing Deal */}
+                <div className="text-center">
+                  <h3 className="text-lg font-semibold text-gray-700 mb-3">KR Social Housing Deal</h3>
+                  <div className="bg-gray-100 rounded-lg p-4 h-32 flex items-end justify-center">
+                    <div className="bg-green-500 rounded-t w-16 flex items-center justify-center text-white font-bold text-sm" style={{ height: '100%' }}>
+                      17.67%
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <p className="text-center text-sm text-gray-500 italic">
+                Illustrative returns based on current UK averages — for educational purposes only.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Deal Structure */}
       <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
@@ -244,8 +321,62 @@ const FourBedFamilySocialHousingNelincs = () => {
         </div>
       </section>
 
-      {/* CTA Section */}
+      {/* Soft CTA Block with Download Option */}
       <section className="py-16 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="max-w-2xl mx-auto text-center">
+            <FileText className="h-12 w-12 text-primary mx-auto mb-4" />
+            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
+              📄 Not quite ready to book a call?
+            </h2>
+            <p className="text-lg text-gray-600 mb-8">
+              Start by reviewing our Deal Checklist — the same tool our investors use to evaluate deals like this one.
+            </p>
+            <p className="text-md text-gray-600 mb-8">
+              Get it free by entering your email below.
+            </p>
+
+            {emailSubmitted ? (
+              <div className="bg-green-50 border border-green-200 rounded-lg p-6">
+                <div className="text-green-600 font-semibold text-lg mb-2">
+                  ✅ Checklist sent to your inbox!
+                </div>
+                <p className="text-gray-600">
+                  <a 
+                    href="https://drive.google.com/file/d/1P_hHhSY2RTOcDxpRuN3egPsff71S3Mtv/view?usp=sharing" 
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-primary font-semibold hover:underline"
+                  >
+                    Click here
+                  </a> to download it directly.
+                </p>
+              </div>
+            ) : (
+              <form onSubmit={handleEmailSubmit} className="max-w-md mx-auto">
+                <div className="flex flex-col sm:flex-row gap-3">
+                  <input
+                    type="email"
+                    name="email"
+                    placeholder="Enter your email to get the checklist"
+                    required
+                    className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                  />
+                  <Button 
+                    type="submit"
+                    className="bg-primary text-white hover:bg-primary/90 px-6 py-3 rounded-lg font-semibold whitespace-nowrap"
+                  >
+                    🎁 Send Me the Checklist
+                  </Button>
+                </div>
+              </form>
+            )}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
             Want to invest in deals like this?
