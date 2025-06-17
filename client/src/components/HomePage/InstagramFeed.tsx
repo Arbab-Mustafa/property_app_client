@@ -38,19 +38,10 @@ const InstagramFeed = () => {
           </div>
         </div>
         
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-          {instagramPosts.map((post) => (
-            <Card key={post.id} className="instagram-post overflow-hidden rounded-lg shadow-md hover:shadow-lg transition">
-              <img 
-                src={post.imageUrl} 
-                alt="Property investment project" 
-                className="w-full h-64 object-cover"
-              />
-              <CardContent className="p-3 bg-white">
-                <p className="text-sm truncate" style={{ color: '#6B7280' }}>{post.caption}</p>
-              </CardContent>
-            </Card>
-          ))}
+        <div className="text-center py-8">
+          <p className="text-lg" style={{ color: '#6B7280' }}>
+            Follow our property investment journey and see our latest deals in action.
+          </p>
         </div>
         
         <div className="text-center mt-8">
