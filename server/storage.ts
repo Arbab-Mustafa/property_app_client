@@ -5,7 +5,6 @@ import {
   learningProgress,
   achievements,
   quizResults,
-  dealSourcingWaitlist,
   type User, 
   type InsertUser, 
   type Contact,
@@ -17,9 +16,7 @@ import {
   type Achievement,
   type InsertAchievement,
   type QuizResult,
-  type InsertQuizResult,
-  type DealLead,
-  type InsertDealLead
+  type InsertQuizResult
 } from "@shared/schema";
 
 export interface IStorage {
@@ -50,9 +47,7 @@ export interface IStorage {
   getQuizResults(userId: string): Promise<QuizResult[]>;
   createQuizResult(result: InsertQuizResult): Promise<QuizResult>;
 
-  // Deal sourcing waitlist methods
-  getDealLead(id: number): Promise<DealLead | undefined>;
-  createDealLead(lead: InsertDealLead): Promise<DealLead>;
+
 }
 
 export class MemStorage implements IStorage {
@@ -112,7 +107,15 @@ export class MemStorage implements IStorage {
   async createContactSubmission(data: InsertContact): Promise<Contact> {
     const id = this.contactId++;
     const createdAt = new Date();
-    const contact: Contact = { ...data, id, createdAt };
+    const contact: Contact = { 
+      id, 
+      createdAt, 
+      name: data.name,
+      email: data.email,
+      phone: data.phone || null,
+      investmentAmount: data.investmentAmount,
+      message: data.message
+    };
     this.contacts.set(id, contact);
     return contact;
   }
@@ -146,8 +149,17 @@ export class MemStorage implements IStorage {
   async createLearningProgress(data: InsertLearningProgress): Promise<LearningProgress> {
     const id = this.progressId++;
     const now = new Date();
-    const progress: LearningProgress = { ...data, id, createdAt: now, updatedAt: now };
-    this.learningProgressMap.set(`${userId}-${data.moduleId}`, progress);
+    const progress: LearningProgress = { 
+      id, 
+      createdAt: now, 
+      updatedAt: now,
+      userId: data.userId,
+      moduleId: data.moduleId,
+      completed: data.completed || "false",
+      score: data.score || null,
+      timeSpent: data.timeSpent || null
+    };
+    this.learningProgressMap.set(`${data.userId}-${data.moduleId}`, progress);
     return progress;
   }
 
