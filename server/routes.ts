@@ -143,40 +143,42 @@ export async function registerRoutes(app: Express): Promise<Server> {
     const { name, email, message } = req.body;
 
     try {
-      // 1. Send Email via SendGrid
+      // ✅ 1. Send to SendGrid
       await sendEmail({
-        to: "aaron@kr-properties.co.uk", // Change to your inbox
+        to: "aaron@kr-properties.co.uk", // Replace with your own email
         from: "aaron@kr-properties.co.uk",
-        subject: "New Deal Sourcing Waitlist Lead",
+        subject: "New Deal Sourcing Interest",
         html: `
-          <h3>New Waitlist Signup</h3>
+          <h3>New Lead for Deal Sourcing</h3>
           <p><strong>Name:</strong> ${name}</p>
           <p><strong>Email:</strong> ${email}</p>
           <p><strong>Message:</strong> ${message || "No message provided."}</p>
         `,
       });
 
-      // 2. Send to Baserow
-      const baserowToken = process.env.BASEROW_API_TOKEN;
-      const tableId = "577145"; // Replace with your actual table ID
-
-      await fetch(`https://api.baserow.io/api/database/rows/table/${tableId}/`, {
+      // ✅ 2. Send to Baserow
+      const baserowRes = await fetch("https://api.baserow.io/api/database/rows/table/577145/", {
         method: "POST",
         headers: {
-          Authorization: `Token ${baserowToken}`,
+          "Authorization": `Token ${process.env.BASEROW_API_KEY}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          Name: name,
-          Email: email,
-          Optional: message || "",
+          "4646200": name,
+          "4646201": email,
+          "4646202": message,
         }),
       });
 
-      res.status(200).json({ message: "Lead submitted successfully" });
+      if (!baserowRes.ok) {
+        console.error("Baserow error:", await baserowRes.text());
+        throw new Error("Failed to save to Baserow");
+      }
+
+      res.status(200).send("Success");
     } catch (err) {
-      console.error("Error in lead handler:", err);
-      res.status(500).send("Submission failed");
+      console.error("Error:", err);
+      res.status(500).send("Something went wrong");
     }
   });
 
