@@ -1,0 +1,62 @@
+Please create a dedicated “Thank You” page for users who have joined the Deal Sourcing Waitlist via the lead capture form.
+
+This is for a paused service, and the user has already opted in.
+⸻
+🎯 Purpose of this page:
+	•	Confirm successful submission
+	•	Deliver the promised lead magnet (a Deal Checklist PDF)
+	•	Build trust and warm the user up for future emails
+	•	Create a visual break from the previous page to reinforce progress
+	•	Keep it simple and clean (no menu nav or distracting elements)
+⸻
+🧱 PAGE STRUCTURE + CONTENT:
+	1.	✅ Hero Section (Headline)
+    Thank You — You’re On the List!
+
+    	2.	💬 Subheadline
+You’ve successfully joined the waitlist for our Deal Sourcing Service. When we reopen, you’ll be the first to know.
+
+	3.	🎁 Bonus Delivery (Banner Box)
+Styled as a card with soft gold border (#C58B25):
+🎁 Your Free Bonus: The Ultimate Deal Checklist
+• Know what to ask before buying  
+• Spot hidden costs and deal-breakers  
+• 10 due diligence checks most investors skip  
+• Instantly compare ROI across deals  
+
+📎 Include a hyperlink to the downloadable PDF:
+Text: “👉 Click here to download your checklist”
+Link: Use a placeholder like https://drive.google.com/your-pdf-link
+	4.	💬 Short Testimonial
+Styled in soft grey box with navy headline:
+
+“KR found my first property deal in 14 days — I’d do it again in a heartbeat.”
+— James, Investor
+
+	5.	📈 (Optional) Light CTA / Soft Followup
+One small section with a link:
+Want to see the kind of deals we’ve helped investors with?
+→ [View Our Case Studies]
+(Use a simple orange link button: #F97316)
+⸻
+🎨 BRAND STYLING:
+	•	Background: #F9FAFB
+	•	Headings: #1A355E (Navy Blue)
+	•	Body Text: #6B7280 (Cool Grey)
+	•	Buttons: #F97316 (Orange), hover #EA580C
+	•	Borders / Highlights: #C58B25 (Muted Gold)
+⸻
+🧭 NOTES FOR FUNCTIONALITY:
+	•	No form on this page
+	•	No navigation bar — this is a stand-alone landing step
+	•	Make it mobile responsive
+	•	Include spacing to give breathing room (use py-20, max-w-xl mx-auto, etc.)
+⸻
+❌ DO NOT:
+<!-- DO NOT reuse the lead capture form here -->
+<!-- DO NOT include “Join Waitlist” or Calendly buttons -->
+<!-- DO NOT clutter with more CTAs — focus on gratitude and delivery -->
+<!-- DO NOT show sourcing service details (save that for later emails) -->
+✅ This is Step 2 in a funnel:
+	•	Step 1 = Waitlist Landing Page
+	•	Step 2 = This Confirmation / Bonus Delivery Page

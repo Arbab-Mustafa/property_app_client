@@ -18,6 +18,7 @@ import CaseStudies from "@/pages/CaseStudies";
 import CaseStudy1 from "@/pages/CaseStudy1";
 import CaseStudy2 from "@/pages/CaseStudy2";
 import FindYouADeal from "@/pages/FindYouADeal";
+import ThankYouDealSourcing from "@/pages/ThankYouDealSourcing";
 import InvestWithUs from "@/pages/InvestWithUs";
 import ManchesterFlip from "@/pages/ManchesterFlip";
 import SocialHousingDeal from "@/pages/SocialHousingDeal";
@@ -41,6 +42,7 @@ function Router() {
       <Route path="/case-studies/manchester-flip" component={ManchesterFlip} />
       <Route path="/case-studies/social-housing-deal" component={SocialHousingDeal} />
       <Route path="/find-you-a-deal" component={FindYouADeal} />
+      <Route path="/thank-you-deal-sourcing" component={ThankYouDealSourcing} />
       <Route path="/invest-with-us" component={InvestWithUs} />
       <Route path="/learn" component={FinancialLearning} />
       <Route path="/financial-literacy" component={FinancialLiteracy} />

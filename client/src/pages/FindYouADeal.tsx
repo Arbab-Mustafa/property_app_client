@@ -1,8 +1,10 @@
 import { Helmet } from "react-helmet";
 import { useState } from "react";
+import { useLocation } from "wouter";
 
 const FindYouADeal = () => {
   const [submitted, setSubmitted] = useState(false);
+  const [, setLocation] = useLocation();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -24,6 +26,10 @@ const FindYouADeal = () => {
     if (res.ok) {
       setSubmitted(true);
       form.reset();
+      // Redirect to thank you page after successful submission
+      setTimeout(() => {
+        setLocation("/thank-you-deal-sourcing");
+      }, 1000);
     } else {
       alert("Something went wrong. Please try again.");
     }
