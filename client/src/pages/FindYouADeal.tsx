@@ -57,6 +57,21 @@ const FindYouADeal = () => {
           </ul>
         </div>
 
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8 text-sm text-[#6B7280] max-w-2xl mx-auto">
+          <div className="flex items-center space-x-2">
+            <span className="text-xl">✅</span>
+            <span>Only 10 sourcing clients per quarter</span>
+          </div>
+          <div className="flex items-center space-x-2">
+            <span className="text-xl">🔐</span>
+            <span>All deals legally secured + vetted</span>
+          </div>
+          <div className="flex items-center space-x-2">
+            <span className="text-xl">📈</span>
+            <span>17.3% average ROI (see case studies)</span>
+          </div>
+        </div>
+
         {submitted ? (
           <div className="text-green-600 font-semibold text-xl">
             ✅ Lead submitted successfully! You'll be the first to hear when we reopen.
@@ -91,6 +106,13 @@ const FindYouADeal = () => {
             </button>
           </form>
         )}
+
+        <div className="border border-[#C58B25] bg-white p-4 rounded-lg mt-10 max-w-xl mx-auto">
+          <p className="italic text-[#6B7280] mb-2">
+            "KR found my first property deal in 14 days — I'd do it again in a heartbeat."
+          </p>
+          <p className="font-semibold text-[#1A355E]">— James, Investor</p>
+        </div>
       </div>
     </>
   );
