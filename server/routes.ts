@@ -147,7 +147,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       try {
         await sendEmail({
           to: "aaron@kr-properties.co.uk",
-          from: "aaron@kr-properties.co.uk",
+          from: "noreply@kr-properties.co.uk", // System email as sender
           subject: "New Deal Sourcing Interest",
           html: `
             <h3>New Lead for Deal Sourcing</h3>
@@ -166,24 +166,30 @@ export async function registerRoutes(app: Express): Promise<Server> {
       console.log("Using Baserow token:", baserowToken ? "Token exists" : "No token found");
       
       if (baserowToken) {
+        const baserowData = {
+          "field_4646200": name,
+          "field_4646201": email,
+          "field_4646202": message || ""
+        };
+        
+        console.log("Sending to Baserow:", baserowData);
+        
         const baserowRes = await fetch("https://api.baserow.io/api/database/rows/table/577145/", {
           method: "POST",
           headers: {
             "Authorization": `Token ${baserowToken}`,
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({
-            "4646200": name,
-            "4646201": email,
-            "4646202": message,
-          }),
+          body: JSON.stringify(baserowData),
         });
 
         if (!baserowRes.ok) {
-          console.error("Baserow error:", await baserowRes.text());
+          const errorText = await baserowRes.text();
+          console.error("Baserow error:", errorText);
           console.error("Response status:", baserowRes.status);
         } else {
-          console.log("Baserow submission successful");
+          const response = await baserowRes.json();
+          console.log("Baserow submission successful:", response);
         }
       } else {
         console.error("No Baserow token available");
