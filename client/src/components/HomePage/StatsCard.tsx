@@ -18,7 +18,7 @@ const StatsCard = () => {
                 <div className="text-sm" style={{ color: '#6B7280' }}>Asset-Backed</div>
               </div>
               <div className="p-3 rounded-md" style={{ backgroundColor: '#FFF7ED' }}>
-                <div className="font-bold text-2xl" style={{ color: '#F97316' }}>£5M+</div>
+                <div className="font-bold text-2xl" style={{ color: '#F97316' }}>£2M</div>
                 <div className="text-sm" style={{ color: '#6B7280' }}>Under Management</div>
               </div>
               <div className="p-3 rounded-md" style={{ backgroundColor: '#FFF7ED' }}>
