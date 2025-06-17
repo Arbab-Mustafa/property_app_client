@@ -144,35 +144,49 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
     try {
       // ✅ 1. Send to SendGrid
-      await sendEmail({
-        to: "aaron@kr-properties.co.uk", // Replace with your own email
-        from: "aaron@kr-properties.co.uk",
-        subject: "New Deal Sourcing Interest",
-        html: `
-          <h3>New Lead for Deal Sourcing</h3>
-          <p><strong>Name:</strong> ${name}</p>
-          <p><strong>Email:</strong> ${email}</p>
-          <p><strong>Message:</strong> ${message || "No message provided."}</p>
-        `,
-      });
+      try {
+        await sendEmail({
+          to: "aaron@kr-properties.co.uk",
+          from: "aaron@kr-properties.co.uk",
+          subject: "New Deal Sourcing Interest",
+          html: `
+            <h3>New Lead for Deal Sourcing</h3>
+            <p><strong>Name:</strong> ${name}</p>
+            <p><strong>Email:</strong> ${email}</p>
+            <p><strong>Message:</strong> ${message || "No message provided."}</p>
+          `,
+        });
+        console.log("Email sent successfully");
+      } catch (emailError) {
+        console.error("Email failed:", emailError);
+      }
 
       // ✅ 2. Send to Baserow
-      const baserowRes = await fetch("https://api.baserow.io/api/database/rows/table/577145/", {
-        method: "POST",
-        headers: {
-          "Authorization": `Token ${process.env.BASEROW_API_KEY}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          "4646200": name,
-          "4646201": email,
-          "4646202": message,
-        }),
-      });
+      const baserowToken = process.env.VITE_BASEROW_API_TOKEN;
+      console.log("Using Baserow token:", baserowToken ? "Token exists" : "No token found");
+      
+      if (baserowToken) {
+        const baserowRes = await fetch("https://api.baserow.io/api/database/rows/table/577145/", {
+          method: "POST",
+          headers: {
+            "Authorization": `Token ${baserowToken}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            "4646200": name,
+            "4646201": email,
+            "4646202": message,
+          }),
+        });
 
-      if (!baserowRes.ok) {
-        console.error("Baserow error:", await baserowRes.text());
-        throw new Error("Failed to save to Baserow");
+        if (!baserowRes.ok) {
+          console.error("Baserow error:", await baserowRes.text());
+          console.error("Response status:", baserowRes.status);
+        } else {
+          console.log("Baserow submission successful");
+        }
+      } else {
+        console.error("No Baserow token available");
       }
 
       res.status(200).send("Success");
