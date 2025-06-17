@@ -18,6 +18,20 @@ export const insertContactSchema = createInsertSchema(contactSubmissions).omit({
   createdAt: true,
 });
 
+// Deal sourcing waitlist table
+export const dealSourcingWaitlist = pgTable("deal_sourcing_waitlist", {
+  id: serial("id").primaryKey(),
+  name: text("name").notNull(),
+  email: text("email").notNull(),
+  message: text("message"),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+export const insertDealLeadSchema = createInsertSchema(dealSourcingWaitlist).omit({
+  id: true,
+  createdAt: true,
+});
+
 // Newsletter subscriptions table
 export const newsletterSubscriptions = pgTable("newsletter_subscriptions", {
   id: serial("id").primaryKey(),
@@ -109,3 +123,6 @@ export type Achievement = typeof achievements.$inferSelect;
 
 export type InsertQuizResult = z.infer<typeof insertQuizResultSchema>;
 export type QuizResult = typeof quizResults.$inferSelect;
+
+export type InsertDealLead = z.infer<typeof insertDealLeadSchema>;
+export type DealLead = typeof dealSourcingWaitlist.$inferSelect;

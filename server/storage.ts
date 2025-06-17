@@ -5,6 +5,7 @@ import {
   learningProgress,
   achievements,
   quizResults,
+  dealSourcingWaitlist,
   type User, 
   type InsertUser, 
   type Contact,
@@ -16,7 +17,9 @@ import {
   type Achievement,
   type InsertAchievement,
   type QuizResult,
-  type InsertQuizResult
+  type InsertQuizResult,
+  type DealLead,
+  type InsertDealLead
 } from "@shared/schema";
 
 export interface IStorage {
@@ -46,6 +49,10 @@ export interface IStorage {
   // Quiz result methods
   getQuizResults(userId: string): Promise<QuizResult[]>;
   createQuizResult(result: InsertQuizResult): Promise<QuizResult>;
+
+  // Deal sourcing waitlist methods
+  getDealLead(id: number): Promise<DealLead | undefined>;
+  createDealLead(lead: InsertDealLead): Promise<DealLead>;
 }
 
 export class MemStorage implements IStorage {

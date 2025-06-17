@@ -144,11 +144,55 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(400).json({ message: "Name and email are required" });
       }
 
-      // Store in contact submissions table
+      // 1. Send Email via SendGrid
+      try {
+        await sendEmail({
+          to: email,
+          from: "aaron@kr-properties.co.uk",
+          subject: "You're on the Waitlist! ✅",
+          html: `
+            <h3>Thanks for joining the KR Property Investments Waitlist</h3>
+            <p>We'll let you know when deal sourcing opens again.</p>
+            <p><strong>Bonus:</strong> Your free Deal Checklist will be available soon.</p>
+            <p>— The KR Property Team</p>
+          `
+        });
+      } catch (emailError) {
+        console.error("Email sending failed:", emailError);
+        // Continue with storage even if email fails
+      }
+
+      // 2. Store lead in Baserow
+      const BASEROW_API_TOKEN = process.env.BASEROW_API_TOKEN;
+      const BASEROW_TABLE_ID = "577145";
+      const BASEROW_URL = `https://api.baserow.io/api/database/rows/table/${BASEROW_TABLE_ID}/`;
+
+      if (BASEROW_API_TOKEN) {
+        try {
+          await fetch(BASEROW_URL, {
+            method: "POST",
+            headers: {
+              Authorization: `Token ${BASEROW_API_TOKEN}`,
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              Name: name,
+              Email: email,
+              Optional: message || "",
+            }),
+          });
+        } catch (baserowError) {
+          console.error("Baserow submission failed:", baserowError);
+          // Continue with local storage even if Baserow fails
+        }
+      }
+
+      // 3. Store locally as backup
       const contactData = {
         name,
         email,
-        subject: "Deal Sourcing Waitlist",
+        phone: null,
+        investmentAmount: "Deal Sourcing Waitlist",
         message: message || "Interested in joining the deal sourcing waitlist"
       };
 

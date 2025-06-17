@@ -18,6 +18,56 @@ interface InflationReportData {
 }
 
 /**
+ * Sends a general email using SendGrid
+ */
+export async function sendEmail({ to, from, subject, html }: {
+  to: string;
+  from: string;
+  subject: string;
+  html: string;
+}) {
+  try {
+    const sendgridApiKey = process.env.SENDGRID_API_KEY;
+    
+    if (!sendgridApiKey) {
+      console.error('Cannot send email: SENDGRID_API_KEY is not set');
+      return { success: false, error: 'Email service not configured' };
+    }
+
+    const response = await fetch('https://api.sendgrid.com/v3/mail/send', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${sendgridApiKey}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        personalizations: [{
+          to: [{ email: to }],
+          subject: subject
+        }],
+        from: { email: from },
+        content: [{
+          type: 'text/html',
+          value: html
+        }]
+      })
+    });
+
+    if (response.ok) {
+      console.log('Email sent successfully to:', to);
+      return { success: true };
+    } else {
+      const errorText = await response.text();
+      console.error('SendGrid API error:', response.status, errorText);
+      return { success: false, error: `SendGrid error: ${response.status}` };
+    }
+  } catch (error) {
+    console.error('Error sending email:', error);
+    return { success: false, error: 'Failed to send email' };
+  }
+}
+
+/**
  * Sends an inflation calculation report email to the user using SendGrid API directly
  */
 export async function sendInflationReport(data: InflationReportData) {
