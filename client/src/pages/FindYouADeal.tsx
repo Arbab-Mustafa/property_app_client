@@ -40,12 +40,22 @@ const FindYouADeal = () => {
       </Helmet>
 
       <div className="min-h-screen bg-[#F9FAFB] py-20 px-4 text-center">
-        <h1 className="text-4xl md:text-5xl font-bold mb-6 text-[#1A355E]">
-          Deal Sourcing Service Temporarily Paused
+        <h1 className="text-4xl md:text-5xl font-bold mb-4 text-[#1A355E]">
+          Our Deal Sourcing Service Is Temporarily Paused
         </h1>
-        <p className="text-lg text-[#6B7280] max-w-2xl mx-auto mb-8">
-          We're currently not taking on new deal sourcing clients. When we reopen, you'll be the first to know.
+        <p className="text-lg text-[#6B7280] max-w-2xl mx-auto mb-6">
+          We're currently at full capacity — but you can join the waitlist and get our <strong>Free Deal Checklist</strong> to prepare for your next investment.
         </p>
+
+        <div className="bg-white rounded-lg shadow-md p-6 max-w-xl mx-auto mb-6 border border-[#C58B25]">
+          <h2 className="text-xl font-bold mb-2 text-[#1A355E]">🎁 Free Bonus: The Ultimate Deal Checklist</h2>
+          <ul className="text-left text-[#6B7280] list-disc pl-5 space-y-1 text-sm">
+            <li>Know what to ask before buying</li>
+            <li>Spot hidden costs and deal-breakers</li>
+            <li>10 due diligence checks most investors skip</li>
+            <li>Instantly compare ROI across deals</li>
+          </ul>
+        </div>
 
         {submitted ? (
           <div className="text-green-600 font-semibold text-xl">
@@ -77,7 +87,7 @@ const FindYouADeal = () => {
               type="submit"
               className="bg-[#F97316] text-white px-6 py-3 rounded hover:bg-[#ea580c] w-full font-semibold"
             >
-              Notify Me When It Reopens
+              Get the Checklist + Join the Waitlist
             </button>
           </form>
         )}
