@@ -18,7 +18,6 @@ const BookCall = () => {
         />
         <meta property="og:type" content="website" />
       </Helmet>
-
       <div className="min-h-screen py-12 px-4" style={{ backgroundColor: '#F9FAFB' }}>
         <div className="max-w-3xl mx-auto">
           {/* Header */}
@@ -99,9 +98,7 @@ const BookCall = () => {
 
           {/* Why Book a Call Section */}
           <div className="bg-white p-8 rounded-lg shadow-md border border-gray-200 mb-12">
-            <h2 className="text-2xl font-bold text-center mb-8" style={{ color: '#1A355E' }}>
-              Why Book a Call With Us?
-            </h2>
+            <h2 className="text-2xl font-bold text-center mb-8" style={{ color: '#1A355E' }}>What To Expect On Our Call</h2>
             <div className="grid md:grid-cols-2 gap-6">
               <div className="flex items-start space-x-3">
                 <CheckIcon className="w-6 h-6 mt-1 flex-shrink-0" style={{ color: '#C58B25' }} />
