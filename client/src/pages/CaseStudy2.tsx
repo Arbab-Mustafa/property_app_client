@@ -237,10 +237,8 @@ const CaseStudy2 = () => {
           
           {/* Call to Action */}
           <div className="flex justify-center my-16">
-            <Link href="/contact">
-              <a className="bg-green-500 hover:bg-green-600 text-white font-bold py-4 px-8 rounded-lg text-xl transition duration-300 shadow-lg">
-                Join To See Property Deals 1st
-              </a>
+            <Link href="/contact" className="bg-green-500 hover:bg-green-600 text-white font-bold py-4 px-8 rounded-lg text-xl transition duration-300 shadow-lg">
+              Join To See Property Deals 1st
             </Link>
           </div>
           

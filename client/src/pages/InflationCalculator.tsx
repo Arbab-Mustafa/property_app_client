@@ -384,7 +384,7 @@ const InflationCalculator = () => {
                       e.currentTarget.style.transform = 'translateY(0)';
                     }}
                   >
-                    {isSubmitting ? "Calculating..." : "Reveal My Losses"}
+                    {isSubmitting ? "Calculating..." : "Has Your Money Decreased Or Increased?"}
                   </Button>
                 </form>
               </Form>
