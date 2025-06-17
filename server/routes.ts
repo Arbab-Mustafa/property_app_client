@@ -138,71 +138,45 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   // Deal lead endpoint for waitlist
   app.post("/api/send-deal-lead", async (req, res) => {
+    if (req.method !== "POST") return res.status(405).send("Method not allowed");
+
+    const { name, email, message } = req.body;
+
     try {
-      const { name, email, message } = req.body;
-      
-      if (!name || !email) {
-        return res.status(400).json({ message: "Name and email are required" });
-      }
-
       // 1. Send Email via SendGrid
-      try {
-        await sendEmail({
-          to: email,
-          from: "aaron@kr-properties.co.uk",
-          subject: "You're on the Waitlist! ✅",
-          html: `
-            <h3>Thanks for joining the KR Property Investments Waitlist</h3>
-            <p>We'll let you know when deal sourcing opens again.</p>
-            <p><strong>Bonus:</strong> Your free Deal Checklist will be available soon.</p>
-            <p>— The KR Property Team</p>
-          `
-        });
-      } catch (emailError) {
-        console.error("Email sending failed:", emailError);
-        // Continue with storage even if email fails
-      }
+      await sendEmail({
+        to: "aaron@kr-properties.co.uk", // Change to your inbox
+        from: "aaron@kr-properties.co.uk",
+        subject: "New Deal Sourcing Waitlist Lead",
+        html: `
+          <h3>New Waitlist Signup</h3>
+          <p><strong>Name:</strong> ${name}</p>
+          <p><strong>Email:</strong> ${email}</p>
+          <p><strong>Message:</strong> ${message || "No message provided."}</p>
+        `,
+      });
 
-      // 2. Store lead in Baserow
-      const BASEROW_API_TOKEN = process.env.BASEROW_API_TOKEN;
-      const BASEROW_TABLE_ID = "577145";
-      const BASEROW_URL = `https://api.baserow.io/api/database/rows/table/${BASEROW_TABLE_ID}/`;
+      // 2. Send to Baserow
+      const baserowToken = process.env.BASEROW_API_TOKEN;
+      const tableId = "577145"; // Replace with your actual table ID
 
-      if (BASEROW_API_TOKEN) {
-        try {
-          await fetch(BASEROW_URL, {
-            method: "POST",
-            headers: {
-              Authorization: `Token ${BASEROW_API_TOKEN}`,
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              Name: name,
-              Email: email,
-              Optional: message || "",
-            }),
-          });
-        } catch (baserowError) {
-          console.error("Baserow submission failed:", baserowError);
-          // Continue with local storage even if Baserow fails
-        }
-      }
+      await fetch(`https://api.baserow.io/api/database/rows/table/${tableId}/`, {
+        method: "POST",
+        headers: {
+          Authorization: `Token ${baserowToken}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          Name: name,
+          Email: email,
+          Optional: message || "",
+        }),
+      });
 
-      // 3. Store locally as backup
-      const contactData = {
-        name,
-        email,
-        phone: null,
-        investmentAmount: "Deal Sourcing Waitlist",
-        message: message || "Interested in joining the deal sourcing waitlist"
-      };
-
-      await storage.createContactSubmission(contactData);
-      
-      res.status(200).json({ message: "Successfully joined waitlist" });
-    } catch (error) {
-      console.error("Deal lead submission error:", error);
-      res.status(500).json({ message: "Failed to submit waitlist request" });
+      res.status(200).json({ message: "Lead submitted successfully" });
+    } catch (err) {
+      console.error("Error in lead handler:", err);
+      res.status(500).send("Submission failed");
     }
   });
 

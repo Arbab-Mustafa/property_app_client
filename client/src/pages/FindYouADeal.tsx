@@ -49,7 +49,7 @@ const FindYouADeal = () => {
 
         {submitted ? (
           <div className="text-green-600 font-semibold text-xl">
-            ✅ Thanks! You'll be the first to hear when we reopen.
+            ✅ Lead submitted successfully! You'll be the first to hear when we reopen.
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="max-w-xl mx-auto space-y-4">
