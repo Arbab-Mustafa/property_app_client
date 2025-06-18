@@ -83,7 +83,6 @@ const FourBedFamilySocialHousingNelincs = () => {
         <meta property="og:description" content="Detailed case study of our 4-bed family social housing project in North East Lincolnshire showing 17.67% ROI through BRR strategy and conversion." />
         <meta property="og:type" content="website" />
       </Helmet>
-
       {/* Page Header */}
       <section className="bg-primary text-white py-16">
         <div className="container mx-auto px-4 text-center">
@@ -97,7 +96,6 @@ const FourBedFamilySocialHousingNelincs = () => {
           </p>
         </div>
       </section>
-
       {/* Project Overview - Before/After Images */}
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
@@ -140,7 +138,6 @@ const FourBedFamilySocialHousingNelincs = () => {
           </div>
         </div>
       </section>
-
       {/* Timeline Section */}
       <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
@@ -175,7 +172,6 @@ const FourBedFamilySocialHousingNelincs = () => {
           </div>
         </div>
       </section>
-
       {/* ROI Breakdown */}
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
@@ -207,7 +203,6 @@ const FourBedFamilySocialHousingNelincs = () => {
           </div>
         </div>
       </section>
-
       {/* Investment Returns Comparison Chart */}
       <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
@@ -256,7 +251,7 @@ const FourBedFamilySocialHousingNelincs = () => {
                   {/* KR Social Housing Deal */}
                   <div className="flex items-center">
                     <div className="w-48 text-right pr-4">
-                      <span className="text-sm font-medium text-gray-700">KR Social Housing Deal</span>
+                      <span className="text-sm font-medium text-gray-700">KR Property Investments</span>
                     </div>
                     <div className="flex-1 bg-gray-100 rounded-full h-8 relative max-w-md">
                       <div 
@@ -280,7 +275,6 @@ const FourBedFamilySocialHousingNelincs = () => {
           </div>
         </div>
       </section>
-
       {/* Deal Structure */}
       <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
@@ -331,7 +325,6 @@ const FourBedFamilySocialHousingNelincs = () => {
           </div>
         </div>
       </section>
-
       {/* Testimonial */}
       <section className="py-16 bg-primary text-white">
         <div className="container mx-auto px-4">
@@ -344,7 +337,6 @@ const FourBedFamilySocialHousingNelincs = () => {
           </div>
         </div>
       </section>
-
       {/* CTA Section */}
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4 text-center">
@@ -363,7 +355,6 @@ const FourBedFamilySocialHousingNelincs = () => {
           </Link>
         </div>
       </section>
-
       {/* Soft CTA Block with Download Option */}
       <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
