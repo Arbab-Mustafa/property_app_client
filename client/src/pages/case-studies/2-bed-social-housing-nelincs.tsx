@@ -1,169 +1,163 @@
-import { Helmet } from "react-helmet";
-import { Link } from "wouter";
-import { Button } from "@/components/ui/button";
-import { ArrowRight, Calendar, DollarSign, TrendingUp, CheckCircle, Quote, FileText } from "lucide-react";
 import { useState } from "react";
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay, Pagination } from 'swiper/modules';
-import 'swiper/css';
-import 'swiper/css/pagination';
+import { Helmet } from "react-helmet";
+import { Button } from "@/components/ui/button";
+import { ArrowRight, TrendingUp, CheckCircle, DollarSign, Quote, FileText } from "lucide-react";
+import { Link } from "wouter";
 
-// Custom styles for Swiper pagination
-const swiperStyles = `
-  .swiper-pagination {
-    position: absolute !important;
-    bottom: 10px !important;
-    left: 50% !important;
-    transform: translateX(-50%) !important;
-    width: auto !important;
-  }
-  
-  .swiper-pagination-bullet {
-    background: rgba(255, 255, 255, 0.5) !important;
-    opacity: 1 !important;
-    margin: 0 4px !important;
-  }
-  
-  .swiper-pagination-bullet-active {
-    background: white !important;
-  }
-`;
-
-const FourBedFamilySocialHousingNelincs = () => {
+const TwoBedSocialHousingNelincs = () => {
   const [emailSubmitted, setEmailSubmitted] = useState(false);
 
-  const handleEmailSubmit = async (e: React.FormEvent) => {
+  const handleEmailSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const form = e.target as HTMLFormElement;
-    const formData = new FormData(form);
+    const formData = new FormData(e.currentTarget);
+    const email = formData.get('email') as string;
 
-    const data = {
-      name: "Case Study Visitor",
-      email: formData.get("email"),
-      message: "Downloaded Deal Checklist from 4-Bed Family Social Housing case study",
-    };
+    try {
+      const response = await fetch('/api/newsletter', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ 
+          email,
+          source: 'case-study-2bed-nelincs'
+        }),
+      });
 
-    const res = await fetch("/api/send-deal-lead", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
-    });
-
-    if (res.ok) {
-      setEmailSubmitted(true);
-      form.reset();
-    } else {
-      alert("Something went wrong. Please try again.");
+      if (response.ok) {
+        setEmailSubmitted(true);
+      }
+    } catch (error) {
+      console.error('Error submitting email:', error);
     }
   };
 
-  // Image arrays for before and after carousels
+  const swiperStyles = `
+    .swiper-container {
+      width: 100%;
+      height: 300px;
+    }
+    .swiper-slide {
+      text-align: center;
+      font-size: 18px;
+      background: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .swiper-slide img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .swiper-pagination-bullet {
+      background: #f97316;
+    }
+    .swiper-button-next,
+    .swiper-button-prev {
+      color: #f97316;
+    }
+  `;
+
   const beforeImages = [
-    { src: "/assets/case-study-before/1.jpg", alt: "Before - Property View 1" },
-    { src: "/assets/case-study-before/2.jpg", alt: "Before - Property View 2" },
-    { src: "/assets/case-study-before/3.jpg", alt: "Before - Property View 3" },
-    { src: "/assets/case-study-before/4.jpg", alt: "Before - Property View 4" },
-    { src: "/assets/case-study-before/5.jpg", alt: "Before - Property View 5" },
-    { src: "/assets/case-study-before/6.jpg", alt: "Before - Property View 6" },
-    { src: "/assets/case-study-before/7.jpg", alt: "Before - Property View 7" },
+    { src: "/assets/case-study-before-richard/1.jpg", alt: "Before - Property View 1" },
+    { src: "/assets/case-study-before-richard/2.jpg", alt: "Before - Property View 2" },
+    { src: "/assets/case-study-before-richard/3.jpg", alt: "Before - Property View 3" },
+    { src: "/assets/case-study-before-richard/4.jpg", alt: "Before - Property View 4" },
+    { src: "/assets/case-study-before-richard/5.jpg", alt: "Before - Property View 5" },
+    { src: "/assets/case-study-before-richard/6.jpg", alt: "Before - Property View 6" },
+    { src: "/assets/case-study-before-richard/7.jpg", alt: "Before - Property View 7" },
+    { src: "/assets/case-study-before-richard/8.jpg", alt: "Before - Property View 8" },
+    { src: "/assets/case-study-before-richard/9.jpg", alt: "Before - Property View 9" },
   ];
 
   const afterImages = [
-    { src: "/assets/case-study-after/1.jpg", alt: "After - Property View 1" },
-    { src: "/assets/case-study-after/2.jpg", alt: "After - Property View 2" },
-    { src: "/assets/case-study-after/3.jpg", alt: "After - Property View 3" },
-    { src: "/assets/case-study-after/4.jpg", alt: "After - Property View 4" },
-    { src: "/assets/case-study-after/5.jpg", alt: "After - Property View 5" },
-    { src: "/assets/case-study-after/6.jpg", alt: "After - Property View 6" },
-    { src: "/assets/case-study-after/7.jpg", alt: "After - Property View 7" },
+    { src: "/assets/case-study-after-richard/1.jpg", alt: "After - Property View 1" },
+    { src: "/assets/case-study-after-richard/2.jpg", alt: "After - Property View 2" },
+    { src: "/assets/case-study-after-richard/3.jpg", alt: "After - Property View 3" },
+    { src: "/assets/case-study-after-richard/4.jpg", alt: "After - Property View 4" },
+    { src: "/assets/case-study-after-richard/5.jpg", alt: "After - Property View 5" },
+    { src: "/assets/case-study-after-richard/6.jpg", alt: "After - Property View 6" },
+    { src: "/assets/case-study-after-richard/7.jpg", alt: "After - Property View 7" },
+    { src: "/assets/case-study-after-richard/8.jpg", alt: "After - Property View 8" },
+    { src: "/assets/case-study-after-richard/9.jpg", alt: "After - Property View 9" },
   ];
 
   const timelineEvents = [
     {
       icon: "👀",
-      title: "Initial Viewing + Provider Approval",
-      date: "Nov 2023",
-      description: "Property viewed and assessed for social housing suitability. Submitted to provider — pre-approved within 2 weeks."
+      title: "First Viewing",
+      date: "July 2024",
+      description: "Property identified and flagged for social housing potential."
     },
     {
       icon: "🤝",
       title: "Offer Accepted",
-      date: "Dec 2023",
-      description: "Negotiated and agreed with the vendor just before Christmas. Provider confirmed interest subject to compliance."
+      date: "July 2024",
+      description: "Competitive bidding situation, but secured due to strong agent relationship."
     },
     {
-      icon: "🔍",
-      title: "Builder Walkthrough + Costing",
-      date: "Jan 2024",
-      description: "Gained early access to allow builder inspection and received refurbishment cost estimates before exchange."
-    },
-    {
-      icon: "🔄",
-      title: "Exchange + Completion",
-      date: "Mar 2024",
-      description: "Title issues delayed legal progress. Completed in March and handed to build team for immediate start."
+      icon: "🔁",
+      title: "Legal Completion",
+      date: "Oct 2024",
+      description: "Purchase completed and keys received."
     },
     {
       icon: "🛠️",
-      title: "Full Refurbishment Works",
-      date: "Mar–May 2024",
-      description: "2-month renovation: layout adjustment, redecoration, damp proofing, compliance works, and furnishings installed."
+      title: "Refurbishment Started + Completed",
+      date: "Oct–Nov 2024",
+      description: "Light refurbishment done in under 4 weeks — including compliance works and furnishings."
     },
     {
       icon: "🏠",
-      title: "Registered Provider Compliance Check",
-      date: "May 2024",
-      description: "Final inspection by provider. Approved for 5-year tenancy — property handed over immediately."
+      title: "Provider Walkthrough + Approval",
+      date: "Dec 2024",
+      description: "Registered charity provider inspected and confirmed compliance."
     },
     {
       icon: "💷",
-      title: "Rental Income Begins",
-      date: "Jun 2024",
-      description: "First rent payment received. 5-year social housing lease agreement officially underway."
+      title: "Tenancy Begins (5-Year Contract)",
+      date: "Dec 2024",
+      description: "Rental income began under a secured long-term lease."
     },
     {
-      icon: "🏦",
-      title: "Remortgage Completed",
-      date: "Oct 2024",
-      description: "Refinanced to release equity and improve return metrics. Achieved projected annual ROI target."
-    },
-    {
-      icon: "📈",
-      title: "Year 1: Fully Let + Operational",
-      date: "Jun 2025 (Now)",
-      description: "Approaching Year 1 of tenancy. Property running smoothly with full occupancy and secure rental income."
+      icon: "🔄",
+      title: "Remortgage in Progress",
+      date: "May 2025",
+      description: "Remortgage initiated to release capital and improve overall ROI."
     }
   ];
 
   const financialBreakdown = [
-    { label: "Purchase Price", value: "£62,000" },
-    { label: "Refurb Cost", value: "£17,950" },
-    { label: "Acquisition Cost", value: "£48,230" },
-    { label: "Projected End Value", value: "£75,000" },
-    { label: "Annual Rental Income", value: "£5,985" },
-    { label: "Monthly Rental", value: "£780" }
+    { label: "Purchase Price", value: "£55,700" },
+    { label: "Refurb Cost", value: "£5,000" },
+    { label: "Acquisition Cost", value: "£60,700" },
+    { label: "Projected End Value", value: "£70,000" },
+    { label: "Annual Rental Income", value: "£4,650" },
+    { label: "Monthly Rental", value: "£650" }
   ];
 
   return (
     <>
       <style>{swiperStyles}</style>
       <Helmet>
-        <title>4-Bed Family Social Housing – North East Lincolnshire Case Study | BRR Investment Success</title>
-        <meta name="description" content="Detailed case study of our 4-bed family social housing project in North East Lincolnshire showing 17.67% ROI through BRR strategy and conversion." />
-        <meta property="og:title" content="4-Bed Family Social Housing – North East Lincolnshire Case Study | BRR Investment Success" />
-        <meta property="og:description" content="Detailed case study of our 4-bed family social housing project in North East Lincolnshire showing 17.67% ROI through BRR strategy and conversion." />
+        <title>2-Bed Social Housing – North East Lincolnshire Case Study | 33% ROI Investment Success</title>
+        <meta name="description" content="Detailed case study of our 2-bed social housing project in North East Lincolnshire showing 33.13% ROI through light modernisation and social housing strategy." />
+        <meta property="og:title" content="2-Bed Social Housing – North East Lincolnshire Case Study | 33% ROI Investment Success" />
+        <meta property="og:description" content="Detailed case study of our 2-bed social housing project in North East Lincolnshire showing 33.13% ROI through light modernisation and social housing strategy." />
         <meta property="og:type" content="website" />
       </Helmet>
       {/* Page Header */}
       <section className="bg-primary text-white py-16">
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-4xl md:text-5xl font-bold mb-6 pt-20">
-            4-Bed Family Social Housing<br />
+            2-Bed Social Housing<br />
             North East Lincolnshire
           </h1>
           <p className="text-xl md:text-2xl max-w-4xl mx-auto">
-            A successful BRR social housing project converting a 3-bed to 4-bed property, 
-            delivering strong returns through strategic refurbishment and 5-year social housing tenancy.
+            A highly successful social housing investment requiring only light modernisation, 
+            delivering exceptional returns through strategic positioning and fast execution.
           </p>
         </div>
       </section>
@@ -180,37 +174,17 @@ const FourBedFamilySocialHousingNelincs = () => {
               <div className="bg-red-500 text-white p-4 text-center">
                 <h3 className="text-xl font-bold">BEFORE</h3>
               </div>
-              <div className="aspect-video bg-gray-200">
-                <Swiper
-                  modules={[Autoplay, Pagination]}
-                  spaceBetween={0}
-                  slidesPerView={1}
-                  autoplay={{
-                    delay: 4000,
-                    disableOnInteraction: false,
-                  }}
-                  pagination={{
-                    clickable: true,
-                    bulletClass: 'swiper-pagination-bullet',
-                    bulletActiveClass: 'swiper-pagination-bullet-active',
-                  }}
-                  loop={true}
-                  className="h-full"
-                >
+              <div className="swiper-container before-swiper" style={{ height: '400px' }}>
+                <div className="swiper-wrapper">
                   {beforeImages.map((image, index) => (
-                    <SwiperSlide key={index}>
-                      <img
-                        src={image.src}
-                        alt={image.alt}
-                        className="w-full h-full object-cover"
-                      />
-                    </SwiperSlide>
+                    <div key={index} className="swiper-slide">
+                      <img src={image.src} alt={image.alt} />
+                    </div>
                   ))}
-                </Swiper>
-              </div>
-              <div className="p-4 text-center">
-                <p className="text-gray-600 font-medium">Original 3-Bed Configuration</p>
-                <p className="text-sm text-gray-500 mt-2">Two reception rooms, converted one into a bedroom. Layout not suitable for tenants. Outdated safety standards and compliance.</p>
+                </div>
+                <div className="swiper-pagination"></div>
+                <div className="swiper-button-next"></div>
+                <div className="swiper-button-prev"></div>
               </div>
             </div>
 
@@ -219,43 +193,23 @@ const FourBedFamilySocialHousingNelincs = () => {
               <div className="bg-green-500 text-white p-4 text-center">
                 <h3 className="text-xl font-bold">AFTER</h3>
               </div>
-              <div className="aspect-video bg-gray-200">
-                <Swiper
-                  modules={[Autoplay, Pagination]}
-                  spaceBetween={0}
-                  slidesPerView={1}
-                  autoplay={{
-                    delay: 4000,
-                    disableOnInteraction: false,
-                  }}
-                  pagination={{
-                    clickable: true,
-                    bulletClass: 'swiper-pagination-bullet',
-                    bulletActiveClass: 'swiper-pagination-bullet-active',
-                  }}
-                  loop={true}
-                  className="h-full"
-                >
+              <div className="swiper-container after-swiper" style={{ height: '400px' }}>
+                <div className="swiper-wrapper">
                   {afterImages.map((image, index) => (
-                    <SwiperSlide key={index}>
-                      <img
-                        src={image.src}
-                        alt={image.alt}
-                        className="w-full h-full object-cover"
-                      />
-                    </SwiperSlide>
+                    <div key={index} className="swiper-slide">
+                      <img src={image.src} alt={image.alt} />
+                    </div>
                   ))}
-                </Swiper>
-              </div>
-              <div className="p-4 text-center">
-                <p className="text-gray-600 font-medium">Compliant 4-Bed Social Housing Unit</p>
-                <p className="text-sm text-gray-500 mt-2">Full refurbishment: redecoration, carpets, damp proofing, kitchen fire door, boxed boiler/gas, fireboarded under stairs</p>
+                </div>
+                <div className="swiper-pagination"></div>
+                <div className="swiper-button-next"></div>
+                <div className="swiper-button-prev"></div>
               </div>
             </div>
           </div>
         </div>
       </section>
-      {/* Timeline Section */}
+      {/* Project Timeline */}
       <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-12">
@@ -265,12 +219,13 @@ const FourBedFamilySocialHousingNelincs = () => {
           <div className="max-w-4xl mx-auto">
             <div className="relative">
               {/* Timeline line */}
-              <div className="absolute left-1/2 transform -translate-x-px h-full w-0.5 bg-primary hidden md:block"></div>
+              <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-primary/20"></div>
               
+              {/* Timeline events */}
               {timelineEvents.map((event, index) => (
-                <div key={index} className={`relative flex items-center mb-8 ${index % 2 === 0 ? 'md:flex-row-reverse' : ''}`}>
+                <div key={index} className={`relative flex items-center mb-12 ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
                   {/* Timeline dot */}
-                  <div className="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-primary rounded-full border-4 border-white shadow hidden md:block"></div>
+                  <div className="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-primary rounded-full z-10"></div>
                   
                   {/* Content */}
                   <div className={`bg-white rounded-lg shadow-md p-6 w-full md:w-5/12 ${index % 2 === 0 ? 'md:mr-auto' : 'md:ml-auto'}`}>
@@ -316,7 +271,7 @@ const FourBedFamilySocialHousingNelincs = () => {
               <div className="mt-8 p-6 bg-green-100 rounded-lg text-center">
                 <div className="flex items-center justify-center mb-2">
                   <TrendingUp className="h-6 w-6 text-green-600 mr-2" />
-                  <span className="text-green-800 font-bold text-xl">Annual ROI: 15.48%</span>
+                  <span className="text-green-800 font-bold text-xl">Annual ROI: 33.13%</span>
                 </div>
                 <p className="text-green-700">5-year social housing tenancy secured with registered provider</p>
               </div>
@@ -328,7 +283,7 @@ const FourBedFamilySocialHousingNelincs = () => {
       <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-12">
-            Comparing Investment Returns
+            Comparing Returns on Capital
           </h2>
           
           <div className="max-w-4xl mx-auto">
@@ -362,7 +317,7 @@ const FourBedFamilySocialHousingNelincs = () => {
                     <div className="flex-1 bg-gray-100 rounded-full h-8 relative max-w-md">
                       <div 
                         className="bg-yellow-400 h-8 rounded-full flex items-center justify-end pr-2 text-white text-xs font-bold"
-                        style={{ width: '25%' }}
+                        style={{ width: '14%' }}
                       >
                         4.5%
                       </div>
@@ -379,7 +334,7 @@ const FourBedFamilySocialHousingNelincs = () => {
                         className="bg-green-500 h-8 rounded-full flex items-center justify-end pr-2 text-white text-xs font-bold"
                         style={{ width: '100%' }}
                       >
-                        17.67%
+                        33.13%
                       </div>
                     </div>
                   </div>
@@ -407,19 +362,19 @@ const FourBedFamilySocialHousingNelincs = () => {
             <div className="bg-white rounded-lg shadow-lg p-8">
               <div className="grid md:grid-cols-2 gap-8">
                 <div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-4">BRR Strategy Implementation</h3>
+                  <h3 className="text-xl font-bold text-gray-900 mb-4">Light Modernisation Strategy</h3>
                   <ul className="space-y-3">
                     <li className="flex items-start">
                       <DollarSign className="h-5 w-5 text-primary mr-3 mt-0.5" />
-                      <span>Buy: Property purchased below market value</span>
+                      <span>Interior painting and decorative improvements</span>
                     </li>
                     <li className="flex items-start">
                       <DollarSign className="h-5 w-5 text-primary mr-3 mt-0.5" />
-                      <span>Refurbish: Full compliance upgrade and conversion</span>
+                      <span>New carpets and cooker installation</span>
                     </li>
                     <li className="flex items-start">
                       <DollarSign className="h-5 w-5 text-primary mr-3 mt-0.5" />
-                      <span>Refinance: Secured against improved rental value</span>
+                      <span>Garden boundaries secured and compliance checks</span>
                     </li>
                   </ul>
                 </div>
@@ -452,9 +407,9 @@ const FourBedFamilySocialHousingNelincs = () => {
           <div className="max-w-4xl mx-auto text-center">
             <Quote className="h-16 w-16 text-white/30 mx-auto mb-6" />
             <blockquote className="text-2xl md:text-3xl font-medium mb-6 italic">
-              "The social housing route gives me peace of mind with guaranteed income and no tenant headaches."
+              "This deal showed me how powerful social housing can be - minimal work, maximum returns, and complete peace of mind."
             </blockquote>
-            <p className="text-xl text-white/90">– M. Thompson, Investor</p>
+            <p className="text-xl text-white/90">– R. Williams, Investor</p>
           </div>
         </div>
       </section>
@@ -469,11 +424,27 @@ const FourBedFamilySocialHousingNelincs = () => {
             Book a free consultation to discuss your investment goals.
           </p>
           <Link href="/book-call">
-            <Button className="bg-primary text-white hover:bg-primary/90 px-8 py-4 rounded-lg text-lg font-semibold">
+            <Button className="bg-primary text-white hover:bg-primary/90 px-8 py-4 rounded-lg text-lg font-semibold mb-6">
               Book a Free Call
               <ArrowRight className="h-5 w-5 ml-2" />
             </Button>
           </Link>
+          
+          <div className="mt-8 pt-6 border-t border-gray-200">
+            <p className="text-lg text-gray-600 mb-4">
+              Not quite ready yet? Download our free Deal Checklist to start preparing today.
+            </p>
+            <a 
+              href="https://drive.google.com/file/d/1P_hHhSY2RTOcDxpRuN3egPsff71S3Mtv/view?usp=sharing" 
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Button className="bg-gray-700 text-white hover:bg-gray-600 px-6 py-3 rounded-lg font-semibold">
+                Download Deal Checklist
+                <FileText className="h-5 w-5 ml-2" />
+              </Button>
+            </a>
+          </div>
         </div>
       </section>
       {/* Soft CTA Block with Download Option */}
@@ -482,7 +453,7 @@ const FourBedFamilySocialHousingNelincs = () => {
           <div className="max-w-2xl mx-auto text-center">
             <FileText className="h-12 w-12 text-primary mx-auto mb-4" />
             <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
-              📄 Not quite ready to book a call?
+              📄 Want to find deals like this yourself?
             </h2>
             <p className="text-lg text-gray-600 mb-8">
               Start by reviewing our Deal Checklist — the same tool our investors use to evaluate deals like this one.
@@ -529,8 +500,49 @@ const FourBedFamilySocialHousingNelincs = () => {
           </div>
         </div>
       </section>
+
+      <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js" defer></script>
+      <script defer dangerouslySetInnerHTML={{
+        __html: `
+          document.addEventListener('DOMContentLoaded', function() {
+            if (typeof Swiper !== 'undefined') {
+              new Swiper('.before-swiper', {
+                loop: true,
+                autoplay: {
+                  delay: 4000,
+                  disableOnInteraction: false,
+                },
+                pagination: {
+                  el: '.swiper-pagination',
+                  clickable: true,
+                },
+                navigation: {
+                  nextEl: '.swiper-button-next',
+                  prevEl: '.swiper-button-prev',
+                },
+              });
+              
+              new Swiper('.after-swiper', {
+                loop: true,
+                autoplay: {
+                  delay: 4500,
+                  disableOnInteraction: false,
+                },
+                pagination: {
+                  el: '.swiper-pagination',
+                  clickable: true,
+                },
+                navigation: {
+                  nextEl: '.swiper-button-next',
+                  prevEl: '.swiper-button-prev',
+                },
+              });
+            }
+          });
+        `
+      }} />
     </>
   );
 };
 
-export default FourBedFamilySocialHousingNelincs;
+export default TwoBedSocialHousingNelincs;

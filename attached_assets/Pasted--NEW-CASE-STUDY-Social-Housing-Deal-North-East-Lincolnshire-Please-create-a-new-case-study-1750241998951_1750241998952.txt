@@ -1,0 +1,94 @@
+📁 NEW CASE STUDY: “Social Housing Deal – North East Lincolnshire”
+
+Please create a **new case study page** using the same layout, structure, and styling as our previous case study pages (e.g., “Manchester Flip” format).
+
+---
+
+🏡 Deal Overview:
+- **Strategy:** Social Housing
+- **Property Type:** 2-bed mid-terrace
+- **Location:** North East Lincolnshire
+- **Summary:** This property required only light modernisation. Works included: interior painting, new carpets, cooker installation, securing garden boundaries, and general compliance checks.
+- **Annual ROI:** 33.13%
+
+---
+
+💸 Financial Breakdown:
+- **Purchase Price:** £55,700  
+- **Estimated Refurb:** £5,000  
+- **Projected End Value:** £70,000  
+- **Projected Rental Income:** £650/month  
+- **Annual Rental Income:** £4,650  
+- **Annual ROI:** 33.13%
+
+Let the “Deal Structure + Returns” section be generated in the same logic/style as previous case studies. Do not adjust layout or design.
+
+---
+
+📊 ROI Comparison Chart:
+Include bar chart comparing this deal’s return to:
+- High Street Bank: 0.2%
+- Cash ISA (average): 4.5%
+- KR Social Housing Deal: 33.13%
+
+Label chart clearly: “Comparing Returns on Capital”  
+Use Y-axis for % returns and X-axis for source type.
+
+---
+
+🖼️ Image Carousel:
+Two image carousels needed – one for before, one for after. Auto-play on a slow loop.
+Use attached zip files:
+- `before-richard.zip` → Before images
+- `after-richard.zip` → After images
+
+Please set consistent image dimensions for layout harmony — ideally 16:9 ratio or similar to existing case studies.
+
+---
+
+📅 PROJECT TIMELINE:
+
+👀 **First Viewing**  
+July 2024  
+Property identified and flagged for social housing potential.
+
+🤝 **Offer Accepted**  
+July 2024  
+Competitive bidding situation, but secured due to strong agent relationship.
+
+🔁 **Legal Completion**  
+Oct 2024  
+Purchase completed and keys received.
+
+🛠️ **Refurbishment Started + Completed**  
+Oct–Nov 2024  
+Light refurbishment done in under 4 weeks — including compliance works and furnishings.
+
+🏠 **Provider Walkthrough + Approval**  
+Dec 2024  
+Registered charity provider inspected and confirmed compliance.
+
+💷 **Tenancy Begins (5-Year Contract)**  
+Dec 2024  
+Rental income began under a secured long-term lease.
+
+🔄 **Remortgage in Progress**  
+May 2025  
+Remortgage initiated to release capital and improve overall ROI.
+
+---
+
+📥 Secondary CTA (after main content):
+Below the “Want to invest in deals like this?” and “Book a Call” button, please add:
+_Not quite ready yet? Download our free Deal Checklist to start preparing today._  
+Include a button: “Download Deal Checklist” (linked to PDF placeholder for now)
+
+---
+
+🎨 IMPORTANT:
+- Do not change any layout or styling from previous case studies.
+- Keep the page educational, clean, and visually engaging.
+- Do not remove testimonial, ROI chart, or CTAs.
+- This is a **new** case study. Keep the URL path consistent with existing case studies.
+
+Thank you!
