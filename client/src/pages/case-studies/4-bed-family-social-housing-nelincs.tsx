@@ -3,6 +3,10 @@ import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Calendar, DollarSign, TrendingUp, CheckCircle, Quote, FileText } from "lucide-react";
 import { useState } from "react";
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay, Pagination } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/pagination';
 
 const FourBedFamilySocialHousingNelincs = () => {
   const [emailSubmitted, setEmailSubmitted] = useState(false);
@@ -31,6 +35,27 @@ const FourBedFamilySocialHousingNelincs = () => {
       alert("Something went wrong. Please try again.");
     }
   };
+
+  // Image arrays for before and after carousels
+  const beforeImages = [
+    { src: "/assets/case-study-before/1.jpg", alt: "Before - Property View 1" },
+    { src: "/assets/case-study-before/2.jpg", alt: "Before - Property View 2" },
+    { src: "/assets/case-study-before/3.jpg", alt: "Before - Property View 3" },
+    { src: "/assets/case-study-before/4.jpg", alt: "Before - Property View 4" },
+    { src: "/assets/case-study-before/5.jpg", alt: "Before - Property View 5" },
+    { src: "/assets/case-study-before/6.jpg", alt: "Before - Property View 6" },
+    { src: "/assets/case-study-before/7.jpg", alt: "Before - Property View 7" },
+  ];
+
+  const afterImages = [
+    { src: "/assets/case-study-after/1.jpg", alt: "After - Property View 1" },
+    { src: "/assets/case-study-after/2.jpg", alt: "After - Property View 2" },
+    { src: "/assets/case-study-after/3.jpg", alt: "After - Property View 3" },
+    { src: "/assets/case-study-after/4.jpg", alt: "After - Property View 4" },
+    { src: "/assets/case-study-after/5.jpg", alt: "After - Property View 5" },
+    { src: "/assets/case-study-after/6.jpg", alt: "After - Property View 6" },
+    { src: "/assets/case-study-after/7.jpg", alt: "After - Property View 7" },
+  ];
 
   const timelineEvents = [
     {
@@ -104,35 +129,81 @@ const FourBedFamilySocialHousingNelincs = () => {
           </h2>
           
           <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
-            {/* Before Image */}
+            {/* Before Carousel */}
             <div className="bg-gray-100 rounded-lg overflow-hidden shadow-lg">
               <div className="bg-red-500 text-white p-4 text-center">
                 <h3 className="text-xl font-bold">BEFORE</h3>
               </div>
-              <div className="aspect-video bg-gray-200 flex items-center justify-center p-8">
-                <div className="text-center">
-                  <div className="w-20 h-20 bg-gray-300 rounded-lg mx-auto mb-4 flex items-center justify-center">
-                    <Calendar className="h-10 w-10 text-gray-500" />
-                  </div>
-                  <p className="text-gray-600 font-medium">Original 3-Bed Configuration</p>
-                  <p className="text-sm text-gray-500 mt-2">Two reception rooms, converted one into a bedroom. Layout not suitable for tenants. Outdated safety standards and compliance.</p>
-                </div>
+              <div className="aspect-video bg-gray-200">
+                <Swiper
+                  modules={[Autoplay, Pagination]}
+                  spaceBetween={0}
+                  slidesPerView={1}
+                  autoplay={{
+                    delay: 4000,
+                    disableOnInteraction: false,
+                  }}
+                  pagination={{
+                    clickable: true,
+                    bulletClass: 'swiper-pagination-bullet',
+                    bulletActiveClass: 'swiper-pagination-bullet-active',
+                  }}
+                  loop={true}
+                  className="h-full"
+                >
+                  {beforeImages.map((image, index) => (
+                    <SwiperSlide key={index}>
+                      <img
+                        src={image.src}
+                        alt={image.alt}
+                        className="w-full h-full object-cover"
+                      />
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
+              </div>
+              <div className="p-4 text-center">
+                <p className="text-gray-600 font-medium">Original 3-Bed Configuration</p>
+                <p className="text-sm text-gray-500 mt-2">Two reception rooms, converted one into a bedroom. Layout not suitable for tenants. Outdated safety standards and compliance.</p>
               </div>
             </div>
 
-            {/* After Image */}
+            {/* After Carousel */}
             <div className="bg-gray-100 rounded-lg overflow-hidden shadow-lg">
               <div className="bg-green-500 text-white p-4 text-center">
                 <h3 className="text-xl font-bold">AFTER</h3>
               </div>
-              <div className="aspect-video bg-gray-200 flex items-center justify-center p-8">
-                <div className="text-center">
-                  <div className="w-20 h-20 bg-gray-300 rounded-lg mx-auto mb-4 flex items-center justify-center">
-                    <CheckCircle className="h-10 w-10 text-gray-500" />
-                  </div>
-                  <p className="text-gray-600 font-medium">Compliant 4-Bed Social Housing Unit</p>
-                  <p className="text-sm text-gray-500 mt-2">Full refurbishment: redecoration, carpets, damp proofing, kitchen fire door, boxed boiler/gas, fireboarded under stairs</p>
-                </div>
+              <div className="aspect-video bg-gray-200">
+                <Swiper
+                  modules={[Autoplay, Pagination]}
+                  spaceBetween={0}
+                  slidesPerView={1}
+                  autoplay={{
+                    delay: 4000,
+                    disableOnInteraction: false,
+                  }}
+                  pagination={{
+                    clickable: true,
+                    bulletClass: 'swiper-pagination-bullet',
+                    bulletActiveClass: 'swiper-pagination-bullet-active',
+                  }}
+                  loop={true}
+                  className="h-full"
+                >
+                  {afterImages.map((image, index) => (
+                    <SwiperSlide key={index}>
+                      <img
+                        src={image.src}
+                        alt={image.alt}
+                        className="w-full h-full object-cover"
+                      />
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
+              </div>
+              <div className="p-4 text-center">
+                <p className="text-gray-600 font-medium">Compliant 4-Bed Social Housing Unit</p>
+                <p className="text-sm text-gray-500 mt-2">Full refurbishment: redecoration, carpets, damp proofing, kitchen fire door, boxed boiler/gas, fireboarded under stairs</p>
               </div>
             </div>
           </div>
@@ -398,7 +469,7 @@ const FourBedFamilySocialHousingNelincs = () => {
                   />
                   <Button 
                     type="submit"
-                    className="bg-primary text-white hover:bg-primary/90 px-6 py-3 rounded-lg font-semibold whitespace-nowrap"
+                    className="bg-primary text-white hover:bg-primary/90 px-6 py-3 rounded-lg font-semibold whitespace-nowrap pl-[24px] pr-[24px] pt-[26px] pb-[26px]"
                   >
                     🎁 Send Me the Checklist
                   </Button>
