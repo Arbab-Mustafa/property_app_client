@@ -132,7 +132,7 @@ const TwoBedSocialHousingNelincs = () => {
   const financialBreakdown = [
     { label: "Purchase Price", value: "£55,700" },
     { label: "Refurb Cost", value: "£5,000" },
-    { label: "Acquisition Cost", value: "£60,700" },
+    { label: "Acquisition Cost", value: "£24,585" },
     { label: "Projected End Value", value: "£70,000" },
     { label: "Annual Rental Income", value: "£4,650" },
     { label: "Monthly Rental", value: "£650" }
@@ -302,8 +302,8 @@ const TwoBedSocialHousingNelincs = () => {
                     </div>
                     <div className="flex-1 bg-gray-100 rounded-full h-8 relative max-w-md">
                       <div 
-                        className="bg-red-400 h-8 rounded-full flex items-center justify-end pr-2 text-white text-xs font-bold"
-                        style={{ width: '1%', minWidth: '60px' }}
+                        className="bg-red-400 h-8 rounded-full flex items-center justify-center text-white text-xs font-bold"
+                        style={{ width: '0.6%', minWidth: '30px' }}
                       >
                         0.2%
                       </div>
@@ -318,7 +318,7 @@ const TwoBedSocialHousingNelincs = () => {
                     <div className="flex-1 bg-gray-100 rounded-full h-8 relative max-w-md">
                       <div 
                         className="bg-yellow-400 h-8 rounded-full flex items-center justify-end pr-2 text-white text-xs font-bold"
-                        style={{ width: '14%' }}
+                        style={{ width: '13.6%' }}
                       >
                         4.5%
                       </div>
@@ -366,15 +366,15 @@ const TwoBedSocialHousingNelincs = () => {
                   <h3 className="text-xl font-bold text-gray-900 mb-4">Light Modernisation Strategy</h3>
                   <ul className="space-y-3">
                     <li className="flex items-start">
-                      <DollarSign className="h-5 w-5 text-primary mr-3 mt-0.5" />
+                      <span className="text-primary mr-3 mt-0.5 text-lg">£</span>
                       <span>Interior painting and decorative improvements</span>
                     </li>
                     <li className="flex items-start">
-                      <DollarSign className="h-5 w-5 text-primary mr-3 mt-0.5" />
+                      <span className="text-primary mr-3 mt-0.5 text-lg">£</span>
                       <span>New carpets and cooker installation</span>
                     </li>
                     <li className="flex items-start">
-                      <DollarSign className="h-5 w-5 text-primary mr-3 mt-0.5" />
+                      <span className="text-primary mr-3 mt-0.5 text-lg">£</span>
                       <span>Garden boundaries secured and compliance checks</span>
                     </li>
                   </ul>
@@ -425,27 +425,11 @@ const TwoBedSocialHousingNelincs = () => {
             Book a free consultation to discuss your investment goals.
           </p>
           <Link href="/book-call">
-            <Button className="bg-primary text-white hover:bg-primary/90 px-8 py-4 rounded-lg text-lg font-semibold mb-6">
+            <Button className="bg-primary text-white hover:bg-primary/90 px-8 py-4 rounded-lg text-lg font-semibold">
               Book a Free Call
               <ArrowRight className="h-5 w-5 ml-2" />
             </Button>
           </Link>
-          
-          <div className="mt-8 pt-6 border-t border-gray-200">
-            <p className="text-lg text-gray-600 mb-4">
-              Not quite ready yet? Download our free Deal Checklist to start preparing today.
-            </p>
-            <a 
-              href="https://drive.google.com/file/d/1P_hHhSY2RTOcDxpRuN3egPsff71S3Mtv/view?usp=sharing" 
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Button className="bg-gray-700 text-white hover:bg-gray-600 px-6 py-3 rounded-lg font-semibold">
-                Download Deal Checklist
-                <FileText className="h-5 w-5 ml-2" />
-              </Button>
-            </a>
-          </div>
         </div>
       </section>
       {/* Soft CTA Block with Download Option */}
