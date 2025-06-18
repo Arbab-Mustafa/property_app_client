@@ -1,8 +1,12 @@
-import { useState } from "react";
 import { Helmet } from "react-helmet";
-import { Button } from "@/components/ui/button";
-import { ArrowRight, TrendingUp, CheckCircle, DollarSign, Quote, FileText } from "lucide-react";
 import { Link } from "wouter";
+import { Button } from "@/components/ui/button";
+import { ArrowRight, Calendar, DollarSign, TrendingUp, CheckCircle, Quote, FileText } from "lucide-react";
+import { useState } from "react";
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay, Pagination } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/pagination';
 
 const TwoBedSocialHousingNelincs = () => {
   const [emailSubmitted, setEmailSubmitted] = useState(false);
@@ -32,33 +36,26 @@ const TwoBedSocialHousingNelincs = () => {
     }
   };
 
-  const swiperStyles = `
-    .swiper-container {
-      width: 100%;
-      height: 300px;
-    }
-    .swiper-slide {
-      text-align: center;
-      font-size: 18px;
-      background: #fff;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    .swiper-slide img {
-      display: block;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-    .swiper-pagination-bullet {
-      background: #f97316;
-    }
-    .swiper-button-next,
-    .swiper-button-prev {
-      color: #f97316;
-    }
-  `;
+// Custom styles for Swiper pagination
+const swiperStyles = `
+  .swiper-pagination {
+    position: absolute !important;
+    bottom: 10px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    width: auto !important;
+  }
+  
+  .swiper-pagination-bullet {
+    background: rgba(255, 255, 255, 0.5) !important;
+    opacity: 1 !important;
+    margin: 0 4px !important;
+  }
+  
+  .swiper-pagination-bullet-active {
+    background: white !important;
+  }
+`;
 
   const beforeImages = [
     { src: "/assets/case-study-before-richard/1.jpg", alt: "Before - Property View 1" },
@@ -175,17 +172,37 @@ const TwoBedSocialHousingNelincs = () => {
               <div className="bg-red-500 text-white p-4 text-center">
                 <h3 className="text-xl font-bold">BEFORE</h3>
               </div>
-              <div className="swiper-container before-swiper" style={{ height: '400px' }}>
-                <div className="swiper-wrapper">
+              <div className="aspect-video bg-gray-200">
+                <Swiper
+                  modules={[Autoplay, Pagination]}
+                  spaceBetween={0}
+                  slidesPerView={1}
+                  autoplay={{
+                    delay: 4000,
+                    disableOnInteraction: false,
+                  }}
+                  pagination={{
+                    clickable: true,
+                    bulletClass: 'swiper-pagination-bullet',
+                    bulletActiveClass: 'swiper-pagination-bullet-active',
+                  }}
+                  loop={true}
+                  className="h-full"
+                >
                   {beforeImages.map((image, index) => (
-                    <div key={index} className="swiper-slide">
-                      <img src={image.src} alt={image.alt} />
-                    </div>
+                    <SwiperSlide key={index}>
+                      <img
+                        src={image.src}
+                        alt={image.alt}
+                        className="w-full h-full object-cover"
+                      />
+                    </SwiperSlide>
                   ))}
-                </div>
-                <div className="swiper-pagination"></div>
-                <div className="swiper-button-next"></div>
-                <div className="swiper-button-prev"></div>
+                </Swiper>
+              </div>
+              <div className="p-4 text-center">
+                <p className="text-gray-600 font-medium">Original Property Condition</p>
+                <p className="text-sm text-gray-500 mt-2">Light modernisation required. Paint, carpets, and boundary work needed for social housing compliance.</p>
               </div>
             </div>
 
@@ -194,17 +211,37 @@ const TwoBedSocialHousingNelincs = () => {
               <div className="bg-green-500 text-white p-4 text-center">
                 <h3 className="text-xl font-bold">AFTER</h3>
               </div>
-              <div className="swiper-container after-swiper" style={{ height: '400px' }}>
-                <div className="swiper-wrapper">
+              <div className="aspect-video bg-gray-200">
+                <Swiper
+                  modules={[Autoplay, Pagination]}
+                  spaceBetween={0}
+                  slidesPerView={1}
+                  autoplay={{
+                    delay: 4500,
+                    disableOnInteraction: false,
+                  }}
+                  pagination={{
+                    clickable: true,
+                    bulletClass: 'swiper-pagination-bullet',
+                    bulletActiveClass: 'swiper-pagination-bullet-active',
+                  }}
+                  loop={true}
+                  className="h-full"
+                >
                   {afterImages.map((image, index) => (
-                    <div key={index} className="swiper-slide">
-                      <img src={image.src} alt={image.alt} />
-                    </div>
+                    <SwiperSlide key={index}>
+                      <img
+                        src={image.src}
+                        alt={image.alt}
+                        className="w-full h-full object-cover"
+                      />
+                    </SwiperSlide>
                   ))}
-                </div>
-                <div className="swiper-pagination"></div>
-                <div className="swiper-button-next"></div>
-                <div className="swiper-button-prev"></div>
+                </Swiper>
+              </div>
+              <div className="p-4 text-center">
+                <p className="text-gray-600 font-medium">Modernised & Compliant</p>
+                <p className="text-sm text-gray-500 mt-2">Fresh paint, new carpets, cooker installed. All compliance checks completed for 5-year social housing tenancy.</p>
               </div>
             </div>
           </div>
@@ -284,7 +321,7 @@ const TwoBedSocialHousingNelincs = () => {
       <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-12">
-            Comparing Returns on Capital
+            Comparing Investment Returns
           </h2>
           
           <div className="max-w-4xl mx-auto">
@@ -302,8 +339,8 @@ const TwoBedSocialHousingNelincs = () => {
                     </div>
                     <div className="flex-1 bg-gray-100 rounded-full h-8 relative max-w-md">
                       <div 
-                        className="bg-red-400 h-8 rounded-full flex items-center justify-center text-white text-xs font-bold"
-                        style={{ width: '0.6%', minWidth: '30px' }}
+                        className="bg-red-400 h-8 rounded-full flex items-center justify-end pr-2 text-white text-xs font-bold"
+                        style={{ width: '1%', minWidth: '60px' }}
                       >
                         0.2%
                       </div>
@@ -318,7 +355,7 @@ const TwoBedSocialHousingNelincs = () => {
                     <div className="flex-1 bg-gray-100 rounded-full h-8 relative max-w-md">
                       <div 
                         className="bg-yellow-400 h-8 rounded-full flex items-center justify-end pr-2 text-white text-xs font-bold"
-                        style={{ width: '13.6%' }}
+                        style={{ width: '25%' }}
                       >
                         4.5%
                       </div>
@@ -486,46 +523,7 @@ const TwoBedSocialHousingNelincs = () => {
         </div>
       </section>
 
-      <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js" defer></script>
-      <script defer dangerouslySetInnerHTML={{
-        __html: `
-          document.addEventListener('DOMContentLoaded', function() {
-            if (typeof Swiper !== 'undefined') {
-              new Swiper('.before-swiper', {
-                loop: true,
-                autoplay: {
-                  delay: 4000,
-                  disableOnInteraction: false,
-                },
-                pagination: {
-                  el: '.swiper-pagination',
-                  clickable: true,
-                },
-                navigation: {
-                  nextEl: '.swiper-button-next',
-                  prevEl: '.swiper-button-prev',
-                },
-              });
-              
-              new Swiper('.after-swiper', {
-                loop: true,
-                autoplay: {
-                  delay: 4500,
-                  disableOnInteraction: false,
-                },
-                pagination: {
-                  el: '.swiper-pagination',
-                  clickable: true,
-                },
-                navigation: {
-                  nextEl: '.swiper-button-next',
-                  prevEl: '.swiper-button-prev',
-                },
-              });
-            }
-          });
-        `
-      }} />
+
     </>
   );
 };
