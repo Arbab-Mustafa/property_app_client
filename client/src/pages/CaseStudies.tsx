@@ -16,24 +16,14 @@ const CaseStudies = () => {
       link: "/case-studies/2-bed-social-housing-nelincs"
     },
     {
-      id: "social-housing-nelincs",
-      title: "3-Bed Social Housing – North East Lincolnshire",
+      id: "3-bed-to-4-bed-newhaven-nelincs",
+      title: "3-Bed to 4-Bed Conversion – Newhaven, North East Lincolnshire",
       type: "Mid-Terrace",
-      strategy: "BRR / Social Housing",
+      strategy: "Social Housing",
       location: "North East Lincolnshire",
-      summary: "Full refurbishment including DPC, kitchen, bathroom, and redecoration prepared this property for long-term letting under a social housing lease.",
-      roi: "16% ROI",
-      link: "#"
-    },
-    {
-      id: "4-bed-social-housing-nelincs",
-      title: "4-Bed Social Housing – North East Lincolnshire",
-      type: "Mid-Terrace",
-      strategy: "BRR / Social Housing",
-      location: "North East Lincolnshire",
-      summary: "Converted from 3 to 4 bedrooms to meet social housing demand. Strong long-term returns through structural reconfiguration and compliance upgrades.",
-      roi: "15.48% ROI",
-      link: "#"
+      summary: "A 3-bed property converted to a 4-bed social housing unit. Renovation included a DPC, reconfiguring the kitchen, installing fire doors, boxing in gas and electrical units to meet fire safety, and fireproofing beneath the stairs.",
+      roi: "19.16% ROI",
+      link: "/case-studies/3-bed-to-4-bed-newhaven-nelincs"
     },
     {
       id: "4-bed-family-social-housing-nelincs",
