@@ -8,6 +8,27 @@ import { Autoplay, Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
 
+// Custom styles for Swiper pagination
+const swiperStyles = `
+  .swiper-pagination {
+    position: absolute !important;
+    bottom: 10px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    width: auto !important;
+  }
+  
+  .swiper-pagination-bullet {
+    background: rgba(255, 255, 255, 0.5) !important;
+    opacity: 1 !important;
+    margin: 0 4px !important;
+  }
+  
+  .swiper-pagination-bullet-active {
+    background: white !important;
+  }
+`;
+
 const FourBedFamilySocialHousingNelincs = () => {
   const [emailSubmitted, setEmailSubmitted] = useState(false);
 
@@ -101,6 +122,7 @@ const FourBedFamilySocialHousingNelincs = () => {
 
   return (
     <>
+      <style>{swiperStyles}</style>
       <Helmet>
         <title>4-Bed Family Social Housing – North East Lincolnshire Case Study | BRR Investment Success</title>
         <meta name="description" content="Detailed case study of our 4-bed family social housing project in North East Lincolnshire showing 17.67% ROI through BRR strategy and conversion." />
