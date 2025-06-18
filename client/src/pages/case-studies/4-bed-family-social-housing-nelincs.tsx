@@ -410,15 +410,15 @@ const FourBedFamilySocialHousingNelincs = () => {
                   <h3 className="text-xl font-bold text-gray-900 mb-4">BRR Strategy Implementation</h3>
                   <ul className="space-y-3">
                     <li className="flex items-start">
-                      <DollarSign className="h-5 w-5 text-primary mr-3 mt-0.5" />
+                      <span className="text-primary mr-3 mt-0.5 text-lg">£</span>
                       <span>Buy: Property purchased below market value</span>
                     </li>
                     <li className="flex items-start">
-                      <DollarSign className="h-5 w-5 text-primary mr-3 mt-0.5" />
+                      <span className="text-primary mr-3 mt-0.5 text-lg">£</span>
                       <span>Refurbish: Full compliance upgrade and conversion</span>
                     </li>
                     <li className="flex items-start">
-                      <DollarSign className="h-5 w-5 text-primary mr-3 mt-0.5" />
+                      <span className="text-primary mr-3 mt-0.5 text-lg">£</span>
                       <span>Refinance: Secured against improved rental value</span>
                     </li>
                   </ul>
