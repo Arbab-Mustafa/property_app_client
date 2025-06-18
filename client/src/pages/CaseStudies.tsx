@@ -9,11 +9,11 @@ const CaseStudies = () => {
       id: "2-bed-social-housing-nelincs",
       title: "2-Bed Social Housing – North East Lincolnshire",
       type: "Mid-Terrace",
-      strategy: "BRR / Social Housing",
+      strategy: "Light Modernisation / Social Housing",
       location: "North East Lincolnshire",
       summary: "Light refurb including paint, carpets, cooker installation and boundary work readied this mid-terrace for social housing tenancy.",
-      roi: "33.32% ROI",
-      link: "#"
+      roi: "33.13% ROI",
+      link: "/case-studies/2-bed-social-housing-nelincs"
     },
     {
       id: "social-housing-nelincs",

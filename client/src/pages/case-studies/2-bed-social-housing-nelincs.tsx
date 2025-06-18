@@ -147,6 +147,7 @@ const TwoBedSocialHousingNelincs = () => {
         <meta property="og:title" content="2-Bed Social Housing – North East Lincolnshire Case Study | 33% ROI Investment Success" />
         <meta property="og:description" content="Detailed case study of our 2-bed social housing project in North East Lincolnshire showing 33.13% ROI through light modernisation and social housing strategy." />
         <meta property="og:type" content="website" />
+        <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
       </Helmet>
       {/* Page Header */}
       <section className="bg-primary text-white py-16">
