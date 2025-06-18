@@ -217,7 +217,7 @@ const swiperStyles = `
                   spaceBetween={0}
                   slidesPerView={1}
                   autoplay={{
-                    delay: 4500,
+                    delay: 4000,
                     disableOnInteraction: false,
                   }}
                   pagination={{
