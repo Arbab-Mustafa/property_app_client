@@ -112,12 +112,12 @@ const FourBedFamilySocialHousingNelincs = () => {
   ];
 
   const financialBreakdown = [
-    { label: "Purchase Price", value: "£XXX" },
-    { label: "Refurb Cost", value: "£XXX" },
-    { label: "Total Investment", value: "£XXX" },
-    { label: "Annual Rental Income", value: "£XXX" },
-    { label: "Projected ROI", value: "17.67%" },
-    { label: "Status", value: "Buy & Hold, 5-Year Let Agreed" }
+    { label: "Purchase Price", value: "£62,000" },
+    { label: "Refurb Cost", value: "£17,950" },
+    { label: "Total Investment", value: "£79,950" },
+    { label: "Projected End Value", value: "£75,000" },
+    { label: "Annual Rental Income", value: "£5,985" },
+    { label: "Monthly Rental", value: "£780" }
   ];
 
   return (
@@ -277,10 +277,14 @@ const FourBedFamilySocialHousingNelincs = () => {
               <div className="grid md:grid-cols-2 gap-6">
                 {financialBreakdown.map((item, index) => (
                   <div key={index} className={`flex justify-between items-center p-4 rounded-lg ${
-                    item.label === "Projected ROI" ? "bg-primary text-white font-bold text-lg" : "bg-white"
+                    item.label === "Total Investment" || item.label === "Annual Rental Income" ? 
+                    "bg-white border-2 border-orange-500" : "bg-white"
                   }`}>
                     <span className="font-medium">{item.label}:</span>
-                    <span className="font-bold">{item.value}</span>
+                    <span className={`font-bold ${
+                      item.label === "Total Investment" || item.label === "Annual Rental Income" ? 
+                      "text-orange-600" : ""
+                    }`}>{item.value}</span>
                   </div>
                 ))}
               </div>
@@ -288,7 +292,7 @@ const FourBedFamilySocialHousingNelincs = () => {
               <div className="mt-8 p-6 bg-green-100 rounded-lg text-center">
                 <div className="flex items-center justify-center mb-2">
                   <TrendingUp className="h-6 w-6 text-green-600 mr-2" />
-                  <span className="text-green-800 font-bold text-xl">Annual ROI: 17.67%</span>
+                  <span className="text-green-800 font-bold text-xl">Annual ROI: 15.48%</span>
                 </div>
                 <p className="text-green-700">5-year social housing tenancy secured with registered provider</p>
               </div>
