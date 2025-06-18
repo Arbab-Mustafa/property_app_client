@@ -367,74 +367,138 @@ const ThreeBedToFourBedNewhavenNelincs = () => {
         </div>
       </section>
 
-      {/* Testimonial */}
+      {/* Deal Structure */}
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-12">
+            Deal Structure
+          </h2>
+          
           <div className="max-w-4xl mx-auto">
-            <div className="bg-gray-50 rounded-lg shadow-lg p-8 text-center">
-              <Quote className="w-12 h-12 mx-auto mb-6 text-primary" />
-              <blockquote className="text-xl italic text-gray-700 mb-6">
-                "This was my first hands-off social housing deal and it ran smoother than expected."
-              </blockquote>
-              <cite className="font-semibold text-gray-900">
-                — Placeholder, Investor
-              </cite>
+            <div className="bg-white rounded-lg shadow-lg p-8">
+              <div className="grid md:grid-cols-2 gap-8">
+                <div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-4">Conversion Strategy</h3>
+                  <ul className="space-y-3">
+                    <li className="flex items-start">
+                      <span className="text-primary mr-3 mt-0.5 text-lg">£</span>
+                      <span>DPC installation and damp-proofing works</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="text-primary mr-3 mt-0.5 text-lg">£</span>
+                      <span>Kitchen reconfiguration and fire safety compliance</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="text-primary mr-3 mt-0.5 text-lg">£</span>
+                      <span>Fire doors, gas/electrical boxing, fireproofing</span>
+                    </li>
+                  </ul>
+                </div>
+                
+                <div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-4">Social Housing Benefits</h3>
+                  <ul className="space-y-3">
+                    <li className="flex items-start">
+                      <CheckCircle className="h-5 w-5 text-green-500 mr-3 mt-0.5" />
+                      <span>5-year guaranteed tenancy agreement</span>
+                    </li>
+                    <li className="flex items-start">
+                      <CheckCircle className="h-5 w-5 text-green-500 mr-3 mt-0.5" />
+                      <span>Zero tenant management required</span>
+                    </li>
+                    <li className="flex items-start">
+                      <CheckCircle className="h-5 w-5 text-green-500 mr-3 mt-0.5" />
+                      <span>Stable, predictable rental income stream</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
+      {/* Testimonial */}
       <section className="py-16 bg-primary text-white">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto text-center">
+            <Quote className="h-16 w-16 text-white/30 mx-auto mb-6" />
+            <blockquote className="text-2xl md:text-3xl font-medium mb-6 italic">
+              "This was my first hands-off social housing deal and it ran smoother than expected."
+            </blockquote>
+            <p className="text-xl text-white/90">– Placeholder, Investor</p>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-16 bg-white">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">
-            Ready to Build Your Property Portfolio?
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+            Want to invest in deals like this?
           </h2>
-          <p className="text-xl mb-8 max-w-2xl mx-auto">
-            Book a free strategy call to discover how you can achieve similar returns
+          <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
+            Join our network of investors and get access to similar high-return property investment opportunities. 
+            Book a free consultation to discuss your investment goals.
           </p>
-          
           <Link href="/book-call">
-            <Button 
-              size="lg" 
-              className="bg-accent hover:bg-accent/90 text-white font-semibold px-8 py-4 rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl mb-8"
-            >
+            <Button className="bg-primary text-white hover:bg-primary/90 px-8 py-4 rounded-lg text-lg font-semibold">
               Book a Free Call
-              <ArrowRight className="ml-2 h-5 w-5" />
+              <ArrowRight className="h-5 w-5 ml-2" />
             </Button>
           </Link>
+        </div>
+      </section>
 
-          <div className="border-t border-blue-700 pt-8 max-w-2xl mx-auto">
-            <p className="text-blue-100 mb-6">
-              Not ready yet? Download our Deal Checklist to learn what makes a deal compliant + profitable.
+      {/* Soft CTA Block with Download Option */}
+      <section className="py-16 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <div className="max-w-2xl mx-auto text-center">
+            <FileText className="h-12 w-12 text-primary mx-auto mb-4" />
+            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
+              📄 Want to find deals like this yourself?
+            </h2>
+            <p className="text-lg text-gray-600 mb-8">
+              Start by reviewing our Deal Checklist — the same tool our investors use to evaluate deals like this one.
             </p>
-            
-            {!emailSubmitted ? (
+            <p className="text-md text-gray-600 mb-8">
+              Get it free by entering your email below.
+            </p>
+
+            {emailSubmitted ? (
+              <div className="bg-green-50 border border-green-200 rounded-lg p-6">
+                <div className="text-green-600 font-semibold text-lg mb-2">
+                  ✅ Checklist sent to your inbox!
+                </div>
+                <p className="text-gray-600">
+                  <a 
+                    href="https://drive.google.com/file/d/1P_hHhSY2RTOcDxpRuN3egPsff71S3Mtv/view?usp=sharing" 
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-primary font-semibold hover:underline"
+                  >
+                    Click here
+                  </a> to download it directly.
+                </p>
+              </div>
+            ) : (
               <form onSubmit={handleEmailSubmit} className="max-w-md mx-auto">
-                <div className="flex gap-3">
+                <div className="flex flex-col sm:flex-row gap-3">
                   <input
                     type="email"
                     name="email"
-                    placeholder="Enter your email"
+                    placeholder="Enter your email to get the checklist"
                     required
-                    className="flex-1 px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-accent text-gray-900"
+                    className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
                   />
                   <Button 
                     type="submit"
-                    className="bg-accent hover:bg-accent/90 px-6 py-3 text-white font-semibold rounded-lg transition-all duration-200"
+                    className="bg-primary text-white hover:bg-primary/90 px-6 py-3 rounded-lg font-semibold whitespace-nowrap pl-[24px] pr-[24px] pt-[26px] pb-[26px]"
                   >
-                    <FileText className="w-5 h-5 mr-2" />
-                    Get Checklist
+                    🎁 Send Me the Checklist
                   </Button>
                 </div>
               </form>
-            ) : (
-              <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-lg max-w-md mx-auto">
-                <div className="flex items-center justify-center">
-                  <CheckCircle className="w-5 h-5 mr-2" />
-                  Thank you! Check your email for the Deal Checklist.
-                </div>
-              </div>
             )}
           </div>
         </div>
