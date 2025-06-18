@@ -65,7 +65,7 @@ const BookCall = () => {
                 <h2 className="text-xl font-bold mb-4" style={{ color: '#1A355E' }}>
                   Prefer to Speak Now?
                 </h2>
-                <p className="mb-6" style={{ color: '#6B7280' }}>
+                <p className="mb-6 pt-[12px] pb-[12px]" style={{ color: '#6B7280' }}>
                   Call us directly for immediate assistance
                 </p>
                 <a 
