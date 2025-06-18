@@ -208,50 +208,74 @@ const FourBedFamilySocialHousingNelincs = () => {
         </div>
       </section>
 
-      {/* ROI Comparison Chart */}
+      {/* Investment Returns Comparison Chart */}
       <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-12">
-            ROI Comparison
+            Comparing Investment Returns
           </h2>
           
           <div className="max-w-4xl mx-auto">
             <div className="bg-white rounded-lg shadow-lg p-8">
-              <div className="grid md:grid-cols-3 gap-6 mb-6">
-                {/* High Street Bank Savings */}
-                <div className="text-center">
-                  <h3 className="text-lg font-semibold text-gray-700 mb-3">High Street Bank Savings</h3>
-                  <div className="bg-gray-100 rounded-lg p-4 h-32 flex items-end justify-center">
-                    <div className="bg-red-400 rounded-t w-16 flex items-center justify-center text-white font-bold text-sm" style={{ height: '8px' }}>
-                      0.2%
+              {/* Chart Title and Labels */}
+              <div className="mb-8">
+                <h3 className="text-xl font-semibold text-center text-gray-800 mb-6">Annual Return (%)</h3>
+                
+                {/* Chart Bars */}
+                <div className="space-y-6">
+                  {/* High Street Bank Savings */}
+                  <div className="flex items-center">
+                    <div className="w-48 text-right pr-4">
+                      <span className="text-sm font-medium text-gray-700">High Street Bank Savings</span>
+                    </div>
+                    <div className="flex-1 bg-gray-100 rounded-full h-8 relative max-w-md">
+                      <div 
+                        className="bg-red-400 h-8 rounded-full flex items-center justify-end pr-2 text-white text-xs font-bold"
+                        style={{ width: '1%', minWidth: '60px' }}
+                      >
+                        0.2%
+                      </div>
                     </div>
                   </div>
-                </div>
 
-                {/* Cash ISA */}
-                <div className="text-center">
-                  <h3 className="text-lg font-semibold text-gray-700 mb-3">Cash ISA</h3>
-                  <div className="bg-gray-100 rounded-lg p-4 h-32 flex items-end justify-center">
-                    <div className="bg-yellow-400 rounded-t w-16 flex items-center justify-center text-white font-bold text-sm" style={{ height: '25%' }}>
-                      4.5%
+                  {/* Cash ISA */}
+                  <div className="flex items-center">
+                    <div className="w-48 text-right pr-4">
+                      <span className="text-sm font-medium text-gray-700">Cash ISA</span>
+                    </div>
+                    <div className="flex-1 bg-gray-100 rounded-full h-8 relative max-w-md">
+                      <div 
+                        className="bg-yellow-400 h-8 rounded-full flex items-center justify-end pr-2 text-white text-xs font-bold"
+                        style={{ width: '25%' }}
+                      >
+                        4.5%
+                      </div>
                     </div>
                   </div>
-                </div>
 
-                {/* KR Social Housing Deal */}
-                <div className="text-center">
-                  <h3 className="text-lg font-semibold text-gray-700 mb-3">KR Social Housing Deal</h3>
-                  <div className="bg-gray-100 rounded-lg p-4 h-32 flex items-end justify-center">
-                    <div className="bg-green-500 rounded-t w-16 flex items-center justify-center text-white font-bold text-sm" style={{ height: '100%' }}>
-                      17.67%
+                  {/* KR Social Housing Deal */}
+                  <div className="flex items-center">
+                    <div className="w-48 text-right pr-4">
+                      <span className="text-sm font-medium text-gray-700">KR Social Housing Deal</span>
+                    </div>
+                    <div className="flex-1 bg-gray-100 rounded-full h-8 relative max-w-md">
+                      <div 
+                        className="bg-green-500 h-8 rounded-full flex items-center justify-end pr-2 text-white text-xs font-bold"
+                        style={{ width: '100%' }}
+                      >
+                        17.67%
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
               
-              <p className="text-center text-sm text-gray-500 italic">
-                Illustrative returns based on current UK averages — for educational purposes only.
-              </p>
+              <div className="text-center">
+                <p className="text-xs text-gray-600 mb-2 font-medium">Investment Type</p>
+                <p className="text-sm text-gray-500 italic">
+                  For illustrative purposes only. Based on UK averages as of 2025.
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -321,8 +345,27 @@ const FourBedFamilySocialHousingNelincs = () => {
         </div>
       </section>
 
-      {/* Soft CTA Block with Download Option */}
+      {/* CTA Section */}
       <section className="py-16 bg-white">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+            Want to invest in deals like this?
+          </h2>
+          <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
+            Join our network of investors and get access to similar high-return property investment opportunities. 
+            Book a free consultation to discuss your investment goals.
+          </p>
+          <Link href="/book-call">
+            <Button className="bg-primary text-white hover:bg-primary/90 px-8 py-4 rounded-lg text-lg font-semibold">
+              Book a Free Call
+              <ArrowRight className="h-5 w-5 ml-2" />
+            </Button>
+          </Link>
+        </div>
+      </section>
+
+      {/* Soft CTA Block with Download Option */}
+      <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="max-w-2xl mx-auto text-center">
             <FileText className="h-12 w-12 text-primary mx-auto mb-4" />
@@ -372,25 +415,6 @@ const FourBedFamilySocialHousingNelincs = () => {
               </form>
             )}
           </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-16 bg-gray-50">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-            Want to invest in deals like this?
-          </h2>
-          <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
-            Join our network of investors and get access to similar high-return property investment opportunities. 
-            Book a free consultation to discuss your investment goals.
-          </p>
-          <Link href="/book-call">
-            <Button className="bg-primary text-white hover:bg-primary/90 px-8 py-4 rounded-lg text-lg font-semibold">
-              Book a Free Call
-              <ArrowRight className="h-5 w-5 ml-2" />
-            </Button>
-          </Link>
         </div>
       </section>
     </>
