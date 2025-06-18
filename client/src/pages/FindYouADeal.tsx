@@ -52,7 +52,7 @@ const FindYouADeal = () => {
           We're currently at full capacity — but you can join the waitlist and get our <strong>Free Deal Checklist</strong> to prepare for your next investment.
         </p>
 
-        <div className="bg-white rounded-lg shadow-md p-6 max-w-xl mx-auto mb-6 border border-[#C58B25]">
+        <div className="bg-white rounded-lg shadow-md p-6 max-w-xl mx-auto border border-[#C58B25] mt-[43px] mb-[43px]">
           <h2 className="text-xl font-bold mb-2 text-[#1A355E]">🎁 Free Bonus: The Ultimate Deal Checklist</h2>
           <ul className="text-left text-[#6B7280] list-disc pl-5 space-y-1 text-sm">
             <li>Know what to ask before buying</li>
