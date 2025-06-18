@@ -44,7 +44,6 @@ const FindYouADeal = () => {
         <meta property="og:description" content="Our deal sourcing service is temporarily paused. Join the waitlist to be notified when we reopen for new clients." />
         <meta property="og:type" content="website" />
       </Helmet>
-
       <div className="min-h-screen bg-[#F9FAFB] py-20 px-4 text-center">
         <h1 className="text-4xl md:text-5xl font-bold mb-4 text-[#1A355E]">
           Our Deal Sourcing Service Is Temporarily Paused
@@ -83,7 +82,7 @@ const FindYouADeal = () => {
             ✅ Lead submitted successfully! You'll be the first to hear when we reopen.
           </div>
         ) : (
-          <form onSubmit={handleSubmit} className="max-w-xl mx-auto space-y-4">
+          <form onSubmit={handleSubmit} className="max-w-xl mx-auto space-y-4 mt-[51px] mb-[51px]">
             <input
               type="text"
               name="name"
