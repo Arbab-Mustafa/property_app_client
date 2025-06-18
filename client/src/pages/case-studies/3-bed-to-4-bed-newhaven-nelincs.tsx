@@ -127,125 +127,207 @@ const ThreeBedToFourBedNewhavenNelincs = () => {
     }
   ];
 
+  const financialBreakdown = [
+    { label: "Purchase Price", value: "£62,000" },
+    { label: "Estimated Refurb", value: "£9,500" },
+    { label: "Acquisition Costs", value: "£38,935" },
+    { label: "Projected End Value", value: "£75,000" },
+    { label: "Projected Rental Income", value: "£750/month" },
+    { label: "Annual Income (net)", value: "£5,625" },
+    { label: "ROCE", value: "19.16%" }
+  ];
+
   return (
     <>
       <Helmet>
-        <title>3-Bed to 4-Bed Conversion - Newhaven, North East Lincolnshire | KR Property Investments</title>
-        <meta name="description" content="19.16% ROI social housing conversion. 3-bed mid-terrace converted to 4-bed family house with DPC, kitchen reconfig, fire safety compliance. £62k purchase, £750/month rental." />
+        <title>3-Bed to 4-Bed Conversion – Newhaven, North East Lincolnshire Case Study | Property Investment Success</title>
+        <meta name="description" content="Detailed case study of our Newhaven property conversion project showing 19.16% ROCE. See the complete timeline and financial breakdown." />
+        <meta property="og:title" content="3-Bed to 4-Bed Conversion – Newhaven, North East Lincolnshire Case Study | Property Investment Success" />
+        <meta property="og:description" content="Detailed case study of our Newhaven property conversion project showing 19.16% ROCE. See the complete timeline and financial breakdown." />
+        <meta property="og:type" content="website" />
       </Helmet>
 
       <style>{swiperStyles}</style>
 
-      <div className="min-h-screen bg-white">
-        {/* Header */}
-        <div className="py-8 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-          <Link href="/case-studies">
-            <a className="inline-flex items-center text-sm font-medium text-blue-600 hover:text-blue-500 mb-6">
-              ← Back to Case Studies
-            </a>
-          </Link>
+      {/* Page Header */}
+      <section className="bg-primary text-white py-16">
+        <div className="container mx-auto px-4 text-center">
+          <h1 className="text-4xl md:text-5xl font-bold mb-6 pt-20">
+            3-Bed Converted to <br />
+            4-Bed Family House
+          </h1>
+          <p className="text-xl md:text-2xl max-w-4xl mx-auto">
+            A successful property conversion project in Newhaven, North East Lincolnshire, delivering strong returns 
+            for our investors through strategic refurbishment and social housing compliance.
+          </p>
+        </div>
+      </section>
 
-          <div className="text-center mb-12">
-            <h1 className="text-4xl font-bold mb-4" style={{ color: '#1A355E' }}>
-              3-Bed to 4-Bed Conversion
-            </h1>
-            <p className="text-xl text-gray-600 mb-6">
-              Newhaven, North East Lincolnshire
-            </p>
-            <div className="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium text-white" style={{ backgroundColor: '#C58B25' }}>
-              <TrendingUp className="w-4 h-4 mr-2" />
-              19.16% ROCE
+      {/* Project Overview - Before/After Images */}
+      <section className="py-16 bg-white">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-12">
+            Project Overview
+          </h2>
+          
+          <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+            {/* Before Image */}
+            <div className="bg-gray-100 rounded-lg overflow-hidden shadow-lg">
+              <div className="bg-red-500 text-white p-4 text-center">
+                <h3 className="text-xl font-bold">BEFORE</h3>
+              </div>
+              <div className="relative h-80">
+                <Swiper
+                  modules={[Autoplay, Pagination]}
+                  spaceBetween={0}
+                  slidesPerView={1}
+                  autoplay={{
+                    delay: 3000,
+                    disableOnInteraction: false,
+                  }}
+                  pagination={{
+                    clickable: true,
+                  }}
+                  loop={true}
+                  className="h-full"
+                >
+                  {beforeImages.map((image, index) => (
+                    <SwiperSlide key={index}>
+                      <img
+                        src={image.src}
+                        alt={image.alt}
+                        className="w-full h-full object-cover"
+                      />
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
+              </div>
+            </div>
+
+            {/* After Image */}
+            <div className="bg-gray-100 rounded-lg overflow-hidden shadow-lg">
+              <div className="bg-green-500 text-white p-4 text-center">
+                <h3 className="text-xl font-bold">AFTER</h3>
+              </div>
+              <div className="relative h-80">
+                <Swiper
+                  modules={[Autoplay, Pagination]}
+                  spaceBetween={0}
+                  slidesPerView={1}
+                  autoplay={{
+                    delay: 3000,
+                    disableOnInteraction: false,
+                  }}
+                  pagination={{
+                    clickable: true,
+                  }}
+                  loop={true}
+                  className="h-full"
+                >
+                  {afterImages.map((image, index) => (
+                    <SwiperSlide key={index}>
+                      <img
+                        src={image.src}
+                        alt={image.alt}
+                        className="w-full h-full object-cover"
+                      />
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
+              </div>
             </div>
           </div>
         </div>
+      </section>
 
-        {/* Project Overview */}
-        <div className="py-12 bg-gray-50">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-              <div>
-                <h2 className="text-3xl font-bold mb-6" style={{ color: '#1A355E' }}>
-                  Project Overview
-                </h2>
-                <div className="space-y-4">
-                  <div className="flex items-start">
-                    <div className="font-semibold text-gray-700 w-32">Strategy:</div>
-                    <div className="text-gray-600">Social Housing</div>
-                  </div>
-                  <div className="flex items-start">
-                    <div className="font-semibold text-gray-700 w-32">Property Type:</div>
-                    <div className="text-gray-600">3-bed mid-terrace (converted to 4-bed family house)</div>
-                  </div>
-                  <div className="flex items-start">
-                    <div className="font-semibold text-gray-700 w-32">Location:</div>
-                    <div className="text-gray-600">North East Lincolnshire</div>
-                  </div>
-                  <div className="flex items-start">
-                    <div className="font-semibold text-gray-700 w-32">Summary:</div>
-                    <div className="text-gray-600">A 3-bed property converted to a 4-bed social housing unit. Renovation included a DPC, reconfiguring the kitchen, installing fire doors, boxing in gas and electrical units to meet fire safety, and fireproofing beneath the stairs.</div>
+      {/* Timeline Section */}
+      <section className="py-16 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-12">
+            Project Timeline
+          </h2>
+          
+          <div className="max-w-4xl mx-auto">
+            <div className="relative">
+              {/* Timeline line */}
+              <div className="absolute left-1/2 transform -translate-x-px h-full w-0.5 bg-primary hidden md:block"></div>
+              
+              {timelineEvents.map((event, index) => (
+                <div key={index} className={`relative flex items-center mb-8 ${index % 2 === 0 ? 'md:flex-row-reverse' : ''}`}>
+                  {/* Timeline dot */}
+                  <div className="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-primary rounded-full border-4 border-white shadow hidden md:block"></div>
+                  
+                  {/* Content */}
+                  <div className={`bg-white rounded-lg shadow-md p-6 w-full md:w-5/12 ${index % 2 === 0 ? 'md:mr-auto' : 'md:ml-auto'}`}>
+                    <div className="flex items-center mb-3">
+                      <span className="text-2xl mr-3">{event.icon}</span>
+                      <div>
+                        <h3 className="text-xl font-bold text-gray-900">{event.title}</h3>
+                        <p className="text-primary font-semibold">{event.date}</p>
+                      </div>
+                    </div>
+                    <p className="text-gray-600">{event.description}</p>
                   </div>
                 </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ROI Breakdown */}
+      <section className="py-16 bg-white">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-12">
+            Financial Breakdown
+          </h2>
+          
+          <div className="max-w-4xl mx-auto">
+            <div className="bg-gray-50 rounded-lg p-8 shadow-lg">
+              <div className="grid md:grid-cols-2 gap-6">
+                {financialBreakdown.map((item, index) => (
+                  <div key={index} className={`flex justify-between items-center p-4 rounded-lg ${
+                    item.label === "ROCE" ? "bg-primary text-white font-bold text-lg" : "bg-white"
+                  }`}>
+                    <span className="font-medium">{item.label}:</span>
+                    <span className="font-bold">{item.value}</span>
+                  </div>
+                ))}
               </div>
               
-              <div className="bg-white rounded-lg shadow-lg p-8">
-                <h3 className="text-2xl font-bold mb-6" style={{ color: '#1A355E' }}>
-                  Financial Breakdown
-                </h3>
-                <div className="space-y-4">
-                  <div className="flex justify-between py-2 border-b border-gray-200">
-                    <span className="font-medium text-gray-700">Purchase Price:</span>
-                    <span className="font-semibold">£62,000</span>
-                  </div>
-                  <div className="flex justify-between py-2 border-b border-gray-200">
-                    <span className="font-medium text-gray-700">Estimated Refurb:</span>
-                    <span className="font-semibold">£9,500</span>
-                  </div>
-                  <div className="flex justify-between py-2 border-b border-gray-200">
-                    <span className="font-medium text-gray-700">Acquisition Costs:</span>
-                    <span className="font-semibold">£38,935</span>
-                  </div>
-                  <div className="flex justify-between py-2 border-b border-gray-200">
-                    <span className="font-medium text-gray-700">Projected End Value:</span>
-                    <span className="font-semibold">£75,000</span>
-                  </div>
-                  <div className="flex justify-between py-2 border-b border-gray-200">
-                    <span className="font-medium text-gray-700">Projected Rental Income:</span>
-                    <span className="font-semibold">£750/month</span>
-                  </div>
-                  <div className="flex justify-between py-2 border-b border-gray-200">
-                    <span className="font-medium text-gray-700">Annual Income (net):</span>
-                    <span className="font-semibold">£5,625</span>
-                  </div>
-                  <div className="flex justify-between py-3 bg-green-50 px-4 rounded-lg mt-4">
-                    <span className="font-bold text-gray-800">ROCE:</span>
-                    <span className="font-bold text-green-600 text-xl">19.16%</span>
-                  </div>
+              <div className="mt-8 p-6 bg-green-100 rounded-lg text-center">
+                <div className="flex items-center justify-center mb-2">
+                  <TrendingUp className="h-6 w-6 text-green-600 mr-2" />
+                  <span className="text-green-800 font-bold text-xl">Return on Capital Employed: 19.16%</span>
                 </div>
+                <p className="text-green-700">Annual return on invested capital</p>
               </div>
             </div>
           </div>
         </div>
+      </section>
 
-        {/* ROI Comparison Chart */}
-        <div className="py-12">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="text-3xl font-bold text-center mb-8" style={{ color: '#1A355E' }}>
-              Return Comparison
-            </h2>
+      {/* ROI Comparison Chart */}
+      <section className="py-16 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-12">
+            Return Comparison
+          </h2>
+          <div className="max-w-4xl mx-auto">
             <div className="bg-white rounded-lg shadow-lg p-8">
               <div className="space-y-6">
                 <div className="flex items-center justify-between">
-                  <span className="font-medium text-gray-700">High Street Bank</span>
+                  <span className="font-medium text-gray-700 w-32">High Street Bank</span>
                   <div className="flex items-center flex-1 mx-4">
                     <div 
                       className="h-8 bg-gray-300 rounded" 
-                      style={{ width: '2%', minWidth: '20px' }}
+                      style={{ width: '1%', minWidth: '20px' }}
                     ></div>
                     <span className="ml-2 font-semibold">0.2%</span>
                   </div>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="font-medium text-gray-700">Cash ISA</span>
+                  <span className="font-medium text-gray-700 w-32">Cash ISA</span>
                   <div className="flex items-center flex-1 mx-4">
                     <div 
                       className="h-8 bg-blue-400 rounded" 
@@ -255,7 +337,7 @@ const ThreeBedToFourBedNewhavenNelincs = () => {
                   </div>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="font-medium text-gray-700">This Deal</span>
+                  <span className="font-medium text-gray-700 w-32">This Deal</span>
                   <div className="flex items-center flex-1 mx-4">
                     <div 
                       className="h-8 rounded" 
@@ -264,190 +346,87 @@ const ThreeBedToFourBedNewhavenNelincs = () => {
                         background: 'linear-gradient(135deg, #C58B25 0%, #F97316 100%)'
                       }}
                     ></div>
-                    <span className="ml-2 font-bold text-xl" style={{ color: '#C58B25' }}>19.16%</span>
+                    <span className="ml-2 font-bold text-xl text-primary">19.16%</span>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
+      </section>
 
-        {/* Before and After Images */}
-        <div className="py-12 bg-gray-50">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-              {/* Before Images */}
-              <div>
-                <h3 className="text-2xl font-bold mb-6 text-center" style={{ color: '#1A355E' }}>
-                  Before
-                </h3>
-                <div className="relative rounded-lg overflow-hidden shadow-lg">
-                  <Swiper
-                    modules={[Autoplay, Pagination]}
-                    spaceBetween={0}
-                    slidesPerView={1}
-                    autoplay={{
-                      delay: 3000,
-                      disableOnInteraction: false,
-                    }}
-                    pagination={{
-                      clickable: true,
-                    }}
-                    loop={true}
-                    className="h-80"
-                  >
-                    {beforeImages.map((image, index) => (
-                      <SwiperSlide key={index}>
-                        <img
-                          src={image.src}
-                          alt={image.alt}
-                          className="w-full h-full object-cover"
-                        />
-                      </SwiperSlide>
-                    ))}
-                  </Swiper>
-                </div>
-              </div>
-
-              {/* After Images */}
-              <div>
-                <h3 className="text-2xl font-bold mb-6 text-center" style={{ color: '#1A355E' }}>
-                  After
-                </h3>
-                <div className="relative rounded-lg overflow-hidden shadow-lg">
-                  <Swiper
-                    modules={[Autoplay, Pagination]}
-                    spaceBetween={0}
-                    slidesPerView={1}
-                    autoplay={{
-                      delay: 3000,
-                      disableOnInteraction: false,
-                    }}
-                    pagination={{
-                      clickable: true,
-                    }}
-                    loop={true}
-                    className="h-80"
-                  >
-                    {afterImages.map((image, index) => (
-                      <SwiperSlide key={index}>
-                        <img
-                          src={image.src}
-                          alt={image.alt}
-                          className="w-full h-full object-cover"
-                        />
-                      </SwiperSlide>
-                    ))}
-                  </Swiper>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Project Timeline */}
-        <div className="py-12">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="text-3xl font-bold text-center mb-12" style={{ color: '#1A355E' }}>
-              Project Timeline
-            </h2>
-            <div className="space-y-8">
-              {timelineEvents.map((event, index) => (
-                <div key={index} className="flex items-start">
-                  <div className="flex-shrink-0 w-16 h-16 bg-gradient-to-br from-orange-400 to-orange-600 rounded-full flex items-center justify-center text-white text-2xl mr-6">
-                    {event.icon}
-                  </div>
-                  <div className="flex-grow">
-                    <div className="bg-white rounded-lg shadow-md p-6">
-                      <h3 className="text-xl font-bold mb-2" style={{ color: '#1A355E' }}>
-                        {event.title}
-                      </h3>
-                      <p className="text-sm font-medium mb-2" style={{ color: '#C58B25' }}>
-                        {event.date}
-                      </p>
-                      <p className="text-gray-600">
-                        {event.description}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* Testimonial */}
-        <div className="py-12 bg-gray-50">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="bg-white rounded-lg shadow-lg p-8 text-center">
-              <Quote className="w-12 h-12 mx-auto mb-6" style={{ color: '#C58B25' }} />
+      {/* Testimonial */}
+      <section className="py-16 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto">
+            <div className="bg-gray-50 rounded-lg shadow-lg p-8 text-center">
+              <Quote className="w-12 h-12 mx-auto mb-6 text-primary" />
               <blockquote className="text-xl italic text-gray-700 mb-6">
                 "This was my first hands-off social housing deal and it ran smoother than expected."
               </blockquote>
-              <cite className="font-semibold" style={{ color: '#1A355E' }}>
+              <cite className="font-semibold text-gray-900">
                 — Placeholder, Investor
               </cite>
             </div>
           </div>
         </div>
+      </section>
 
-        {/* CTA Section */}
-        <div className="py-16" style={{ backgroundColor: '#1A355E' }}>
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 className="text-3xl font-bold text-white mb-6">
-              Ready to Build Your Property Portfolio?
-            </h2>
-            <p className="text-xl text-blue-100 mb-8">
-              Book a free strategy call to discover how you can achieve similar returns
+      {/* CTA Section */}
+      <section className="py-16 bg-primary text-white">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="text-3xl md:text-4xl font-bold mb-6">
+            Ready to Build Your Property Portfolio?
+          </h2>
+          <p className="text-xl mb-8 max-w-2xl mx-auto">
+            Book a free strategy call to discover how you can achieve similar returns
+          </p>
+          
+          <Link href="/book-call">
+            <Button 
+              size="lg" 
+              className="bg-accent hover:bg-accent/90 text-white font-semibold px-8 py-4 rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl mb-8"
+            >
+              Book a Free Call
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </Button>
+          </Link>
+
+          <div className="border-t border-blue-700 pt-8 max-w-2xl mx-auto">
+            <p className="text-blue-100 mb-6">
+              Not ready yet? Download our Deal Checklist to learn what makes a deal compliant + profitable.
             </p>
-            <Link href="/book-call">
-              <Button 
-                size="lg" 
-                className="text-white font-semibold px-8 py-4 rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl mb-8"
-                style={{ backgroundColor: '#F97316' }}
-              >
-                Book a Free Call
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
-            </Link>
-
-            <div className="border-t border-blue-700 pt-8">
-              <p className="text-blue-100 mb-6">
-                Not ready yet? Download our Deal Checklist to learn what makes a deal compliant + profitable.
-              </p>
-              
-              {!emailSubmitted ? (
-                <form onSubmit={handleEmailSubmit} className="max-w-md mx-auto">
-                  <div className="flex gap-3">
-                    <input
-                      type="email"
-                      name="email"
-                      placeholder="Enter your email"
-                      required
-                      className="flex-1 px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-500"
-                    />
-                    <Button 
-                      type="submit"
-                      className="px-6 py-3 text-white font-semibold rounded-lg transition-all duration-200"
-                      style={{ backgroundColor: '#C58B25' }}
-                    >
-                      <FileText className="w-5 h-5 mr-2" />
-                      Get Checklist
-                    </Button>
-                  </div>
-                </form>
-              ) : (
-                <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-lg max-w-md mx-auto">
-                  <div className="flex items-center">
-                    <CheckCircle className="w-5 h-5 mr-2" />
-                    Thank you! Check your email for the Deal Checklist.
-                  </div>
+            
+            {!emailSubmitted ? (
+              <form onSubmit={handleEmailSubmit} className="max-w-md mx-auto">
+                <div className="flex gap-3">
+                  <input
+                    type="email"
+                    name="email"
+                    placeholder="Enter your email"
+                    required
+                    className="flex-1 px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-accent text-gray-900"
+                  />
+                  <Button 
+                    type="submit"
+                    className="bg-accent hover:bg-accent/90 px-6 py-3 text-white font-semibold rounded-lg transition-all duration-200"
+                  >
+                    <FileText className="w-5 h-5 mr-2" />
+                    Get Checklist
+                  </Button>
                 </div>
-              )}
-            </div>
+              </form>
+            ) : (
+              <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-lg max-w-md mx-auto">
+                <div className="flex items-center justify-center">
+                  <CheckCircle className="w-5 h-5 mr-2" />
+                  Thank you! Check your email for the Deal Checklist.
+                </div>
+              </div>
+            )}
           </div>
         </div>
-      </div>
+      </section>
     </>
   );
 };
