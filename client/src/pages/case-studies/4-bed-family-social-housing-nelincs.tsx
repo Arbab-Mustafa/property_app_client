@@ -114,7 +114,7 @@ const FourBedFamilySocialHousingNelincs = () => {
   const financialBreakdown = [
     { label: "Purchase Price", value: "£62,000" },
     { label: "Refurb Cost", value: "£17,950" },
-    { label: "Total Investment", value: "£79,950" },
+    { label: "Acquisition Cost", value: "£48,230" },
     { label: "Projected End Value", value: "£75,000" },
     { label: "Annual Rental Income", value: "£5,985" },
     { label: "Monthly Rental", value: "£780" }
@@ -277,12 +277,12 @@ const FourBedFamilySocialHousingNelincs = () => {
               <div className="grid md:grid-cols-2 gap-6">
                 {financialBreakdown.map((item, index) => (
                   <div key={index} className={`flex justify-between items-center p-4 rounded-lg ${
-                    item.label === "Total Investment" || item.label === "Annual Rental Income" ? 
+                    item.label === "Acquisition Cost" || item.label === "Annual Rental Income" ? 
                     "bg-white border-2 border-orange-500" : "bg-white"
                   }`}>
                     <span className="font-medium">{item.label}:</span>
                     <span className={`font-bold ${
-                      item.label === "Total Investment" || item.label === "Annual Rental Income" ? 
+                      item.label === "Acquisition Cost" || item.label === "Annual Rental Income" ? 
                       "text-orange-600" : ""
                     }`}>{item.value}</span>
                   </div>
