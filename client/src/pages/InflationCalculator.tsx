@@ -133,6 +133,38 @@ const InflationCalculator = () => {
     }
   };
 
+  const sendEmailWithChart = async (formData: FormValues, calculationData: any) => {
+    if (!chartRef.current) return;
+
+    try {
+      // Get chart image as base64
+      const canvas = chartRef.current.canvas;
+      const chartImageData = canvas.toDataURL('image/png');
+
+      const response = await fetch("/api/inflation-email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          amount: formData.amount,
+          month: formData.month,
+          year: formData.year,
+          chartImage: chartImageData,
+          calculationData: calculationData
+        }),
+      });
+
+      if (response.ok) {
+        console.log("Email sent successfully");
+      } else {
+        console.error("Failed to send email");
+      }
+    } catch (error) {
+      console.error("Error sending email:", error);
+    }
+  };
+
   const calculateInflation = async (data: FormValues) => {
     if (isSubmittingRef.current) return;
     
@@ -165,6 +197,11 @@ const InflationCalculator = () => {
       if (responseData.success && responseData.data) {
         setResult(responseData.data);
         await submitToBaserow(data, responseData.data.todayValue);
+        
+        // Send email with chart after results are set and a brief delay for chart rendering
+        setTimeout(() => {
+          sendEmailWithChart(data, responseData.data);
+        }, 1000);
       } else {
         console.error("API error:", responseData.error);
       }
