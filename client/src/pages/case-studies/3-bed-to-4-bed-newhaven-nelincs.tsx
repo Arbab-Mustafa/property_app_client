@@ -171,22 +171,24 @@ const ThreeBedToFourBedNewhavenNelincs = () => {
           </h2>
           
           <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
-            {/* Before Image */}
+            {/* Before Carousel */}
             <div className="bg-gray-100 rounded-lg overflow-hidden shadow-lg">
               <div className="bg-red-500 text-white p-4 text-center">
                 <h3 className="text-xl font-bold">BEFORE</h3>
               </div>
-              <div className="relative h-80">
+              <div className="aspect-video bg-gray-200">
                 <Swiper
                   modules={[Autoplay, Pagination]}
                   spaceBetween={0}
                   slidesPerView={1}
                   autoplay={{
-                    delay: 3000,
+                    delay: 4000,
                     disableOnInteraction: false,
                   }}
                   pagination={{
                     clickable: true,
+                    bulletClass: 'swiper-pagination-bullet',
+                    bulletActiveClass: 'swiper-pagination-bullet-active',
                   }}
                   loop={true}
                   className="h-full"
@@ -202,24 +204,30 @@ const ThreeBedToFourBedNewhavenNelincs = () => {
                   ))}
                 </Swiper>
               </div>
+              <div className="p-4 text-center">
+                <p className="text-gray-600 font-medium">Original 3-Bed Configuration</p>
+                <p className="text-sm text-gray-500 mt-2">Needed DPC, kitchen reconfig, and fire safety compliance. Layout required conversion to 4-bed to meet social housing demand.</p>
+              </div>
             </div>
 
-            {/* After Image */}
+            {/* After Carousel */}
             <div className="bg-gray-100 rounded-lg overflow-hidden shadow-lg">
               <div className="bg-green-500 text-white p-4 text-center">
                 <h3 className="text-xl font-bold">AFTER</h3>
               </div>
-              <div className="relative h-80">
+              <div className="aspect-video bg-gray-200">
                 <Swiper
                   modules={[Autoplay, Pagination]}
                   spaceBetween={0}
                   slidesPerView={1}
                   autoplay={{
-                    delay: 3000,
+                    delay: 4000,
                     disableOnInteraction: false,
                   }}
                   pagination={{
                     clickable: true,
+                    bulletClass: 'swiper-pagination-bullet',
+                    bulletActiveClass: 'swiper-pagination-bullet-active',
                   }}
                   loop={true}
                   className="h-full"
@@ -234,6 +242,10 @@ const ThreeBedToFourBedNewhavenNelincs = () => {
                     </SwiperSlide>
                   ))}
                 </Swiper>
+              </div>
+              <div className="p-4 text-center">
+                <p className="text-gray-600 font-medium">Converted 4-Bed Social Housing</p>
+                <p className="text-sm text-gray-500 mt-2">DPC installed, kitchen reconfigured, fire doors added, gas/electrical boxed in, fireproofing completed. 5-year social housing lease secured.</p>
               </div>
             </div>
           </div>
