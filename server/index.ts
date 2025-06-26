@@ -1,7 +1,12 @@
+import dotenv from "dotenv";
+
+// Load environment variables first, before any other imports
+dotenv.config();
+
 import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
-import inflationRouter from "./inflation";  // <-- imported here
+import inflationRouter from "./inflation"; // <-- imported here
 import path from "path";
 
 const app = express();
@@ -9,9 +14,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 // Serve static files from public directory
-app.use('/assets', express.static(path.resolve(process.cwd(), 'public/assets')));
+app.use(
+  "/assets",
+  express.static(path.resolve(process.cwd(), "public/assets"))
+);
 
-app.use(inflationRouter);  // <-- added here, before logging middleware
+app.use(inflationRouter); // <-- added here, before logging middleware
 
 app.use((req, res, next) => {
   const start = Date.now();
@@ -60,12 +68,15 @@ app.use((req, res, next) => {
     serveStatic(app);
   }
 
-  const port = 5000;
-  server.listen({
-    port,
-    host: "0.0.0.0",
-    reusePort: true,
-  }, () => {
-    log(`serving on port ${port}`);
-  });
+  const port = process.env.PORT || 5000;
+  server.listen(
+    {
+      port,
+      host: "0.0.0.0",
+      reusePort: true,
+    },
+    () => {
+      log(`serving on port ${port}`);
+    }
+  );
 })();

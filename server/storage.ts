@@ -1,12 +1,12 @@
-import { 
-  users, 
-  contactSubmissions, 
-  newsletterSubscriptions, 
+import {
+  users,
+  contactSubmissions,
+  newsletterSubscriptions,
   learningProgress,
   achievements,
   quizResults,
-  type User, 
-  type InsertUser, 
+  type User,
+  type InsertUser,
   type Contact,
   type InsertContact,
   type Newsletter,
@@ -16,7 +16,7 @@ import {
   type Achievement,
   type InsertAchievement,
   type QuizResult,
-  type InsertQuizResult
+  type InsertQuizResult,
 } from "@shared/schema";
 
 export interface IStorage {
@@ -28,16 +28,24 @@ export interface IStorage {
   // Contact form methods
   getContactSubmission(id: number): Promise<Contact | undefined>;
   createContactSubmission(contact: InsertContact): Promise<Contact>;
-  
+
   // Newsletter methods
   getNewsletterSubscription(id: number): Promise<Newsletter | undefined>;
   getNewsletterByEmail(email: string): Promise<Newsletter | undefined>;
-  createNewsletterSubscription(newsletter: InsertNewsletter): Promise<Newsletter>;
+  createNewsletterSubscription(
+    newsletter: InsertNewsletter
+  ): Promise<Newsletter>;
 
   // Learning progress methods
   getLearningProgress(userId: string): Promise<LearningProgress[]>;
-  createLearningProgress(progress: InsertLearningProgress): Promise<LearningProgress>;
-  updateLearningProgress(userId: string, moduleId: string, progress: Partial<InsertLearningProgress>): Promise<LearningProgress>;
+  createLearningProgress(
+    progress: InsertLearningProgress
+  ): Promise<LearningProgress>;
+  updateLearningProgress(
+    userId: string,
+    moduleId: string,
+    progress: Partial<InsertLearningProgress>
+  ): Promise<LearningProgress>;
 
   // Achievement methods
   getUserAchievements(userId: string): Promise<Achievement[]>;
@@ -46,8 +54,6 @@ export interface IStorage {
   // Quiz result methods
   getQuizResults(userId: string): Promise<QuizResult[]>;
   createQuizResult(result: InsertQuizResult): Promise<QuizResult>;
-
-
 }
 
 export class MemStorage implements IStorage {
@@ -57,7 +63,7 @@ export class MemStorage implements IStorage {
   private learningProgressMap: Map<string, LearningProgress>;
   private achievementsMap: Map<string, Achievement>;
   private quizResultsMap: Map<string, QuizResult>;
-  
+
   private userId: number;
   private contactId: number;
   private newsletterId: number;
@@ -72,7 +78,7 @@ export class MemStorage implements IStorage {
     this.learningProgressMap = new Map();
     this.achievementsMap = new Map();
     this.quizResultsMap = new Map();
-    
+
     this.userId = 1;
     this.contactId = 1;
     this.newsletterId = 1;
@@ -88,7 +94,7 @@ export class MemStorage implements IStorage {
 
   async getUserByUsername(username: string): Promise<User | undefined> {
     return Array.from(this.users.values()).find(
-      (user) => user.username === username,
+      (user) => user.username === username
     );
   }
 
@@ -107,31 +113,33 @@ export class MemStorage implements IStorage {
   async createContactSubmission(data: InsertContact): Promise<Contact> {
     const id = this.contactId++;
     const createdAt = new Date();
-    const contact: Contact = { 
-      id, 
-      createdAt, 
+    const contact: Contact = {
+      id,
+      createdAt,
       name: data.name,
       email: data.email,
       phone: data.phone || null,
       investmentAmount: data.investmentAmount,
-      message: data.message
+      message: data.message,
     };
     this.contacts.set(id, contact);
     return contact;
   }
-  
+
   // Newsletter methods
   async getNewsletterSubscription(id: number): Promise<Newsletter | undefined> {
     return this.newsletters.get(id);
   }
-  
+
   async getNewsletterByEmail(email: string): Promise<Newsletter | undefined> {
     return Array.from(this.newsletters.values()).find(
-      (newsletter) => newsletter.email === email,
+      (newsletter) => newsletter.email === email
     );
   }
 
-  async createNewsletterSubscription(data: InsertNewsletter): Promise<Newsletter> {
+  async createNewsletterSubscription(
+    data: InsertNewsletter
+  ): Promise<Newsletter> {
     const id = this.newsletterId++;
     const createdAt = new Date();
     const newsletter: Newsletter = { ...data, id, createdAt };
@@ -146,30 +154,40 @@ export class MemStorage implements IStorage {
     );
   }
 
-  async createLearningProgress(data: InsertLearningProgress): Promise<LearningProgress> {
+  async createLearningProgress(
+    data: InsertLearningProgress
+  ): Promise<LearningProgress> {
     const id = this.progressId++;
     const now = new Date();
-    const progress: LearningProgress = { 
-      id, 
-      createdAt: now, 
+    const progress: LearningProgress = {
+      id,
+      createdAt: now,
       updatedAt: now,
       userId: data.userId,
       moduleId: data.moduleId,
       completed: data.completed || "false",
       score: data.score || null,
-      timeSpent: data.timeSpent || null
+      timeSpent: data.timeSpent || null,
     };
     this.learningProgressMap.set(`${data.userId}-${data.moduleId}`, progress);
     return progress;
   }
 
-  async updateLearningProgress(userId: string, moduleId: string, data: Partial<InsertLearningProgress>): Promise<LearningProgress> {
+  async updateLearningProgress(
+    userId: string,
+    moduleId: string,
+    data: Partial<InsertLearningProgress>
+  ): Promise<LearningProgress> {
     const key = `${userId}-${moduleId}`;
     const existing = this.learningProgressMap.get(key);
     if (!existing) {
-      throw new Error('Learning progress not found');
+      throw new Error("Learning progress not found");
     }
-    const updated: LearningProgress = { ...existing, ...data, updatedAt: new Date() };
+    const updated: LearningProgress = {
+      ...existing,
+      ...data,
+      updatedAt: new Date(),
+    };
     this.learningProgressMap.set(key, updated);
     return updated;
   }
@@ -216,20 +234,23 @@ export class DatabaseStorage implements IStorage {
   }
 
   async getUserByUsername(username: string): Promise<User | undefined> {
-    const [user] = await db.select().from(users).where(eq(users.username, username));
+    const [user] = await db
+      .select()
+      .from(users)
+      .where(eq(users.username, username));
     return user || undefined;
   }
 
   async createUser(insertUser: InsertUser): Promise<User> {
-    const [user] = await db
-      .insert(users)
-      .values(insertUser)
-      .returning();
+    const [user] = await db.insert(users).values(insertUser).returning();
     return user;
   }
 
   async getContactSubmission(id: number): Promise<Contact | undefined> {
-    const [contact] = await db.select().from(contactSubmissions).where(eq(contactSubmissions.id, id));
+    const [contact] = await db
+      .select()
+      .from(contactSubmissions)
+      .where(eq(contactSubmissions.id, id));
     return contact || undefined;
   }
 
@@ -242,16 +263,24 @@ export class DatabaseStorage implements IStorage {
   }
 
   async getNewsletterSubscription(id: number): Promise<Newsletter | undefined> {
-    const [newsletter] = await db.select().from(newsletterSubscriptions).where(eq(newsletterSubscriptions.id, id));
+    const [newsletter] = await db
+      .select()
+      .from(newsletterSubscriptions)
+      .where(eq(newsletterSubscriptions.id, id));
     return newsletter || undefined;
   }
 
   async getNewsletterByEmail(email: string): Promise<Newsletter | undefined> {
-    const [newsletter] = await db.select().from(newsletterSubscriptions).where(eq(newsletterSubscriptions.email, email));
+    const [newsletter] = await db
+      .select()
+      .from(newsletterSubscriptions)
+      .where(eq(newsletterSubscriptions.email, email));
     return newsletter || undefined;
   }
 
-  async createNewsletterSubscription(data: InsertNewsletter): Promise<Newsletter> {
+  async createNewsletterSubscription(
+    data: InsertNewsletter
+  ): Promise<Newsletter> {
     const [newsletter] = await db
       .insert(newsletterSubscriptions)
       .values(data)
@@ -261,10 +290,15 @@ export class DatabaseStorage implements IStorage {
 
   // Learning progress methods
   async getLearningProgress(userId: string): Promise<LearningProgress[]> {
-    return await db.select().from(learningProgress).where(eq(learningProgress.userId, userId));
+    return await db
+      .select()
+      .from(learningProgress)
+      .where(eq(learningProgress.userId, userId));
   }
 
-  async createLearningProgress(data: InsertLearningProgress): Promise<LearningProgress> {
+  async createLearningProgress(
+    data: InsertLearningProgress
+  ): Promise<LearningProgress> {
     const [progress] = await db
       .insert(learningProgress)
       .values(data)
@@ -272,18 +306,28 @@ export class DatabaseStorage implements IStorage {
     return progress;
   }
 
-  async updateLearningProgress(userId: string, moduleId: string, data: Partial<InsertLearningProgress>): Promise<LearningProgress> {
+  async updateLearningProgress(
+    userId: string,
+    moduleId: string,
+    data: Partial<InsertLearningProgress>
+  ): Promise<LearningProgress> {
     const [progress] = await db
       .update(learningProgress)
       .set({ ...data, updatedAt: new Date() })
-      .where(eq(learningProgress.userId, userId) && eq(learningProgress.moduleId, moduleId))
+      .where(
+        eq(learningProgress.userId, userId) &&
+          eq(learningProgress.moduleId, moduleId)
+      )
       .returning();
     return progress;
   }
 
   // Achievement methods
   async getUserAchievements(userId: string): Promise<Achievement[]> {
-    return await db.select().from(achievements).where(eq(achievements.userId, userId));
+    return await db
+      .select()
+      .from(achievements)
+      .where(eq(achievements.userId, userId));
   }
 
   async createAchievement(data: InsertAchievement): Promise<Achievement> {
@@ -296,16 +340,38 @@ export class DatabaseStorage implements IStorage {
 
   // Quiz result methods
   async getQuizResults(userId: string): Promise<QuizResult[]> {
-    return await db.select().from(quizResults).where(eq(quizResults.userId, userId));
+    return await db
+      .select()
+      .from(quizResults)
+      .where(eq(quizResults.userId, userId));
   }
 
   async createQuizResult(data: InsertQuizResult): Promise<QuizResult> {
-    const [result] = await db
-      .insert(quizResults)
-      .values(data)
-      .returning();
+    const [result] = await db.insert(quizResults).values(data).returning();
     return result;
   }
 }
 
-export const storage = new DatabaseStorage();
+// Smart storage selection with fallback
+function createStorage(): IStorage {
+  try {
+    // Check if DATABASE_URL is available
+    if (process.env.DATABASE_URL) {
+      console.log("✅ Using DatabaseStorage - Database connection available");
+      return new DatabaseStorage();
+    } else {
+      console.log(
+        "⚠️  Using MemStorage - No database configured (DATABASE_URL not set)"
+      );
+      return new MemStorage();
+    }
+  } catch (error) {
+    console.error(
+      "❌ Database connection failed, falling back to MemStorage:",
+      error
+    );
+    return new MemStorage();
+  }
+}
+
+export const storage = createStorage();
