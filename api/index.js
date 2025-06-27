@@ -1,35 +1,44 @@
-import dotenv from "dotenv";
-dotenv.config();
+// Vercel Serverless Function Handler
+// This handles all API routes for the KR Property Investments application
 
-import express from "express";
+// Import required modules
+import { z } from "zod";
 
-// Create Express app
-const app = express();
+// Simple in-memory storage for demo purposes
+const storage = {
+  contacts: [],
+  newsletters: [],
 
-// Middleware
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+  async createContactSubmission(data) {
+    const contact = { id: Date.now(), ...data, createdAt: new Date() };
+    this.contacts.push(contact);
+    return contact;
+  },
 
-// CORS headers
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
-  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
-  if (req.method === "OPTIONS") {
-    res.sendStatus(200);
-  } else {
-    next();
-  }
+  async createNewsletterSubscription(data) {
+    const subscription = { id: Date.now(), ...data, createdAt: new Date() };
+    this.newsletters.push(subscription);
+    return subscription;
+  },
+
+  async getNewsletterByEmail(email) {
+    return this.newsletters.find((sub) => sub.email === email);
+  },
+};
+
+// Validation schemas
+const insertContactSchema = z.object({
+  name: z.string().min(1),
+  email: z.string().email(),
+  phone: z.string().optional(),
+  message: z.string().min(1),
+  source: z.string().optional(),
 });
 
-// Import storage and dependencies
-import { storage } from "../server/storage.js";
-import { sendEmail } from "../server/email.js";
-import {
-  insertContactSchema,
-  insertNewsletterSchema,
-} from "../shared/schema.js";
-import { z } from "zod";
+const insertNewsletterSchema = z.object({
+  email: z.string().email(),
+  source: z.string().optional(),
+});
 
 // RPI Index data for inflation calculator
 const rpiIndexData = {
@@ -134,115 +143,179 @@ function calculateDetailedInflation(amount, startYear, month) {
   };
 }
 
-// Define routes directly in the serverless function
-// Contact form route
-app.post("/api/contact", async (req, res) => {
-  try {
-    console.log("Contact form submission:", req.body);
-    const validatedData = insertContactSchema.parse(req.body);
-    const contact = await storage.createContactSubmission(validatedData);
-    res
-      .status(201)
-      .json({ message: "Contact form submitted successfully", id: contact.id });
-  } catch (error) {
-    console.error("Contact form error:", error);
-    if (error instanceof z.ZodError) {
-      res
-        .status(400)
-        .json({ message: "Invalid form data", errors: error.errors });
-    } else {
-      res.status(500).json({ message: "Failed to submit contact form" });
-    }
+// CORS headers helper
+function setCorsHeaders(response) {
+  response.setHeader("Access-Control-Allow-Origin", "*");
+  response.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET, POST, PUT, DELETE, OPTIONS"
+  );
+  response.setHeader(
+    "Access-Control-Allow-Headers",
+    "Content-Type, Authorization"
+  );
+}
+
+// Main serverless function handler
+export default async function handler(req, res) {
+  // Set CORS headers
+  setCorsHeaders(res);
+
+  // Handle preflight requests
+  if (req.method === "OPTIONS") {
+    res.status(200).end();
+    return;
   }
-});
 
-// Newsletter route
-app.post("/api/newsletter", async (req, res) => {
+  const { url, method } = req;
+
+  console.log(`📡 API Request: ${method} ${url}`);
+
   try {
-    const validatedData = insertNewsletterSchema.parse(req.body);
-    const existing = await storage.getNewsletterByEmail(validatedData.email);
+    // Route handling based on URL path
+    if (url === "/api/health" && method === "GET") {
+      return res.status(200).json({
+        status: "ok",
+        timestamp: new Date().toISOString(),
+        storage: "MemoryStorage",
+        message: "KR Property Investments API is running",
+      });
+    } else if (url === "/api/contact" && method === "POST") {
+      try {
+        console.log("📝 Contact form submission:", req.body);
+        const validatedData = insertContactSchema.parse(req.body);
+        const contact = await storage.createContactSubmission(validatedData);
+        return res.status(201).json({
+          message: "Contact form submitted successfully",
+          id: contact.id,
+        });
+      } catch (error) {
+        console.error("❌ Contact form error:", error);
+        if (error instanceof z.ZodError) {
+          return res.status(400).json({
+            message: "Invalid form data",
+            errors: error.errors,
+          });
+        }
+        return res.status(500).json({
+          message: "Failed to submit contact form",
+        });
+      }
+    } else if (url === "/api/newsletter" && method === "POST") {
+      try {
+        const validatedData = insertNewsletterSchema.parse(req.body);
+        const existing = await storage.getNewsletterByEmail(
+          validatedData.email
+        );
 
-    if (existing) {
-      return res.status(200).json({ message: "Email already subscribed" });
+        if (existing) {
+          return res.status(200).json({ message: "Email already subscribed" });
+        }
+
+        const subscription = await storage.createNewsletterSubscription(
+          validatedData
+        );
+        return res.status(201).json({
+          message: "Subscribed to newsletter successfully",
+          id: subscription.id,
+        });
+      } catch (error) {
+        console.error("❌ Newsletter error:", error);
+        if (error instanceof z.ZodError) {
+          return res.status(400).json({
+            message: "Invalid email",
+            errors: error.errors,
+          });
+        }
+        return res.status(500).json({
+          message: "Failed to subscribe to newsletter",
+        });
+      }
+    } else if (url === "/api/inflation" && method === "POST") {
+      try {
+        console.log("🧮 Inflation calculation request:", req.body);
+
+        const { name, email, amount, month, year, source } = req.body;
+
+        if (!amount || !month || !year) {
+          return res.status(400).json({
+            success: false,
+            error: "Missing required fields: amount, month, year",
+          });
+        }
+
+        const numericAmount = parseFloat(amount);
+        const numericYear = parseInt(year);
+        const numericMonth = parseInt(month);
+
+        if (isNaN(numericAmount) || isNaN(numericYear) || isNaN(numericMonth)) {
+          return res.status(400).json({
+            success: false,
+            error: "Invalid numerical values provided",
+          });
+        }
+
+        if (numericAmount <= 0) {
+          return res.status(400).json({
+            success: false,
+            error: "Amount must be greater than 0",
+          });
+        }
+
+        if (numericYear < 1987 || numericYear > new Date().getFullYear()) {
+          return res.status(400).json({
+            success: false,
+            error: "Year must be between 1987 and current year",
+          });
+        }
+
+        if (numericMonth < 1 || numericMonth > 12) {
+          return res.status(400).json({
+            success: false,
+            error: "Month must be between 1 and 12",
+          });
+        }
+
+        const inflationData = calculateDetailedInflation(
+          numericAmount,
+          numericYear,
+          numericMonth
+        );
+
+        console.log("✅ Inflation calculation result:", inflationData);
+
+        return res.status(200).json({
+          success: true,
+          data: inflationData,
+        });
+      } catch (err) {
+        console.error("❌ Inflation calculation error:", err);
+        return res.status(500).json({
+          success: false,
+          error: "Internal server error processing your request",
+        });
+      }
     }
 
-    const subscription = await storage.createNewsletterSubscription(
-      validatedData
-    );
-    res.status(201).json({
-      message: "Subscribed to newsletter successfully",
-      id: subscription.id,
-    });
-  } catch (error) {
-    console.error("Newsletter error:", error);
-    if (error instanceof z.ZodError) {
-      res.status(400).json({ message: "Invalid email", errors: error.errors });
-    } else {
-      res.status(500).json({ message: "Failed to subscribe to newsletter" });
-    }
-  }
-});
-
-// Inflation calculator route
-app.post("/api/inflation", async (req, res) => {
-  try {
-    console.log("Inflation calculation request:", req.body);
-
-    const { name, email, amount, month, year, source } = req.body;
-
-    if (!amount || !month || !year) {
-      return res.status(400).json({
-        success: false,
-        error: "Missing required fields",
+    // Handle 404 for unknown routes
+    else {
+      console.log("❌ Route not found:", method, url);
+      return res.status(404).json({
+        error: "Not Found",
+        message: `Route ${method} ${url} not found`,
+        availableRoutes: [
+          "GET /api/health",
+          "POST /api/contact",
+          "POST /api/newsletter",
+          "POST /api/inflation",
+        ],
       });
     }
-
-    const numericAmount = parseFloat(amount);
-    const numericYear = parseInt(year);
-    const numericMonth = parseInt(month);
-
-    if (isNaN(numericAmount) || isNaN(numericYear) || isNaN(numericMonth)) {
-      return res.status(400).json({
-        success: false,
-        error: "Invalid numerical values provided",
-      });
-    }
-
-    const inflationData = calculateDetailedInflation(
-      numericAmount,
-      numericYear,
-      numericMonth
-    );
-
-    console.log("Inflation calculation result:", inflationData);
-
-    return res.json({
-      success: true,
-      data: inflationData,
-    });
-  } catch (err) {
-    console.error("Inflation calculation error:", err);
-    res.status(500).json({
-      success: false,
-      error: "Internal server error processing your request",
+  } catch (error) {
+    console.error("❌ Unhandled error in API handler:", error);
+    return res.status(500).json({
+      error: "Internal Server Error",
+      message: "An unexpected error occurred",
     });
   }
-});
-
-// Health check route
-app.get("/api/health", (req, res) => {
-  res.json({
-    status: "ok",
-    timestamp: new Date().toISOString(),
-    storage: storage.constructor.name,
-  });
-});
-
-// Error handler
-app.use((err, req, res, next) => {
-  console.error("Unhandled error:", err);
-  res.status(500).json({ message: "Internal Server Error" });
-});
-
-// Export the Express app as the default export for Vercel
-export default app;
+}
