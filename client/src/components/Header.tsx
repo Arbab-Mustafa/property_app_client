@@ -14,17 +14,17 @@ import mobileLogo from "../assets/mobile-Property-Investments.png";
 const navLinks = [
   { name: "Home", path: "/" },
   { name: "About Us", path: "/about" },
-  { 
-    name: "What We Do", 
+  {
+    name: "What We Do",
     path: "/invest",
     isDropdown: true,
     dropdownItems: [
       { name: "Find You A Deal", path: "/find-you-a-deal" },
-      { name: "Invest With Us", path: "/invest-with-us" }
-    ]
+      { name: "Invest With Us", path: "/invest-with-us" },
+    ],
   },
   { name: "Case Studies", path: "/case-studies" },
-  { name: "Updates", path: "/updates" },
+  // { name: "Updates", path: "/updates" },
   { name: "Inflation Calculator", path: "/inflation-calculator" },
   { name: "Book A Call", path: "/book-call" },
   { name: "Contact Us", path: "/contact" },
@@ -56,43 +56,51 @@ const Header = () => {
 
   // WordPress plugin integration hook point
   useEffect(() => {
-    if ((window as any).wpData && typeof (window as any).wpData.integratePlugin === 'function') {
+    if (
+      (window as any).wpData &&
+      typeof (window as any).wpData.integratePlugin === "function"
+    ) {
       // WordPress menu integration example
-      (window as any).wpData.integratePlugin('menu', {
-        element: 'header-menu',
-        location: 'primary'
+      (window as any).wpData.integratePlugin("menu", {
+        element: "header-menu",
+        location: "primary",
       });
     }
   }, []);
 
   return (
-    <header className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? "bg-white shadow-md" : "bg-white shadow-md"}`} id="wp-header">
+    <header
+      className={`fixed w-full z-50 transition-all duration-300 ${
+        scrolled ? "bg-white shadow-md" : "bg-white shadow-md"
+      }`}
+      id="wp-header"
+    >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-4">
           <div className="flex items-center">
             <Link href="/">
               {/* Desktop Logo */}
-              <img 
-                src={desktopLogo} 
-                alt="KR Property Investments" 
-                className="h-10 cursor-pointer hidden md:block" 
+              <img
+                src={desktopLogo}
+                alt="KR Property Investments"
+                className="h-10 cursor-pointer hidden md:block"
               />
               {/* Mobile Logo */}
-              <img 
-                src={mobileLogo} 
-                alt="KR Property Investments" 
-                className="h-10 cursor-pointer block md:hidden" 
+              <img
+                src={mobileLogo}
+                alt="KR Property Investments"
+                className="h-10 cursor-pointer block md:hidden"
               />
             </Link>
           </div>
 
           <nav className="hidden md:flex space-x-8" id="header-menu">
-            {navLinks.map((link) => (
+            {navLinks.map((link) =>
               link.isDropdown ? (
                 <DropdownMenu key={link.path}>
                   <DropdownMenuTrigger asChild>
-                    <Link 
-                      href={link.path} 
+                    <Link
+                      href={link.path}
                       className="flex items-center font-medium transition hover:text-primary"
                     >
                       {link.name} <ChevronDown className="h-4 w-4 ml-1" />
@@ -101,21 +109,28 @@ const Header = () => {
                   <DropdownMenuContent>
                     {link.dropdownItems?.map((item) => (
                       <DropdownMenuItem key={item.path} asChild>
-                        <Link href={item.path} className="w-full cursor-pointer">{item.name}</Link>
+                        <Link
+                          href={item.path}
+                          className="w-full cursor-pointer"
+                        >
+                          {item.name}
+                        </Link>
                       </DropdownMenuItem>
                     ))}
                   </DropdownMenuContent>
                 </DropdownMenu>
               ) : (
-                <Link 
+                <Link
                   key={link.path}
                   href={link.path}
-                  className={`font-medium transition hover:text-primary ${location === link.path ? "text-primary" : "text-neutral-700"}`}
+                  className={`font-medium transition hover:text-primary ${
+                    location === link.path ? "text-primary" : "text-neutral-700"
+                  }`}
                 >
                   {link.name}
                 </Link>
               )
-            ))}
+            )}
           </nav>
 
           <Button
@@ -133,10 +148,10 @@ const Header = () => {
         {isOpen && (
           <div className="md:hidden pb-4">
             <div className="flex flex-col space-y-3">
-              {navLinks.map((link) => (
+              {navLinks.map((link) =>
                 link.isDropdown ? (
                   <div key={link.path} className="space-y-2">
-                    <a 
+                    <a
                       href={link.path}
                       className="font-medium text-neutral-700 block"
                       onClick={() => setIsOpen(false)}
@@ -145,7 +160,7 @@ const Header = () => {
                     </a>
                     <div className="pl-4 space-y-2">
                       {link.dropdownItems?.map((item) => (
-                        <a 
+                        <a
                           key={item.path}
                           href={item.path}
                           className="font-medium py-1 block transition hover:text-primary text-neutral-600"
@@ -157,16 +172,20 @@ const Header = () => {
                     </div>
                   </div>
                 ) : (
-                  <a 
+                  <a
                     key={link.path}
                     href={link.path}
-                    className={`font-medium py-2 transition hover:text-primary ${location === link.path ? "text-primary" : "text-neutral-700"}`}
+                    className={`font-medium py-2 transition hover:text-primary ${
+                      location === link.path
+                        ? "text-primary"
+                        : "text-neutral-700"
+                    }`}
                     onClick={() => setIsOpen(false)}
                   >
                     {link.name}
                   </a>
                 )
-              ))}
+              )}
             </div>
           </div>
         )}
