@@ -2,41 +2,21 @@ import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { sendEmail } from "./email";
-import {
-  insertContactSchema,
-  insertNewsletterSchema,
-  insertLearningProgressSchema,
-  insertAchievementSchema,
-  insertQuizResultSchema,
-} from "@shared/schema";
+import { insertContactSchema, insertNewsletterSchema, insertLearningProgressSchema, insertAchievementSchema, insertQuizResultSchema } from "@shared/schema";
 import { z } from "zod";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // Contact form submission
   app.post("/api/contact", async (req, res) => {
     try {
-      console.log("Contact form submission received:", req.body);
       const validatedData = insertContactSchema.parse(req.body);
-      console.log("Contact form validation passed:", validatedData);
       const contact = await storage.createContactSubmission(validatedData);
-      console.log("Contact form saved successfully:", contact.id);
-      res
-        .status(201)
-        .json({
-          message: "Contact form submitted successfully",
-          id: contact.id,
-        });
+      res.status(201).json({ message: "Contact form submitted successfully", id: contact.id });
     } catch (error) {
-      console.error("Contact form submission error:", error);
       if (error instanceof z.ZodError) {
-        console.error("Validation errors:", error.errors);
-        res.status(400).json({
-          message: "Invalid form data",
-          errors: error.errors,
-          received: req.body,
-        });
+        res.status(400).json({ message: "Invalid form data", errors: error.errors });
       } else {
-        console.error("Unexpected error:", error);
+        console.error("Contact form submission error:", error);
         res.status(500).json({ message: "Failed to submit contact form" });
       }
     }
@@ -47,25 +27,16 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const validatedData = insertNewsletterSchema.parse(req.body);
       const existing = await storage.getNewsletterByEmail(validatedData.email);
-
+      
       if (existing) {
         return res.status(200).json({ message: "Email already subscribed" });
       }
-
-      const subscription = await storage.createNewsletterSubscription(
-        validatedData
-      );
-      res
-        .status(201)
-        .json({
-          message: "Subscribed to newsletter successfully",
-          id: subscription.id,
-        });
+      
+      const subscription = await storage.createNewsletterSubscription(validatedData);
+      res.status(201).json({ message: "Subscribed to newsletter successfully", id: subscription.id });
     } catch (error) {
       if (error instanceof z.ZodError) {
-        res
-          .status(400)
-          .json({ message: "Invalid email", errors: error.errors });
+        res.status(400).json({ message: "Invalid email", errors: error.errors });
       } else {
         console.error("Newsletter subscription error:", error);
         res.status(500).json({ message: "Failed to subscribe to newsletter" });
@@ -92,9 +63,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.status(201).json(progress);
     } catch (error) {
       if (error instanceof z.ZodError) {
-        res
-          .status(400)
-          .json({ message: "Invalid progress data", errors: error.errors });
+        res.status(400).json({ message: "Invalid progress data", errors: error.errors });
       } else {
         console.error("Create learning progress error:", error);
         res.status(500).json({ message: "Failed to create learning progress" });
@@ -105,11 +74,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.put("/api/learning/progress/:userId/:moduleId", async (req, res) => {
     try {
       const { userId, moduleId } = req.params;
-      const progress = await storage.updateLearningProgress(
-        userId,
-        moduleId,
-        req.body
-      );
+      const progress = await storage.updateLearningProgress(userId, moduleId, req.body);
       res.json(progress);
     } catch (error) {
       console.error("Update learning progress error:", error);
@@ -136,9 +101,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.status(201).json(achievement);
     } catch (error) {
       if (error instanceof z.ZodError) {
-        res
-          .status(400)
-          .json({ message: "Invalid achievement data", errors: error.errors });
+        res.status(400).json({ message: "Invalid achievement data", errors: error.errors });
       } else {
         console.error("Create achievement error:", error);
         res.status(500).json({ message: "Failed to create achievement" });
@@ -165,9 +128,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.status(201).json(result);
     } catch (error) {
       if (error instanceof z.ZodError) {
-        res
-          .status(400)
-          .json({ message: "Invalid quiz result data", errors: error.errors });
+        res.status(400).json({ message: "Invalid quiz result data", errors: error.errors });
       } else {
         console.error("Create quiz result error:", error);
         res.status(500).json({ message: "Failed to create quiz result" });
@@ -177,8 +138,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   // Deal lead endpoint for waitlist
   app.post("/api/send-deal-lead", async (req, res) => {
-    if (req.method !== "POST")
-      return res.status(405).send("Method not allowed");
+    if (req.method !== "POST") return res.status(405).send("Method not allowed");
 
     const { name, email, message } = req.body;
 
@@ -224,46 +184,38 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
       // ✅ 2. Send to Baserow
       const baserowToken = process.env.VITE_BASEROW_API_TOKEN;
-      console.log(
-        "Using Baserow token:",
-        baserowToken
-          ? `Token exists (${baserowToken.substring(0, 8)}...)`
-          : "No token found"
-      );
-
+      console.log("Using Baserow token:", baserowToken ? `Token exists (${baserowToken.substring(0, 8)}...)` : "No token found");
+      
       if (baserowToken) {
         // Create formatted timestamp: "17 June 2025 – 2:38PM"
         const now = new Date();
         const day = now.getDate();
-        const month = now.toLocaleString("en-US", { month: "long" });
+        const month = now.toLocaleString('en-US', { month: 'long' });
         const year = now.getFullYear();
-        const time = now.toLocaleString("en-US", {
-          hour: "numeric",
-          minute: "2-digit",
-          hour12: true,
+        const time = now.toLocaleString('en-US', { 
+          hour: 'numeric', 
+          minute: '2-digit', 
+          hour12: true 
         });
         const timestamp = `${day} ${month} ${year} – ${time}`;
 
         const baserowData = {
-          field_4646200: name,
-          field_4646201: email,
-          field_4646202: message || "",
-          field_4648813: timestamp,
+          "field_4646200": name,
+          "field_4646201": email,
+          "field_4646202": message || "",
+          "field_4648813": timestamp
         };
-
+        
         console.log("Sending to Baserow:", baserowData);
-
-        const baserowRes = await fetch(
-          "https://api.baserow.io/api/database/rows/table/577145/",
-          {
-            method: "POST",
-            headers: {
-              Authorization: `Token ${baserowToken}`,
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(baserowData),
-          }
-        );
+        
+        const baserowRes = await fetch("https://api.baserow.io/api/database/rows/table/577145/", {
+          method: "POST",
+          headers: {
+            "Authorization": `Token ${baserowToken}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(baserowData),
+        });
 
         if (!baserowRes.ok) {
           const errorText = await baserowRes.text();

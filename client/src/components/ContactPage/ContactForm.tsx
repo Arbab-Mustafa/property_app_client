@@ -54,24 +54,13 @@ const ContactForm = () => {
   const onSubmit = async (data: FormValues) => {
     setIsSubmitting(true);
     try {
-      // Transform data to match backend schema
-      const contactData = {
-        name: data.name,
-        email: data.email,
-        phone: data.phone || undefined,
-        investmentAmount: data.investmentAmount,
-        message: `Interest: ${data.interest}\n\n${data.message}`,
-      };
-
-      console.log("Submitting contact form:", contactData);
-      await apiRequest("POST", "/api/contact", contactData);
+      await apiRequest("POST", "/api/contact", data);
       toast({
         title: "Message sent",
         description: "Thank you for contacting us. We'll be in touch shortly.",
       });
       form.reset();
     } catch (error) {
-      console.error("Contact form error:", error);
       toast({
         title: "Something went wrong",
         description: "Failed to send your message. Please try again.",
@@ -85,10 +74,8 @@ const ContactForm = () => {
   return (
     <Card className="bg-white rounded-lg shadow-lg overflow-hidden">
       <CardContent className="p-8">
-        <h3 className="text-2xl font-bold mb-6" style={{ color: "#1A355E" }}>
-          Send Us a Message
-        </h3>
-
+        <h3 className="text-2xl font-bold mb-6" style={{ color: '#1A355E' }}>Send Us a Message</h3>
+        
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
             <FormField
@@ -96,12 +83,7 @@ const ContactForm = () => {
               name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel
-                    className="font-medium"
-                    style={{ color: "#1A355E" }}
-                  >
-                    Name
-                  </FormLabel>
+                  <FormLabel className="font-medium" style={{ color: '#1A355E' }}>Name</FormLabel>
                   <FormControl>
                     <Input
                       placeholder="Your name"
@@ -113,18 +95,13 @@ const ContactForm = () => {
                 </FormItem>
               )}
             />
-
+            
             <FormField
               control={form.control}
               name="email"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel
-                    className="font-medium"
-                    style={{ color: "#1A355E" }}
-                  >
-                    Email
-                  </FormLabel>
+                  <FormLabel className="font-medium" style={{ color: '#1A355E' }}>Email</FormLabel>
                   <FormControl>
                     <Input
                       type="email"
@@ -137,18 +114,13 @@ const ContactForm = () => {
                 </FormItem>
               )}
             />
-
+            
             <FormField
               control={form.control}
               name="phone"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel
-                    className="font-medium"
-                    style={{ color: "#1A355E" }}
-                  >
-                    Phone (Optional)
-                  </FormLabel>
+                  <FormLabel className="font-medium" style={{ color: '#1A355E' }}>Phone (Optional)</FormLabel>
                   <FormControl>
                     <Input
                       type="tel"
@@ -161,18 +133,13 @@ const ContactForm = () => {
                 </FormItem>
               )}
             />
-
+            
             <FormField
               control={form.control}
               name="investmentAmount"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel
-                    className="font-medium"
-                    style={{ color: "#1A355E" }}
-                  >
-                    Investment Amount
-                  </FormLabel>
+                  <FormLabel className="font-medium" style={{ color: '#1A355E' }}>Investment Amount</FormLabel>
                   <Select
                     onValueChange={field.onChange}
                     defaultValue={field.value}
@@ -193,18 +160,13 @@ const ContactForm = () => {
                 </FormItem>
               )}
             />
-
+            
             <FormField
               control={form.control}
               name="interest"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel
-                    className="font-medium"
-                    style={{ color: "#1A355E" }}
-                  >
-                    What are you interested in?
-                  </FormLabel>
+                  <FormLabel className="font-medium" style={{ color: '#1A355E' }}>What are you interested in?</FormLabel>
                   <Select
                     onValueChange={field.onChange}
                     defaultValue={field.value}
@@ -215,34 +177,23 @@ const ContactForm = () => {
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      <SelectItem value="lending">
-                        Lending for fixed returns
-                      </SelectItem>
-                      <SelectItem value="joint-venture">
-                        Joint venture opportunities
-                      </SelectItem>
+                      <SelectItem value="lending">Lending for fixed returns</SelectItem>
+                      <SelectItem value="joint-venture">Joint venture opportunities</SelectItem>
                       <SelectItem value="sourcing">Sourcing deals</SelectItem>
-                      <SelectItem value="questions">
-                        Just asking questions
-                      </SelectItem>
+                      <SelectItem value="questions">Just asking questions</SelectItem>
                     </SelectContent>
                   </Select>
                   <FormMessage />
                 </FormItem>
               )}
             />
-
+            
             <FormField
               control={form.control}
               name="message"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel
-                    className="font-medium"
-                    style={{ color: "#1A355E" }}
-                  >
-                    Tell us a little about your goals or questions...
-                  </FormLabel>
+                  <FormLabel className="font-medium" style={{ color: '#1A355E' }}>Tell us a little about your goals or questions...</FormLabel>
                   <FormControl>
                     <Textarea
                       placeholder="What would you like to know about property investing?"
@@ -255,17 +206,13 @@ const ContactForm = () => {
                 </FormItem>
               )}
             />
-
-            <Button
-              type="submit"
+            
+            <Button 
+              type="submit" 
               className="w-full text-white font-semibold py-3 rounded transition-colors"
-              style={{ backgroundColor: "#F97316" }}
-              onMouseEnter={(e) =>
-                (e.currentTarget.style.backgroundColor = "#EA580C")
-              }
-              onMouseLeave={(e) =>
-                (e.currentTarget.style.backgroundColor = "#F97316")
-              }
+              style={{ backgroundColor: '#F97316' }}
+              onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#EA580C'}
+              onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#F97316'}
               disabled={isSubmitting}
             >
               {isSubmitting ? "Sending..." : "Send Message"}
