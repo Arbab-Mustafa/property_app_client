@@ -7,16 +7,28 @@
       "config": {
         "buildCommand": "npm run build"
       }
-    },
-    {
-      "src": "api/index.js",
-      "use": "@vercel/node"
     }
   ],
   "routes": [
     {
-      "src": "/api/(.*)",
-      "dest": "/api/index.js"
+      "src": "/api/test",
+      "dest": "/api/test.js"
+    },
+    {
+      "src": "/api/contact",
+      "dest": "/api/contact.js"
+    },
+    {
+      "src": "/api/newsletter",
+      "dest": "/api/newsletter.js"
+    },
+    {
+      "src": "/api/inflation",
+      "dest": "/api/inflation.js"
+    },
+    {
+      "src": "/api/send-deal-lead",
+      "dest": "/api/send-deal-lead.js"
     },
     {
       "src": "/assets/(.*)",
