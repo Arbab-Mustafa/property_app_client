@@ -1,9 +1,12 @@
 import dotenv from "dotenv";
 dotenv.config();
 
-import { insertNewsletterSchema } from "../shared/schema.js";
-import { createStorage } from "../server/storage-vercel.js";
 import { z } from "zod";
+
+// Define schema inline to avoid import issues
+const insertNewsletterSchema = z.object({
+  email: z.string().email(),
+});
 
 export default async function handler(req, res) {
   // Enable CORS
@@ -28,26 +31,24 @@ export default async function handler(req, res) {
   }
 
   try {
+    console.log("Newsletter API called with body:", req.body);
+
+    // Validate the email
     const validatedData = insertNewsletterSchema.parse(req.body);
-    const storage = createStorage();
-    const existing = await storage.getNewsletterByEmail(validatedData.email);
+    console.log("Email validated:", validatedData.email);
 
-    if (existing) {
-      return res.status(200).json({ message: "Email already subscribed" });
-    }
-
-    const subscription = await storage.createNewsletterSubscription(
-      validatedData
-    );
+    // For now, just return success without database operations
+    // This will help us isolate if the issue is with imports or database
     res.status(201).json({
       message: "Subscribed to newsletter successfully",
-      id: subscription.id,
+      id: Math.floor(Math.random() * 1000), // Random ID for testing
     });
   } catch (error) {
+    console.error("Newsletter subscription error:", error);
+
     if (error instanceof z.ZodError) {
       res.status(400).json({ message: "Invalid email", errors: error.errors });
     } else {
-      console.error("Newsletter subscription error:", error);
       res.status(500).json({ message: "Failed to subscribe to newsletter" });
     }
   }

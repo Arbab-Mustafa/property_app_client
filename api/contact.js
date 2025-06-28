@@ -1,9 +1,16 @@
 import dotenv from "dotenv";
 dotenv.config();
 
-import { insertContactSchema } from "../shared/schema.js";
-import { createStorage } from "../server/storage-vercel.js";
 import { z } from "zod";
+
+// Define schema inline to avoid import issues
+const insertContactSchema = z.object({
+  name: z.string().min(1),
+  email: z.string().email(),
+  phone: z.string().optional(),
+  investmentAmount: z.string().min(1),
+  message: z.string().min(1),
+});
 
 export default async function handler(req, res) {
   // Enable CORS
@@ -28,20 +35,26 @@ export default async function handler(req, res) {
   }
 
   try {
+    console.log("Contact API called with body:", req.body);
+
+    // Validate the form data
     const validatedData = insertContactSchema.parse(req.body);
-    const storage = createStorage();
-    const contact = await storage.createContactSubmission(validatedData);
+    console.log("Contact data validated:", validatedData);
+
+    // For now, just return success without database operations
+    // This will help us isolate if the issue is with imports or database
     res.status(201).json({
       message: "Contact form submitted successfully",
-      id: contact.id,
+      id: Math.floor(Math.random() * 1000), // Random ID for testing
     });
   } catch (error) {
+    console.error("Contact form submission error:", error);
+
     if (error instanceof z.ZodError) {
       res
         .status(400)
         .json({ message: "Invalid form data", errors: error.errors });
     } else {
-      console.error("Contact form submission error:", error);
       res.status(500).json({ message: "Failed to submit contact form" });
     }
   }
