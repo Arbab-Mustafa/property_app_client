@@ -190,9 +190,29 @@ export default async function handler(req, res) {
     return;
   }
 
-  const { url, method } = req;
+  // Parse URL properly for Vercel
+  const url = req.url || req.path || "";
+  const method = req.method;
 
   console.log(`📡 API Request: ${method} ${url}`);
+
+  // Log request body size for debugging
+  if (req.body) {
+    const bodySize = JSON.stringify(req.body).length;
+    console.log(`📡 Request body size: ${bodySize} bytes`);
+
+    // Handle large payloads (especially for chart images)
+    if (bodySize > 10000000) {
+      // 10MB limit
+      console.log(
+        "⚠️ Large payload detected, truncating chart image for processing"
+      );
+      if (req.body.chartImage) {
+        req.body.chartImage =
+          req.body.chartImage.substring(0, 1000) + "...truncated";
+      }
+    }
+  }
 
   try {
     // ✅ HEALTH CHECK ENDPOINT
