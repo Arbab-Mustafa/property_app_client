@@ -14,6 +14,15 @@ import {
   Legend,
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
+import { useToast } from "@/hooks/use-toast";
+import {
+  TrendingUp,
+  DollarSign,
+  AlertTriangle,
+  Mail,
+  Download,
+} from "lucide-react";
+import { API_CONFIG, BASEROW_API_TOKEN } from "../config/api";
 
 ChartJS.register(
   CategoryScale,
@@ -91,43 +100,64 @@ const InflationCalculator = () => {
   const isSubmittingRef = useRef(false);
   const chartRef = useRef<any>(null);
 
-  const token = import.meta.env.VITE_BASEROW_API_TOKEN;
+  const token = BASEROW_API_TOKEN;
 
   // Send email automatically when chart is rendered and data is available
   useEffect(() => {
     if (result && lastFormData && chartRef.current) {
       const sendEmail = async () => {
         try {
+          // Check if chart is properly rendered
+          if (!chartRef.current || !chartRef.current.canvas) {
+            console.log("⚠️ Chart not ready yet, skipping email");
+            return;
+          }
+
           const canvas = chartRef.current.canvas;
+
+          // Additional safety check
+          if (!canvas || !canvas.toDataURL) {
+            console.log("⚠️ Canvas not ready, skipping email");
+            return;
+          }
+
           // Reduce image quality to minimize payload size
           const chartImageData = canvas.toDataURL("image/jpeg", 0.7); // 70% quality JPEG
 
-          const response = await fetch("/api/inflation-email", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              name: lastFormData.name,
-              email: lastFormData.email,
-              amount: lastFormData.amount,
-              month: lastFormData.month,
-              year: lastFormData.year,
-              chartImage: chartImageData,
-              calculationData: result,
-            }),
-          });
+          console.log("📧 Sending inflation email with chart...");
+
+          const response = await fetch(
+            `${API_CONFIG.BASE_URL}${API_CONFIG.ENDPOINTS.INFLATION_EMAIL}`,
+            {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                name: lastFormData.name,
+                email: lastFormData.email,
+                amount: parseFloat(lastFormData.amount),
+                month: parseInt(lastFormData.month),
+                year: parseInt(lastFormData.year),
+                chartImage: chartImageData,
+                calculationData: result,
+              }),
+            }
+          );
 
           if (response.ok) {
-            console.log("Email sent successfully to", lastFormData.email);
+            const responseData = await response.json();
+            console.log("✅ Email sent successfully:", responseData);
           } else {
-            console.error("Failed to send email");
+            const errorData = await response.json();
+            console.error("❌ Failed to send email:", errorData);
           }
-        } catch (error) {
-          console.error("Error sending email:", error);
+        } catch (emailError) {
+          console.error("❌ Failed to send email:", emailError);
+          // Continue even if email fails
         }
       };
 
-      // Small delay to ensure chart is fully rendered
-      setTimeout(sendEmail, 500);
+      // Increased delay to ensure chart is fully rendered
+      setTimeout(sendEmail, 1000);
     }
   }, [result, lastFormData, chartRef.current]);
 
@@ -145,43 +175,33 @@ const InflationCalculator = () => {
 
   const submitToBaserow = async (formData: FormValues, todayValue: number) => {
     try {
-      const rowData = {
-        Name: formData.name,
-        Email: formData.email,
-        Amount: parseFloat(formData.amount.replace(/[^0-9.]/g, "")),
-        Month: parseInt(formData.month),
-        Year: parseInt(formData.year),
-        "Inflation Adjusted Amount": todayValue,
-        "Submission Date": new Date().toISOString(),
-        "Source/Campaign": formData.source || "Website",
-      };
-
-      console.log("Submitting row to Baserow:", rowData);
-
+      // Store in our backend database
       const response = await fetch(
-        "https://api.baserow.io/api/database/rows/table/540880/?user_field_names=true",
+        `${API_CONFIG.BASE_URL}${API_CONFIG.ENDPOINTS.INFLATION}`,
         {
           method: "POST",
-          headers: {
-            Authorization: `Token ${token}`,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(rowData),
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            name: formData.name,
+            email: formData.email,
+            amount: parseFloat(formData.amount.replace(/[^0-9.]/g, "")),
+            month: parseInt(formData.month),
+            year: parseInt(formData.year),
+            source: formData.source || "inflation-calculator",
+          }),
         }
       );
 
-      console.log("Baserow response status:", response.status);
-
       if (!response.ok) {
-        throw new Error(`Baserow API error: ${response.status}`);
+        throw new Error("Failed to store calculation");
       }
 
       const responseData = await response.json();
-      console.log("Baserow response data:", responseData);
+      console.log("✅ Calculation stored successfully:", responseData);
 
       return responseData;
     } catch (error) {
-      console.error("Error submitting to Baserow:", error);
+      console.error("❌ Failed to store calculation:", error);
       throw error;
     }
   };
@@ -195,18 +215,21 @@ const InflationCalculator = () => {
     try {
       setLastFormData(data);
 
-      const response = await fetch("/api/inflation", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: data.name,
-          email: data.email,
-          amount: data.amount,
-          year: data.year,
-          month: data.month,
-          source: data.source || "Website",
-        }),
-      });
+      const response = await fetch(
+        `${API_CONFIG.BASE_URL}${API_CONFIG.ENDPOINTS.INFLATION}`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            name: data.name,
+            email: data.email,
+            amount: data.amount,
+            year: data.year,
+            month: data.month,
+            source: data.source || "inflation-calculator",
+          }),
+        }
+      );
 
       if (!response.ok) {
         throw new Error("Failed to calculate inflation");

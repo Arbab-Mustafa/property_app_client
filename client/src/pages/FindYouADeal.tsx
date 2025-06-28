@@ -1,6 +1,7 @@
 import { Helmet } from "react-helmet";
 import { useState } from "react";
 import { useLocation } from "wouter";
+import { API_CONFIG } from "@/config/api";
 
 const FindYouADeal = () => {
   const [submitted, setSubmitted] = useState(false);
@@ -17,20 +18,30 @@ const FindYouADeal = () => {
       message: formData.get("message"),
     };
 
-    const res = await fetch("/api/send-deal-lead", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
-    });
+    try {
+      const res = await fetch(
+        `${API_CONFIG.BASE_URL}${API_CONFIG.ENDPOINTS.DEAL_SOURCING}`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data),
+        }
+      );
 
-    if (res.ok) {
-      setSubmitted(true);
-      form.reset();
-      // Redirect to thank you page after successful submission
-      setTimeout(() => {
-        setLocation("/thank-you-deal-sourcing");
-      }, 1000);
-    } else {
+      if (res.ok) {
+        setSubmitted(true);
+        form.reset();
+        // Redirect to thank you page after successful submission
+        setTimeout(() => {
+          setLocation("/thank-you-deal-sourcing");
+        }, 1000);
+      } else {
+        const errorData = await res.json();
+        console.error("Deal sourcing submission failed:", errorData);
+        alert("Something went wrong. Please try again.");
+      }
+    } catch (error) {
+      console.error("Deal sourcing submission error:", error);
       alert("Something went wrong. Please try again.");
     }
   };
@@ -39,9 +50,18 @@ const FindYouADeal = () => {
     <>
       <Helmet>
         <title>Deal Sourcing Service Paused | KR Property Investments</title>
-        <meta name="description" content="Our deal sourcing service is temporarily paused. Join the waitlist to be notified when we reopen for new clients." />
-        <meta property="og:title" content="Deal Sourcing Service Paused | KR Property Investments" />
-        <meta property="og:description" content="Our deal sourcing service is temporarily paused. Join the waitlist to be notified when we reopen for new clients." />
+        <meta
+          name="description"
+          content="Our deal sourcing service is temporarily paused. Join the waitlist to be notified when we reopen for new clients."
+        />
+        <meta
+          property="og:title"
+          content="Deal Sourcing Service Paused | KR Property Investments"
+        />
+        <meta
+          property="og:description"
+          content="Our deal sourcing service is temporarily paused. Join the waitlist to be notified when we reopen for new clients."
+        />
         <meta property="og:type" content="website" />
       </Helmet>
       <div className="min-h-screen bg-[#F9FAFB] py-20 px-4 text-center">
@@ -49,11 +69,15 @@ const FindYouADeal = () => {
           Our Deal Sourcing Service Is Temporarily Paused
         </h1>
         <p className="text-lg text-[#6B7280] max-w-2xl mx-auto mb-6">
-          We're currently at full capacity — but you can join the waitlist and get our <strong>Free Deal Checklist</strong> to prepare for your next investment.
+          We're currently at full capacity — but you can join the waitlist and
+          get our <strong>Free Deal Checklist</strong> to prepare for your next
+          investment.
         </p>
 
         <div className="bg-white rounded-lg shadow-md p-6 max-w-xl mx-auto border border-[#C58B25] mt-[43px] mb-[43px]">
-          <h2 className="text-xl font-bold mb-2 text-[#1A355E]">🎁 Free Bonus: The Ultimate Deal Checklist</h2>
+          <h2 className="text-xl font-bold mb-2 text-[#1A355E]">
+            🎁 Free Bonus: The Ultimate Deal Checklist
+          </h2>
           <ul className="text-left text-[#6B7280] list-disc pl-5 space-y-1 text-sm">
             <li>Know what to ask before buying</li>
             <li>Spot hidden costs and deal-breakers</li>
@@ -79,10 +103,14 @@ const FindYouADeal = () => {
 
         {submitted ? (
           <div className="text-green-600 font-semibold text-xl">
-            ✅ Lead submitted successfully! You'll be the first to hear when we reopen.
+            ✅ Lead submitted successfully! You'll be the first to hear when we
+            reopen.
           </div>
         ) : (
-          <form onSubmit={handleSubmit} className="max-w-xl mx-auto space-y-4 mt-[51px] mb-[51px]">
+          <form
+            onSubmit={handleSubmit}
+            className="max-w-xl mx-auto space-y-4 mt-[51px] mb-[51px]"
+          >
             <input
               type="text"
               name="name"
@@ -114,7 +142,8 @@ const FindYouADeal = () => {
 
         <div className="border border-[#C58B25] bg-white p-4 rounded-lg mt-10 max-w-xl mx-auto">
           <p className="italic text-[#6B7280] mb-2">
-            "KR found my first property deal in 14 days — I'd do it again in a heartbeat."
+            "KR found my first property deal in 14 days — I'd do it again in a
+            heartbeat."
           </p>
           <p className="font-semibold text-[#1A355E]">— James, Investor</p>
         </div>

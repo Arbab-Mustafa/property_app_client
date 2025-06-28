@@ -7,6 +7,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
+import { API_CONFIG } from "@/config/api";
 
 // Custom styles for Swiper pagination
 const swiperStyles = `
@@ -32,18 +33,18 @@ const swiperStyles = `
 const FourBedFamilySocialHousingNelincs = () => {
   const [emailSubmitted, setEmailSubmitted] = useState(false);
 
-  const handleEmailSubmit = async (e: React.FormEvent) => {
+  const handleEmailSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const form = e.target as HTMLFormElement;
-    const formData = new FormData(form);
+    const formData = new FormData(e.currentTarget);
 
     const data = {
-      name: "Case Study Visitor",
+      name: formData.get("name"),
       email: formData.get("email"),
-      message: "Downloaded Deal Checklist from 4-Bed Family Social Housing case study",
+      message: formData.get("message"),
     };
 
-    const res = await fetch("/api/send-deal-lead", {
+    try {
+      const res = await fetch(`${API_CONFIG.BASE_URL}${API_CONFIG.ENDPOINTS.DEAL_SOURCING}`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
@@ -51,8 +52,12 @@ const FourBedFamilySocialHousingNelincs = () => {
 
     if (res.ok) {
       setEmailSubmitted(true);
-      form.reset();
     } else {
+        console.error("Deal sourcing submission failed");
+        alert("Something went wrong. Please try again.");
+      }
+    } catch (error) {
+      console.error("Deal sourcing submission error:", error);
       alert("Something went wrong. Please try again.");
     }
   };

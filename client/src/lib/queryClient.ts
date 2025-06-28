@@ -22,7 +22,6 @@ export async function apiRequest(
     method,
     headers: data ? { "Content-Type": "application/json" } : {},
     body: data ? JSON.stringify(data) : undefined,
-    credentials: "include",
   });
 
   await throwIfResNotOk(res);
@@ -44,7 +43,7 @@ export const getQueryFn: <T>(options: {
     const url = getApiUrl(endpoint);
 
     const res = await fetch(url, {
-      credentials: "include",
+      // Removed credentials: "include" to fix CORS issue
     });
 
     if (unauthorizedBehavior === "returnNull" && res.status === 401) {
