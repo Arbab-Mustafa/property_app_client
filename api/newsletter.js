@@ -8,11 +8,15 @@ import { eq } from "drizzle-orm";
 import { pgTable, text, serial, timestamp } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 
-// Configure Neon for serverless
-neonConfig.webSocketConstructor = global.WebSocket || (() => {
-  const ws = await import('ws');
-  return ws.default;
-})();
+// Configure Neon for serverless - fix syntax error
+if (typeof global !== "undefined" && !global.WebSocket) {
+  try {
+    const ws = require("ws");
+    neonConfig.webSocketConstructor = ws;
+  } catch (error) {
+    console.log("WebSocket not available, using default");
+  }
+}
 
 // Define newsletter table inline
 const newsletterSubscriptions = pgTable("newsletter_subscriptions", {
@@ -22,10 +26,12 @@ const newsletterSubscriptions = pgTable("newsletter_subscriptions", {
 });
 
 // Define schema inline
-const insertNewsletterSchema = createInsertSchema(newsletterSubscriptions).omit({
-  id: true,
-  createdAt: true,
-});
+const insertNewsletterSchema = createInsertSchema(newsletterSubscriptions).omit(
+  {
+    id: true,
+    createdAt: true,
+  }
+);
 
 // Database connection function
 function createDatabase() {
@@ -33,7 +39,7 @@ function createDatabase() {
     console.log("⚠️ No DATABASE_URL found");
     return null;
   }
-  
+
   try {
     const pool = new Pool({ connectionString: process.env.DATABASE_URL });
     const db = drizzle(pool);
@@ -69,14 +75,14 @@ export default async function handler(req, res) {
 
   try {
     console.log("Newsletter API called with body:", req.body);
-    
+
     // Validate the email
     const validatedData = insertNewsletterSchema.parse(req.body);
     console.log("Email validated:", validatedData.email);
 
     // Try to connect to database
     const db = createDatabase();
-    
+
     if (db) {
       try {
         // Check if email already exists
@@ -88,9 +94,9 @@ export default async function handler(req, res) {
 
         if (existing) {
           console.log("Email already exists:", existing.id);
-          return res.status(200).json({ 
+          return res.status(200).json({
             message: "Email already subscribed",
-            id: existing.id 
+            id: existing.id,
           });
         }
 
@@ -101,7 +107,10 @@ export default async function handler(req, res) {
           .values(validatedData)
           .returning();
 
-        console.log("✅ Newsletter saved to database with ID:", subscription.id);
+        console.log(
+          "✅ Newsletter saved to database with ID:",
+          subscription.id
+        );
         res.status(201).json({
           message: "Subscribed to newsletter successfully",
           id: subscription.id,
@@ -124,7 +133,7 @@ export default async function handler(req, res) {
     }
   } catch (error) {
     console.error("Newsletter subscription error:", error);
-    
+
     if (error instanceof z.ZodError) {
       res.status(400).json({ message: "Invalid email", errors: error.errors });
     } else {

@@ -7,11 +7,15 @@ import { drizzle } from "drizzle-orm/neon-serverless";
 import { pgTable, text, serial, timestamp } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 
-// Configure Neon for serverless
-neonConfig.webSocketConstructor = global.WebSocket || (() => {
-  const ws = await import('ws');
-  return ws.default;
-})();
+// Configure Neon for serverless - fix syntax error
+if (typeof global !== "undefined" && !global.WebSocket) {
+  try {
+    const ws = require("ws");
+    neonConfig.webSocketConstructor = ws;
+  } catch (error) {
+    console.log("WebSocket not available, using default");
+  }
+}
 
 // Define contact table inline
 const contactSubmissions = pgTable("contact_submissions", {
@@ -36,7 +40,7 @@ function createDatabase() {
     console.log("⚠️ No DATABASE_URL found");
     return null;
   }
-  
+
   try {
     const pool = new Pool({ connectionString: process.env.DATABASE_URL });
     const db = drizzle(pool);
@@ -72,14 +76,14 @@ export default async function handler(req, res) {
 
   try {
     console.log("Contact API called with body:", req.body);
-    
+
     // Validate the form data
     const validatedData = insertContactSchema.parse(req.body);
     console.log("Contact data validated:", validatedData);
 
     // Try to connect to database
     const db = createDatabase();
-    
+
     if (db) {
       try {
         // Insert contact submission
@@ -112,7 +116,7 @@ export default async function handler(req, res) {
     }
   } catch (error) {
     console.error("Contact form submission error:", error);
-    
+
     if (error instanceof z.ZodError) {
       res
         .status(400)
