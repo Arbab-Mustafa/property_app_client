@@ -1,9 +1,9 @@
-const dotenv = require("dotenv");
+import dotenv from "dotenv";
 dotenv.config();
 
-const sgMail = require("@sendgrid/mail");
+import sgMail from "@sendgrid/mail";
 
-module.exports = async function handler(req, res) {
+export default async function handler(req, res) {
   // Enable CORS
   res.setHeader("Access-Control-Allow-Credentials", true);
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -76,4 +76,4 @@ module.exports = async function handler(req, res) {
     console.error("Deal lead submission error:", error);
     res.status(500).json({ error: "Failed to process request" });
   }
-};
+}

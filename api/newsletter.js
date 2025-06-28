@@ -1,11 +1,11 @@
-const dotenv = require("dotenv");
+import dotenv from "dotenv";
 dotenv.config();
 
-const { insertNewsletterSchema } = require("../shared/schema-cjs.js");
-const { createStorage } = require("../server/storage-vercel-cjs.js");
-const { z } = require("zod");
+import { insertNewsletterSchema } from "../shared/schema.js";
+import { createStorage } from "../server/storage-vercel.js";
+import { z } from "zod";
 
-module.exports = async function handler(req, res) {
+export default async function handler(req, res) {
   // Enable CORS
   res.setHeader("Access-Control-Allow-Credentials", true);
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -51,4 +51,4 @@ module.exports = async function handler(req, res) {
       res.status(500).json({ message: "Failed to subscribe to newsletter" });
     }
   }
-};
+}

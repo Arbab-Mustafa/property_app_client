@@ -1,7 +1,7 @@
-const dotenv = require("dotenv");
+import dotenv from "dotenv";
 dotenv.config();
 
-module.exports = async function handler(req, res) {
+export default async function handler(req, res) {
   // Enable CORS
   res.setHeader("Access-Control-Allow-Credentials", true);
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -50,4 +50,4 @@ module.exports = async function handler(req, res) {
     console.error("Inflation calculation error:", error);
     res.status(500).json({ error: "Failed to calculate inflation" });
   }
-};
+}

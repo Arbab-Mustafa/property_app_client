@@ -1,52 +1,6 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "package.json",
-      "use": "@vercel/static-build",
-      "config": {
-        "buildCommand": "npm run build"
-      }
-    }
-  ],
-  "functions": {
-    "api/*.js": {
-      "runtime": "nodejs18.x"
-    }
-  },
-  "routes": [
-    {
-      "src": "/api/test",
-      "dest": "/api/test.js"
-    },
-    {
-      "src": "/api/contact",
-      "dest": "/api/contact.js"
-    },
-    {
-      "src": "/api/newsletter",
-      "dest": "/api/newsletter.js"
-    },
-    {
-      "src": "/api/inflation",
-      "dest": "/api/inflation.js"
-    },
-    {
-      "src": "/api/send-deal-lead",
-      "dest": "/api/send-deal-lead.js"
-    },
-    {
-      "src": "/assets/(.*)",
-      "dest": "/assets/$1"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/index.html"
-    }
-  ],
-  "env": {
-    "DATABASE_URL": "@database_url",
-    "SENDGRID_API_KEY": "@sendgrid_api_key",
-    "VITE_BASEROW_API_TOKEN": "@vite_baserow_api_token"
-  }
+  "buildCommand": "npm run build",
+  "outputDirectory": "client/dist",
+  "installCommand": "npm install"
 }
