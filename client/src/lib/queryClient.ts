@@ -1,4 +1,5 @@
 import { QueryClient, QueryFunction } from "@tanstack/react-query";
+import { getApiUrl } from "@/config/api";
 
 async function throwIfResNotOk(res: Response) {
   if (!res.ok) {
@@ -9,9 +10,14 @@ async function throwIfResNotOk(res: Response) {
 
 export async function apiRequest(
   method: string,
-  url: string,
-  data?: unknown | undefined,
-): Promise<Response> {
+  endpoint: string,
+  data?: unknown | undefined
+): Promise<any> {
+  // Use the API configuration to build the full URL
+  const url = getApiUrl(endpoint);
+
+  console.log(`🌐 API ${method} ${url}`, data ? data : "");
+
   const res = await fetch(url, {
     method,
     headers: data ? { "Content-Type": "application/json" } : {},
@@ -20,7 +26,11 @@ export async function apiRequest(
   });
 
   await throwIfResNotOk(res);
-  return res;
+
+  // Return the JSON data directly for easier usage
+  const result = await res.json();
+  console.log(`✅ API Response:`, result);
+  return result;
 }
 
 type UnauthorizedBehavior = "returnNull" | "throw";
@@ -29,7 +39,11 @@ export const getQueryFn: <T>(options: {
 }) => QueryFunction<T> =
   ({ on401: unauthorizedBehavior }) =>
   async ({ queryKey }) => {
-    const res = await fetch(queryKey[0] as string, {
+    // Build URL using API configuration
+    const endpoint = queryKey[0] as string;
+    const url = getApiUrl(endpoint);
+
+    const res = await fetch(url, {
       credentials: "include",
     });
 
