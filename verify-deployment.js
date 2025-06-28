@@ -1,12 +1,3 @@
-#!/usr/bin/env node
-
-/**
- * KR Property Investments - Deployment Verification Script
- * Run this after deploying to Vercel to verify all endpoints work
- *
- * Usage: node verify-deployment.js https://your-domain.vercel.app
- */
-
 const BASE_URL = process.argv[2] || "http://localhost:3000";
 
 console.log("🚀 VERIFYING DEPLOYMENT");
