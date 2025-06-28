@@ -1,11 +1,11 @@
-import dotenv from "dotenv";
+const dotenv = require("dotenv");
 dotenv.config();
 
-import { insertContactSchema } from "../shared/schema.js";
-import { createStorage } from "../server/storage-vercel.js";
-import { z } from "zod";
+const { insertContactSchema } = require("../shared/schema-cjs.js");
+const { createStorage } = require("../server/storage-vercel-cjs.js");
+const { z } = require("zod");
 
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   // Enable CORS
   res.setHeader("Access-Control-Allow-Credentials", true);
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -45,4 +45,4 @@ export default async function handler(req, res) {
       res.status(500).json({ message: "Failed to submit contact form" });
     }
   }
-}
+};

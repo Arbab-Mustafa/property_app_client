@@ -1,4 +1,4 @@
-export default function handler(req, res) {
+module.exports = function handler(req, res) {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "GET,OPTIONS,POST");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
@@ -17,4 +17,4 @@ export default function handler(req, res) {
       : "No database configured",
     email: !!process.env.SENDGRID_API_KEY ? "Configured" : "Not configured",
   });
-}
+};

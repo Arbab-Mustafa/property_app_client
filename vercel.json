@@ -9,6 +9,11 @@
       }
     }
   ],
+  "functions": {
+    "api/*.js": {
+      "runtime": "nodejs18.x"
+    }
+  },
   "routes": [
     {
       "src": "/api/test",
@@ -38,5 +43,10 @@
       "src": "/(.*)",
       "dest": "/index.html"
     }
-  ]
+  ],
+  "env": {
+    "DATABASE_URL": "@database_url",
+    "SENDGRID_API_KEY": "@sendgrid_api_key",
+    "VITE_BASEROW_API_TOKEN": "@vite_baserow_api_token"
+  }
 }
