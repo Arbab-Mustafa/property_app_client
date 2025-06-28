@@ -156,14 +156,235 @@ function calculateDetailedInflation(amount, startYear, month) {
   };
 }
 
-// Simple email mock function (since we can't use SendGrid in serverless without API key)
-async function sendEmailMock(emailData) {
-  console.log("📧 Email would be sent:", {
-    to: emailData.to,
-    subject: emailData.subject,
-    from: emailData.from,
-  });
-  return { success: true };
+// Real SendGrid email function for Vercel
+async function sendEmail({ to, from, subject, html }) {
+  try {
+    const sendgridApiKey = process.env.SENDGRID_API_KEY;
+
+    if (!sendgridApiKey) {
+      console.error("❌ Cannot send email: SENDGRID_API_KEY is not set");
+      return { success: false, error: "Email service not configured" };
+    }
+
+    console.log(`📧 Sending email to ${to} with subject: ${subject}`);
+
+    const response = await fetch("https://api.sendgrid.com/v3/mail/send", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${sendgridApiKey}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        personalizations: [
+          {
+            to: [{ email: to }],
+            subject: subject,
+          },
+        ],
+        from: { email: from },
+        content: [
+          {
+            type: "text/html",
+            value: html,
+          },
+        ],
+      }),
+    });
+
+    if (response.ok) {
+      console.log("✅ Email sent successfully to:", to);
+      return { success: true };
+    } else {
+      const errorText = await response.text();
+      console.error("❌ SendGrid API error:", response.status, errorText);
+      return { success: false, error: `SendGrid error: ${response.status}` };
+    }
+  } catch (error) {
+    console.error("❌ Error sending email:", error);
+    return { success: false, error: "Failed to send email" };
+  }
+}
+
+// Inflation report email function
+async function sendInflationReport(data) {
+  try {
+    const sendgridApiKey = process.env.SENDGRID_API_KEY;
+
+    if (!sendgridApiKey) {
+      console.error("❌ Cannot send email: SENDGRID_API_KEY is not set");
+      return { success: false, error: "Email service not configured" };
+    }
+
+    const {
+      name,
+      email,
+      amount,
+      month,
+      year,
+      todayValue,
+      lossInValue,
+      percentageIncrease,
+      annualGrowthRate,
+      startYear,
+      endYear,
+      yearsDiff,
+      chartImage,
+    } = data;
+
+    // Format values for display
+    const formattedOriginalAmount = amount.toLocaleString("en-GB", {
+      style: "currency",
+      currency: "GBP",
+    });
+    const formattedTodayValue = todayValue.toLocaleString("en-GB", {
+      style: "currency",
+      currency: "GBP",
+    });
+
+    // Get month name
+    const monthNames = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
+    const monthName = monthNames[month - 1];
+
+    // Format additional values for display
+    const formattedLossInValue = lossInValue.toLocaleString("en-GB", {
+      style: "currency",
+      currency: "GBP",
+    });
+    const formattedPercentageIncrease = percentageIncrease.toFixed(1);
+    const formattedAnnualGrowthRate = annualGrowthRate.toFixed(1);
+    const formattedYearsDiff = yearsDiff.toFixed(0);
+
+    // Current year
+    const currentYear = new Date().getFullYear();
+
+    // Create the email HTML content
+    const htmlContent = `
+      <div style="font-family: Arial, sans-serif; max-width: 700px; margin: 0 auto; padding: 20px; line-height: 1.6; color: #333;">
+        
+        <div style="text-align: left; margin-bottom: 30px; border-bottom: 2px solid #ddd; padding-bottom: 15px;">
+          <h1 style="color: #008e6d; margin: 0; font-size: 24px; font-weight: bold;">KR Property Investments</h1>
+          <p style="margin: 5px 0 0 0; font-size: 16px; color: #666;">Detailed Inflation Calculator Results</p>
+        </div>
+        
+        <p style="margin-bottom: 20px;">Hello ${name},</p>
+        
+        <p style="margin-bottom: 25px;">Thank you for using our Inflation Calculator. Below is your detailed report based on the Retail Price Index (RPI) data up to ${currentYear}.</p>
+        
+        <div style="border-top: 2px solid #ddd; margin: 30px 0 20px 0;"></div>
+        
+        <div style="margin: 30px 0;">
+          <h2 style="color: #008e6d; margin: 0 0 20px 0; font-size: 20px;">📊 Inflation Report Summary</h2>
+          <ul style="list-style: none; padding: 0; margin: 0;">
+            <li style="margin-bottom: 8px;">• <strong>Original Amount:</strong> ${formattedOriginalAmount}</li>
+            <li style="margin-bottom: 8px;">• <strong>Start Date:</strong> ${monthName} ${year}</li>
+            <li style="margin-bottom: 8px;">• <strong>End Date:</strong> Present (${currentYear})</li>
+            <li style="margin-bottom: 8px;">• <strong>Inflation-Adjusted Value (${currentYear}):</strong> ${formattedTodayValue}</li>
+            <li style="margin-bottom: 8px;">• <strong>Real-Term Loss in Value:</strong> -${formattedLossInValue}</li>
+            <li style="margin-bottom: 8px;">• <strong>Percentage Increase in Cost of Living:</strong> ${formattedPercentageIncrease}%</li>
+            <li style="margin-bottom: 8px;">• <strong>Required Growth to Keep Up with Inflation:</strong> ${formattedAnnualGrowthRate}% annually</li>
+            <li style="margin-bottom: 8px;">• <strong>Time Period:</strong> ${formattedYearsDiff} years</li>
+          </ul>
+        </div>
+        
+        <div style="margin: 30px 0;">
+          <h2 style="color: #008e6d; margin: 0 0 20px 0; font-size: 20px;">💰 Investment Comparison</h2>
+          <p style="margin-bottom: 20px; color: #333;">Here's how your ${formattedOriginalAmount} from ${year} would have performed:</p>
+          
+          <div style="margin: 20px 0;">
+            <div style="background-color: #fee2e2; border-left: 4px solid #dc2626; padding: 20px; border-radius: 8px; margin-bottom: 15px;">
+              <h3 style="color: #dc2626; margin: 0 0 10px 0; font-size: 16px; font-weight: bold;">Bank Savings (1%)</h3>
+              <div style="font-size: 20px; font-weight: bold; color: #333; margin-bottom: 5px;">
+                £${(amount * Math.pow(1.01, yearsDiff)).toLocaleString(
+                  "en-GB",
+                  { minimumFractionDigits: 2, maximumFractionDigits: 2 }
+                )}
+              </div>
+              <div style="color: #dc2626; font-size: 14px; font-weight: bold;">
+                Lost to inflation: -${formattedLossInValue}
+              </div>
+            </div>
+            
+            <div style="background-color: #dcfce7; border-left: 4px solid #16a34a; padding: 20px; border-radius: 8px;">
+              <h3 style="color: #16a34a; margin: 0 0 10px 0; font-size: 16px; font-weight: bold;">Property Investment (10%)</h3>
+              <div style="font-size: 20px; font-weight: bold; color: #333; margin-bottom: 5px;">
+                £${(amount * Math.pow(1.1, yearsDiff)).toLocaleString("en-GB", {
+                  minimumFractionDigits: 2,
+                  maximumFractionDigits: 2,
+                })}
+              </div>
+              <div style="color: #16a34a; font-size: 14px; font-weight: bold;">
+                Beat inflation by £${(
+                  amount * Math.pow(1.1, yearsDiff) -
+                  todayValue
+                ).toLocaleString("en-GB", {
+                  minimumFractionDigits: 2,
+                  maximumFractionDigits: 2,
+                })}
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div style="text-center; margin: 30px 0; padding: 20px; background-color: #f8f9fa; border-radius: 8px;">
+          <h3 style="color: #1A355E; margin: 0 0 15px 0;">Ready to protect your wealth from inflation?</h3>
+          <p style="margin-bottom: 20px; color: #666;">Learn how our property investments deliver 8-12% annual returns.</p>
+          <a href="https://www.krhomes.co.uk/contact" style="background-color: #F97316; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: bold;">Book Your Free Consultation</a>
+        </div>
+        
+        <div style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #ddd; text-align: center; color: #666; font-size: 12px;">
+          <p>This email was sent by KR Property Investments. Visit us at <a href="https://www.krhomes.co.uk">www.krhomes.co.uk</a></p>
+        </div>
+      </div>
+    `;
+
+    const response = await fetch("https://api.sendgrid.com/v3/mail/send", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${sendgridApiKey}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        personalizations: [
+          {
+            to: [{ email: email }],
+            subject: `Your Inflation Report - £${amount.toLocaleString()} from ${year}`,
+          },
+        ],
+        from: { email: "aaron@kr-properties.co.uk" },
+        content: [
+          {
+            type: "text/html",
+            value: htmlContent,
+          },
+        ],
+      }),
+    });
+
+    if (response.ok) {
+      console.log("✅ Inflation report email sent successfully to:", email);
+      return { success: true };
+    } else {
+      const errorText = await response.text();
+      console.error("❌ SendGrid API error:", response.status, errorText);
+      return { success: false, error: `SendGrid error: ${response.status}` };
+    }
+  } catch (error) {
+    console.error("❌ Error sending inflation report email:", error);
+    return { success: false, error: "Failed to send email" };
+  }
 }
 
 // CORS headers helper
@@ -240,11 +461,23 @@ export default async function handler(req, res) {
         const validatedData = insertContactSchema.parse(req.body);
         const contact = await storage.createContactSubmission(validatedData);
 
-        // Mock email sending
-        await sendEmailMock({
+        // Send real email notification
+        await sendEmail({
           to: "aaron@kr-properties.co.uk",
           from: "noreply@kr-properties.co.uk",
           subject: `New Contact Form Submission from ${validatedData.name}`,
+          html: `
+            <h2>New Contact Form Submission</h2>
+            <p><strong>Name:</strong> ${validatedData.name}</p>
+            <p><strong>Email:</strong> ${validatedData.email}</p>
+            <p><strong>Phone:</strong> ${
+              validatedData.phone || "Not provided"
+            }</p>
+            <p><strong>Message:</strong></p>
+            <p>${validatedData.message}</p>
+            <p><strong>Source:</strong> ${validatedData.source || "Website"}</p>
+            <p><strong>Submitted:</strong> ${new Date().toISOString()}</p>
+          `,
         });
 
         return res.status(201).json({
@@ -387,14 +620,31 @@ export default async function handler(req, res) {
           });
         }
 
-        // Mock email sending with chart
-        await sendEmailMock({
-          to: email,
-          from: "aaron@kr-properties.co.uk",
-          subject: `Your Inflation Report - £${amount} from ${year}`,
+        // Send real inflation report email
+        const emailResult = await sendInflationReport({
+          name,
+          email,
+          amount: parseFloat(amount),
+          month: parseInt(month),
+          year: parseInt(year),
+          todayValue: calculationData.todayValue,
+          lossInValue: calculationData.lossInValue,
+          percentageIncrease: calculationData.percentageIncrease,
+          annualGrowthRate: calculationData.annualGrowthRate,
+          startYear: calculationData.startYear,
+          endYear: calculationData.endYear,
+          yearsDiff: calculationData.yearsDiff,
+          chartImage,
         });
 
-        console.log(`✅ Email with chart sent to ${email}`);
+        if (emailResult.success) {
+          console.log(`✅ Email with chart sent to ${email}`);
+        } else {
+          console.error(
+            `❌ Failed to send email to ${email}:`,
+            emailResult.error
+          );
+        }
         return res.status(200).json({
           success: true,
           message: "Email sent successfully",
@@ -430,10 +680,29 @@ export default async function handler(req, res) {
         const lead = await storage.createDealLead(validatedData);
 
         // Send confirmation email to user
-        await sendEmailMock({
+        await sendEmail({
           to: email,
           from: "aaron@kr-properties.co.uk",
           subject: "Welcome to the Deal Sourcing Waitlist! 🎯",
+          html: `
+            <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
+              <h1 style="color: #1A355E;">Welcome to the Deal Sourcing Waitlist! 🎯</h1>
+              <p>Hi ${name},</p>
+              <p>Thank you for joining our exclusive Deal Sourcing waitlist! You're now part of a select group who will get first access to our best property investment opportunities.</p>
+              <h3>What happens next?</h3>
+              <ul>
+                <li>📧 You'll receive priority notifications about new deals</li>
+                <li>🏠 Access to off-market properties before they're public</li>
+                <li>📊 Detailed investment analysis for each opportunity</li>
+                <li>🤝 Personal support from our investment team</li>
+              </ul>
+              <p>We'll be in touch soon with your first exclusive deal!</p>
+              <p>Best regards,<br>The KR Property Investments Team</p>
+              <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #ddd; text-align: center; color: #666; font-size: 12px;">
+                <p>Visit us at <a href="https://www.krhomes.co.uk">www.krhomes.co.uk</a></p>
+              </div>
+            </div>
+          `,
         });
 
         // Mock Baserow submission
