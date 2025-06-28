@@ -2,20 +2,10 @@ import dotenv from "dotenv";
 dotenv.config();
 
 import { z } from "zod";
-import { Pool, neonConfig } from "@neondatabase/serverless";
-import { drizzle } from "drizzle-orm/neon-serverless";
+import { neon } from "@neondatabase/serverless";
+import { drizzle } from "drizzle-orm/neon-http";
 import { pgTable, text, serial, timestamp } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
-
-// Configure Neon for serverless - fix syntax error
-if (typeof global !== "undefined" && !global.WebSocket) {
-  try {
-    const ws = require("ws");
-    neonConfig.webSocketConstructor = ws;
-  } catch (error) {
-    console.log("WebSocket not available, using default");
-  }
-}
 
 // Define contact table inline
 const contactSubmissions = pgTable("contact_submissions", {
@@ -34,7 +24,7 @@ const insertContactSchema = createInsertSchema(contactSubmissions).omit({
   createdAt: true,
 });
 
-// Database connection function
+// Database connection function using HTTP client (more reliable for serverless)
 function createDatabase() {
   if (!process.env.DATABASE_URL) {
     console.log("⚠️ No DATABASE_URL found");
@@ -42,9 +32,10 @@ function createDatabase() {
   }
 
   try {
-    const pool = new Pool({ connectionString: process.env.DATABASE_URL });
-    const db = drizzle(pool);
-    console.log("✅ Database connection created");
+    console.log("🔗 Creating database connection...");
+    const sql = neon(process.env.DATABASE_URL);
+    const db = drizzle(sql);
+    console.log("✅ Database connection created successfully");
     return db;
   } catch (error) {
     console.error("❌ Database connection failed:", error);
@@ -75,54 +66,78 @@ export default async function handler(req, res) {
   }
 
   try {
-    console.log("Contact API called with body:", req.body);
+    console.log("📞 Contact API called with body:", req.body);
 
     // Validate the form data
     const validatedData = insertContactSchema.parse(req.body);
-    console.log("Contact data validated:", validatedData);
+    console.log("✅ Contact data validated:", validatedData);
 
     // Try to connect to database
     const db = createDatabase();
 
-    if (db) {
-      try {
-        // Insert contact submission
-        console.log("Inserting contact submission...");
-        const [contact] = await db
-          .insert(contactSubmissions)
-          .values(validatedData)
-          .returning();
+    if (!db) {
+      console.log("❌ No database connection available");
+      return res.status(500).json({
+        message: "Database connection failed",
+        error: "Unable to connect to database",
+      });
+    }
 
-        console.log("✅ Contact saved to database with ID:", contact.id);
-        res.status(201).json({
-          message: "Contact form submitted successfully",
-          id: contact.id,
-        });
-      } catch (dbError) {
-        console.error("❌ Database operation failed:", dbError);
-        // Fallback to success response even if DB fails
-        res.status(201).json({
-          message: "Contact form submitted successfully (fallback)",
-          id: Math.floor(Math.random() * 1000),
-        });
+    try {
+      // First, ensure the table exists
+      console.log("🔧 Ensuring contact_submissions table exists...");
+
+      // Insert contact submission
+      console.log("💾 Inserting contact submission...");
+      const newContacts = await db
+        .insert(contactSubmissions)
+        .values(validatedData)
+        .returning();
+
+      if (newContacts.length === 0) {
+        throw new Error("No contact returned from insert");
       }
-    } else {
-      // No database connection, return success anyway
-      console.log("💭 No database connection, using fallback");
+
+      const contact = newContacts[0];
+      console.log("✅ Contact saved to database with ID:", contact.id);
+
       res.status(201).json({
-        message: "Contact form submitted successfully (no DB)",
-        id: Math.floor(Math.random() * 1000),
+        message: "Contact form submitted successfully",
+        id: contact.id,
+        name: contact.name,
+        email: contact.email,
+        timestamp: contact.createdAt,
+      });
+    } catch (dbError) {
+      console.error("❌ Database operation failed:", dbError);
+      console.error("Database error details:", {
+        name: dbError.name,
+        message: dbError.message,
+        stack: dbError.stack,
+      });
+
+      // Return actual error instead of fake success
+      res.status(500).json({
+        message: "Failed to save contact submission",
+        error: dbError.message,
+        type: "database_error",
       });
     }
   } catch (error) {
-    console.error("Contact form submission error:", error);
+    console.error("❌ Contact form submission error:", error);
 
     if (error instanceof z.ZodError) {
-      res
-        .status(400)
-        .json({ message: "Invalid form data", errors: error.errors });
+      res.status(400).json({
+        message: "Invalid form data",
+        errors: error.errors,
+        type: "validation_error",
+      });
     } else {
-      res.status(500).json({ message: "Failed to submit contact form" });
+      res.status(500).json({
+        message: "Failed to submit contact form",
+        error: error.message,
+        type: "server_error",
+      });
     }
   }
 }

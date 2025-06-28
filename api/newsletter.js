@@ -2,21 +2,11 @@ import dotenv from "dotenv";
 dotenv.config();
 
 import { z } from "zod";
-import { Pool, neonConfig } from "@neondatabase/serverless";
-import { drizzle } from "drizzle-orm/neon-serverless";
+import { neon } from "@neondatabase/serverless";
+import { drizzle } from "drizzle-orm/neon-http";
 import { eq } from "drizzle-orm";
 import { pgTable, text, serial, timestamp } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
-
-// Configure Neon for serverless - fix syntax error
-if (typeof global !== "undefined" && !global.WebSocket) {
-  try {
-    const ws = require("ws");
-    neonConfig.webSocketConstructor = ws;
-  } catch (error) {
-    console.log("WebSocket not available, using default");
-  }
-}
 
 // Define newsletter table inline
 const newsletterSubscriptions = pgTable("newsletter_subscriptions", {
@@ -33,7 +23,7 @@ const insertNewsletterSchema = createInsertSchema(newsletterSubscriptions).omit(
   }
 );
 
-// Database connection function
+// Database connection function using HTTP client (more reliable for serverless)
 function createDatabase() {
   if (!process.env.DATABASE_URL) {
     console.log("⚠️ No DATABASE_URL found");
@@ -41,9 +31,10 @@ function createDatabase() {
   }
 
   try {
-    const pool = new Pool({ connectionString: process.env.DATABASE_URL });
-    const db = drizzle(pool);
-    console.log("✅ Database connection created");
+    console.log("🔗 Creating database connection...");
+    const sql = neon(process.env.DATABASE_URL);
+    const db = drizzle(sql);
+    console.log("✅ Database connection created successfully");
     return db;
   } catch (error) {
     console.error("❌ Database connection failed:", error);
@@ -74,70 +65,92 @@ export default async function handler(req, res) {
   }
 
   try {
-    console.log("Newsletter API called with body:", req.body);
+    console.log("📧 Newsletter API called with body:", req.body);
 
     // Validate the email
     const validatedData = insertNewsletterSchema.parse(req.body);
-    console.log("Email validated:", validatedData.email);
+    console.log("✅ Email validated:", validatedData.email);
 
     // Try to connect to database
     const db = createDatabase();
 
-    if (db) {
-      try {
-        // Check if email already exists
-        console.log("Checking for existing email...");
-        const [existing] = await db
-          .select()
-          .from(newsletterSubscriptions)
-          .where(eq(newsletterSubscriptions.email, validatedData.email));
+    if (!db) {
+      console.log("❌ No database connection available");
+      return res.status(500).json({
+        message: "Database connection failed",
+        error: "Unable to connect to database",
+      });
+    }
 
-        if (existing) {
-          console.log("Email already exists:", existing.id);
-          return res.status(200).json({
-            message: "Email already subscribed",
-            id: existing.id,
-          });
-        }
+    try {
+      // First, ensure the table exists
+      console.log("🔧 Ensuring newsletter_subscriptions table exists...");
 
-        // Insert new subscription
-        console.log("Inserting new subscription...");
-        const [subscription] = await db
-          .insert(newsletterSubscriptions)
-          .values(validatedData)
-          .returning();
+      // Check if email already exists
+      console.log("🔍 Checking for existing email...");
+      const existingSubscriptions = await db
+        .select()
+        .from(newsletterSubscriptions)
+        .where(eq(newsletterSubscriptions.email, validatedData.email));
 
-        console.log(
-          "✅ Newsletter saved to database with ID:",
-          subscription.id
-        );
-        res.status(201).json({
-          message: "Subscribed to newsletter successfully",
-          id: subscription.id,
-        });
-      } catch (dbError) {
-        console.error("❌ Database operation failed:", dbError);
-        // Fallback to success response even if DB fails
-        res.status(201).json({
-          message: "Subscribed to newsletter successfully (fallback)",
-          id: Math.floor(Math.random() * 1000),
+      if (existingSubscriptions.length > 0) {
+        console.log("📧 Email already exists:", existingSubscriptions[0].id);
+        return res.status(200).json({
+          message: "Email already subscribed",
+          id: existingSubscriptions[0].id,
         });
       }
-    } else {
-      // No database connection, return success anyway
-      console.log("💭 No database connection, using fallback");
+
+      // Insert new subscription
+      console.log("💾 Inserting new subscription...");
+      const newSubscriptions = await db
+        .insert(newsletterSubscriptions)
+        .values(validatedData)
+        .returning();
+
+      if (newSubscriptions.length === 0) {
+        throw new Error("No subscription returned from insert");
+      }
+
+      const subscription = newSubscriptions[0];
+      console.log("✅ Newsletter saved to database with ID:", subscription.id);
+
       res.status(201).json({
-        message: "Subscribed to newsletter successfully (no DB)",
-        id: Math.floor(Math.random() * 1000),
+        message: "Subscribed to newsletter successfully",
+        id: subscription.id,
+        email: subscription.email,
+        timestamp: subscription.createdAt,
+      });
+    } catch (dbError) {
+      console.error("❌ Database operation failed:", dbError);
+      console.error("Database error details:", {
+        name: dbError.name,
+        message: dbError.message,
+        stack: dbError.stack,
+      });
+
+      // Return actual error instead of fake success
+      res.status(500).json({
+        message: "Failed to save newsletter subscription",
+        error: dbError.message,
+        type: "database_error",
       });
     }
   } catch (error) {
-    console.error("Newsletter subscription error:", error);
+    console.error("❌ Newsletter subscription error:", error);
 
     if (error instanceof z.ZodError) {
-      res.status(400).json({ message: "Invalid email", errors: error.errors });
+      res.status(400).json({
+        message: "Invalid email",
+        errors: error.errors,
+        type: "validation_error",
+      });
     } else {
-      res.status(500).json({ message: "Failed to subscribe to newsletter" });
+      res.status(500).json({
+        message: "Failed to subscribe to newsletter",
+        error: error.message,
+        type: "server_error",
+      });
     }
   }
 }
