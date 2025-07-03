@@ -161,7 +161,7 @@ const InflationCalculator = () => {
       // Increased delay to ensure chart is fully rendered
       setTimeout(sendEmail, 1000);
     }
-  }, [result, lastFormData]); // Removed emailSent from dependencies to prevent double execution
+  }, [result, lastFormData]); // Removed emailSent from dependencies to... prevent double execution
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
