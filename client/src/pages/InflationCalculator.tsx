@@ -100,17 +100,28 @@ const InflationCalculator = () => {
   const [emailSent, setEmailSent] = useState(false);
   const isSubmittingRef = useRef(false);
   const chartRef = useRef<any>(null);
+  const emailSentRef = useRef(false); // Use ref to track email sending state
 
   const token = BASEROW_API_TOKEN;
 
   // Send email automatically when chart is rendered and data is available
   useEffect(() => {
-    if (result && lastFormData && chartRef.current && !emailSent) {
+    if (result && lastFormData && chartRef.current && !emailSentRef.current) {
       const sendEmail = async () => {
+        // Double-check to prevent race conditions
+        if (emailSentRef.current) {
+          console.log("⚠️ Email already sent, skipping...");
+          return;
+        }
+
         try {
+          // Mark as sending to prevent duplicate sends
+          emailSentRef.current = true;
+
           // Check if chart is properly rendered
           if (!chartRef.current || !chartRef.current.canvas) {
             console.log("⚠️ Chart not ready yet, skipping email");
+            emailSentRef.current = false; // Reset if chart not ready
             return;
           }
 
@@ -119,6 +130,7 @@ const InflationCalculator = () => {
           // Additional safety check
           if (!canvas || !canvas.toDataURL) {
             console.log("⚠️ Canvas not ready, skipping email");
+            emailSentRef.current = false; // Reset if canvas not ready
             return;
           }
 
@@ -147,21 +159,22 @@ const InflationCalculator = () => {
           if (response.ok) {
             const responseData = await response.json();
             console.log("✅ Email sent successfully:", responseData);
-            setEmailSent(true); // Mark email as sent to prevent duplicate sends
+            setEmailSent(true); // Update state for UI
           } else {
             const errorData = await response.json();
             console.error("❌ Failed to send email:", errorData);
+            emailSentRef.current = false; // Reset on error
           }
         } catch (emailError) {
           console.error("❌ Failed to send email:", emailError);
-          // Continue even if email fails
+          emailSentRef.current = false; // Reset on error
         }
       };
 
       // Increased delay to ensure chart is fully rendered
       setTimeout(sendEmail, 1000);
     }
-  }, [result, lastFormData]); // Removed emailSent from dependencies to... prevent double execution
+  }, [result, lastFormData]); // Removed emailSent from dependencies to prevent double execution
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -217,6 +230,7 @@ const InflationCalculator = () => {
     try {
       setLastFormData(data);
       setEmailSent(false); // Reset email sent state for new calculation
+      emailSentRef.current = false; // Reset ref for new calculation
 
       const response = await fetch(
         `${API_CONFIG.BASE_URL}${API_CONFIG.ENDPOINTS.INFLATION}`,

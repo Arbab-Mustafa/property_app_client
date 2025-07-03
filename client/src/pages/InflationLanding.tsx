@@ -79,6 +79,7 @@ export default function InflationLanding() {
   const [emailSent, setEmailSent] = useState(false);
   const isSubmittingRef = useRef(false);
   const chartRef = useRef<any>(null);
+  const emailSentRef = useRef(false); // Use ref to track email sending state
 
   const token = BASEROW_API_TOKEN;
 
@@ -95,8 +96,14 @@ export default function InflationLanding() {
   });
 
   useEffect(() => {
-    if (result && chartRef.current && !emailSent) {
+    if (result && chartRef.current && !emailSentRef.current) {
       const timer = setTimeout(async () => {
+        // Double-check to prevent race conditions
+        if (emailSentRef.current) {
+          console.log("⚠️ Email already sent, skipping...");
+          return;
+        }
+
         if (chartRef.current && chartRef.current.canvas) {
           const chartImageBase64 = chartRef.current.toBase64Image();
           setChartImage(chartImageBase64);
@@ -107,6 +114,9 @@ export default function InflationLanding() {
 
           if (lastFormData && lastFormData.email && chartImageBase64) {
             try {
+              // Mark as sending to prevent duplicate sends
+              emailSentRef.current = true;
+
               const emailResponse = await fetch(
                 `${API_CONFIG.BASE_URL}${API_CONFIG.ENDPOINTS.INFLATION_EMAIL}`,
                 {
@@ -129,9 +139,11 @@ export default function InflationLanding() {
                 setEmailSent(true);
               } else {
                 console.error("Failed to send chart email");
+                emailSentRef.current = false; // Reset on error
               }
             } catch (emailError) {
               console.error("Error sending chart email:", emailError);
+              emailSentRef.current = false; // Reset on error
             }
           }
         }
@@ -197,6 +209,7 @@ export default function InflationLanding() {
       isSubmittingRef.current = true;
       setLastFormData(data);
       setEmailSent(false); // Reset email sent state for new calculation
+      emailSentRef.current = false; // Reset ref for new calculation
 
       const response = await fetch(
         `${API_CONFIG.BASE_URL}${API_CONFIG.ENDPOINTS.INFLATION}`,
