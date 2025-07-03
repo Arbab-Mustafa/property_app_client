@@ -97,6 +97,7 @@ const InflationCalculator = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [chartImage, setChartImage] = useState<string | null>(null);
   const [lastFormData, setLastFormData] = useState<FormValues | null>(null);
+  const [emailSent, setEmailSent] = useState(false);
   const isSubmittingRef = useRef(false);
   const chartRef = useRef<any>(null);
 
@@ -104,7 +105,7 @@ const InflationCalculator = () => {
 
   // Send email automatically when chart is rendered and data is available
   useEffect(() => {
-    if (result && lastFormData && chartRef.current) {
+    if (result && lastFormData && chartRef.current && !emailSent) {
       const sendEmail = async () => {
         try {
           // Check if chart is properly rendered
@@ -146,6 +147,7 @@ const InflationCalculator = () => {
           if (response.ok) {
             const responseData = await response.json();
             console.log("✅ Email sent successfully:", responseData);
+            setEmailSent(true); // Mark email as sent to prevent duplicate sends
           } else {
             const errorData = await response.json();
             console.error("❌ Failed to send email:", errorData);
@@ -159,7 +161,7 @@ const InflationCalculator = () => {
       // Increased delay to ensure chart is fully rendered
       setTimeout(sendEmail, 1000);
     }
-  }, [result, lastFormData, chartRef.current]);
+  }, [result, lastFormData]); // Removed emailSent from dependencies to prevent double execution
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -214,6 +216,7 @@ const InflationCalculator = () => {
 
     try {
       setLastFormData(data);
+      setEmailSent(false); // Reset email sent state for new calculation
 
       const response = await fetch(
         `${API_CONFIG.BASE_URL}${API_CONFIG.ENDPOINTS.INFLATION}`,

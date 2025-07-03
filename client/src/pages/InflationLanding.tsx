@@ -76,6 +76,7 @@ export default function InflationLanding() {
   const [chartImage, setChartImage] = useState<string | null>(null);
   const [lastFormData, setLastFormData] = useState<FormValues | null>(null);
   const [showResults, setShowResults] = useState(false);
+  const [emailSent, setEmailSent] = useState(false);
   const isSubmittingRef = useRef(false);
   const chartRef = useRef<any>(null);
 
@@ -94,7 +95,7 @@ export default function InflationLanding() {
   });
 
   useEffect(() => {
-    if (result && chartRef.current) {
+    if (result && chartRef.current && !emailSent) {
       const timer = setTimeout(async () => {
         if (chartRef.current && chartRef.current.canvas) {
           const chartImageBase64 = chartRef.current.toBase64Image();
@@ -125,6 +126,7 @@ export default function InflationLanding() {
 
               if (emailResponse.ok) {
                 console.log("Chart email sent successfully");
+                setEmailSent(true);
               } else {
                 console.error("Failed to send chart email");
               }
@@ -137,7 +139,7 @@ export default function InflationLanding() {
 
       return () => clearTimeout(timer);
     }
-  }, [result, lastFormData]);
+  }, [result, lastFormData]); // Removed emailSent from dependencies to prevent double execution
 
   const submitToBaserow = async (formData: FormValues, todayValue: number) => {
     try {
@@ -194,6 +196,7 @@ export default function InflationLanding() {
       setIsSubmitting(true);
       isSubmittingRef.current = true;
       setLastFormData(data);
+      setEmailSent(false); // Reset email sent state for new calculation
 
       const response = await fetch(
         `${API_CONFIG.BASE_URL}${API_CONFIG.ENDPOINTS.INFLATION}`,
