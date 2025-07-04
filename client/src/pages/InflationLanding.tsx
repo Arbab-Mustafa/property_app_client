@@ -81,8 +81,6 @@ export default function InflationLanding() {
   const chartRef = useRef<any>(null);
   const emailSentRef = useRef(false); // Use ref to track email sending state
 
-  const token = BASEROW_API_TOKEN;
-
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -153,52 +151,6 @@ export default function InflationLanding() {
     }
   }, [result, lastFormData]); // Removed emailSent from dependencies to prevent double execution
 
-  const submitToBaserow = async (formData: FormValues, todayValue: number) => {
-    try {
-      if (!token) {
-        console.warn("Baserow API token not found, skipping submission");
-        return;
-      }
-
-      const baserowData = {
-        Name: formData.name,
-        Email: formData.email,
-        Amount: parseFloat(formData.amount),
-        Month: formData.month,
-        Year: formData.year,
-        "Inflation Adjusted Amount": todayValue,
-        "Submission Date": new Date().toISOString(),
-        "Source/Campaign": formData.source || "Landing Page",
-      };
-
-      console.log("Submitting row to Baserow:", baserowData);
-
-      const response = await fetch(
-        "https://api.baserow.io/api/database/rows/table/383509/?user_field_names=true",
-        {
-          method: "POST",
-          headers: {
-            Authorization: `Token ${token}`,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(baserowData),
-        }
-      );
-
-      console.log("Baserow response status:", response.status);
-
-      if (response.ok) {
-        const responseData = await response.json();
-        console.log("Baserow response data:", responseData);
-      } else {
-        const errorText = await response.text();
-        console.error("Baserow error:", errorText);
-      }
-    } catch (error) {
-      console.error("Error submitting to Baserow:", error);
-    }
-  };
-
   const calculateInflation = async (data: FormValues) => {
     if (isSubmittingRef.current) {
       return;
@@ -237,7 +189,6 @@ export default function InflationLanding() {
       if (responseData.success && responseData.data) {
         setResult(responseData.data);
         setShowResults(true);
-        await submitToBaserow(data, responseData.data.todayValue);
       } else {
         console.error("API error:", responseData.error);
       }

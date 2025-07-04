@@ -188,39 +188,6 @@ const InflationCalculator = () => {
     },
   });
 
-  const submitToBaserow = async (formData: FormValues, todayValue: number) => {
-    try {
-      // Store in our backend database
-      const response = await fetch(
-        `${API_CONFIG.BASE_URL}${API_CONFIG.ENDPOINTS.INFLATION}`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            name: formData.name,
-            email: formData.email,
-            amount: parseFloat(formData.amount.replace(/[^0-9.]/g, "")),
-            month: parseInt(formData.month),
-            year: parseInt(formData.year),
-            source: formData.source || "inflation-calculator",
-          }),
-        }
-      );
-
-      if (!response.ok) {
-        throw new Error("Failed to store calculation");
-      }
-
-      const responseData = await response.json();
-      console.log("✅ Calculation stored successfully:", responseData);
-
-      return responseData;
-    } catch (error) {
-      console.error("❌ Failed to store calculation:", error);
-      throw error;
-    }
-  };
-
   const calculateInflation = async (data: FormValues) => {
     if (isSubmittingRef.current) return;
 
@@ -257,7 +224,6 @@ const InflationCalculator = () => {
 
       if (responseData.success && responseData.data) {
         setResult(responseData.data);
-        await submitToBaserow(data, responseData.data.todayValue);
       } else {
         console.error("API error:", responseData.error);
       }
